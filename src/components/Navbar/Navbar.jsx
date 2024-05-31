@@ -2,16 +2,16 @@ import "./Navbar.css";
 import Button from "../Button/Button";
 import defaultPP from '../../assets/user.png';
 import { Link, NavLink } from "react-router-dom";
-import { useContext, useEffect, useRef, useState } from "react";
-import { AuthContext } from "../../providers/AuthProvider";
+import { useEffect, useRef, useState } from "react";
 import { MdMenuOpen, MdOutlineClose } from "react-icons/md";
 import { IoMdLogOut } from "react-icons/io";
 import { Tooltip } from "react-tooltip";
 import toast from "react-hot-toast";
 import ToggleTheme from "../ToggleTheme/ToggleTheme";
+import useAuth from "../../hooks/useAuth";
 
 const Navbar = () => {
-    const { user, logOut } = useContext(AuthContext);
+    const { user, logOut } = useAuth();
     const [openNavbar, setOpenNavbar] = useState(false);
     const [userName, setUserName] = useState('');
     const [profilePicture, setProfilePicture] = useState('');
