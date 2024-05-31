@@ -1,0 +1,30 @@
+nav ul a.active {
+    transition: 1s;
+    border-bottom: 1px solid midnightblue;
+    color: midnightblue !important;
+}
+
+nav ul a.pending {
+    transition: 1s;
+    border-bottom: 1px solid midnightblue !important;
+    background-color: midnightblue !important;
+    color: white !important;
+}
+
+nav ul a:hover {
+    border-bottom: 1px solid midnightblue !important;
+    background-color: midnightblue !important;
+    color: white !important;
+}
+
+nav ul a {
+    border-bottom: 1px solid transparent;
+    padding: 6px 8px;
+    border-radius: 2px;
+    transition: all ease-in-out 0.3s;
+}
+
+a.active>button {
+    background-color: transparent !important;
+    color: #272c50 !important;
+}
