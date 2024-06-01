@@ -134,7 +134,7 @@ const Register = () => {
     }
 
     return (
-        <section className="mx-2 md:mx-8 my-2 md:my-8 p-2 md:px-4">
+        <section className="mx-6 md:mx-10 my-2 md:my-8 p-2 md:px-4">
             <Helmet>
                 <title>Register - Nexus News</title>
             </Helmet>
@@ -157,14 +157,14 @@ const Register = () => {
                         {/* Name */}
                         <div className="flex flex-col gap-3">
                             <label className="font-medium" htmlFor="name">Your Name *</label>
-                            <div className="flex items-center gap-2 bg-transparent p-2 rounded-lg border border-furry">
-                                <FaUserEdit className="left-0 text-gray-500" />
+                            <div className="flex items-center gap-2 bg-transparent pl-2 rounded-lg border border-furry">
+                                <FaUserEdit className="text-gray-500" />
                                 <input
                                     {...register("name", {
                                         required:
                                             { value: true, message: "You must provide your name." }
                                     })}
-                                    className="bg-transparent w-full focus:bg-transparent focus:outline-0" type="text" name="name" id="name" placeholder="Enter Your Name" />
+                                    className="px-2 rounded-r-lg py-1 bg-transparent w-full focus:bg-transparent focus:outline-0" type="text" name="name" id="name" placeholder="Enter Your Name" />
                             </div>
                             {
                                 errors.name && <p className="text-red-700">{errors.name.message}</p>
@@ -173,14 +173,14 @@ const Register = () => {
                         {/* Email */}
                         <div className="flex flex-col gap-3">
                             <label className="font-medium" htmlFor="email">Your Email *</label>
-                            <div className="flex items-center gap-2 bg-transparent p-2 rounded-lg border border-furry">
-                                <MdEmail className="left-0 text-gray-500" />
+                            <div className="flex items-center gap-2 bg-transparent pl-2 rounded-lg border border-furry">
+                                <MdEmail className="text-gray-500" />
                                 <input
                                     {...register("email", {
                                         required:
                                             { value: true, message: "Provide a valid email address!" }
                                     })}
-                                    className="bg-transparent w-full focus:outline-0" type="email" name="email" id="email" placeholder="Enter Your Email" />
+                                    className="px-2 rounded-r-lg py-1 bg-transparent w-full focus:outline-0" type="email" name="email" id="email" placeholder="Enter Your Email" />
                             </div>
                             {
                                 errors.email && <p className="text-red-700">{errors.email.message}</p>
@@ -189,8 +189,8 @@ const Register = () => {
                         {/* Profile Picture */}
                         <div className="flex flex-col gap-3">
                             <label className="font-medium" htmlFor="picture">Choose Your Profile Picture *</label>
-                            <div className="flex items-center gap-2 bg-transparent px-2 py-3 rounded-lg border border-furry">
-                                <MdImage className="left-0 text-gray-500" />
+                            <div className="flex items-center gap-2 bg-transparent pl-2 py-2 rounded-lg border border-furry">
+                                <MdImage className="text-gray-500" />
                                 <div className="w-full">
                                     <div className="relative w-full">
                                         <input
@@ -203,7 +203,7 @@ const Register = () => {
                                             accept="image/jpeg, image/bmp, image/png, image/gif"
                                             onChange={(e) => setImageFileName(e.target.files[0]?.name || "Upload Your Profile Picture")}
                                         />
-                                        <label htmlFor="picture" className="text-gray-500 hover:text-blue-700 transition-all duration-500 block w-full overflow-hidden overflow-ellipsis absolute top-1/2 left-0 -translate-y-1/2 bg-transparent cursor-pointer">
+                                        <label htmlFor="picture" className="px-2 rounded-r-lg py-1 text-gray-500 hover:bg-gray-500 hover:text-white transition-all duration-500 block w-full overflow-hidden overflow-ellipsis absolute top-1/2 left-0 -translate-y-1/2 bg-transparent cursor-pointer">
                                             {imageFileName}
                                         </label>
                                     </div>
@@ -227,8 +227,8 @@ const Register = () => {
                         </div> */}
                         <div className="flex flex-col gap-3">
                             <label className="font-medium" htmlFor="password">Your Password *</label>
-                            <div className="flex items-center gap-2 bg-transparent p-2 rounded-lg border border-furry">
-                                <RiLockPasswordFill className="left-0 text-gray-500" />
+                            <div className="flex items-center gap-2 bg-transparent  pl-2 rounded-lg border border-furry">
+                                <RiLockPasswordFill className="text-gray-500" />
                                 <div className="relative w-full">
                                     <input
                                         {...register("password", {
@@ -265,15 +265,15 @@ const Register = () => {
                                                 }
                                             }
                                         })}
-                                        className="bg-transparent w-full focus:outline-0" type={showPassword ? "text" : "password"} name="password" id="password" placeholder="Enter Your Password" />
+                                        className="px-2 rounded-r-lg py-1 bg-transparent w-full focus:outline-0" type={showPassword ? "text" : "password"} name="password" id="password" placeholder="Enter Your Password" />
                                     <span className="absolute top-1/2 right-2 -translate-y-1/2 cursor-pointer" onClick={() => setShowPassword(!showPassword)} >{showPassword ? <FaEyeSlash /> : <FaEye />}</span>
                                 </div>
                             </div>
+                            {
+                                errors.password && (
+                                    <p className="text-red-700">{errors.password.message}</p>)
+                            }
                         </div>
-                        {
-                            errors.password && (
-                                <p className="text-red-700">{errors.password.message}</p>)
-                        }
                         <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-lg px-5 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">{userLoading || imageLoading ? "Loading..." : "Register New Account"}</button>
                         <p className="text-center text-sm md:text-base font-medium">Already have an Account? <Link className="hover:pl-4 text-[#3c5cc3] font-bold hover:text-furry transition-all duration-500" to={'/login'}>Login Here!</Link></p>
                     </form>

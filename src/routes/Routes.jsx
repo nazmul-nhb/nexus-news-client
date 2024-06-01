@@ -4,6 +4,8 @@ import Root from "../layouts/Root";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
+import AddArticle from "../pages/AddArticle/AddArticle";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
     {
@@ -22,6 +24,10 @@ export const router = createBrowserRouter([
             {
                 path: '/register',
                 element: <Register/>
+            },
+            {
+                path: '/add-article',
+                element: <PrivateRoute><AddArticle /></PrivateRoute>
             },
           ],
     },

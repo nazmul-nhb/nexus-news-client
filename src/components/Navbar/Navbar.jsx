@@ -48,7 +48,7 @@ const Navbar = () => {
 
         {
             user && <>
-                <NavLink to={'/'}>Private Route</NavLink>
+                <NavLink to={'/add-article'}>Add Article</NavLink>
                 <NavLink to={'/'}>Private Route</NavLink>
             </>
         }
@@ -66,7 +66,7 @@ const Navbar = () => {
     }
 
     return (
-        <nav className="max-w-[1920px] flex items-center gap-0 md:gap-4 mx-auto shadow-md px-3 py-4 md:px-10 xl:px-20 sticky top-0 bg-gradient-to-l from-[#829ae8fa] to-[#7690e5fa] bg-opacity-100 z-50 text-[#1e4080]">
+        <nav className="max-w-screen-2xl flex items-center gap-0 md:gap-4 mx-auto shadow-md px-3 py-4 md:px-10 xl:px-20 sticky top-0 bg-gradient-to-l from-[#829ae8fa] to-[#7690e5fa] bg-opacity-100 z-50 text-[#1e4080]">
             <div ref={sidebarRef} className="min-[1170px]:hidden max-[430px]:text-3xl text-5xl cursor-pointer" onClick={() => setOpenNavbar(!openNavbar)}>
                 {
                     openNavbar

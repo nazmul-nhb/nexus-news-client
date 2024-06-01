@@ -4,7 +4,7 @@ const Footer = () => {
 
 
     return (
-        <footer className="max-w-[1920px] mx-auto">
+        <footer className="max-w-screen-2xl mx-auto">
             This is Footer
         </footer>
     );
