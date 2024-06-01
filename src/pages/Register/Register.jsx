@@ -1,7 +1,7 @@
 // import banner from '../../assets/banner.png';
 import { useEffect, useState } from "react";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { FaEye, FaEyeSlash, FaUserEdit } from "react-icons/fa";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Helmet } from 'react-helmet-async';
 import Swal from "sweetalert2";
@@ -10,27 +10,37 @@ import useAuth from '../../hooks/useAuth';
 import SocialLogin from '../../components/SocialLogin/SocialLogin';
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import moment from "moment";
+import axios from "axios";
+import { MdEmail, MdImage } from "react-icons/md";
+import { RiLockPasswordFill } from "react-icons/ri";
+
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const [imageLoading, setImageLoading] = useState(false);
+    const [imageFileName, setImageFileName] = useState("Upload Your Profile Picture")
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { user, createUser, updateUserProfile, logOut } = useAuth();
+    const { user, createUser, updateUserProfile, userLoading } = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
     const axiosPublic = useAxiosPublic();
 
     useEffect(() => {
         if (user) {
-            return navigate('/');
+            navigate(from, { replace: true });
         }
-    }, [navigate, user]);
+    }, [from, navigate, user])
 
     useEffect(() => {
         if (errors.name) {
             toast.error(errors.name.message, { duration: 2000 })
             return;
         }
-        if (errors.photo) {
-            toast.error(errors.photo.message, { duration: 2000 })
+        if (errors.picture) {
+            toast.error(errors.picture.message, { duration: 2000 })
             return;
         }
         if (errors.email) {
@@ -41,52 +51,86 @@ const Register = () => {
             toast.error(errors.password.message, { duration: 2000 })
             return;
         }
-    }, [errors.email, errors.name, errors.password, errors.photo]);
+    }, [errors.email, errors.name, errors.password, errors.picture]);
 
-    const handleRegister = (registrationInfo) => {
-        const { name, photo, email, password } = registrationInfo;
-        createUser(email, password)
-            .then(() => {
-                // update profile
-                updateUserProfile(name, photo)
-                    .then(() => {
-                        const userInfo = { name, email, joined_on: moment().format("YYYY-MM-DD HH:mm:ss") };
-                        axiosPublic.post('/users', userInfo)
-                            .then(res => {
-                                if (res.data.insertedId) {
-                                    toast.success("User Added in Database!");
-                                }
-                            })
-                    })
-                    .catch(error => {
+    const handleRegister = async (registrationInfo) => {
+        setImageLoading(true);
+        const { name, picture, email, password } = registrationInfo;
+        const imageFile = picture[0];
+
+        // set image file name on upload input
+        if (imageFile) {
+            setImageFileName(imageFile.name);
+        } else {
+            setImageFileName("Upload Your Profile Picture");
+        }
+        console.log(imageFile);
+
+        const formData = new FormData();
+        formData.append('image', imageFile);
+
+        // upload image to imgbb
+        const res = await axios.post(image_hosting_api, formData, {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        });
+
+        console.log(res);
+
+        if (res.data.success) {
+            const profilePicture = res.data.data.display_url; // use res.data.data.url for full size image
+            createUser(email, password)
+                .then(() => {
+                    // update profile
+                    updateUserProfile(name, profilePicture)
+                        .then(() => {
+                            const userInfo = { name, email, joined_on: moment().format("YYYY-MM-DD HH:mm:ss") };
+                            axiosPublic.post('/users', userInfo)
+                                .then(res => {
+                                    if (res.data.insertedId) {
+                                        toast.success("User Added in Database!");
+                                    }
+                                })
+                        })
+                        .catch(error => {
+                            Swal.fire({
+                                title: 'Error!',
+                                text: error.message.split(': ')[1] || error.message,
+                                icon: 'error',
+                                confirmButtonText: 'Close'
+                            });
+                        })
+                    toast.success("Successful! Please, Login Now!");
+                    setImageLoading(false);
+                    // logOut();
+                    // navigate('/login');
+                })
+                .catch(error => {
+                    if (error.message === "Firebase: Error (auth/email-already-in-use).") {
+                        Swal.fire({
+                            title: 'Registration Failed!',
+                            text: "Already Exists! Your Email is Registered with Different Credential!",
+                            icon: 'warning',
+                            confirmButtonText: 'Close'
+                        });
+                    } else {
                         Swal.fire({
                             title: 'Error!',
                             text: error.message.split(': ')[1] || error.message,
                             icon: 'error',
                             confirmButtonText: 'Close'
                         });
-                    })
-                toast.success("Successful! Please, Login Now!");
-                logOut();
-                navigate('/login');
-            })
-            .catch(error => {
-                if (error.message === "Firebase: Error (auth/email-already-in-use).") {
-                    Swal.fire({
-                        title: 'Registration Failed!',
-                        text: "Already Exists! Your Email is Registered with Different Credential!",
-                        icon: 'warning',
-                        confirmButtonText: 'Close'
-                    });
-                } else {
-                    Swal.fire({
-                        title: 'Error!',
-                        text: error.message.split(': ')[1] || error.message,
-                        icon: 'error',
-                        confirmButtonText: 'Close'
-                    });
-                }
-            })
+                    }
+                })
+        } else {
+            Swal.fire({
+                title: 'Error!',
+                text: "Image Upload Failed!",
+                icon: 'error',
+                confirmButtonText: 'Close'
+            });
+        }
     }
 
     return (
@@ -110,31 +154,66 @@ const Register = () => {
                     {/* Email Password Login */}
                     <form onSubmit={handleSubmit(handleRegister)} className="w-full flex flex-col gap-6 px-4 lg:px-8 py-4 lg:py-6 shadow-lg shadow-[#8689ee] border border-furry rounded-md">
                         <h3 className='text-lg md:text-xl font-medium text-center'>Register with Email & Password</h3>
+                        {/* Name */}
                         <div className="flex flex-col gap-3">
                             <label className="font-medium" htmlFor="name">Your Name *</label>
-                            <input
-                                {...register("name", {
-                                    required:
-                                        { value: true, message: "You must provide your name." }
-                                })}
-                                className="bg-transparent focus:border-2 p-2 rounded-lg border border-furry transition duration-500 focus:outline-0" type="text" name="name" id="name" placeholder="Enter Your Name" />
+                            <div className="flex items-center gap-2 bg-transparent p-2 rounded-lg border border-furry">
+                                <FaUserEdit className="left-0 text-gray-500" />
+                                <input
+                                    {...register("name", {
+                                        required:
+                                            { value: true, message: "You must provide your name." }
+                                    })}
+                                    className="bg-transparent w-full focus:bg-transparent focus:outline-0" type="text" name="name" id="name" placeholder="Enter Your Name" />
+                            </div>
                             {
                                 errors.name && <p className="text-red-700">{errors.name.message}</p>
                             }
                         </div>
+                        {/* Email */}
                         <div className="flex flex-col gap-3">
                             <label className="font-medium" htmlFor="email">Your Email *</label>
-                            <input
-                                {...register("email", {
-                                    required:
-                                        { value: true, message: "Provide a valid email address!" }
-                                })}
-                                className="bg-transparent focus:border-2 p-2 rounded-lg border border-furry transition duration-500 focus:outline-0" type="email" name="email" id="email" placeholder="Enter Your Email" />
+                            <div className="flex items-center gap-2 bg-transparent p-2 rounded-lg border border-furry">
+                                <MdEmail className="left-0 text-gray-500" />
+                                <input
+                                    {...register("email", {
+                                        required:
+                                            { value: true, message: "Provide a valid email address!" }
+                                    })}
+                                    className="bg-transparent w-full focus:outline-0" type="email" name="email" id="email" placeholder="Enter Your Email" />
+                            </div>
                             {
                                 errors.email && <p className="text-red-700">{errors.email.message}</p>
                             }
                         </div>
+                        {/* Profile Picture */}
                         <div className="flex flex-col gap-3">
+                            <label className="font-medium" htmlFor="picture">Choose Your Profile Picture *</label>
+                            <div className="flex items-center gap-2 bg-transparent px-2 py-3 rounded-lg border border-furry">
+                                <MdImage className="left-0 text-gray-500" />
+                                <div className="w-full">
+                                    <div className="relative w-full">
+                                        <input
+                                            {...register("picture", {
+                                                required:
+                                                    { value: true, message: "Provide an Image File!" }
+                                            })}
+                                            className="absolute w-full h-full opacity-0 cursor-pointer bg-transparent focus:outline-0"
+                                            type="file" name="picture" id="picture"
+                                            accept="image/jpeg, image/bmp, image/png, image/gif"
+                                            onChange={(e) => setImageFileName(e.target.files[0]?.name || "Upload Your Profile Picture")}
+                                        />
+                                        <label htmlFor="picture" className="text-gray-500 hover:text-blue-700 transition-all duration-500 block w-full overflow-hidden overflow-ellipsis absolute top-1/2 left-0 -translate-y-1/2 bg-transparent cursor-pointer">
+                                            {imageFileName}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            {
+                                errors.picture && <p className="text-red-700">{errors.picture.message}</p>
+                            }
+                        </div>
+                        {/* <div className="flex flex-col gap-3">
                             <label className="font-medium" htmlFor="photo">Photo URL for Your Profile*</label>
                             <input
                                 {...register("photo", {
@@ -145,54 +224,57 @@ const Register = () => {
                             {
                                 errors.photo && <p className="text-red-700">{errors.photo.message}</p>
                             }
-                        </div>
+                        </div> */}
                         <div className="flex flex-col gap-3">
                             <label className="font-medium" htmlFor="password">Your Password *</label>
-                            <div className="relative">
-                                <input
-                                    {...register("password", {
-                                        required: {
-                                            value: true, message: "You must choose a password."
-                                        },
-                                        minLength: {
-                                            value: 6, message: "Password must contain 6 characters!"
-                                        },
-                                        validate: {
-                                            isCapital: (value) => {
-                                                if (/(?=.*[A-Z])/.test(value)) {
-                                                    return true;
-                                                }
-                                                return "Password must contain uppercase!"
+                            <div className="flex items-center gap-2 bg-transparent p-2 rounded-lg border border-furry">
+                                <RiLockPasswordFill className="left-0 text-gray-500" />
+                                <div className="relative w-full">
+                                    <input
+                                        {...register("password", {
+                                            required: {
+                                                value: true, message: "You must choose a password."
                                             },
-                                            // isLower: (value) => {
-                                            //     if (/(?=.*[a-z])/.test(value)) {
-                                            //         return true;
-                                            //     }
-                                            //     return "Password must contain lowercase!"
-                                            // },
-                                            isNumeric: (value) => {
-                                                if (/(?=.*[0-9])/.test(value)) {
-                                                    return true;
-                                                }
-                                                return "Password must contain a number!"
+                                            minLength: {
+                                                value: 6, message: "Password must contain 6 characters!"
                                             },
-                                            isSpecialChar: (value) => {
-                                                if (/(?=.*[!@#$%^&*()_+\-~=[\]{};'`:"\\|,.<>/?])/.test(value)) {
-                                                    return true;
+                                            validate: {
+                                                isCapital: (value) => {
+                                                    if (/(?=.*[A-Z])/.test(value)) {
+                                                        return true;
+                                                    }
+                                                    return "Password must contain uppercase!"
+                                                },
+                                                // isLower: (value) => {
+                                                //     if (/(?=.*[a-z])/.test(value)) {
+                                                //         return true;
+                                                //     }
+                                                //     return "Password must contain lowercase!"
+                                                // },
+                                                isNumeric: (value) => {
+                                                    if (/(?=.*[0-9])/.test(value)) {
+                                                        return true;
+                                                    }
+                                                    return "Password must contain a number!"
+                                                },
+                                                isSpecialChar: (value) => {
+                                                    if (/(?=.*[!@#$%^&*()_+\-~=[\]{};'`:"\\|,.<>/?])/.test(value)) {
+                                                        return true;
+                                                    }
+                                                    return "Password must contain a symbol!"
                                                 }
-                                                return "Password must contain a symbol!"
                                             }
-                                        }
-                                    })}
-                                    className="w-full bg-transparent focus:border-2 p-2 rounded-lg border border-furry transition duration-500 focus:outline-0" type={showPassword ? "text" : "password"} name="password" id="password" placeholder="Enter Your Password" />
-                                <span className="absolute top-1/2 right-2 -translate-y-1/2 cursor-pointer" onClick={() => setShowPassword(!showPassword)} >{showPassword ? <FaEyeSlash /> : <FaEye />}</span>
+                                        })}
+                                        className="bg-transparent w-full focus:outline-0" type={showPassword ? "text" : "password"} name="password" id="password" placeholder="Enter Your Password" />
+                                    <span className="absolute top-1/2 right-2 -translate-y-1/2 cursor-pointer" onClick={() => setShowPassword(!showPassword)} >{showPassword ? <FaEyeSlash /> : <FaEye />}</span>
+                                </div>
                             </div>
                         </div>
                         {
                             errors.password && (
                                 <p className="text-red-700">{errors.password.message}</p>)
                         }
-                        <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-lg px-5 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Register New Account</button>
+                        <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-lg px-5 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">{userLoading || imageLoading ? "Loading..." : "Register New Account"}</button>
                         <p className="text-center text-sm md:text-base font-medium">Already have an Account? <Link className="hover:pl-4 text-[#3c5cc3] font-bold hover:text-furry transition-all duration-500" to={'/login'}>Login Here!</Link></p>
                     </form>
                 </div>

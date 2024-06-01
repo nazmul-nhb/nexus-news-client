@@ -11,7 +11,7 @@ import ToggleTheme from "../ToggleTheme/ToggleTheme";
 import useAuth from "../../hooks/useAuth";
 
 const Navbar = () => {
-    const { user, logOut } = useAuth();
+    const { user, userLoading, logOut } = useAuth();
     const [openNavbar, setOpenNavbar] = useState(false);
     const [userName, setUserName] = useState('');
     const [profilePicture, setProfilePicture] = useState('');
@@ -88,10 +88,11 @@ const Navbar = () => {
                     </ul>
                 </div>
 
-                <ToggleTheme/>
+                <ToggleTheme />
 
-                {
-                    user
+                {userLoading ?
+                    "Loading..."
+                    : user
                         ? <div className="flex items-center gap-2 md:gap-3">
                             <Tooltip anchorSelect=".nameIcon" place="bottom">
                                 {userName}
