@@ -9,11 +9,12 @@ const AddArticle = () => {
     const [resetForm, setResetForm] = useState(null);
     const [imageFileName, setImageFileName] = useState("Upload News Image")
     const [newsTags, setNewsTags] = useState([]);
+    const [publisher, setPublisher] = useState({});
 
 
     const handlePostArticle = (newArticle) => {
         console.log(newArticle);
-        const { headline, publisher, image } = newArticle;
+        const { headline, image } = newArticle;
         const imageFile = image[0];
         // set image file name on upload input
         if (imageFile) {
@@ -24,7 +25,9 @@ const AddArticle = () => {
         const tags = newsTags?.map(tag => tag.value);
         resetForm();
         setImageFileName("Upload News Image");
-        const finalArticle = { headline, publisher, tags, posted_on: moment().format("YYYY-MM-DD HH:mm:ss") }
+        // setNewsTags([]);
+        // setPublisher({})
+        const finalArticle = { headline, publisher: publisher.label, tags, posted_on: moment().format("YYYY-MM-DD HH:mm:ss") }
         console.log(finalArticle);
     }
 
@@ -45,6 +48,8 @@ const AddArticle = () => {
                 imageFileName={imageFileName}
                 setImageFileName={setImageFileName}
                 setNewsTags={setNewsTags}
+                setPublisher={setPublisher}
+                selectedPublisher={publisher}
             />
         </section>
     );

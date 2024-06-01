@@ -9,6 +9,7 @@ import CreatableSelect from 'react-select/creatable';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
 import { TiNews } from 'react-icons/ti';
+import Select from 'react-select';
 
 const animatedComponents = makeAnimated();
 const tagOptions = [
@@ -33,8 +34,8 @@ const customStyles = {
     control: (baseStyles, state) => ({
         ...baseStyles,
         backgroundColor: 'transparent',
-        border: 'none',
         boxShadow: state.isFocused ? 'none' : 'none',
+        border: 'none',
         padding: '0 0 0 4px',
     }),
     container: (base) => ({
@@ -92,7 +93,9 @@ const ArticleForm = ({
     setImageFileName,
     setResetForm,
     handlePostArticle,
-    setNewsTags }) => {
+    setNewsTags,
+    setPublisher,
+    selectedPublisher }) => {
 
     const axiosPublic = useAxiosPublic();
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -124,13 +127,10 @@ const ArticleForm = ({
 
     return (
         <div className='my-6'>
-            <form onSubmit={handleSubmit(handlePostArticle)} className='w-4/5 mx-auto grid grid-cols-1 lg:grid-cols-6 gap-3'>
-                {/* Headline & Publisher */}
-                {/* <div className="flex justify-between gap-4"></div> */}
-
+            <form onSubmit={handleSubmit(handlePostArticle)} className='w-4/5 mx-auto grid grid-cols-1 lg:grid-cols-6 gap-3 font-medium'>
                 {/* Headline/Title */}
                 <div className="col-span-1 lg:col-span-4 flex flex-col gap-3">
-                    <div className="flex items-center gap-2 pl-2 py-0.5 bg-transparent rounded-lg border border-furry">
+                    <div className="flex items-center gap-2 pl-2 py-1 bg-transparent rounded-lg border border-furry">
                         <MdViewHeadline />
                         <label className="font-medium" htmlFor="headline">Headline</label>
                         <input
@@ -145,28 +145,24 @@ const ArticleForm = ({
                 </div>
                 {/* Publisher */}
                 <div className="col-span-1 lg:col-span-2 flex flex-col gap-3">
-                    <div className="flex items-center gap-2 pl-2 py-0.5 bg-transparent rounded-lg border border-furry">
+                    <div className="flex items-center gap-2 pl-2 py-[1px] bg-transparent rounded-lg border border-furry">
                         <FaNewspaper />
                         <label className="font-medium" htmlFor="publisher">Publisher</label>
-                        <select
-                            {...register("publisher", {
-                                required: { value: true, message: "You must select a publisher!" },
-                            })}
-                            className="px-2 rounded-r-lg py-1 bg-transparent w-full border-l border-furry focus:outline-0" name="publisher" id="publisher" placeholder="Select A Publisher" >
-                            <option className='text-gray-500' value={""}>Select A Publisher</option>
-                            {
-                                publishers?.map(publisher => <option
-                                    key={publisher._id}
-                                    value={publisher.publisher}
-                                >{publisher.publisher}</option>)
-                            }
-                        </select>
+                        <Select isClearable
+                            styles={customStyles}
+                            components={animatedComponents}
+                            value={selectedPublisher}
+                            onChange={setPublisher}
+                            options={publishers.map(publisher => ({
+                                value: publisher._id,
+                                label: publisher.publisher
+                            }))}
+                            required
+                            placeholder="Select A Publisher"
+                            className="px-2 rounded-r-lg py-0.5 bg-transparent w-full border-l border-furry focus:outline-0"
+                        />
                     </div>
-                    {
-                        errors.publisher && <p className="text-red-700">{errors.publisher.message}</p>
-                    }
                 </div>
-
                 {/* Image */}
                 <div className="col-span-1 lg:col-span-3 flex flex-col gap-3">
                     <div className="flex items-center gap-2 bg-transparent pl-2 py-[7px] rounded-lg border border-furry">
@@ -184,7 +180,7 @@ const ArticleForm = ({
                                     accept="image/jpeg, image/bmp, image/png, image/gif"
                                     onChange={(e) => setImageFileName(e.target.files[0]?.name || "Upload News Image")}
                                 />
-                                <label htmlFor="image" className="px-2 rounded-r-lg py-1 bg-transparent w-full border-l border-furry focus:outline-0 text-gray-500 hover:bg-gray-500 hover:text-white transition-all duration-500 block overflow-hidden overflow-ellipsis absolute top-1/2 left-0 -translate-y-1/2 cursor-pointer">
+                                <label htmlFor="image" className="px-2 rounded-r-lg py-2 bg-transparent w-full border-l border-furry focus:outline-0 text-gray-500 hover:bg-gray-500 hover:text-white transition-all duration-500 block overflow-hidden overflow-ellipsis absolute top-1/2 left-0 -translate-y-1/2 cursor-pointer">
                                     {imageFileName}
                                 </label>
                             </div>
@@ -202,7 +198,7 @@ const ArticleForm = ({
                         <CreatableSelect
                             styles={customStyles}
                             isClearable isMulti
-                            closeMenuOnSelect={false}
+                            closeMenuOnSelect={true}
                             placeholder="Select tags"
                             components={animatedComponents}
                             // theme={newsTheme}
@@ -216,8 +212,8 @@ const ArticleForm = ({
                 </div>
                 {/* News Description */}
                 <div className="col-span-1 lg:col-span-6 flex flex-col gap-3">
-                    <div className="flex md:flex-row flex-col items-start justify-start gap-2 md:pl-2 py-0.5 bg-transparent rounded-lg border border-furry">
-                        <div className="flex items-center gap-2 pt-1">
+                    <div className="flex md:flex-row flex-col items-start justify-start gap-2 py-0.5 bg-transparent rounded-lg border border-furry">
+                        <div className="pl-2 flex items-center gap-2 pt-1">
                             <TiNews />
                             <label className="font-medium" htmlFor="description">Description</label>
                         </div>
@@ -225,7 +221,7 @@ const ArticleForm = ({
                             {...register("description", {
                                 required: { value: true, message: "You must write News Description!" },
                             })}
-                            className="h-60 px-2 rounded-tr-none md:rounded-r-lg py-1 bg-transparent w-full border-t md:border-t-0 md:border-l border-furry focus:outline-0" type="text" name="description" id="description" placeholder="Description for the Article" />
+                            className="h-80 px-2 rounded-tr-none md:rounded-r-lg py-1 bg-transparent w-full border-t md:border-t-0 md:border-l border-furry focus:outline-0" type="text" name="description" id="description" placeholder="Description for the Article" />
                     </div>
                     {
                         errors.description && <p className="text-red-700">{errors.description.message}</p>
@@ -244,7 +240,9 @@ ArticleForm.propTypes = {
     setResetForm: PropTypes.func,
     setImageFileName: PropTypes.func,
     setNewsTags: PropTypes.func,
+    setPublisher: PropTypes.func,
     imageFileName: PropTypes.string,
+    selectedPublisher: PropTypes.object,
 };
 
 export default ArticleForm;
