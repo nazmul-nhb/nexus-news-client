@@ -3,17 +3,28 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { FaGoogle, FaFacebook } from "react-icons/fa";
 import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
+import moment from 'moment';
 
 const SocialLogin = () => {
     const { googleLogin, facebookLogin } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
+    const axiosPublic = useAxiosPublic();
 
     const handleGoogleLogin = () => {
         googleLogin()
-            .then(() => {
+            .then(result => {
                 toast.success("Successfully Logged in!");
+                const user = result.user;
+                const userInfo = { name: user?.displayName, email: user?.email, joined_on: moment().format("YYYY-MM-DD HH:mm:ss") };
+                axiosPublic.post('/users', userInfo)
+                    .then(res => {
+                        if (res.data.insertedId) {
+                            toast.success("User Added in Database!");
+                        }
+                    })
                 navigate(from, { replace: true });
             })
             .catch(error => {
@@ -44,8 +55,16 @@ const SocialLogin = () => {
 
     const handleFacebookLogin = () => {
         facebookLogin()
-            .then(() => {
+            .then(result => {
                 toast.success("Successfully Logged in!");
+                const user = result.user;
+                const userInfo = { name: user?.displayName, email: user?.email, joined_on: moment().format("YYYY-MM-DD HH:mm:ss") };
+                axiosPublic.post('/users', userInfo)
+                    .then(res => {
+                        if (res.data.insertedId) {
+                            toast.success("User Added in Database!");
+                        }
+                    })
                 navigate(from, { replace: true });
             })
             .catch(error => {

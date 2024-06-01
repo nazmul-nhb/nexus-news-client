@@ -44,12 +44,12 @@ const Navbar = () => {
 
     const navItems = <>
         <NavLink to={'/'}>Home</NavLink>
-        <NavLink to={'/'}>Item 1</NavLink>
+        <NavLink to={'/'}>Public Route</NavLink>
 
         {
             user && <>
-                <NavLink to={'/private'}>Private Route</NavLink>
-                <NavLink to={'/private'}>Private Route</NavLink>
+                <NavLink to={'/'}>Private Route</NavLink>
+                <NavLink to={'/'}>Private Route</NavLink>
             </>
         }
         <NavLink to={'/contact'}>Contact</NavLink>
