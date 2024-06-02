@@ -6,10 +6,12 @@ import useImageUpload from "../../hooks/useImageUpload";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import toast from "react-hot-toast";
+import useAuth from "../../hooks/useAuth";
 // import useAxiosPublic from "../../hooks/useAxiosPublic";
 // import { useQuery } from "@tanstack/react-query";
 
 const AddArticle = () => {
+    const { user } = useAuth();
     const [resetForm, setResetForm] = useState(null);
     const [imageFileName, setImageFileName] = useState("Upload News Image")
     const [newsTags, setNewsTags] = useState([]);
@@ -17,7 +19,6 @@ const AddArticle = () => {
     const [newsType, setNewsType] = useState({});
     const { imageUploading, uploadSuccess, uploadError, lowResImageURL, fullSizeImageURL, uploadImage } = useImageUpload();
     const axiosPublic = useAxiosPublic();
-
 
     const handlePostArticle = async (newArticle) => {
         console.log(newArticle);
@@ -47,7 +48,9 @@ const AddArticle = () => {
         }
 
         setImageFileName("Upload News Image");
-        const finalArticle = { headline, tags, description, isPremium: newsType.value, publisher: publisher.value, thumb_image: lowResImageURL, full_image: fullSizeImageURL, posted_on: moment().format("YYYY-MM-DD HH:mm:ss") }
+
+        const finalArticle = { headline, tags, description, posted_by: user.displayName, posted_by_email: user.email, isPremium: newsType.value, publisher: publisher.value, thumb_image: lowResImageURL, full_image: fullSizeImageURL, posted_on: moment().format("YYYY-MM-DD HH:mm:ss") };
+
         console.log(finalArticle);
 
         if (uploadSuccess) {
@@ -56,7 +59,18 @@ const AddArticle = () => {
                     if (res.data.insertedId) {
                         toast.success("Article Posted Successfully!");
                         resetForm();
+                    } else {
+                        Swal.fire({
+                            title: 'Error!',
+                            text: res.data.message,
+                            icon: 'error',
+                            confirmButtonText: 'Close'
+                        });
                     }
+                }).
+                catch(error => {
+                    console.log(error);
+                    toast.error(error);
                 })
         } else {
             Swal.fire({

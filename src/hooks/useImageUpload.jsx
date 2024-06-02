@@ -24,7 +24,7 @@ const useImageUpload = () => {
                     'content-type': 'multipart/form-data'
                 }
             });
-            // console.log(res.data.success);
+            console.log(res.data);
             setLowResImageURL(res.data.data.display_url);
             setFullSizeImageURL(res.data.data.image.url);
             if (res.data.success) {
@@ -32,6 +32,7 @@ const useImageUpload = () => {
             }
         } catch (error) {
             setUploadError(error);
+            console.error(error);
         } finally {
             setImageUploading(false);
         }

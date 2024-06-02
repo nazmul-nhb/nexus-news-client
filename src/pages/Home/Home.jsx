@@ -1,7 +1,11 @@
+import { useEffect } from "react";
 
 
 const Home = () => {
 
+    useEffect(() => {
+        document.title = "Home - Nexus News";
+    }, []);
 
     return (
         <section className="mx-6 md:mx-10 my-2 md:my-8 p-2 md:px-4">

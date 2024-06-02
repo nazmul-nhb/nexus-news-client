@@ -196,7 +196,7 @@ const ArticleForm = ({
                                     accept="image/jpeg, image/bmp, image/png, image/gif"
                                     onChange={(e) => setImageFileName(e.target.files[0]?.name || "Upload News Image")}
                                 />
-                                <label htmlFor="image" className="px-2 rounded-r-lg py-2 bg-transparent w-full border-l border-nexus-primary focus:outline-0 text-gray-500 hover:bg-gray-500 hover:text-white transition-all duration-500 block overflow-hidden overflow-ellipsis absolute top-1/2 left-0 -translate-y-1/2 cursor-pointer">
+                                <label htmlFor="image" className="px-2 rounded-r-lg py-2 bg-transparent w-full border-l border-nexus-primary focus:outline-0 text-gray-500 hover:bg-gray-500 hover:text-white transition-all duration-500 block overflow-hidden whitespace-nowrap overflow-ellipsis absolute top-1/2 left-0 -translate-y-1/2 cursor-pointer">
                                     {imageFileName}
                                 </label>
                             </div>
@@ -210,19 +210,20 @@ const ArticleForm = ({
                 <div className="col-span-9 lg:col-span-5 flex flex-col gap-3">
                     <div className="flex items-center gap-2 bg-transparent pl-2 rounded-lg border border-nexus-primary">
                         <FaRegNewspaper />
-                        <label className="font-medium" htmlFor="tag">Tags</label>
+                        <label className="font-medium" htmlFor="tags">Tags</label>
                         <CreatableSelect
                             styles={customStyles}
                             isClearable isMulti
-                            closeMenuOnSelect={true}
-                            placeholder="Select tags"
+                            closeMenuOnSelect={false}
                             components={animatedComponents}
                             // theme={newsTheme}
                             defaultValue={[]}
                             options={tagOptions}
                             onChange={setNewsTags}
                             required
+                            placeholder="Select Tags"
                             className="px-2 rounded-l-none rounded-r-lg py-1 bg-transparent w-full border-l border-nexus-primary focus:outline-0"
+                            id='tags' name='tags'
                         />
                     </div>
                 </div>
