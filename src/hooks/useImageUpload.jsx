@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const useImageUpload = () => {
     const [imageUploading, setImageUploading] = useState(false);
-    const [uploadSuccess, setUploadSuccess] = useState();
+    const [uploadSuccess, setUploadSuccess] = useState(false);
     const [lowResImageURL, setLowResImageURL] = useState(null);
     const [fullSizeImageURL, setFullSizeImageURL] = useState(null);
     const [uploadError, setUploadError] = useState(null);
@@ -13,8 +13,10 @@ const useImageUpload = () => {
 
     const uploadImage = async (formData) => {
         setImageUploading(true);
-        setUploadError(null);
+        setUploadSuccess(false);
         setLowResImageURL(null);
+        setFullSizeImageURL(null);
+        setUploadError(null);
 
         try {
             const res = await axios.post(imageHostingApi, formData, {
@@ -22,9 +24,12 @@ const useImageUpload = () => {
                     'content-type': 'multipart/form-data'
                 }
             });
+            // console.log(res.data.success);
             setLowResImageURL(res.data.data.display_url);
-            setFullSizeImageURL(res.data.data.url);
-            setUploadSuccess(res.data.success);
+            setFullSizeImageURL(res.data.data.image.url);
+            if (res.data.success) {
+                setUploadSuccess(true);
+            }
         } catch (error) {
             setUploadError(error);
         } finally {

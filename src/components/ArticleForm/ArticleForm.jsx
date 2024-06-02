@@ -89,6 +89,7 @@ const customStyles = {
 const ArticleForm = ({
     // addArticle,
     // updateArticle,
+    imageUploading,
     imageFileName,
     setImageFileName,
     setResetForm,
@@ -242,7 +243,7 @@ const ArticleForm = ({
                         errors.description && <p className="text-red-700">{errors.description.message}</p>
                     }
                 </div>
-                <Button buttonText={'Post Article'} />
+                <Button buttonType={'submit'} buttonText={imageUploading ? 'Loading...' : 'Post Article'} />
             </form >
         </div >
     );
@@ -251,6 +252,7 @@ const ArticleForm = ({
 ArticleForm.propTypes = {
     addArticle: PropTypes.bool,
     updateArticle: PropTypes.bool,
+    imageUploading: PropTypes.bool,
     handlePostArticle: PropTypes.func,
     setResetForm: PropTypes.func,
     setImageFileName: PropTypes.func,

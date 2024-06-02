@@ -15,12 +15,8 @@ import { MdEmail, MdImage } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import useImageUpload from "../../hooks/useImageUpload";
 
-// const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
-// const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
-
 const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
-    // const [imageLoading, setImageLoading] = useState(false);
     const [imageFileName, setImageFileName] = useState("Upload Your Profile Picture")
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { createUser, updateUserProfile, userLoading, logOut } = useAuth();
@@ -70,15 +66,6 @@ const Register = () => {
 
         const formData = new FormData();
         formData.append('image', imageFile);
-
-        // upload image to imgbb
-        // const res = await axios.post(image_hosting_api, formData, {
-        //     headers: {
-        //         'content-type': 'multipart/form-data'
-        //     }
-        // });
-
-        // console.log(res);
 
         await uploadImage(formData);
 
