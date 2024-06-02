@@ -9,7 +9,7 @@ const ToggleTheme = () => {
     const [isAnimating, setIsAnimating] = useState(false);
     const [currentIcon, setCurrentIcon] = useState(
         theme === 'light'
-            ? <BsFillCloudMoonFill className='text-furry' />
+            ? <BsFillCloudMoonFill className='text-nexus-primary' />
             : <MdLightMode className='text-white' />);
 
     useEffect(() => {
@@ -17,7 +17,7 @@ const ToggleTheme = () => {
         const timer = setTimeout(() => {
             setCurrentIcon(
                 theme === 'light'
-                    ? <BsFillCloudMoonFill className='text-furry' />
+                    ? <BsFillCloudMoonFill className='text-nexus-primary' />
                     : <MdLightMode className='text-white' />);
             setIsAnimating(false);
         }, 500);

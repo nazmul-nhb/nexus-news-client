@@ -21,10 +21,13 @@ export default {
         fadeOut: 'fadeOut 0.5s ease-in-out',
       },
       colors: {
-
+        'nexus-primary': '#31404b',
+        'nexus-secondary': '#6897bb',
+        'nexusBG': 'Final Project Part-7'
       },
       fontFamily: {
-
+        kreonSerif: '"Kreon", serif;',
+        sourceSans: '"Source Sans 3", sans-serif;',
       },
     },
   },
