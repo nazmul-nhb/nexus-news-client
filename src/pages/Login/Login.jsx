@@ -11,21 +11,22 @@ import SocialLogin from "../../components/SocialLogin/SocialLogin";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
+import moment from "moment";
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { user, userLogin } = useAuth();
+    const { userLogin } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
     const axiosPublic = useAxiosPublic();
 
-    useEffect(() => {
-        if (user) {
-            return navigate(from, { replace: true });
-        }
-    }, [from, navigate, user]);
+    // useEffect(() => {
+    //     if (user) {
+    //         return navigate(from, { replace: true });
+    //     }
+    // }, [from, navigate, user]);
 
     useEffect(() => {
         if (errors.email) {
@@ -44,11 +45,14 @@ const Login = () => {
             .then(result => {
                 toast.success("Successfully Logged in!");
                 const user = result.user;
-                const userInfo = { name: user?.displayName, email: user?.email };
+                const userInfo = { name: user?.displayName, email: user?.email, profile_image: user?.photoURL, joined_on: moment().format("YYYY-MM-DD HH:mm:ss") };
                 axiosPublic.post('/users', userInfo)
                     .then(res => {
                         if (res.data.insertedId) {
                             toast.success("User Added in Database!");
+                        }
+                        if (res.data.modifiedCount > 0) {
+                            toast.success("Profile Picture Updated!");
                         }
                     })
                 navigate(from, { replace: true });

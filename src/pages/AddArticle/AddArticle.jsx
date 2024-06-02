@@ -10,7 +10,7 @@ const AddArticle = () => {
     const [imageFileName, setImageFileName] = useState("Upload News Image")
     const [newsTags, setNewsTags] = useState([]);
     const [publisher, setPublisher] = useState({});
-
+    const [newsType, setNewsType] = useState({});
 
     const handlePostArticle = (newArticle) => {
         console.log(newArticle);
@@ -27,7 +27,7 @@ const AddArticle = () => {
         setImageFileName("Upload News Image");
         // setNewsTags([]);
         // setPublisher({})
-        const finalArticle = { headline, publisher: publisher.label, tags, posted_on: moment().format("YYYY-MM-DD HH:mm:ss") }
+        const finalArticle = { headline, isPremium: newsType.value, publisher: publisher.value, tags, posted_on: moment().format("YYYY-MM-DD HH:mm:ss") }
         console.log(finalArticle);
     }
 
@@ -49,7 +49,7 @@ const AddArticle = () => {
                 setImageFileName={setImageFileName}
                 setNewsTags={setNewsTags}
                 setPublisher={setPublisher}
-                selectedPublisher={publisher}
+                setNewsType={setNewsType}
             />
         </section>
     );

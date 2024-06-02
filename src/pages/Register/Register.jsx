@@ -1,7 +1,7 @@
 // import banner from '../../assets/banner.png';
 import { useEffect, useState } from "react";
 import { FaEye, FaEyeSlash, FaUserEdit } from "react-icons/fa";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Helmet } from 'react-helmet-async';
 import Swal from "sweetalert2";
@@ -10,29 +10,31 @@ import useAuth from '../../hooks/useAuth';
 import SocialLogin from '../../components/SocialLogin/SocialLogin';
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import moment from "moment";
-import axios from "axios";
+// import axios from "axios";
 import { MdEmail, MdImage } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
+import useImageUpload from "../../hooks/useImageUpload";
 
-const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
-const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
+// const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+// const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
-    const [imageLoading, setImageLoading] = useState(false);
+    // const [imageLoading, setImageLoading] = useState(false);
     const [imageFileName, setImageFileName] = useState("Upload Your Profile Picture")
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { user, createUser, updateUserProfile, userLoading } = useAuth();
+    const { createUser, updateUserProfile, userLoading, logOut } = useAuth();
     const navigate = useNavigate();
-    const location = useLocation();
-    const from = location.state?.from?.pathname || "/";
+    // const location = useLocation();
+    // const from = location.state?.from?.pathname || "/";
     const axiosPublic = useAxiosPublic();
+    const { imageUploading, uploadSuccess, uploadError, lowResImageURL, uploadImage } = useImageUpload();
 
-    useEffect(() => {
-        if (user) {
-            navigate(from, { replace: true });
-        }
-    }, [from, navigate, user])
+    // useEffect(() => {
+    //     if (user) {
+    //         navigate(from, { replace: true });
+    //     }
+    // }, [from, navigate, user])
 
     useEffect(() => {
         if (errors.name) {
@@ -54,7 +56,7 @@ const Register = () => {
     }, [errors.email, errors.name, errors.password, errors.picture]);
 
     const handleRegister = async (registrationInfo) => {
-        setImageLoading(true);
+        // setImageLoading(true);
         const { name, picture, email, password } = registrationInfo;
         const imageFile = picture[0];
 
@@ -70,22 +72,32 @@ const Register = () => {
         formData.append('image', imageFile);
 
         // upload image to imgbb
-        const res = await axios.post(image_hosting_api, formData, {
-            headers: {
-                'content-type': 'multipart/form-data'
-            }
-        });
+        // const res = await axios.post(image_hosting_api, formData, {
+        //     headers: {
+        //         'content-type': 'multipart/form-data'
+        //     }
+        // });
 
-        console.log(res);
+        // console.log(res);
 
-        if (res.data.success) {
-            const profilePicture = res.data.data.display_url; // use res.data.data.url for full size image
+        await uploadImage(formData);
+
+        if(uploadError){
+            return Swal.fire({
+                title: 'Error!',
+                text: uploadError,
+                icon: 'error',
+                confirmButtonText: 'Close'
+            });
+        }
+
+        if (uploadSuccess) {
             createUser(email, password)
                 .then(() => {
                     // update profile
-                    updateUserProfile(name, profilePicture)
+                    updateUserProfile(name, lowResImageURL)
                         .then(() => {
-                            const userInfo = { name, email, joined_on: moment().format("YYYY-MM-DD HH:mm:ss") };
+                            const userInfo = { name, email, profile_image: lowResImageURL, joined_on: moment().format("YYYY-MM-DD HH:mm:ss") };
                             axiosPublic.post('/users', userInfo)
                                 .then(res => {
                                     if (res.data.insertedId) {
@@ -102,9 +114,9 @@ const Register = () => {
                             });
                         })
                     toast.success("Successful! Please, Login Now!");
-                    setImageLoading(false);
-                    // logOut();
-                    // navigate('/login');
+                    // setImageLoading(false);
+                    logOut();
+                    navigate('/login');
                 })
                 .catch(error => {
                     if (error.message === "Firebase: Error (auth/email-already-in-use).") {
@@ -274,7 +286,7 @@ const Register = () => {
                                     <p className="text-red-700">{errors.password.message}</p>)
                             }
                         </div>
-                        <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-lg px-5 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">{userLoading || imageLoading ? "Loading..." : "Register New Account"}</button>
+                        <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-lg px-5 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">{userLoading || imageUploading ? "Loading..." : "Register New Account"}</button>
                         <p className="text-center text-sm md:text-base font-medium">Already have an Account? <Link className="hover:pl-4 text-[#3c5cc3] font-bold hover:text-nexus-primary transition-all duration-500" to={'/login'}>Login Here!</Link></p>
                     </form>
                 </div>

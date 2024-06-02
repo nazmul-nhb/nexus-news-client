@@ -18,11 +18,14 @@ const SocialLogin = () => {
             .then(result => {
                 toast.success("Successfully Logged in!");
                 const user = result.user;
-                const userInfo = { name: user?.displayName, email: user?.email, joined_on: moment().format("YYYY-MM-DD HH:mm:ss") };
+                const userInfo = { name: user?.displayName, email: user?.email, profile_image: user?.photoURL, joined_on: moment().format("YYYY-MM-DD HH:mm:ss") };
                 axiosPublic.post('/users', userInfo)
                     .then(res => {
                         if (res.data.insertedId) {
                             toast.success("User Added in Database!");
+                        }
+                        if (res.data.modifiedCount > 0) {
+                            toast.success("Profile Picture Updated!");
                         }
                     })
                 navigate(from, { replace: true });
@@ -58,11 +61,14 @@ const SocialLogin = () => {
             .then(result => {
                 toast.success("Successfully Logged in!");
                 const user = result.user;
-                const userInfo = { name: user?.displayName, email: user?.email, joined_on: moment().format("YYYY-MM-DD HH:mm:ss") };
+                const userInfo = { name: user?.displayName, email: user?.email, profile_image: user?.photoURL, joined_on: moment().format("YYYY-MM-DD HH:mm:ss") };
                 axiosPublic.post('/users', userInfo)
                     .then(res => {
                         if (res.data.insertedId) {
                             toast.success("User Added in Database!");
+                        }
+                        if (res.data.modifiedCount > 0) {
+                            toast.success("Profile Picture Updated!");
                         }
                     })
                 navigate(from, { replace: true });

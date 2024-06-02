@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import Button from '../Button/Button';
 import { useEffect } from 'react';
 import { MdImage, MdViewHeadline } from 'react-icons/md';
-import { FaNewspaper, FaRegNewspaper } from 'react-icons/fa6';
+import { FaNewspaper, FaRegNewspaper, FaSackDollar } from 'react-icons/fa6';
 import makeAnimated from 'react-select/animated';
 import CreatableSelect from 'react-select/creatable';
 import { useQuery } from '@tanstack/react-query';
@@ -94,8 +94,8 @@ const ArticleForm = ({
     setResetForm,
     handlePostArticle,
     setNewsTags,
-    setPublisher,
-    selectedPublisher }) => {
+    setNewsType,
+    setPublisher }) => {
 
     const axiosPublic = useAxiosPublic();
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -127,44 +127,59 @@ const ArticleForm = ({
 
     return (
         <div className='my-6'>
-            <form onSubmit={handleSubmit(handlePostArticle)} className='w-4/5 mx-auto grid grid-cols-1 lg:grid-cols-6 gap-3 font-medium'>
+            <form onSubmit={handleSubmit(handlePostArticle)} className='w-4/5 mx-auto grid grid-cols-9 gap-3 font-medium'>
                 {/* Headline/Title */}
-                <div className="col-span-1 lg:col-span-4 flex flex-col gap-3">
-                    <div className="flex items-center gap-2 pl-2 py-1 bg-transparent rounded-lg border border-nexus-primary">
+                <div className="col-span-9 lg:col-span-4 flex flex-col gap-3">
+                    <div className="flex items-center gap-2 pl-2 bg-transparent rounded-lg border border-nexus-primary">
                         <MdViewHeadline />
                         <label className="font-medium" htmlFor="headline">Headline</label>
                         <input
                             {...register("headline", {
                                 required: { value: true, message: "You must write a headline!" },
                             })}
-                            className="px-2 rounded-r-lg py-1 bg-transparent w-full border-l border-nexus-primary focus:outline-0" type="text" name="headline" id="headline" placeholder="Headline for the Article" />
+                            className="px-2 rounded-r-lg py-[7px] bg-transparent w-full border-l border-nexus-primary focus:outline-0" type="text" name="headline" id="headline" placeholder="Headline for the Article" />
                     </div>
                     {
                         errors.headline && <p className="text-red-700">{errors.headline.message}</p>
                     }
                 </div>
+                {/* Type */}
+                <div className="col-span-9 lg:col-span-2 flex flex-col gap-3">
+                    <div className="flex items-center gap-2 pl-2 bg-transparent rounded-lg border border-nexus-primary">
+                        <FaSackDollar />
+                        <label className="font-medium" htmlFor="type">Type</label>
+                        <Select isClearable
+                            styles={customStyles}
+                            components={animatedComponents}
+                            onChange={setNewsType}
+                            options={[{ value: true, label: 'Premium' }, { value: false, label: 'Free' }]}
+                            required
+                            placeholder="Article Type"
+                            className="px-2 rounded-r-lg py-1 bg-transparent w-full border-l border-nexus-primary focus:outline-0" id='type' name='type'
+                        />
+                    </div>
+                </div>
                 {/* Publisher */}
-                <div className="col-span-1 lg:col-span-2 flex flex-col gap-3">
-                    <div className="flex items-center gap-2 pl-2 py-[1px] bg-transparent rounded-lg border border-nexus-primary">
+                <div className="col-span-9 lg:col-span-3 flex flex-col gap-3">
+                    <div className="flex items-center gap-2 pl-2 bg-transparent rounded-lg border border-nexus-primary">
                         <FaNewspaper />
                         <label className="font-medium" htmlFor="publisher">Publisher</label>
                         <Select isClearable
                             styles={customStyles}
                             components={animatedComponents}
-                            value={selectedPublisher}
                             onChange={setPublisher}
                             options={publishers.map(publisher => ({
-                                value: publisher._id,
+                                value: publisher.publisher,
                                 label: publisher.publisher
                             }))}
                             required
-                            placeholder="Select A Publisher"
-                            className="px-2 rounded-r-lg py-0.5 bg-transparent w-full border-l border-nexus-primary focus:outline-0"
+                            placeholder="Select Publisher"
+                            className="px-2 rounded-r-lg py-1 bg-transparent w-full border-l border-nexus-primary focus:outline-0" id='publisher' name='publisher'
                         />
                     </div>
                 </div>
                 {/* Image */}
-                <div className="col-span-1 lg:col-span-3 flex flex-col gap-3">
+                <div className="col-span-9 lg:col-span-4 flex flex-col gap-3">
                     <div className="flex items-center gap-2 bg-transparent pl-2 py-[7px] rounded-lg border border-nexus-primary">
                         <MdImage />
                         <label className="font-medium" htmlFor="image">Image</label>
@@ -191,7 +206,7 @@ const ArticleForm = ({
                     }
                 </div>
                 {/* Tags */}
-                <div className="col-span-1 lg:col-span-3 flex flex-col gap-3">
+                <div className="col-span-9 lg:col-span-5 flex flex-col gap-3">
                     <div className="flex items-center gap-2 bg-transparent pl-2 rounded-lg border border-nexus-primary">
                         <FaRegNewspaper />
                         <label className="font-medium" htmlFor="tag">Tags</label>
@@ -211,7 +226,7 @@ const ArticleForm = ({
                     </div>
                 </div>
                 {/* News Description */}
-                <div className="col-span-1 lg:col-span-6 flex flex-col gap-3">
+                <div className="col-span-9 flex flex-col gap-3">
                     <div className="flex md:flex-row flex-col items-start justify-start gap-2 py-0.5 bg-transparent rounded-lg border border-nexus-primary">
                         <div className="pl-2 flex items-center gap-2 pt-1">
                             <TiNews />
@@ -240,9 +255,9 @@ ArticleForm.propTypes = {
     setResetForm: PropTypes.func,
     setImageFileName: PropTypes.func,
     setNewsTags: PropTypes.func,
+    setNewsType: PropTypes.func,
     setPublisher: PropTypes.func,
     imageFileName: PropTypes.string,
-    selectedPublisher: PropTypes.object,
 };
 
 export default ArticleForm;
