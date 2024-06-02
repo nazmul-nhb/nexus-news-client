@@ -202,7 +202,7 @@ const Register = () => {
                                             accept="image/jpeg, image/bmp, image/png, image/gif"
                                             onChange={(e) => setImageFileName(e.target.files[0]?.name || "Upload Your Profile Picture")}
                                         />
-                                        <label htmlFor="picture" className="px-2 rounded-r-lg py-1 text-gray-500 hover:bg-gray-500 hover:text-white transition-all duration-500 block w-full overflow-hidden overflow-ellipsis absolute top-1/2 left-0 -translate-y-1/2 bg-transparent cursor-pointer">
+                                        <label htmlFor="picture" className="px-2 rounded-r-lg py-1 text-gray-500 hover:bg-gray-500 hover:text-white transition-all duration-500 block w-full overflow-hidden whitespace-nowrap overflow-ellipsis absolute top-1/2 left-0 -translate-y-1/2 bg-transparent cursor-pointer">
                                             {imageFileName}
                                         </label>
                                     </div>

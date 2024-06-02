@@ -23,6 +23,8 @@ const tagOptions = [
     { value: 'science', label: 'science' },
     { value: 'education', label: 'education' },
     { value: 'environment', label: 'environment' },
+    { value: 'economics', label: 'economics' },
+    { value: 'local', label: 'local' },
     { value: 'opinion', label: 'opinion' },
     { value: 'travel', label: 'travel' },
     { value: 'fashion', label: 'fashion' },

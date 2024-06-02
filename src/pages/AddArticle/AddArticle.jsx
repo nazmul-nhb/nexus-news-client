@@ -47,9 +47,7 @@ const AddArticle = () => {
             });
         }
 
-        setImageFileName("Upload News Image");
-
-        const finalArticle = { headline, tags, description, posted_by: user.displayName, posted_by_email: user.email, isPremium: newsType.value, publisher: publisher.value, thumb_image: lowResImageURL, full_image: fullSizeImageURL, posted_on: moment().format("YYYY-MM-DD HH:mm:ss") };
+        const finalArticle = { headline, tags, description, posted_by: user.displayName, posted_by_email: user.email, isPremium: newsType.value, publisher: publisher.value, view_count: 0, thumb_image: lowResImageURL, full_image: fullSizeImageURL, posted_on: moment().format("YYYY-MM-DD HH:mm:ss") };
 
         console.log(finalArticle);
 
@@ -58,8 +56,10 @@ const AddArticle = () => {
                 .then(res => {
                     if (res.data.insertedId) {
                         toast.success("Article Posted Successfully!");
+                        setImageFileName("Upload News Image");
                         resetForm();
-                    } else {
+                    }
+                    if (res.data.message) {
                         Swal.fire({
                             title: 'Error!',
                             text: res.data.message,
@@ -74,8 +74,8 @@ const AddArticle = () => {
                 })
         } else {
             Swal.fire({
-                title: 'Error!',
-                text: "Image Upload Failed!",
+                title: 'Upload Failed!',
+                text: "This Happens Sometimes! Please, Try Again!",
                 icon: 'error',
                 confirmButtonText: 'Close'
             });
