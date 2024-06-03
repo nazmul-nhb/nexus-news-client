@@ -25,7 +25,6 @@ const Register = () => {
     // const from = location.state?.from?.pathname || "/";
     const axiosPublic = useAxiosPublic();
     const [imageUploading, setImageUploading] = useState(false);
-    const [uploadError, setUploadError] = useState(null);
     const uploadImage = useImageUpload();
 
     // useEffect(() => {
@@ -122,10 +121,9 @@ const Register = () => {
                     })
             }
         } catch (error) {
-            setUploadError(error);
             Swal.fire({
                 title: 'Error!',
-                text: uploadError || "Image Upload Failed!",
+                text: error,
                 icon: 'error',
                 confirmButtonText: 'Close'
             });

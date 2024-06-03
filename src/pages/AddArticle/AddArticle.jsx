@@ -16,7 +16,6 @@ const AddArticle = () => {
     const [publisher, setPublisher] = useState({});
     const [newsType, setNewsType] = useState({});
     const [imageUploading, setImageUploading] = useState(false);
-    const [uploadError, setUploadError] = useState(null);
     const uploadImage = useImageUpload();
     const axiosPublic = useAxiosPublic();
 
@@ -61,7 +60,7 @@ const AddArticle = () => {
                     posted_on: moment().format("YYYY-MM-DD HH:mm:ss")
                 };
 
-                console.log(finalArticle);
+                console.log(tags);
 
                 const res = await axiosPublic.post('/articles', finalArticle);
                 if (res.data.insertedId) {
@@ -72,6 +71,8 @@ const AddArticle = () => {
                     // reset form conditionally
                     if (resetForm) resetForm();
 
+                    // send tags to the server
+                    await axiosPublic.post('/tags', newsTags);
                 } else if (res.data.message) {
                     Swal.fire({
                         title: 'Error!',
@@ -84,10 +85,9 @@ const AddArticle = () => {
                 throw new Error("Image Upload Failed!");
             }
         } catch (error) {
-            setUploadError(error);
             Swal.fire({
                 title: 'Error!',
-                text: uploadError || "Image Upload Failed!",
+                text: error,
                 icon: 'error',
                 confirmButtonText: 'Close'
             });

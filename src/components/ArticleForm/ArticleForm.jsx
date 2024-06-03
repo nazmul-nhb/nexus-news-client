@@ -12,25 +12,6 @@ import { TiNews } from 'react-icons/ti';
 import Select from 'react-select';
 
 const animatedComponents = makeAnimated();
-const tagOptions = [
-    { value: 'crime', label: 'crime' },
-    { value: 'politics', label: 'politics' },
-    { value: 'business', label: 'business' },
-    { value: 'sports', label: 'sports' },
-    { value: 'entertainment', label: 'entertainment' },
-    { value: 'technology', label: 'technology' },
-    { value: 'health', label: 'health' },
-    { value: 'science', label: 'science' },
-    { value: 'education', label: 'education' },
-    { value: 'environment', label: 'environment' },
-    { value: 'economics', label: 'economics' },
-    { value: 'local', label: 'local' },
-    { value: 'opinion', label: 'opinion' },
-    { value: 'travel', label: 'travel' },
-    { value: 'fashion', label: 'fashion' },
-    { value: 'food', label: 'food' },
-    { value: 'lifestyle', label: 'lifestyle' }
-];
 
 const customStyles = {
     control: (baseStyles, state) => ({
@@ -110,6 +91,16 @@ const ArticleForm = ({
             return res.data;
         }
     });
+
+    const { data: tags = [] } = useQuery({
+        queryKey: ['tags'],
+        queryFn: async () => {
+            const res = await axiosPublic('/tags')
+            return res.data;
+        }
+    });
+
+    // console.log(tags);
 
     useEffect(() => {
         if (setResetForm) {
@@ -220,7 +211,7 @@ const ArticleForm = ({
                             components={animatedComponents}
                             // theme={newsTheme}
                             defaultValue={[]}
-                            options={tagOptions}
+                            options={tags}
                             onChange={setNewsTags}
                             required
                             placeholder="Select Tags"
