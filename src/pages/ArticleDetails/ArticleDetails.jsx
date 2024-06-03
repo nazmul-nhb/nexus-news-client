@@ -16,7 +16,7 @@ const ArticleDetails = () => {
 
     return (
         <section className="mx-6 md:mx-10 my-2 md:my-8 p-2 md:px-4">
-           Hello Article : {article?.headline}
+            <h3 className="">{article?.headline}</h3>
            <br /><br />
            View: {article?.view_count}
         </section>

@@ -1,15 +1,17 @@
 import { Outlet } from 'react-router-dom';
 import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
+import SiteTitle from '../components/SiteTitle/SiteTitle';
 
 const Root = () => {
     return (
         <>
-            <Navbar></Navbar>
+            <SiteTitle />
+            <Navbar />
             <main className="max-w-screen-2xl mx-auto">
-                <Outlet></Outlet>
+                <Outlet />
             </main>
-            <Footer></Footer>
+            <Footer />
         </>
     );
 };

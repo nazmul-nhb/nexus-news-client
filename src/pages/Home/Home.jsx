@@ -1,16 +1,16 @@
-import { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import TrendingArticles from "../../components/TrendingArticles/TrendingArticles";
 
 
 const Home = () => {
 
-    useEffect(() => {
-        document.title = "Home - Nexus News";
-    }, []);
-
     return (
         <section className="">
-            <TrendingArticles/>
+            <Helmet>
+                <title>Home - Nexus News</title>
+            </Helmet>
+
+            <TrendingArticles />
         </section>
     );
 };
