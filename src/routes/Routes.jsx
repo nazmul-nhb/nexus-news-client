@@ -6,29 +6,34 @@ import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import AddArticle from "../pages/AddArticle/AddArticle";
 import PrivateRoute from "./PrivateRoute";
+import ArticleDetails from "../pages/ArticleDetails/ArticleDetails";
 
 export const router = createBrowserRouter([
     {
         path: "/",
-        element: <Root></Root>,
-        errorElement: <ErrorPage></ErrorPage>,
+        element: <Root />,
+        errorElement: <ErrorPage />,
         children: [
             {
                 index: true,
-                element: <Home/>
+                element: <Home />
             },
             {
                 path: '/login',
-                element: <Login/>
+                element: <Login />
             },
             {
                 path: '/register',
-                element: <Register/>
+                element: <Register />
             },
             {
                 path: '/add-article',
                 element: <PrivateRoute><AddArticle /></PrivateRoute>
             },
-          ],
+            {
+                path: '/news/:id',
+                element: <PrivateRoute><ArticleDetails /></PrivateRoute>
+            },
+        ],
     },
 ]);

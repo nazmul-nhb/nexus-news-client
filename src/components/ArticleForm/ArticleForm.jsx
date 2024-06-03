@@ -121,7 +121,7 @@ const ArticleForm = ({
 
     return (
         <div className='my-6'>
-            <form onSubmit={handleSubmit(handlePostArticle)} className='w-4/5 mx-auto grid grid-cols-9 gap-3 font-medium'>
+            <form onSubmit={handleSubmit(handlePostArticle)} className='mx-auto grid grid-cols-9 gap-3 font-medium'>
                 {/* Headline/Title */}
                 <div className="col-span-9 lg:col-span-4 flex flex-col gap-3">
                     <div className="flex items-center gap-2 pl-2 bg-transparent rounded-lg border border-nexus-primary">

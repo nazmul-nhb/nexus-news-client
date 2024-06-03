@@ -101,7 +101,7 @@ const AddArticle = () => {
     };
 
     return (
-        <section>
+        <section className="mx-6 md:mx-10 my-2 md:my-8 p-2 md:px-4">
             <Helmet>
                 <title>Add Article - Nexus News</title>
             </Helmet>
