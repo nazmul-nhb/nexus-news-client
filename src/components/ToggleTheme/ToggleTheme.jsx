@@ -10,7 +10,7 @@ const ToggleTheme = () => {
     const [currentIcon, setCurrentIcon] = useState(
         theme === 'light'
             ? <BsFillCloudMoonFill className='text-nexus-primary' />
-            : <MdLightMode className='text-white' />);
+            : <MdLightMode className='text-nexus-secondary' />);
 
     useEffect(() => {
         setIsAnimating(true);
@@ -18,7 +18,7 @@ const ToggleTheme = () => {
             setCurrentIcon(
                 theme === 'light'
                     ? <BsFillCloudMoonFill className='text-nexus-primary' />
-                    : <MdLightMode className='text-white' />);
+                    : <MdLightMode className='text--nexus-secondary' />);
             setIsAnimating(false);
         }, 500);
 
@@ -28,7 +28,7 @@ const ToggleTheme = () => {
     return (
         <button
             onClick={toggleTheme}
-            className="theme-toggler text-white text-2xl md:text-4xl"
+            className="theme-toggler  text-2xl md:text-4xl"
         >
             <Tooltip anchorSelect=".theme-toggler" place="bottom" className='!text-sm md:!text-base'>
                 {theme === 'light' ? 'Enable Dark Mode' : 'Enable Light Mode'}

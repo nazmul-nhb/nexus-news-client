@@ -11,6 +11,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import 'swiper/css/effect-creative';
 import { Link } from 'react-router-dom';
+import ArticleLoading from '../LoadingSpinners/ArticleLoading';
 
 const TrendingArticles = () => {
     const axiosPublic = useAxiosPublic();
@@ -19,7 +20,7 @@ const TrendingArticles = () => {
         clickable: true,
     };
 
-    const { data: tArticles = [] } = useQuery({
+    const { isLoading, data: tArticles = [] } = useQuery({
         queryKey: ['tArticles'],
         queryFn: async () => {
             const res = await axiosPublic('/articles?sort=view_descending&size=6')
@@ -27,7 +28,11 @@ const TrendingArticles = () => {
         }
     });
 
-    console.log(tArticles);
+    // console.log(tArticles);
+
+    if(isLoading){
+        return <ArticleLoading/>
+    }
 
     return (
         <div>

@@ -189,7 +189,7 @@ const ArticleForm = ({
                                     accept="image/jpeg, image/bmp, image/png, image/gif"
                                     onChange={(e) => setImageFileName(e.target.files[0]?.name || "Upload News Image")}
                                 />
-                                <label htmlFor="image" className="px-2 rounded-r-lg py-2 bg-transparent w-full border-l border-nexus-primary focus:outline-0 text-gray-500 hover:bg-gray-500 hover:text-white transition-all duration-500 block overflow-hidden whitespace-nowrap overflow-ellipsis absolute top-1/2 left-0 -translate-y-1/2 cursor-pointer">
+                                <label htmlFor="image" className="px-2 rounded-r-lg py-[7px] bg-transparent w-full border-l border-nexus-primary focus:outline-0 text-gray-500 hover:bg-gray-500 hover:text-white transition-all duration-500 block overflow-hidden whitespace-nowrap overflow-ellipsis absolute top-1/2 left-0 -translate-y-1/2 cursor-pointer">
                                     {imageFileName}
                                 </label>
                             </div>

@@ -9,8 +9,7 @@ const Home = () => {
     }, []);
 
     return (
-        <section className="mx-6 md:mx-10 p-2 md:px-4">
-            This is Home!
+        <section className="">
             <TrendingArticles/>
         </section>
     );
