@@ -24,7 +24,9 @@ const Register = () => {
     // const location = useLocation();
     // const from = location.state?.from?.pathname || "/";
     const axiosPublic = useAxiosPublic();
-    const { imageUploading, uploadSuccess, uploadError, lowResImageURL, uploadImage } = useImageUpload();
+    const [imageUploading, setImageUploading] = useState(false);
+    const [uploadError, setUploadError] = useState(null);
+    const uploadImage = useImageUpload();
 
     // useEffect(() => {
     //     if (user) {
@@ -52,7 +54,6 @@ const Register = () => {
     }, [errors.email, errors.name, errors.password, errors.picture]);
 
     const handleRegister = async (registrationInfo) => {
-        // setImageLoading(true);
         const { name, picture, email, password } = registrationInfo;
         const imageFile = picture[0];
 
@@ -62,73 +63,74 @@ const Register = () => {
         } else {
             setImageFileName("Upload Your Profile Picture");
         }
+
         console.log(imageFile);
 
+        // convert image to formData
         const formData = new FormData();
         formData.append('image', imageFile);
 
-        await uploadImage(formData);
+        setImageUploading(true);
+        try {
+            // start image upload
+            const result = await uploadImage(formData);
+            console.log(result);
+            const lowResImageURL = result.data.display_url;
 
-        if(uploadError){
-            return Swal.fire({
-                title: 'Error!',
-                text: uploadError,
-                icon: 'error',
-                confirmButtonText: 'Close'
-            });
-        }
-
-        if (uploadSuccess) {
-            createUser(email, password)
-                .then(() => {
-                    // update profile
-                    updateUserProfile(name, lowResImageURL)
-                        .then(() => {
-                            const userInfo = { name, email, profile_image: lowResImageURL, joined_on: moment().format("YYYY-MM-DD HH:mm:ss") };
-                            axiosPublic.post('/users', userInfo)
-                                .then(res => {
-                                    if (res.data.insertedId) {
-                                        toast.success("User Added in Database!");
-                                    }
-                                })
-                        })
-                        .catch(error => {
+            if (result.success) {
+                createUser(email, password)
+                    .then(() => {
+                        // update profile
+                        updateUserProfile(name, lowResImageURL)
+                            .then(() => {
+                                const userInfo = { name, email, profile_image: lowResImageURL, joined_on: moment().format("YYYY-MM-DD HH:mm:ss") };
+                                axiosPublic.post('/users', userInfo)
+                                    .then(res => {
+                                        if (res.data.insertedId) {
+                                            toast.success("User Added in Database!");
+                                        }
+                                    })
+                            })
+                            .catch(error => {
+                                Swal.fire({
+                                    title: 'Error!',
+                                    text: error.message.split(': ')[1] || error.message,
+                                    icon: 'error',
+                                    confirmButtonText: 'Close'
+                                });
+                            })
+                        toast.success("Successful! Please, Login Now!");
+                        logOut();
+                        navigate('/login');
+                    })
+                    .catch(error => {
+                        if (error.message === "Firebase: Error (auth/email-already-in-use).") {
+                            Swal.fire({
+                                title: 'Registration Failed!',
+                                text: "Already Exists! Your Email is Registered with Different Credential!",
+                                icon: 'warning',
+                                confirmButtonText: 'Close'
+                            });
+                        } else {
                             Swal.fire({
                                 title: 'Error!',
                                 text: error.message.split(': ')[1] || error.message,
                                 icon: 'error',
                                 confirmButtonText: 'Close'
                             });
-                        })
-                    toast.success("Successful! Please, Login Now!");
-                    // setImageLoading(false);
-                    logOut();
-                    navigate('/login');
-                })
-                .catch(error => {
-                    if (error.message === "Firebase: Error (auth/email-already-in-use).") {
-                        Swal.fire({
-                            title: 'Registration Failed!',
-                            text: "Already Exists! Your Email is Registered with Different Credential!",
-                            icon: 'warning',
-                            confirmButtonText: 'Close'
-                        });
-                    } else {
-                        Swal.fire({
-                            title: 'Error!',
-                            text: error.message.split(': ')[1] || error.message,
-                            icon: 'error',
-                            confirmButtonText: 'Close'
-                        });
-                    }
-                })
-        } else {
+                        }
+                    })
+            }
+        } catch (error) {
+            setUploadError(error);
             Swal.fire({
                 title: 'Error!',
-                text: "Image Upload Failed!",
+                text: uploadError || "Image Upload Failed!",
                 icon: 'error',
                 confirmButtonText: 'Close'
             });
+        } finally {
+            setImageUploading(false);
         }
     }
 
