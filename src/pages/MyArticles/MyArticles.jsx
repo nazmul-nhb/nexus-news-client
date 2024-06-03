@@ -28,6 +28,12 @@ const MyArticles = () => {
         console.log(id);
     }
 
+    // show decline reason 
+
+    const handleShowReason = (id) => {
+        console.log(id);
+    }
+
     // delete article
     const handleDeleteArticle = (id, headline) => {
         console.log(id);
@@ -92,14 +98,24 @@ const MyArticles = () => {
             header: 'Status',
             accessorKey: 'status',
             cell: (cell) => {
-                return <p>{cell.row.original.status}</p>;
+                return (
+                    <div>
+                        {cell.row.original.status === 'Approved' && 'Approved'}
+                        {cell.row.original.status === 'Declined' && (
+                            <>
+                                Declined <button onClick={() => handleShowReason(cell.row.original._id)}>Reason</button>
+                            </>
+                        )}
+                        {!cell.row.original.status && 'Pending'}
+                    </div>
+                )
             }
         },
         {
-            header: 'Subscription',
+            header: 'Premium',
             accessorKey: 'isPremium',
             cell: (cell) => {
-                return <p>{cell.row.original.isPremium ? 'Premium' : 'Free'}</p>;
+                return <p>{cell.row.original.isPremium ? 'Yes' : 'No'}</p>;
             }
         },
         {

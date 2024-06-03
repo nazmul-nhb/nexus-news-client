@@ -1,6 +1,6 @@
 import "./Navbar.css";
 import defaultPP from '../../assets/user.png';
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { MdMenuOpen, MdOutlineClose } from "react-icons/md";
 import { Tooltip } from "react-tooltip";
@@ -9,6 +9,7 @@ import ToggleTheme from "../ToggleTheme/ToggleTheme";
 import useAuth from "../../hooks/useAuth";
 import { ImProfile } from "react-icons/im";
 import { FaSignOutAlt } from "react-icons/fa";
+import { FaUserLock } from "react-icons/fa6";
 
 const Navbar = () => {
     const { user, userLoading, logOut } = useAuth();
@@ -82,7 +83,7 @@ const Navbar = () => {
 
     return (
         <nav className="max-w-screen-2xl flex items-center gap-0 md:gap-4 mx-auto shadow-md px-3 py-2 md:px-10 xl:px-20 sticky top-0 bg-white bg-opacity-90 z-50 text-nexus-primary">
-            <div ref={sidebarRef} className="min-[1170px]:hidden max-[430px]:text-3xl text-5xl cursor-pointer" onClick={() => setOpenNavbar(!openNavbar)}>
+            <div ref={sidebarRef} className="min-[1170px]:hidden max-[430px]:text-3xl text-5xl cursor-pointer z-50" onClick={() => setOpenNavbar(!openNavbar)}>
                 {
                     openNavbar
                         ? <MdOutlineClose className="text-nexus-primary hover:text-nexus-secondary transform transition-all duration-1000"></MdOutlineClose>
@@ -92,7 +93,7 @@ const Navbar = () => {
             <div className="flex justify-between items-center w-full">
                 {/* Navbar Items/Links/Routes */}
                 <div className="text-sm xl:text-base">
-                    <ul className={`w-3/5 min-[1170px]:w-full flex flex-col min-[1170px]:flex-row justify-start min-[1170px]:justify-center gap-2 min-[1170px]:gap-6 text-lg md:text-xl font-semibold duration-500 absolute min-[1170px]:static shadow-lg shadow-slate-700 min-[1170px]:shadow-none h-screen min-[1170px]:h-auto p-4 min-[1170px]:p-0 ${openNavbar ? 'left-0 min-[430px]:top-20 top-[68px] md:top-[88px] bg-white bg-opacity-90 flex z-30' : '-left-full min-[430px]:top-20 top-[68px] md:top-[88px]'}`}>
+                    <ul className={`w-3/5 min-[1170px]:w-full flex flex-col min-[1170px]:flex-row justify-start min-[1170px]:justify-center gap-2 min-[1170px]:gap-6 text-lg md:text-xl font-semibold duration-500 absolute min-[1170px]:static shadow-lg shadow-slate-700 min-[1170px]:shadow-none h-screen min-[1170px]:h-auto p-4 min-[1170px]:p-0 ${openNavbar ? 'pl-14 left-0 top-0 bg-white bg-opacity-90 flex z-30' : '-left-full top-0'}`}>
                         {navItems}
                     </ul>
                 </div>
@@ -109,22 +110,22 @@ const Navbar = () => {
                                 </Tooltip>
                                 <div className="relative" ref={dropdownRef}>
                                     <img
-                                        className="nameIcon w-9 md:w-14 h-9 md:h-14 rounded-full border-2 p-[2px] border-nexus-primary hover:opacity-70 transition-all duration-1000 cursor-pointer"
+                                        className="nameIcon w-9 md:w-14 h-9 md:h-14 rounded-full border-2 border-nexus-primary hover:opacity-70 transition-all duration-1000 cursor-pointer"
                                         src={profilePicture} alt={userName}
                                         onClick={() => setProfileOpen(!profileOpen)}
                                     />
                                     {profileOpen && (
-                                        <ul className="dropdown-arrow absolute md:right-[16%] right-[1%] mt-2 w-48 overflow-x-auto-auto rounded-md shadow-md z-30 bg-[#1e3fadea] shadow-[#8689ee] p-2 flex flex-col gap-2 animate__animated animate__bounceIn">
+                                        <div className="dropdown-arrow absolute md:right-[16%] right-[1%] mt-2 w-48 overflow-x-auto-auto rounded-md shadow-md z-30 bg-[#1e3fadea] shadow-[#8689ee] p-2 flex flex-col gap-2 animate__animated animate__bounceIn">
                                             <NavLink className={'flex gap-2 items-center text-white'} to={'/profile'}><ImProfile />{userName}</NavLink>
-                                            <Link to={''} className={'flex gap-2 items-center text-white'} onClick={handleLogout}><FaSignOutAlt />Logout</Link>
-                                        </ul>
+                                            <button className={'flex gap-2 items-center text-white'} onClick={handleLogout}><FaSignOutAlt />Logout</button>
+                                        </div>
                                     )}
                                 </div>
                             </div>
-                            : <ul className="font-jokeyOneSans flex items-center gap-1 md:gap-3 text-lg md:text-xl xl:text-2xl font-medium md:pt-0 pt-1">
-                                <NavLink to={'/login'}>Login</NavLink>
-                                {/* <NavLink to={'/register'}>Register</NavLink> */}
-                            </ul>
+                            : <div className="font-jokeyOneSans flex items-center gap-1 md:gap-3 text-lg md:text-xl xl:text-2xl font-medium md:pt-0 pt-1">
+                                <NavLink to={'/login'} className={`${navClasses} flex items-center gap-2`}><FaUserLock />Login</NavLink>
+                                <NavLink to={'/register'} className={`${navClasses} flex items-center gap-2`}>Register</NavLink>
+                            </div>
                     }
                 </div>
             </div>
