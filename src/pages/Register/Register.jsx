@@ -63,16 +63,12 @@ const Register = () => {
             setImageFileName("Upload Your Profile Picture");
         }
 
-        console.log(imageFile);
-
-        // convert image to formData
-        const formData = new FormData();
-        formData.append('image', imageFile);
+        // console.log(imageFile);
 
         setImageUploading(true);
         try {
             // start image upload
-            const result = await uploadImage(formData);
+            const result = await uploadImage(imageFile);
             console.log(result);
             const lowResImageURL = result.data.display_url;
 

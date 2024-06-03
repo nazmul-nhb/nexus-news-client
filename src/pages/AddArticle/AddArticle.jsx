@@ -33,14 +33,10 @@ const AddArticle = () => {
 
         const tags = newsTags?.map(tag => tag.value);
 
-        // convert image to formData
-        const formData = new FormData();
-        formData.append('image', imageFile);
-
         setImageUploading(true);
         try {
             // start image upload
-            const result = await uploadImage(formData);
+            const result = await uploadImage(imageFile);
 
             console.log(result);
 
