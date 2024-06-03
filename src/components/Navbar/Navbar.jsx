@@ -47,15 +47,14 @@ const Navbar = () => {
 
     const navItems = <>
         <NavLink className={navClasses} to={'/'}>Home</NavLink>
-        <NavLink className={navClasses} to={'/'}>Public Route</NavLink>
-
-        {
-            user && <>
-                <NavLink className={navClasses} to={'/add-article'}>Add Article</NavLink>
-                <NavLink className={navClasses} to={'/'}>Private Route</NavLink>
-            </>
-        }
-        <NavLink className={navClasses} to={'/contact'}>Contact</NavLink>
+        <NavLink className={navClasses} to={'/all-articles'}>All Articles</NavLink>
+        <NavLink className={navClasses} to={'/subscription'}>Subscription</NavLink>
+        {user && <>
+            <NavLink className={navClasses} to={'/add-article'}>Add Articles</NavLink>
+            <NavLink className={navClasses} to={'my-articles'}>My Articles</NavLink>
+            <NavLink className={navClasses} to={'/premium-articles'}>Premium Articles</NavLink>
+            <NavLink className={navClasses} to={'/dashboard'}>Dashboard</NavLink>
+        </>}
     </>
 
     const handleLogout = () => {
@@ -93,7 +92,7 @@ const Navbar = () => {
             <div className="flex justify-between items-center w-full">
                 {/* Navbar Items/Links/Routes */}
                 <div className="text-sm xl:text-base">
-                    <ul className={`w-3/5 min-[1170px]:w-full flex flex-col min-[1170px]:flex-row justify-start min-[1170px]:justify-center gap-2 text-lg md:text-xl font-semibold duration-500 absolute min-[1170px]:static shadow-lg shadow-slate-700 min-[1170px]:shadow-none h-screen min-[1170px]:h-auto p-4 min-[1170px]:p-0 ${openNavbar ? 'left-0 min-[430px]:top-20 top-[68px] md:top-[88px] bg-white bg-opacity-90 flex z-30' : '-left-full min-[430px]:top-20 top-[68px] md:top-[88px]'}`}>
+                    <ul className={`w-3/5 min-[1170px]:w-full flex flex-col min-[1170px]:flex-row justify-start min-[1170px]:justify-center gap-2 min-[1170px]:gap-6 text-lg md:text-xl font-semibold duration-500 absolute min-[1170px]:static shadow-lg shadow-slate-700 min-[1170px]:shadow-none h-screen min-[1170px]:h-auto p-4 min-[1170px]:p-0 ${openNavbar ? 'left-0 min-[430px]:top-20 top-[68px] md:top-[88px] bg-white bg-opacity-90 flex z-30' : '-left-full min-[430px]:top-20 top-[68px] md:top-[88px]'}`}>
                         {navItems}
                     </ul>
                 </div>

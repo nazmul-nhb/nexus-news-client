@@ -3,6 +3,7 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import ArticleLoading from "../LoadingSpinners/ArticleLoading";
 import Marquee from "react-fast-marquee";
 import { Link } from "react-router-dom";
+import moment from "moment";
 
 const LatestHeadlines = () => {
     const axiosPublic = useAxiosPublic();
@@ -25,7 +26,7 @@ const LatestHeadlines = () => {
                 <div className="flex gap-2">
                     {
                         latestArticles?.map(article => <div key={article._id} >
-                            <Link to={`/news/${article._id}`}><h3 className=""> • {article.headline}</h3></Link>
+                            <Link to={`/news/${article._id}`}><h3 className=""> • {article.headline} ({moment(article.posted_on).fromNow()})</h3></Link>
                         </div>)
                     }
                 </div>
