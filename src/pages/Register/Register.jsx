@@ -1,7 +1,7 @@
 // import banner from '../../assets/banner.png';
 import { useEffect, useState } from "react";
 import { FaEye, FaEyeSlash, FaUserEdit } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Helmet } from 'react-helmet-async';
 import Swal from "sweetalert2";
@@ -19,19 +19,19 @@ const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [imageFileName, setImageFileName] = useState("Upload Your Profile Picture")
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { createUser, updateUserProfile, userLoading, logOut } = useAuth();
+    const { createUser, updateUserProfile, userLoading, user, setUser } = useAuth();
     const navigate = useNavigate();
-    // const location = useLocation();
-    // const from = location.state?.from?.pathname || "/";
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
     const axiosPublic = useAxiosPublic();
     const [imageUploading, setImageUploading] = useState(false);
     const uploadImage = useImageUpload();
 
-    // useEffect(() => {
-    //     if (user) {
-    //         navigate(from, { replace: true });
-    //     }
-    // }, [from, navigate, user])
+    useEffect(() => {
+        if (user) {
+            navigate(from, { replace: true });
+        }
+    }, [from, navigate, user])
 
     useEffect(() => {
         if (errors.name) {
@@ -95,8 +95,14 @@ const Register = () => {
                                 });
                             })
                         toast.success("Successful! Please, Login Now!");
-                        logOut();
-                        navigate('/login');
+                        // logOut();
+                        // navigate('/login');
+                        setUser(prevUser => ({
+                            ...prevUser,
+                            displayName: name,
+                            photoURL: lowResImageURL || prevUser.photoURL,
+                        }));
+                        navigate(from, { replace: true });
                     })
                     .catch(error => {
                         if (error.message === "Firebase: Error (auth/email-already-in-use).") {

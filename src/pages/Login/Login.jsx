@@ -16,17 +16,17 @@ import moment from "moment";
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { userLogin } = useAuth();
+    const { user, userLogin } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
     const axiosPublic = useAxiosPublic();
 
-    // useEffect(() => {
-    //     if (user) {
-    //         return navigate(from, { replace: true });
-    //     }
-    // }, [from, navigate, user]);
+    useEffect(() => {
+        if (user) {
+            navigate(from, { replace: true });
+        }
+    }, [from, navigate, user])
 
     useEffect(() => {
         if (errors.email) {

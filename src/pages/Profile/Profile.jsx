@@ -11,7 +11,7 @@ import toast from "react-hot-toast";
 import moment from "moment";
 
 const Profile = () => {
-    const { user, userLoading, updateUserProfile } = useAuth();
+    const { user, setUser, userLoading, updateUserProfile } = useAuth();
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [imageFileName, setImageFileName] = useState("Upload Your Profile Picture")
     const axiosPublic = useAxiosPublic();
@@ -57,9 +57,11 @@ const Profile = () => {
                                 toast.success("Updated! Please, Refresh!");
                             }
                         })
-                    // window.location.reload();
-                    // user.displayName = name;
-                    // lowResImageURL && (user.photoURL = lowResImageURL);
+                    setUser(prevUser => ({
+                        ...prevUser,
+                        displayName: name,
+                        photoURL: lowResImageURL || prevUser.photoURL,
+                    }));
                 })
                 .catch(error => {
                     Swal.fire({
