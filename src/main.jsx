@@ -9,6 +9,7 @@ import { Toaster } from 'react-hot-toast';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import ThemeProvider from './providers/ThemeProvider';
 import ScrollButtons from './components/ScrollButtons/ScrollButtons';
+import 'animate.css';
 
 const queryClient = new QueryClient();
 

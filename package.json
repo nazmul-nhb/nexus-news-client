@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.40.0",
+    "@tanstack/react-table": "^8.17.3",
+    "animate.css": "^4.1.1",
     "axios": "^1.7.2",
     "firebase": "^10.12.2",
     "keen-slider": "^6.8.6",
