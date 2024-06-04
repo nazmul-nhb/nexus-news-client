@@ -23,7 +23,8 @@ const AllArticles = () => {
         ['allArticles', selectedTag?.value, selectedPublisher?.value],
         `tag=${selectedTag?.value}&publisher=${selectedPublisher?.value}`);
 
-    console.log(selectedTag);
+    // console.log(selectedTag);
+
     const { data: publishers = [] } = useQuery({
         queryKey: ['publishers'],
         queryFn: async () => {
