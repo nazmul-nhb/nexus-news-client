@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../hooks/useAuth";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import ArticleTable from "../../components/ArticleTable/ArticleTable";
@@ -8,15 +7,16 @@ import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import ArticleLoading from "../../components/LoadingSpinners/ArticleLoading";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const MyArticles = () => {
     const { user } = useAuth();
-    const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
 
     const { isLoading, data: userArticles = [], refetch } = useQuery({
         queryKey: ['userArticles'],
         queryFn: async () => {
-            const res = await axiosPublic(`/user/articles/${user?.email}`)
+            const res = await axiosSecure(`/user/articles/${user?.email}`)
             return res.data;
         }
     });
@@ -47,7 +47,7 @@ const MyArticles = () => {
             confirmButtonText: 'Yes, Delete It!'
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosPublic.delete(`/articles/${id}?email=${user.email}`)
+                axiosSecure.delete(`/articles/${id}?email=${user.email}`)
                     .then(res => {
                         if (res.data.deletedCount > 0) {
                             refetch();

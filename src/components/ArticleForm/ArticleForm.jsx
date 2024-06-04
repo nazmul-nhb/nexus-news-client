@@ -10,6 +10,7 @@ import { useQuery } from '@tanstack/react-query';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
 import { TiNews } from 'react-icons/ti';
 import Select from 'react-select';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const animatedComponents = makeAnimated();
 
@@ -81,13 +82,14 @@ const ArticleForm = ({
     setNewsType,
     setPublisher }) => {
 
+    const axiosSecure = useAxiosSecure();
     const axiosPublic = useAxiosPublic();
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
     const { data: publishers = [] } = useQuery({
         queryKey: ['publishers'],
         queryFn: async () => {
-            const res = await axiosPublic('/publishers')
+            const res = await axiosSecure('/publishers')
             return res.data;
         }
     });

@@ -54,7 +54,7 @@ const Profile = () => {
                         .then(res => {
                             console.log(res);
                             if (res.data.modifiedCount > 0) {
-                                toast.success("Updated! Please, Refresh!");
+                                toast.success("Profile Updated!");
                             }
                         })
                     setUser(prevUser => ({

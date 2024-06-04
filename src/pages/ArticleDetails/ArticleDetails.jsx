@@ -1,15 +1,15 @@
 import { useParams } from "react-router-dom";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const ArticleDetails = () => {
     const {id} =useParams();
-    const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
 
     const { data: article } = useQuery({
         queryKey: ['article'],
         queryFn: async () => {
-            const res = await axiosPublic(`/articles/${id}`)
+            const res = await axiosSecure(`/articles/${id}`)
             return res.data;
         }
     });

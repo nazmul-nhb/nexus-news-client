@@ -26,7 +26,7 @@ const Login = () => {
         if (user) {
             navigate(from, { replace: true });
         }
-    }, [from, navigate, user])
+    }, [from, navigate, user]);
 
     useEffect(() => {
         if (errors.email) {

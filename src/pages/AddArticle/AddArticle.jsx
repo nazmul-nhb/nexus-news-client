@@ -4,9 +4,9 @@ import moment from "moment";
 import { Helmet } from "react-helmet-async";
 import useImageUpload from "../../hooks/useImageUpload";
 import Swal from "sweetalert2";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
 import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const AddArticle = () => {
     const { user } = useAuth();
@@ -17,7 +17,7 @@ const AddArticle = () => {
     const [newsType, setNewsType] = useState({});
     const [imageUploading, setImageUploading] = useState(false);
     const uploadImage = useImageUpload();
-    const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
 
     const handlePostArticle = async (newArticle) => {
         console.log(newArticle);
@@ -58,7 +58,7 @@ const AddArticle = () => {
 
                 console.log(tags);
 
-                const res = await axiosPublic.post('/articles', finalArticle);
+                const res = await axiosSecure.post('/articles', finalArticle);
                 if (res.data.insertedId) {
                     toast.success("Article Posted Successfully!");
 
@@ -68,7 +68,7 @@ const AddArticle = () => {
                     if (resetForm) resetForm();
 
                     // send tags to the server
-                    await axiosPublic.post('/tags', newsTags);
+                    await axiosSecure.post('/tags', newsTags);
                 } else if (res.data.message) {
                     Swal.fire({
                         title: 'Error!',
