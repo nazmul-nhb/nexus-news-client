@@ -115,7 +115,7 @@ const Navbar = () => {
                                         onClick={() => setProfileOpen(!profileOpen)}
                                     />
                                     {profileOpen && (
-                                        <div className="dropdown-arrow absolute md:right-[16%] right-[1%] mt-2 w-48 overflow-x-auto-auto rounded-md shadow-md z-30 bg-[#1e3fadea] shadow-[#8689ee] p-2 flex flex-col gap-2 animate__animated animate__bounceIn">
+                                        <div className="dropdown-arrow absolute md:right-[16%] right-[1%] mt-2 w-56 overflow-x-auto-auto rounded-md shadow-md z-30 bg-[#1e3fadea] shadow-[#8689ee] p-2 flex flex-col gap-2 animate__animated animate__bounceIn">
                                             <NavLink className={'flex gap-2 items-center text-white'} to={'/profile'}><ImProfile />{userName}</NavLink>
                                             <button className={'flex gap-2 items-center text-white'} onClick={handleLogout}><FaSignOutAlt />Logout</button>
                                         </div>

@@ -1,16 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "./useAxiosSecure";
 
-const useNexusUsers = (email) => {
+const useNexusUsers = (queryKey, email) => {
     const axiosSecure = useAxiosSecure();
 
-    const queryKey = email ? ['nexusUsers', email] : ['nexusUsers']
-
-    const { isFetching, data: nexusUsers, refetch } = useQuery({
+    const { isFetching, data, refetch } = useQuery({
         queryKey,
         queryFn: async () => {
             if (email) {
-                const res = await axiosSecure.get(`/users?email=${email}`);
+                const res = await axiosSecure.get(`/users/single?email=${email}`);
                 return res.data;
             } else {
                 const res = await axiosSecure.get(`/users`);
@@ -18,7 +16,7 @@ const useNexusUsers = (email) => {
             }
         }
     });
-    return { isFetching, nexusUsers, refetch }
+    return { isFetching, data, refetch }
 };
 
 export default useNexusUsers;
