@@ -110,7 +110,6 @@ const AddArticle = () => {
                 setImageFileName={setImageFileName}
                 setNewsTags={setNewsTags}
                 setPublisher={setPublisher}
-                // setNewsType={setNewsType}
                 imageUploading={imageUploading}
             />
         </section>

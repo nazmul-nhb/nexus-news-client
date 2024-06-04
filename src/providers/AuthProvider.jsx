@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { useState, createContext, useEffect } from "react";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, FacebookAuthProvider, signInWithPopup, updateProfile } from "firebase/auth";
 import { auth } from "../firebase/firebase.config";
+import useAxiosPublic from '../hooks/useAxiosPublic';
 
 const googleProvider = new GoogleAuthProvider();
 const facebookProvider = new FacebookAuthProvider();
@@ -11,7 +12,7 @@ export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [userLoading, setUserLoading] = useState(true);
-
+    const axiosPublic = useAxiosPublic();
     // Register with Email & Password
     const createUser = (email, password) => {
         setUserLoading(true);
@@ -52,12 +53,27 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
-            setUserLoading(false);
+            if (currentUser) {
+                // get token and store in the localStorage
+                const userInfo = { email: currentUser.email };
+                axiosPublic.post('/jwt', userInfo)
+                    .then(res => {
+                        if (res.data.token) {
+                            localStorage.setItem('nexus-token', res.data.token);
+                            setUserLoading(false);
+                        }
+                    })
+            }
+            else {
+                // remove token if the token stored in the localStorage
+                localStorage.removeItem('nexus-token');
+                setUserLoading(false);
+            }
         });
         return () => {
             unsubscribe();
         }
-    }, [])
+    }, [axiosPublic])
 
     const authInfo = { user, setUser, createUser, updateUserProfile, userLogin, googleLogin, facebookLogin, logOut, userLoading, setUserLoading };
 
