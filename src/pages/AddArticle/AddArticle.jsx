@@ -14,7 +14,7 @@ const AddArticle = () => {
     const [imageFileName, setImageFileName] = useState("Upload News Image")
     const [newsTags, setNewsTags] = useState([]);
     const [publisher, setPublisher] = useState({});
-    const [newsType, setNewsType] = useState({});
+    // const [newsType, setNewsType] = useState({});
     const [imageUploading, setImageUploading] = useState(false);
     const uploadImage = useImageUpload();
     const axiosSecure = useAxiosSecure();
@@ -48,7 +48,7 @@ const AddArticle = () => {
                     description,
                     posted_by: user.displayName,
                     posted_by_email: user.email,
-                    isPremium: newsType.value,
+                    // isPremium: newsType.value,
                     publisher: publisher.value,
                     view_count: 0,
                     thumb_image: result.data.display_url,
@@ -110,7 +110,7 @@ const AddArticle = () => {
                 setImageFileName={setImageFileName}
                 setNewsTags={setNewsTags}
                 setPublisher={setPublisher}
-                setNewsType={setNewsType}
+                // setNewsType={setNewsType}
                 imageUploading={imageUploading}
             />
         </section>

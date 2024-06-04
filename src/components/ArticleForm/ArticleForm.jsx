@@ -3,72 +3,16 @@ import { useForm } from 'react-hook-form';
 import Button from '../Button/Button';
 import { useEffect } from 'react';
 import { MdImage, MdViewHeadline } from 'react-icons/md';
-import { FaNewspaper, FaRegNewspaper, FaSackDollar } from 'react-icons/fa6';
+import { FaNewspaper, FaRegNewspaper } from 'react-icons/fa6';
+import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import CreatableSelect from 'react-select/creatable';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
 import { TiNews } from 'react-icons/ti';
-import Select from 'react-select';
-import useAxiosSecure from '../../hooks/useAxiosSecure';
+import customStyles from '../../utilities/selectStyles';
 
 const animatedComponents = makeAnimated();
-
-const customStyles = {
-    control: (baseStyles, state) => ({
-        ...baseStyles,
-        backgroundColor: 'transparent',
-        boxShadow: state.isFocused ? 'none' : 'none',
-        border: 'none',
-        padding: '0 0 0 4px',
-    }),
-    container: (base) => ({
-        ...base,
-        padding: '0 0 0 4px',
-    }),
-    valueContainer: (base) => ({
-        ...base,
-        padding: '0 0 0 4px',
-    }),
-    menu: (base) => ({
-        ...base,
-        // backgroundColor: 'transparent',
-        padding: '0 0 0 4px',
-    }),
-    multiValue: (base) => ({
-        ...base,
-        // backgroundColor: 'transparent',
-    }),
-    multiValueLabel: (base) => ({
-        ...base,
-        // color: '#000',
-    }),
-    multiValueRemove: (base) => ({
-        ...base,
-        // color: '#000',
-        ':hover': {
-            backgroundColor: 'transparent',
-            // color: '#000',
-        },
-    }),
-    input: (base) => ({
-        ...base,
-        margin: '0',
-        padding: '0 0 0 4px',
-    }),
-    placeholder: (base) => ({
-        ...base,
-        // color: '#aaa',
-    }),
-    options: (base, state) => ({
-        ...base,
-        backgroundColor: 'transparent',
-        ':hover': {
-            backgroundColor: state.isFocused ? '#f0f0f0' : 'transparent', // Example hover color
-            color: state.isFocused ? '#fff' : '#fff', // Example hover text color
-        },
-    })
-};
 
 const ArticleForm = ({
     // addArticle,
@@ -79,17 +23,16 @@ const ArticleForm = ({
     setResetForm,
     handlePostArticle,
     setNewsTags,
-    setNewsType,
+    // setNewsType,
     setPublisher }) => {
 
-    const axiosSecure = useAxiosSecure();
     const axiosPublic = useAxiosPublic();
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
     const { data: publishers = [] } = useQuery({
         queryKey: ['publishers'],
         queryFn: async () => {
-            const res = await axiosSecure('/publishers')
+            const res = await axiosPublic('/publishers')
             return res.data;
         }
     });
@@ -125,7 +68,7 @@ const ArticleForm = ({
         <div className='my-6'>
             <form onSubmit={handleSubmit(handlePostArticle)} className='mx-auto grid grid-cols-9 gap-3 font-medium'>
                 {/* Headline/Title */}
-                <div className="col-span-9 lg:col-span-4 flex flex-col gap-3">
+                <div className="col-span-9 lg:col-span-6 flex flex-col gap-3">
                     <div className="flex items-center gap-2 pl-2 bg-transparent rounded-lg border border-nexus-primary">
                         <MdViewHeadline />
                         <label className="font-medium" htmlFor="headline">Headline</label>
@@ -140,7 +83,7 @@ const ArticleForm = ({
                     }
                 </div>
                 {/* Type */}
-                <div className="col-span-9 lg:col-span-2 flex flex-col gap-3">
+                {/* <div className="col-span-9 lg:col-span-2 flex flex-col gap-3">
                     <div className="flex items-center gap-2 pl-2 bg-transparent rounded-lg border border-nexus-primary">
                         <FaSackDollar />
                         <label className="font-medium" htmlFor="type">Type</label>
@@ -154,7 +97,7 @@ const ArticleForm = ({
                             className="px-2 rounded-r-lg py-1 bg-transparent w-full border-l border-nexus-primary focus:outline-0" id='type' name='type'
                         />
                     </div>
-                </div>
+                </div> */}
                 {/* Publisher */}
                 <div className="col-span-9 lg:col-span-3 flex flex-col gap-3">
                     <div className="flex items-center gap-2 pl-2 bg-transparent rounded-lg border border-nexus-primary">
@@ -253,7 +196,7 @@ ArticleForm.propTypes = {
     setResetForm: PropTypes.func,
     setImageFileName: PropTypes.func,
     setNewsTags: PropTypes.func,
-    setNewsType: PropTypes.func,
+    // setNewsType: PropTypes.func,
     setPublisher: PropTypes.func,
     imageFileName: PropTypes.string,
 };

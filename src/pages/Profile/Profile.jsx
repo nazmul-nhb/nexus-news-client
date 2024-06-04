@@ -21,9 +21,9 @@ const Profile = () => {
     const axiosPublic = useAxiosPublic();
     const [imageUploading, setImageUploading] = useState(false);
     const uploadImage = useImageUpload();
-    const { isFetching, data: nexusUser = {} } = useNexusUsers(['nexusUser'], user.email);
+    const { isFetching, data: nexusUser = {} } = useNexusUsers(['nexusUser', user.email], user.email);
 
-    console.log(user);
+    // console.log(nexusUser);
 
     const handleUpdateProfile = async (updateInfo) => {
         const { name, picture } = updateInfo;
