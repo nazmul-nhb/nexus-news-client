@@ -13,6 +13,8 @@ import PremiumArticles from "../pages/PremiumArticles/PremiumArticles";
 import AllArticles from "../pages/AllArticles/AllArticles";
 import Profile from "../pages/Profile/Profile";
 import Dashboard from "../layouts/Dashboard";
+import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
+import AllArticlesAdmin from "../pages/Dashboard/AllArticles/AllArticlesAdmin";
 
 export const router = createBrowserRouter([
     {
@@ -63,6 +65,16 @@ export const router = createBrowserRouter([
         ],
     }, {
         path: '/dashboard',
-        element: <Dashboard />
+        element: <Dashboard />,
+        children:[
+            {
+                path:'/dashboard/all-users',
+                element:<AllUsers/>
+            },
+            {
+                path:'/dashboard/all-articles',
+                element: <AllArticlesAdmin/>
+            },
+        ]
     }
 ]);

@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "./useAxiosSecure";
 
-const useNexusUsers = (queryKey, email) => {
+const useNexusUsers = (queryKey, email='') => {
     const axiosSecure = useAxiosSecure();
 
     const { isFetching, data, refetch } = useQuery({
