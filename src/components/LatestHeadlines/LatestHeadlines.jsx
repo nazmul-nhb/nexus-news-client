@@ -15,10 +15,15 @@ const LatestHeadlines = () => {
         <div className="flex items-center gap-3">
             <h3 className="">Latest: </h3>
             <Marquee pauseOnHover={true} speed={25}>
-                <div className="flex gap-2">
+                <div className="flex items-center">
                     {
                         latestArticles?.map(article => <div key={article._id} >
-                            <Link to={`/news/${article._id}`}><h3 className=""> • {article.headline} ({moment(article.posted_on).fromNow()})</h3></Link>
+                            <Link to={`/news/${article._id}`}>
+                                <h3 className="text-nexus-primary hover:text-nexus-secondary transition-all duration-300">
+                                    <span className="mx-3">•</span>
+                                    {article.headline} ({moment(article.posted_on).fromNow()})
+                                </h3>
+                            </Link>
                         </div>)
                     }
                 </div>
