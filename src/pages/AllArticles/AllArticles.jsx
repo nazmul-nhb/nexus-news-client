@@ -1,15 +1,16 @@
 import { Helmet } from "react-helmet-async";
+import { useEffect, useRef, useState } from "react";
 import useGetArticles from "../../hooks/useGetArticles";
 import ArticleCard from "../../components/ArticleCard/ArticleCard";
 import ArticleLoading from "../../components/LoadingSpinners/ArticleLoading";
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import customStyles from "../../utilities/selectStyles";
-import { FaNewspaper } from "react-icons/fa";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
-import { useEffect, useRef, useState } from "react";
-import { FaDeleteLeft, FaRegNewspaper } from "react-icons/fa6";
+import { FaNewspaper, FaSearch } from "react-icons/fa";
+import { FaHashtag } from "react-icons/fa6";
+import { MdClear } from "react-icons/md";
 import toast from "react-hot-toast";
 
 const animatedComponents = makeAnimated();
@@ -67,12 +68,12 @@ const AllArticles = () => {
     }
 
     return (
-        <section>
+        <section className="mx-6 md:mx-10 my-2 md:my-8 p-2 md:px-4">
             <Helmet>
                 <title>All Articles - Nexus News</title>
             </Helmet>
             {/* Filter */}
-            <div className="flex justify-center items-center gap-3">
+            <div className="flex justify-center items-center gap-3 mb-8">
                 {/* Filter by Publisher */}
                 <div className="col-span-9 lg:col-span-3 flex flex-col gap-3">
                     <div className="flex items-center gap-2 pl-2 bg-transparent rounded-lg border border-nexus-primary">
@@ -95,7 +96,7 @@ const AllArticles = () => {
                 {/* Filter by Tags */}
                 <div className="col-span-9 lg:col-span-3 flex flex-col gap-3">
                     <div className="flex items-center gap-2 pl-2 bg-transparent rounded-lg border border-nexus-primary">
-                        <FaRegNewspaper />
+                        <FaHashtag />
                         <Select isClearable
                             // value={selectedTag && selectedTag}
                             styles={customStyles}
@@ -112,14 +113,15 @@ const AllArticles = () => {
                     </div>
                 </div>
                 {/* Search Articles */}
-                <form onSubmit={handleSearchArticle} className="flex gap-2 items-center text-nexus-secondary">
-                    <div className="flex gap-2 items-center relative">
-                        <input ref={inputRef} defaultValue={searchText} className="text-left p-2 rounded-lg outline outline-none border bg-transparent focus:border-2 text-nexus-secondary border-nexus-secondary" placeholder="Search Headline" type="text" name="search" id="search" />
+                <form onSubmit={handleSearchArticle} className="flex gap-2 items-center text-nexus-primary">
+                    <div className="flex gap-2 items-center relative pl-2 bg-transparent rounded-lg border border-nexus-primary">
+                        <label className="font-medium" htmlFor="search"><FaSearch /></label>
+                        <input ref={inputRef} defaultValue={searchText} className="px-2 rounded-r-lg py-[7px] bg-transparent w-full border-l border-nexus-primary focus:outline-0" placeholder="Search Headline" type="text" name="search" id="search" />
                         {
-                            searchText !== '' && <button title="Clear Search Field" onClick={clearSearchText} className="absolute right-2 text-3xl hover:text-red-900"><FaDeleteLeft /></button>
+                            searchText !== '' && <button title="Clear Search Field" onClick={clearSearchText} className="absolute right-2 text-2xl hover:text-nexus-secondary transition-all duration-500"><MdClear /></button>
                         }
                     </div>
-                    <button className="border py-2 px-4 rounded-lg font-bold tracking-wider border-nexus-secondary bg-nexus-secondary text-white hover:bg-transparent hover:text-nexus-secondary transition-all duration-700" type="submit">Search</button>
+                    <button className="border py-2 px-4 rounded-lg font-bold tracking-wider border-nexus-primary bg-nexus-primary text-white hover:bg-transparent hover:text-nexus-primary transition-all duration-700" type="submit">Search</button>
                 </form>
             </div>
             {isLoading ?

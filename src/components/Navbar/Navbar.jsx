@@ -35,6 +35,9 @@ const Navbar = () => {
             if (sidebarRef.current && !sidebarRef.current.contains(e.target)) {
                 setOpenNavbar(false);
             }
+            if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+                setProfileOpen(false);
+            }
         };
 
         document.addEventListener("mouseup", handleClickOutside);
@@ -42,7 +45,7 @@ const Navbar = () => {
         return () => {
             document.removeEventListener("mouseup", handleClickOutside);
         };
-    }, [sidebarRef]);
+    }, [sidebarRef, dropdownRef]);
 
     const navClasses = ({ isActive }) => isActive ? 'text-nexus-secondary font-bold border-b-2 border-nexus-secondary' : 'text-nexus-primary hover:nexus-secondary';
 
@@ -67,19 +70,6 @@ const Navbar = () => {
                 toast.error(error.message.split(': ')[1]);
             })
     }
-
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-                setProfileOpen(false);
-            }
-        };
-
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, [dropdownRef]);
 
     return (
         <nav className="max-w-screen-2xl flex items-center gap-0 md:gap-4 mx-auto shadow-md px-3 py-2 md:px-10 xl:px-20 sticky top-0 bg-white bg-opacity-90 z-50 text-nexus-primary">
@@ -116,8 +106,14 @@ const Navbar = () => {
                                     />
                                     {profileOpen && (
                                         <div className="dropdown-arrow absolute md:right-[16%] right-[1%] mt-2 w-56 overflow-x-auto-auto rounded-md shadow-md z-30 bg-[#1e3fadea] shadow-[#8689ee] p-2 flex flex-col gap-2 animate__animated animate__bounceIn">
-                                            <NavLink className={'flex gap-2 items-center text-white'} to={'/profile'}><ImProfile />{userName}</NavLink>
-                                            <button className={'flex gap-2 items-center text-white'} onClick={handleLogout}><FaSignOutAlt />Logout</button>
+                                            <NavLink to={'/profile'}
+                                                onClick={() => setProfileOpen(!profileOpen)}
+                                                className={'flex gap-2 items-center text-white'}><ImProfile />
+                                                {userName}
+                                            </NavLink>
+                                            <button className={'flex gap-2 items-center text-white'}
+                                                onClick={() => { handleLogout(); setProfileOpen(!profileOpen)}}
+                                            ><FaSignOutAlt />Logout</button>
                                         </div>
                                     )}
                                 </div>

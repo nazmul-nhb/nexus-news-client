@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import Button from '../Button/Button';
 import { useEffect } from 'react';
 import { MdImage, MdViewHeadline } from 'react-icons/md';
-import { FaNewspaper, FaRegNewspaper } from 'react-icons/fa6';
+import { FaNewspaper, FaHashtag } from 'react-icons/fa6';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import CreatableSelect from 'react-select/creatable';
@@ -23,7 +23,6 @@ const ArticleForm = ({
     setResetForm,
     handlePostArticle,
     setNewsTags,
-    // setNewsType,
     setPublisher }) => {
 
     const axiosPublic = useAxiosPublic();
@@ -52,17 +51,6 @@ const ArticleForm = ({
             setResetForm(reset);
         }
     }, [reset, setResetForm]);
-
-    // const newsTheme = (theme) => {
-    //     return {
-    //         ...theme,
-    //         colors: {
-    //             ...theme.colors,
-    //             primary25: 'blue',
-    //             primary: 'orange',
-    //         },
-    //     }
-    // }
 
     return (
         <div className='my-6'>
@@ -147,14 +135,13 @@ const ArticleForm = ({
                 {/* Tags */}
                 <div className="col-span-9 lg:col-span-5 flex flex-col gap-3">
                     <div className="flex items-center gap-2 bg-transparent pl-2 rounded-lg border border-nexus-primary">
-                        <FaRegNewspaper />
+                        <FaHashtag />
                         <label className="font-medium" htmlFor="tags">Tags</label>
                         <CreatableSelect
                             styles={customStyles}
                             isClearable isMulti
                             closeMenuOnSelect={false}
                             components={animatedComponents}
-                            // theme={newsTheme}
                             defaultValue={[]}
                             options={tags}
                             onChange={setNewsTags}
@@ -196,7 +183,6 @@ ArticleForm.propTypes = {
     setResetForm: PropTypes.func,
     setImageFileName: PropTypes.func,
     setNewsTags: PropTypes.func,
-    // setNewsType: PropTypes.func,
     setPublisher: PropTypes.func,
     imageFileName: PropTypes.string,
 };
