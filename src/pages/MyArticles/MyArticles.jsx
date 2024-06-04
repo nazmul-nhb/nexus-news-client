@@ -136,15 +136,16 @@ const MyArticles = () => {
         }
     ]
 
+    if (isLoading) return <ArticleLoading />
+
     return (
         <section className="mx-6 md:mx-10 my-2 md:my-8 p-2 md:px-4">
             <Helmet>
                 <title>{user.displayName}&rsquo;s Articles</title>
             </Helmet>
-            {user.displayName}&rsquo;s Vua Articles
+            {user.displayName}&rsquo;s Articles
             {
-                isLoading ? <ArticleLoading />
-                    : <ArticleTable data={articleData} columns={articleColumns} />
+                !userArticles.length ? <p>No Data</p> : <ArticleTable data={articleData} columns={articleColumns} />
             }
         </section>
     );

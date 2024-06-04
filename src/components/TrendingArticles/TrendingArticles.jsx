@@ -1,37 +1,28 @@
 // Import Swiper React components
+import { Link } from 'react-router-dom';
+import ArticleLoading from '../LoadingSpinners/ArticleLoading';
+import useGetArticles from '../../hooks/useGetArticles';
 import { Swiper, SwiperSlide } from 'swiper/react';
 // import required modules
 import { Autoplay, EffectCreative, Navigation, Pagination } from 'swiper/modules';
-import useAxiosPublic from '../../hooks/useAxiosPublic';
-import { useQuery } from '@tanstack/react-query';
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import 'swiper/css/effect-creative';
-import { Link } from 'react-router-dom';
-import ArticleLoading from '../LoadingSpinners/ArticleLoading';
 
 const TrendingArticles = () => {
-    const axiosPublic = useAxiosPublic();
+    const { isLoading, data: trendingArticles } = useGetArticles(['trendingArticles'], 'sort=view_descending&size=6');
 
     const pagination = {
         clickable: true,
     };
 
-    const { isLoading, data: tArticles = [] } = useQuery({
-        queryKey: ['tArticles'],
-        queryFn: async () => {
-            const res = await axiosPublic('/articles?sort=view_descending&size=6')
-            return res.data;
-        }
-    });
+    console.log(trendingArticles);
 
-    // console.log(tArticles);
-
-    if(isLoading){
-        return <ArticleLoading/>
+    if (isLoading) {
+        return <ArticleLoading />
     }
 
     return (
@@ -67,7 +58,7 @@ const TrendingArticles = () => {
                 className="mySwiper"
             >
                 {
-                    tArticles?.map(article => <SwiperSlide key={article._id}>
+                    trendingArticles?.map(article => <SwiperSlide key={article._id}>
                         <Link to={`/news/${article._id}`}>
                             <div>
                                 <img src={article.full_image} className='w-full' alt={article.headline} />

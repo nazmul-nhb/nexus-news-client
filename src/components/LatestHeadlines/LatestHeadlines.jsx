@@ -1,22 +1,14 @@
-import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
 import ArticleLoading from "../LoadingSpinners/ArticleLoading";
 import Marquee from "react-fast-marquee";
 import { Link } from "react-router-dom";
 import moment from "moment";
+import useGetArticles from "../../hooks/useGetArticles";
 
 const LatestHeadlines = () => {
-    const axiosPublic = useAxiosPublic();
-    const { isLoading, data: latestArticles = [] } = useQuery({
-        queryKey: ['latestArticles'],
-        queryFn: async () => {
-            const res = await axiosPublic('/articles?sort=time_descending&size=12')
-            return res.data;
-        }
-    });
+    const { isLoading, data: latestArticles } = useGetArticles(['latestArticles'], 'sort=time_descending&size=12');
 
-    if (isLoading){
-        return <ArticleLoading/>
+    if (isLoading) {
+        return <ArticleLoading />
     }
 
     return (
