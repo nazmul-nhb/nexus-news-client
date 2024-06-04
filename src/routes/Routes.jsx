@@ -11,8 +11,8 @@ import MyArticles from "../pages/MyArticles/MyArticles";
 import Subscription from "../pages/Subscription/Subscription";
 import PremiumArticles from "../pages/PremiumArticles/PremiumArticles";
 import AllArticles from "../pages/AllArticles/AllArticles";
-import Dashboard from "../pages/Dashboard/Dashboard";
 import Profile from "../pages/Profile/Profile";
+import Dashboard from "../layouts/Dashboard";
 
 export const router = createBrowserRouter([
     {

@@ -51,7 +51,7 @@ const AllArticles = () => {
     const handleSearchArticle = (e) => {
         e.preventDefault();
         if (e.target.search.value === '') {
-            return toast.error('Please, Search with a Keyword!');
+            return toast.error('Cannot Perform Empty Search!');
         }
         setSearchText(e.target.search.value);
     }
@@ -116,12 +116,15 @@ const AllArticles = () => {
                 <form onSubmit={handleSearchArticle} className="flex gap-2 items-center justify-start text-nexus-primary">
                     <div className="flex gap-2 w-full items-center relative pl-2 bg-transparent rounded-lg border border-nexus-primary">
                         <label className="font-medium" htmlFor="search"><FaSearch /></label>
-                        <input ref={inputRef} defaultValue={searchText} className="px-2 rounded-r-lg py-[9px] bg-transparent w-full border-l border-nexus-primary focus:outline-0" placeholder="Search Headline" type="text" name="search" id="search" />
-                        {
-                            searchText !== '' && <button title="Clear Search Field" onClick={clearSearchText} className="absolute right-2 text-2xl hover:text-nexus-secondary transition-all duration-500"><MdClear /></button>
-                        }
+                        <input ref={inputRef} defaultValue={searchText} className="px-2 rounded-r-lg py-[9px] bg-transparent w-full border-l border-nexus-primary focus:outline-0" placeholder="Search Articles" type="text" name="search" id="search" />
+                        <div className="absolute right-0 flex gap-2">
+                            {
+                                searchText !== '' && <button title="Clear Search Field" onClick={clearSearchText} className="text-2xl hover:text-nexus-secondary transition-all duration-500"><MdClear /></button>
+                            }
+                            <button className="border py-[9px] px-4 rounded-r-lg font-bold tracking-wider border-nexus-primary bg-nexus-primary text-white hover:bg-white hover:text-nexus-primary transition-all duration-700" type="submit">Search</button>
+                        </div>
                     </div>
-                    <button className="border py-[9px] px-4 rounded-lg font-bold tracking-wider border-nexus-primary bg-nexus-primary text-white hover:bg-transparent hover:text-nexus-primary transition-all duration-700" type="submit">Search</button>
+                   
                 </form>
                 <button
                     onClick={() => setSortByTime(!sortByTime)}
