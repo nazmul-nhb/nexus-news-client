@@ -8,20 +8,24 @@ import customStyles from "../../utilities/selectStyles";
 import { FaNewspaper } from "react-icons/fa";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
-import { useState } from "react";
-import { FaRegNewspaper } from "react-icons/fa6";
+import { useEffect, useRef, useState } from "react";
+import { FaDeleteLeft, FaRegNewspaper } from "react-icons/fa6";
+import toast from "react-hot-toast";
 
 const animatedComponents = makeAnimated();
 
 const AllArticles = () => {
     const [selectedTag, setSelectedTag] = useState({});
     const [selectedPublisher, setSelectedPublisher] = useState({});
+    const [searchText, setSearchText] = useState('');
+    // const [sortByTime, setSortByTime] = useState(false);
+    const inputRef = useRef(null);
     const axiosPublic = useAxiosPublic();
 
     // load articles using the hook
     const { isLoading, data: allArticles } = useGetArticles(
-        ['allArticles', selectedTag?.value, selectedPublisher?.value],
-        `tag=${selectedTag?.value}&publisher=${selectedPublisher?.value}`);
+        ['allArticles', selectedTag?.value, selectedPublisher?.value, searchText],
+        `tag=${selectedTag?.value}&publisher=${selectedPublisher?.value}&search=${searchText}`);
 
     // console.log(selectedTag);
 
@@ -40,6 +44,27 @@ const AllArticles = () => {
             return res.data;
         }
     });
+
+    const handleSearchArticle = (e) => {
+        e.preventDefault();
+        if (e.target.search.value === '') {
+            return toast.error('Please, Search with a Keyword!');
+        }
+        setSearchText(e.target.search.value);
+    }
+
+    // Show Toast with Search Count
+    useEffect(() => {
+        if (searchText && allArticles?.length > 0) {
+            toast.success(`${allArticles?.length} ${allArticles?.length > 1 ? 'Matches' : 'Match'} Found!`);
+        }
+    }, [allArticles, searchText]);
+
+    // Clear Search Text after a search
+    const clearSearchText = () => {
+        setSearchText('');
+        inputRef.current.value = '';
+    }
 
     return (
         <section>
@@ -86,6 +111,16 @@ const AllArticles = () => {
                         />
                     </div>
                 </div>
+                {/* Search Articles */}
+                <form onSubmit={handleSearchArticle} className="flex gap-2 items-center text-nexus-secondary">
+                    <div className="flex gap-2 items-center relative">
+                        <input ref={inputRef} defaultValue={searchText} className="text-left p-2 rounded-lg outline outline-none border bg-transparent focus:border-2 text-nexus-secondary border-nexus-secondary" placeholder="Search Headline" type="text" name="search" id="search" />
+                        {
+                            searchText !== '' && <button title="Clear Search Field" onClick={clearSearchText} className="absolute right-2 text-3xl hover:text-red-900"><FaDeleteLeft /></button>
+                        }
+                    </div>
+                    <button className="border py-2 px-4 rounded-lg font-bold tracking-wider border-nexus-secondary bg-nexus-secondary text-white hover:bg-transparent hover:text-nexus-secondary transition-all duration-700" type="submit">Search</button>
+                </form>
             </div>
             {isLoading ?
                 < ArticleLoading />
