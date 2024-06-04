@@ -11,7 +11,7 @@ const useGetArticles = (queryKey, queryParams = '') => {
             return res.data;
         }
     });
-    return { isLoading, data, isError, error, refetch }
+    return { isLoading, data, isError, error, refetch };
 };
 
 export default useGetArticles;

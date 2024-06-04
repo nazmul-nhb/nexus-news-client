@@ -16,7 +16,7 @@ const useNexusUsers = (queryKey, email) => {
             }
         }
     });
-    return { isFetching, data, refetch }
+    return { isFetching, data, refetch };
 };
 
 export default useNexusUsers;
