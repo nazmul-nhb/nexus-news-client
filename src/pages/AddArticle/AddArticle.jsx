@@ -57,6 +57,7 @@ const AddArticle = () => {
                 };
 
                 console.log(tags);
+                console.log(newsTags);
 
                 const res = await axiosSecure.post('/articles', finalArticle);
                 if (res.data.insertedId) {
@@ -68,7 +69,18 @@ const AddArticle = () => {
                     if (resetForm) resetForm();
 
                     // send tags to the server
-                    await axiosSecure.post('/tags', newsTags);
+                    try {
+                        const tagsResponse = await axiosSecure.post('/tags', newsTags);
+                        console.log('Tags Response:', tagsResponse);
+                    } catch (tagError) {
+                        console.error('Error posting tags:', tagError);
+                        Swal.fire({
+                            title: 'Error!',
+                            text: 'Failed to post tags: ' + tagError.message,
+                            icon: 'error',
+                            confirmButtonText: 'Close'
+                        });
+                    }
                 } else if (res.data.message) {
                     Swal.fire({
                         title: 'Error!',
