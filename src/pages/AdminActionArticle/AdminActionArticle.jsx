@@ -21,7 +21,7 @@ const AdminActionArticle = ({ article, refetch }) => {
 
     // delete article
     const handleDeleteArticle = (id, headline) => {
-        deleteArticle(id,posted_by_email,headline, refetch);
+        deleteArticle(id, posted_by_email, headline, refetch);
     }
 
     const handleMakePremium = (id) => {
@@ -46,28 +46,34 @@ const AdminActionArticle = ({ article, refetch }) => {
     }
 
     return (
-        <div className='flex flex-col'>
+        <div className='flex flex-col gap-3 border px-3 py-2'>
             {/* headline */}
             <h3 className="">{headline}</h3>
 
             {/* post time and publisher */}
-            <div className="">
+            <div className="flex justify-between items-center">
                 <h3>{moment(posted_on).format('MMMM DD, YYYY [at] hh:mm:ss A')}</h3>
                 <h3>{publisher}</h3>
             </div>
 
             {/* author info */}
-            <div className="">
-                <img className='w-20 h-20' src={authorImage} alt={articleAuthor} />
-                <div className="">
-                    <h3>{articleAuthor}</h3>
-                    <h4>{posted_by_email}</h4>
+            <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                    <img className='w-12 h-12 rounded-xl' src={authorImage} alt={articleAuthor} />
+                    <div className="">
+                        <h3>{articleAuthor}</h3>
+                        <h4>{posted_by_email}</h4>
+                    </div>
                 </div>
+
+                <h3 className="">
+                    {status === 'Approved' ? 'Approved' : status === 'Declined' ? 'Declined' : 'Pending'}
+                </h3>
             </div>
 
             {/* action buttons */}
-            <div className="flex gap-2">
-                <h3 className="">{status === 'Approved' ? 'Approved' : status === 'Declined' ? 'Declined' : 'Pending'}</h3>
+            <div className="flex gap-2 items-center justify-between">
+
                 <button
                     disabled={status === 'Approved'}
                     onClick={() => handleApproveArticle(_id)}
@@ -75,17 +81,20 @@ const AdminActionArticle = ({ article, refetch }) => {
                     {
                         status === 'Approved' ? 'Approved' : 'Approve'
                     }
-                    </button>
+                </button>
 
                 <button
                     onClick={() => handleDeclineArticle(_id)}
                     className="">
-                    Decline</button>
+                    Decline
+                </button>
+
 
                 <button
                     onClick={() => handleDeleteArticle(_id, headline)}
                     className="">
-                    Delete</button>
+                    Delete
+                </button>
 
                 <button
                     disabled={isPremium}

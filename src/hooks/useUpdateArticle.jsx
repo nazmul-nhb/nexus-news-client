@@ -8,7 +8,7 @@ const useUpdateArticle = () => {
     /**
      * Updates an Article.
      *
-     * @param {string} id - The ID of the article to update.
+     * @param {string} id - The MongoDB ID of the article to update.
      * @param {object} article - The article to update.
      * @param {string} msg - Success message to display.
      * @param {function} refetch - Function from useQuery to refetch the data after update.
@@ -21,8 +21,6 @@ const useUpdateArticle = () => {
                 if (res.data.modifiedCount > 0) {
                     toast.success(msg)
                     refetch();
-                    // navigate(`/blog-details/${id}`);
-                    // navigate(-1);
                 }
             })
             .catch(error => {

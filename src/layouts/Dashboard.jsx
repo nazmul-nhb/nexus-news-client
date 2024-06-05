@@ -7,10 +7,10 @@ const Dashboard = () => {
 
     return (<>
         <SiteTitle />
-        <section className="">
+        <section className="overflow-x-auto">
             <div className="flex items-start justify-start gap-1">
                 <Sidebar/>
-                <div className={`flex-grow mx-4 my-6 flex justify-center`}>
+                <div className={`mx-4 my-6 flex justify-center md:w-full w-auto`}>
                     <Outlet></Outlet>
                 </div>
             </div>

@@ -22,7 +22,7 @@ const AllArticlesAdmin = () => {
         <section>
             All is Well!!!
             <h3>Total {allRawArticles?.length} Articles</h3>
-            <div className="grid grid-cols-2">
+            <div className="grid lg:grid-cols-2 gap-6">
                 {
                     allRawArticles?.map(article => <AdminActionArticle key={article._id}
                         article={article}

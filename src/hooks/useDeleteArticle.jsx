@@ -8,8 +8,8 @@ const useDeleteArticle = () => {
     /**
      * Deletes an Article.
      *
-     * @param {string} id - The ID of the article to delete.
-     * @param {string} email - Author's email to verify accurately.
+     * @param {string} id - The MongoDB ID of the article to delete.
+     * @param {string} email - Author's email for more security.
      * @param {string} headline - Headline of the article to display in alert.
      * @param {function} refetch - Function from useQuery to refetch the data after delete.
      */
@@ -34,13 +34,13 @@ const useDeleteArticle = () => {
                                 `Permanently Deleted "${headline}"!`,
                                 'success'
                             )
-                            toast.success('Permanently Deleted the Article!');
+                            toast.success('Deleted the Article!');
                         }
                     })
                     .catch(error => {
                         Swal.fire({
                             title: 'Error!',
-                            text: error,
+                            text: error?.message,
                             icon: 'error',
                             confirmButtonText: 'Close'
                         });
