@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../hooks/useAuth";
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
-import ArticleTable from "../../components/ArticleTable/ArticleTable";
+import NexusTable from "../../components/NexusTable/NexusTable";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
@@ -76,7 +76,7 @@ const MyArticles = () => {
     /** @type import('@tanstack/react-table').ColumnDef<any> */
     const articleColumns = [
         {
-            header: 'Serial',
+            header: '#',
             accessorKey: 'posted_on',
             enableSorting: false
         },
@@ -145,7 +145,7 @@ const MyArticles = () => {
             </Helmet>
             {user.displayName}&rsquo;s Articles
             {
-                !userArticles.length ? <p>No Data</p> : <ArticleTable data={articleData} columns={articleColumns} />
+                !userArticles.length ? <p>No Data</p> : <NexusTable data={articleData} columns={articleColumns} />
             }
         </section>
     );

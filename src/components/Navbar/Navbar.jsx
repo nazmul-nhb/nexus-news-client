@@ -10,6 +10,7 @@ import useAuth from "../../hooks/useAuth";
 import { ImProfile } from "react-icons/im";
 import { FaUserLock } from "react-icons/fa6";
 import { GiExitDoor } from "react-icons/gi";
+import useUserRole from "../../hooks/useUserRole";
 
 const Navbar = () => {
     const { user, userLoading, logOut } = useAuth();
@@ -19,6 +20,7 @@ const Navbar = () => {
     const [profileOpen, setProfileOpen] = useState(false);
     const sidebarRef = useRef(null);
     const dropdownRef = useRef(null);
+    const { role } = useUserRole();
 
     useEffect(() => {
         if (user) {
@@ -57,7 +59,7 @@ const Navbar = () => {
             <NavLink className={navClasses} to={'/add-article'}>Add Articles</NavLink>
             <NavLink className={navClasses} to={'my-articles'}>My Articles</NavLink>
             <NavLink className={navClasses} to={'/premium-articles'}>Premium Articles</NavLink>
-            <NavLink className={navClasses} to={'/dashboard'}>Dashboard</NavLink>
+            {role === 'admin' && <NavLink className={navClasses} to={'/dashboard'}>Dashboard</NavLink>}
         </>}
     </>
 

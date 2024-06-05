@@ -2,9 +2,9 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { RiSortAsc, RiSortDesc } from 'react-icons/ri';
 import { useReactTable, getCoreRowModel, flexRender, getSortedRowModel } from '@tanstack/react-table';
-import './ArticleTable.css';
+import './NexusTable.css';
 
-const ArticleTable = ({ data, columns }) => {
+const NexusTable = ({ data, columns }) => {
     const [sortArticle, setSortArticle] = useState([]);
 
     const table = useReactTable({
@@ -19,10 +19,10 @@ const ArticleTable = ({ data, columns }) => {
         <div className='article-container container overflow-x-auto'>
             <table className='article-table table'>
                 <thead>
-                    {table.getHeaderGroups().map(headerGroup => (
+                    {table.getHeaderGroups()?.map(headerGroup => (
                         <tr key={headerGroup.id}>
                             {
-                                headerGroup.headers.map(header => <th className='text-white bg-nexus-secondary text-lg font-semibold' key={header.id} onClick={header.column.getToggleSortingHandler()}>
+                                headerGroup.headers?.map(header => <th className='text-white bg-nexus-secondary text-lg font-semibold' key={header.id} onClick={header.column.getToggleSortingHandler()}>
                                     {flexRender(header.column.columnDef.header, header.getContext())}
                                     {
                                         { asc: <RiSortAsc className='inline ml-2' />, desc: <RiSortDesc className='inline ml-2' /> }[
@@ -35,12 +35,12 @@ const ArticleTable = ({ data, columns }) => {
                     ))}
                 </thead>
                 <tbody>
-                    {table.getRowModel().rows.map((row, index) => (
+                    {table.getRowModel().rows?.map((row, index) => (
                         <tr key={row.id}>
                             {
-                                row.getVisibleCells().map(cell => (
+                                row.getVisibleCells()?.map(cell => (
                                     <td key={cell.id}>
-                                        {cell.column.columnDef.accessorKey === 'posted_on' ? (index + 1)
+                                        {cell.column.columnDef.accessorKey === 'posted_on' || cell.column.columnDef.accessorKey === 'joined_on' ? (index + 1)
                                             : (flexRender(cell.column.columnDef.cell, cell.getContext()))}
                                     </td>
                                 ))
@@ -53,10 +53,10 @@ const ArticleTable = ({ data, columns }) => {
     );
 };
 
-ArticleTable.propTypes = {
+NexusTable.propTypes = {
     columns: PropTypes.array,
     data: PropTypes.array,
 }
 
 
-export default ArticleTable;
+export default NexusTable;

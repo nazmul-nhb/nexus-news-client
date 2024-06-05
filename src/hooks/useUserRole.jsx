@@ -2,7 +2,7 @@ import useAuth from './useAuth';
 import useAxiosSecure from './useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 const useUserRole = () => {
-    const { user, loading: userLoading } = useAuth();
+    const { user, userLoading } = useAuth();
     const axiosSecure = useAxiosSecure();
 
     const { data: role = '', isPending: roleLoading } = useQuery({
