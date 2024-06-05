@@ -19,7 +19,7 @@ const NexusTable = ({ data, columns }) => {
     const buttonClasses = 'px-3 border disabled:text-gray-500 disabled:border-gray-500 disabled:hover:text-gray-500 disabled:hover:bg-transparent text-nexus-secondary border-nexus-secondary hover:bg-nexus-secondary hover:text-white';
 
     return (
-        <div className='article-container container overflow-x-auto'>
+        <div className='article-container container overflow-x-auto mx-auto'>
             <table className='article-table table'>
                 <thead>
                     {table.getHeaderGroups()?.map(headerGroup => (
