@@ -28,7 +28,6 @@ const AdminActionArticle = ({ article, refetch }) => {
         const msg = 'Article is Now Premium!';
         const premiumArticle = { isPremium: true };
         updateArticle(id, premiumArticle, msg, refetch);
-        // refetch();
     }
 
     const handleDeclineArticle = (id) => {
@@ -40,17 +39,14 @@ const AdminActionArticle = ({ article, refetch }) => {
     }
 
     const handleApproveArticle = (id) => {
-        console.log(id);
-        // const msg = 'Article is Now Premium!';
-        // const premiumArticle = { isPremium: true };
-        // updateArticle(id, premiumArticle, msg);
-        // refetch();
+        // console.log(id);
+        const msg = 'Article is Approved!';
+        const approvedArticle = { status: 'Approved' };
+        updateArticle(id, approvedArticle, msg, refetch);
     }
 
     return (
         <div className='flex flex-col'>
-            {/* 
-             */}
             {/* headline */}
             <h3 className="">{headline}</h3>
 
@@ -73,9 +69,13 @@ const AdminActionArticle = ({ article, refetch }) => {
             <div className="flex gap-2">
                 <h3 className="">{status === 'Approved' ? 'Approved' : status === 'Declined' ? 'Declined' : 'Pending'}</h3>
                 <button
+                    disabled={status === 'Approved'}
                     onClick={() => handleApproveArticle(_id)}
                     className="">
-                    Approve</button>
+                    {
+                        status === 'Approved' ? 'Approved' : 'Approve'
+                    }
+                    </button>
 
                 <button
                     onClick={() => handleDeclineArticle(_id)}
