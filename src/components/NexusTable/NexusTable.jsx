@@ -16,6 +16,8 @@ const NexusTable = ({ data, columns }) => {
         onSortingChange: setSortArticle
     });
 
+    const buttonClasses = 'px-3 border disabled:text-gray-500 disabled:border-gray-500 disabled:hover:text-gray-500 disabled:hover:bg-transparent text-nexus-secondary border-nexus-secondary hover:bg-nexus-secondary hover:text-white';
+
     return (
         <div className='article-container container overflow-x-auto'>
             <table className='article-table table'>
@@ -49,26 +51,26 @@ const NexusTable = ({ data, columns }) => {
                     ))}
                 </tbody>
             </table>
-            <div>
-                <button
+            <div className='flex justify-center items-center gap-6 mt-5'>
+                <button className={buttonClasses}
                     disabled={!table.getCanPreviousPage()}
-                    onClick={() => table.setPageIndex(0)}>First page</button>
-                <button
+                    onClick={() => table.setPageIndex(0)}>First</button>
+                <button className={buttonClasses}
                     disabled={!table.getCanPreviousPage()}
                     onClick={() => table.previousPage()}
                 >
-                    Previous page
+                    Previous
                 </button>
-                <button
+                <button className={buttonClasses}
                     disabled={!table.getCanNextPage()}
                     onClick={() => table.nextPage()}
                 >
-                    Next page
+                    Next
                 </button>
-                <button
+                <button className={buttonClasses}
                     disabled={!table.getCanNextPage()}
                     onClick={() => table.setPageIndex(table.getPageCount() - 1)}>
-                    Last page
+                    Last
                 </button>
             </div>
         </div>

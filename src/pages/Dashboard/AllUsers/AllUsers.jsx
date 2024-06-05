@@ -71,7 +71,7 @@ const AllUsers = () => {
 
     return (
         <section>
-            All Users {nexusUsers?.length}
+            <h3 className="text-center text-2xl mb-4">Total Registered Users: {nexusUsers?.length}</h3>
 
             <NexusTable data={userData} columns={userColumns} />
         </section>

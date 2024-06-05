@@ -25,7 +25,7 @@
 }
 
 .article-table th {
-    padding: 8px 8px;
+    padding: 4px 6px;
     display: table-cell;
     text-align: left;
     vertical-align: center;
@@ -37,7 +37,7 @@
 }
 
 .article-table td {
-    padding: 8px 8px;
+    padding: 4px 6px;
     display: table-cell;
     text-align: left;
     vertical-align: center;

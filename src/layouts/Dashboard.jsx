@@ -10,7 +10,7 @@ const Dashboard = () => {
         <section className="">
             <div className="flex items-start justify-start gap-1">
                 <Sidebar/>
-                <div className={`flex-1 mx-4 transform transition-all duration-500`}>
+                <div className={`flex-1 mx-4 my-6 transform transition-all duration-500`}>
                     <Outlet></Outlet>
                 </div>
             </div>
