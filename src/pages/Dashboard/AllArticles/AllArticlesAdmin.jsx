@@ -1,9 +1,9 @@
 
 const AllArticlesAdmin = () => {
     return (
-        <div>
+        <section>
             All is Well!!!
-        </div>
+        </section>
     );
 };
 

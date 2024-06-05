@@ -1,9 +1,9 @@
 
 const AddPublisher = () => {
     return (
-        <div>
+        <section>
             Add Publisher
-        </div>
+        </section>
     );
 };
 

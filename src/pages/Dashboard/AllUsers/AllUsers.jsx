@@ -5,9 +5,9 @@ const AllUsers = () => {
 
     console.log(nexusUsers);
     return (
-        <div>
+        <section>
             All Users {nexusUsers?.length}
-        </div>
+        </section>
     );
 };
 

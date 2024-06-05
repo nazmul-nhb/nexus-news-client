@@ -88,7 +88,7 @@ const Navbar = () => {
                     </ul>
                 </div>
 
-                <div className="flex gap-4 items-center">
+                <div className="flex gap-8 items-center">
                     <ToggleTheme />
 
                     {userLoading ?
@@ -100,7 +100,7 @@ const Navbar = () => {
                                 </Tooltip>
                                 <div className="relative" ref={dropdownRef}>
                                     <img
-                                        className="nameIcon w-9 md:w-14 h-9 md:h-14 rounded-full border-2 border-nexus-primary hover:opacity-70 transition-all duration-1000 cursor-pointer"
+                                        className="nameIcon w-9 md:w-12 h-9 md:h-12 rounded-full border-2 border-nexus-primary hover:opacity-70 transition-all duration-1000 cursor-pointer"
                                         src={profilePicture} alt={userName}
                                         onClick={() => setProfileOpen(!profileOpen)}
                                     />
