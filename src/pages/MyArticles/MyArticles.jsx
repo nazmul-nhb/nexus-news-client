@@ -4,14 +4,16 @@ import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import NexusTable from "../../components/NexusTable/NexusTable";
 import { Helmet } from "react-helmet-async";
-import Swal from "sweetalert2";
-import toast from "react-hot-toast";
+// import Swal from "sweetalert2";
+// import toast from "react-hot-toast";
 import ArticleLoading from "../../components/LoadingSpinners/ArticleLoading";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useDeleteArticle from "../../hooks/useDeleteArticle";
 
 const MyArticles = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
+    const deleteArticle = useDeleteArticle();
 
     const { isLoading, data: userArticles = [], refetch } = useQuery({
         queryKey: ['userArticles'],
@@ -29,46 +31,13 @@ const MyArticles = () => {
     }
 
     // show decline reason 
-
     const handleShowReason = (id) => {
         console.log(id);
     }
 
     // delete article
     const handleDeleteArticle = (id, headline) => {
-        console.log(id);
-        Swal.fire({
-            title: 'Are You Sure?',
-            text: `Delete "${headline}" Permanently?`,
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#ff0000',
-            cancelButtonColor: '#2a7947',
-            confirmButtonText: 'Yes, Delete It!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                axiosSecure.delete(`/articles/${id}?email=${user.email}`)
-                    .then(res => {
-                        if (res.data.deletedCount > 0) {
-                            refetch();
-                            Swal.fire(
-                                'Article Deleted!',
-                                `Permanently Deleted "${headline}"!`,
-                                'success'
-                            )
-                            toast.success('Permanently Deleted the Article!');
-                        }
-                    })
-                    .catch(error => {
-                        Swal.fire({
-                            title: 'Error!',
-                            text: error,
-                            icon: 'error',
-                            confirmButtonText: 'Close'
-                        });
-                    })
-            }
-        })
+        deleteArticle(id, user?.email, headline, refetch);
     }
 
     const articlesWithSerial = userArticles?.map((article, index) => ({ ...article, serial: index + 1 }));

@@ -11,7 +11,7 @@ const AllArticlesAdmin = () => {
         enabled: true,
         queryKey: ['allRawArticles', role],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/all-articles?role=${role}`);
+            const res = await axiosSecure.get(`/all-articles?role=${role}&sort=time_descending`);
             return res.data;
         }
     })

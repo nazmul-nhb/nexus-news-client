@@ -2,13 +2,16 @@ import PropTypes from 'prop-types';
 import useNexusUsers from '../../hooks/useNexusUsers';
 import moment from 'moment';
 import useUpdateArticle from '../../hooks/useUpdateArticle';
-import Swal from 'sweetalert2';
-import useAxiosSecure from '../../hooks/useAxiosSecure';
-import toast from 'react-hot-toast';
+// import Swal from 'sweetalert2';
+// import useAxiosSecure from '../../hooks/useAxiosSecure';
+// import toast from 'react-hot-toast';
+import useDeleteArticle from '../../hooks/useDeleteArticle';
 
 const AdminActionArticle = ({ article, refetch }) => {
     const { _id, headline, posted_by_email, posted_on, status, isPremium, publisher } = article;
+    // const axiosSecure = useAxiosSecure();
     const updateArticle = useUpdateArticle();
+    const deleteArticle = useDeleteArticle();
 
     // get latest name & profile photo of the blog author
     const { data: nexusUser = {} } = useNexusUsers(['nexusUser', posted_by_email], posted_by_email);
@@ -18,46 +21,14 @@ const AdminActionArticle = ({ article, refetch }) => {
 
     // delete article
     const handleDeleteArticle = (id, headline) => {
-        console.log(id);
-        Swal.fire({
-            title: 'Are You Sure?',
-            text: `Delete "${headline}" Permanently?`,
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#ff0000',
-            cancelButtonColor: '#2a7947',
-            confirmButtonText: 'Yes, Delete It!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                useAxiosSecure.delete(`/articles/${id}?email=${posted_by_email}`)
-                    .then(res => {
-                        if (res.data.deletedCount > 0) {
-                            refetch();
-                            Swal.fire(
-                                'Article Deleted!',
-                                `Permanently Deleted "${headline}"!`,
-                                'success'
-                            )
-                            toast.success('Permanently Deleted the Article!');
-                        }
-                    })
-                    .catch(error => {
-                        Swal.fire({
-                            title: 'Error!',
-                            text: error,
-                            icon: 'error',
-                            confirmButtonText: 'Close'
-                        });
-                    })
-            }
-        })
+        deleteArticle(id,posted_by_email,headline, refetch);
     }
 
     const handleMakePremium = (id) => {
         const msg = 'Article is Now Premium!';
         const premiumArticle = { isPremium: true };
-        updateArticle(id, premiumArticle, msg);
-        refetch();
+        updateArticle(id, premiumArticle, msg, refetch);
+        // refetch();
     }
 
     const handleDeclineArticle = (id) => {

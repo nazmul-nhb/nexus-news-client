@@ -5,13 +5,22 @@ import Swal from "sweetalert2";
 const useUpdateArticle = () => {
     const axiosSecure = useAxiosSecure();
 
-    const updateArticle = (id, article, msg) => {
+    /**
+     * Updates an Article.
+     *
+     * @param {string} id - The ID of the article to update.
+     * @param {object} article - The article to update.
+     * @param {string} msg - Success message to display.
+     * @param {function} refetch - Function from useQuery to refetch the data after update.
+     */
+
+    const updateArticle = (id, article, msg, refetch) => {
         console.log(article);
         axiosSecure.patch(`/articles/${id}`, article)
             .then(res => {
                 if (res.data.modifiedCount > 0) {
                     toast.success(msg)
-                    // refetch();
+                    refetch();
                     // navigate(`/blog-details/${id}`);
                     // navigate(-1);
                 }
@@ -28,7 +37,6 @@ const useUpdateArticle = () => {
                 }
             })
     }
-
 
     return updateArticle;
 };
