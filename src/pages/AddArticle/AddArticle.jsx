@@ -70,13 +70,11 @@ const AddArticle = () => {
 
                     // send tags to the server
                     try {
-                        const tagsResponse = await axiosSecure.post('/tags', newsTags);
-                        console.log('Tags Response:', tagsResponse);
+                        await axiosSecure.post('/tags', newsTags);
                     } catch (tagError) {
-                        console.error('Error posting tags:', tagError);
                         Swal.fire({
                             title: 'Error!',
-                            text: 'Failed to post tags: ' + tagError.message,
+                            text: 'Failed to Post Tags!',
                             icon: 'error',
                             confirmButtonText: 'Close'
                         });

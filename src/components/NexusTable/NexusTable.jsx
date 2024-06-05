@@ -36,13 +36,12 @@ const NexusTable = ({ data, columns }) => {
                     ))}
                 </thead>
                 <tbody>
-                    {table.getRowModel().rows?.map((row, index) => (
+                    {table.getRowModel().rows?.map(row => (
                         <tr key={row.id}>
                             {
                                 row.getVisibleCells()?.map(cell => (
                                     <td key={cell.id}>
-                                        {cell.column.columnDef.accessorKey === 'posted_on' || cell.column.columnDef.accessorKey === 'joined_on' ? (index + 1)
-                                            : (flexRender(cell.column.columnDef.cell, cell.getContext()))}
+                                        {(flexRender(cell.column.columnDef.cell, cell.getContext()))}
                                     </td>
                                 ))
                             }

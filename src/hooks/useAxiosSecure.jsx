@@ -27,7 +27,7 @@ const useAxiosSecure = () => {
     axiosSecure.interceptors.response.use((response) => {
         return response;
     }, async (error) => {
-        const status = error.response.status;
+        const status = error.response ? error.response.status : null;
         console.error('status error in the interceptor', status);
         // log out the user if there is something wrong in the token
         if (status === 401 || status === 403) {

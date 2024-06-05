@@ -13,13 +13,17 @@ const AllUsers = () => {
         console.log(email);
     }
 
-    const userData = useMemo(() => nexusUsers, [nexusUsers]);
+    const usersWithSerial = nexusUsers?.map((user, index) => ({ ...user, serial: index + 1 }));
+
+    console.log(usersWithSerial);
+
+    const userData = useMemo(() => usersWithSerial, [usersWithSerial]);
 
     /** @type import('@tanstack/react-table').ColumnDef<any> */
     const userColumns = [
         {
             header: '#',
-            accessorKey: 'joined_on',
+            accessorKey: 'serial',
             // enableSorting: false
         },
         {

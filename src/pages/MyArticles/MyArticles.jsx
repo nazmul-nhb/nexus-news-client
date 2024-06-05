@@ -71,14 +71,16 @@ const MyArticles = () => {
         })
     }
 
-    const articleData = useMemo(() => userArticles, [userArticles]);
+    const articlesWithSerial = userArticles?.map((article, index) => ({ ...article, serial: index + 1 }));
+
+    const articleData = useMemo(() => articlesWithSerial, [articlesWithSerial]);
 
     /** @type import('@tanstack/react-table').ColumnDef<any> */
     const articleColumns = [
         {
             header: '#',
-            accessorKey: 'posted_on',
-            enableSorting: false
+            accessorKey: 'serial',
+            // enableSorting: false
         },
         {
             header: 'Headline',
