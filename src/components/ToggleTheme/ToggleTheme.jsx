@@ -28,7 +28,7 @@ const ToggleTheme = () => {
     return (
         <button
             onClick={toggleTheme}
-            className="theme-toggler  text-2xl md:text-4xl"
+            className="theme-toggler text-2xl md:text-3xl"
         >
             <Tooltip anchorSelect=".theme-toggler" place="bottom" className='!text-sm md:!text-base'>
                 {theme === 'light' ? 'Enable Dark Mode' : 'Enable Light Mode'}

@@ -47,7 +47,7 @@ const Navbar = () => {
         };
     }, [sidebarRef, dropdownRef]);
 
-    const navClasses = ({ isActive }) => isActive ? 'text-nexus-secondary font-bold border-b-2 border-nexus-secondary' : 'text-nexus-primary hover:text-nexus-secondary';
+    const navClasses = ({ isActive }) => isActive ? 'text-nexus-secondary font-bold border-b-2 border-nexus-secondary flex items-center gap-2' : 'text-nexus-primary hover:text-nexus-secondary flex items-center gap-2';
 
     const navItems = <>
         <NavLink className={navClasses} to={'/'}>Home</NavLink>
@@ -112,15 +112,15 @@ const Navbar = () => {
                                                 {userName}
                                             </NavLink>
                                             <button className={'flex gap-2 items-center text-white'}
-                                                onClick={() => { handleLogout(); setProfileOpen(!profileOpen)}}
+                                                onClick={() => { handleLogout(); setProfileOpen(!profileOpen) }}
                                             ><GiExitDoor />Logout</button>
                                         </div>
                                     )}
                                 </div>
                             </div>
                             : <div className="font-jokeyOneSans flex items-center gap-1 md:gap-3 text-lg md:text-xl xl:text-2xl font-medium md:pt-0 pt-1">
-                                <NavLink to={'/login'} className={`${navClasses} flex items-center gap-2`}><FaUserLock />Login</NavLink>
-                                <NavLink to={'/register'} className={`${navClasses} flex items-center gap-2`}>Register</NavLink>
+                                <NavLink to={'/login'} className={navClasses}><FaUserLock />Login</NavLink>
+                                <NavLink to={'/register'} className={navClasses}>Register</NavLink>
                             </div>
                     }
                 </div>

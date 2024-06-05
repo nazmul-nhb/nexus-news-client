@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
@@ -7,11 +7,13 @@ import { FaFileCirclePlus, FaNewspaper } from "react-icons/fa6";
 import { RiHome7Fill, RiHomeGearFill } from "react-icons/ri";
 import { IoIosArrowDroprightCircle } from "react-icons/io";
 import { GiExitDoor } from "react-icons/gi";
+import ToggleTheme from "../ToggleTheme/ToggleTheme";
+import { ThemeContext } from "../../providers/ThemeProvider";
 
 const Sidebar = () => {
     const { user, logOut } = useAuth();
     const [openSidebar, setOpenSidebar] = useState(true);
-
+    const { theme } = useContext(ThemeContext);
     const handleLogout = () => {
         logOut()
             .then(() => {
@@ -58,6 +60,10 @@ const Sidebar = () => {
                 }
             </ul>
             <hr className="my-5" />
+            <div className="flex items-center gap-2 duration-300 transition-all mb-5">
+                <ToggleTheme />
+                <h3 className={`${!openSidebar && "hidden"} text-xl font-semibold origin-left transition-all transform duration-200`}>{theme === 'light' ? 'Enable Dark Mode' : 'Enable Light Mode'}</h3>
+            </div>
             <button className="flex items-center gap-2 font-semibold hover:font-bold duration-300 transition-all"
                 onClick={handleLogout}>
                 <GiExitDoor className="text-4xl" /> <span className={`${!openSidebar && "hidden"} text-xl origin-left transition-all transform duration-200`}>Logout</span>
