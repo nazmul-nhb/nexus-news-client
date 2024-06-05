@@ -40,7 +40,7 @@ const Sidebar = () => {
     ]
 
     return (
-        <div className={`${openSidebar ? "w-72" : "w-20 "} whitespace-nowrap bg-nexus-secondary border-nexus-secondary h-dvh p-5 pt-6 relative transition-all transform duration-300`}>
+        <div className={`${openSidebar ? "w-64" : "w-20 "} whitespace-nowrap bg-nexus-secondary border-nexus-secondary h-dvh p-5 pt-6 relative transition-all transform duration-300`}>
             {/* ${openSidebar ? "w-72" : "w-20 "} */}
             {/* sidebar control */}
             <IoIosArrowDropleftCircle className={`absolute cursor-pointer -right-3 top-[30] w-7 text-4xl text-nexus-primary ${!openSidebar && "rotate-180"}`} onClick={() => setOpenSidebar(!openSidebar)} />

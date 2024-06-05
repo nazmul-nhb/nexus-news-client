@@ -28,6 +28,7 @@ const ArticleDetails = () => {
     if (isLoading) {
         return <ArticleLoading />
     }
+    
     const { headline, view_count, thumb_image, tags, publisher, description } = article;
 
     return (
