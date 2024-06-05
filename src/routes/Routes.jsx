@@ -15,6 +15,8 @@ import Profile from "../pages/Profile/Profile";
 import Dashboard from "../layouts/Dashboard";
 import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
 import AllArticlesAdmin from "../pages/Dashboard/AllArticles/AllArticlesAdmin";
+import AdminHome from "../pages/Dashboard/AdminHome/AdminHome";
+import AddPublisher from "../pages/Dashboard/AddPublisher/AddPublisher";
 
 export const router = createBrowserRouter([
     {
@@ -68,6 +70,10 @@ export const router = createBrowserRouter([
         element: <Dashboard />,
         children:[
             {
+                path:'/dashboard',
+                element:<AdminHome/>
+            },
+            {
                 path:'/dashboard/all-users',
                 element:<AllUsers/>
             },
@@ -75,6 +81,10 @@ export const router = createBrowserRouter([
                 path:'/dashboard/all-articles',
                 element: <AllArticlesAdmin/>
             },
+            {
+                path:'/dashboard/add-publisher',
+                element: <AddPublisher/>
+            }
         ]
     }
 ]);

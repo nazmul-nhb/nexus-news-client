@@ -8,8 +8,8 @@ import toast from "react-hot-toast";
 import ToggleTheme from "../ToggleTheme/ToggleTheme";
 import useAuth from "../../hooks/useAuth";
 import { ImProfile } from "react-icons/im";
-import { FaSignOutAlt } from "react-icons/fa";
 import { FaUserLock } from "react-icons/fa6";
+import { GiExitDoor } from "react-icons/gi";
 
 const Navbar = () => {
     const { user, userLoading, logOut } = useAuth();
@@ -47,7 +47,7 @@ const Navbar = () => {
         };
     }, [sidebarRef, dropdownRef]);
 
-    const navClasses = ({ isActive }) => isActive ? 'text-nexus-secondary font-bold border-b-2 border-nexus-secondary' : 'text-nexus-primary hover:nexus-secondary';
+    const navClasses = ({ isActive }) => isActive ? 'text-nexus-secondary font-bold border-b-2 border-nexus-secondary' : 'text-nexus-primary hover:text-nexus-secondary';
 
     const navItems = <>
         <NavLink className={navClasses} to={'/'}>Home</NavLink>
@@ -105,7 +105,7 @@ const Navbar = () => {
                                         onClick={() => setProfileOpen(!profileOpen)}
                                     />
                                     {profileOpen && (
-                                        <div className="dropdown-arrow absolute md:right-[16%] right-[1%] mt-2 w-56 overflow-x-auto-auto rounded-md shadow-md z-30 bg-[#1e3fadea] shadow-[#8689ee] p-2 flex flex-col gap-2 animate__animated animate__bounceIn">
+                                        <div className="dropdown-arrow absolute md:right-[16%] right-[1%] mt-2 w-56 overflow-x-auto-auto rounded-md shadow-md z-30 bg-nexus-secondary shadow-[#6897bb] p-2 flex flex-col gap-2 animate__animated animate__bounceIn">
                                             <NavLink to={'/profile'}
                                                 onClick={() => setProfileOpen(!profileOpen)}
                                                 className={'flex gap-2 items-center text-white'}><ImProfile />
@@ -113,7 +113,7 @@ const Navbar = () => {
                                             </NavLink>
                                             <button className={'flex gap-2 items-center text-white'}
                                                 onClick={() => { handleLogout(); setProfileOpen(!profileOpen)}}
-                                            ><FaSignOutAlt />Logout</button>
+                                            ><GiExitDoor />Logout</button>
                                         </div>
                                     )}
                                 </div>

@@ -2,14 +2,14 @@ import { useContext, useState, useEffect } from 'react';
 import { ThemeContext } from '../../providers/ThemeProvider';
 import { MdLightMode } from 'react-icons/md';
 import { Tooltip } from 'react-tooltip';
-import { BsFillCloudMoonFill } from 'react-icons/bs';
+import { IoMoon } from 'react-icons/io5';
 
 const ToggleTheme = () => {
     const { theme, toggleTheme } = useContext(ThemeContext);
     const [isAnimating, setIsAnimating] = useState(false);
     const [currentIcon, setCurrentIcon] = useState(
         theme === 'light'
-            ? <BsFillCloudMoonFill className='text-nexus-primary' />
+            ? <IoMoon  className='text-nexus-primary' />
             : <MdLightMode className='text-nexus-secondary' />);
 
     useEffect(() => {
@@ -17,7 +17,7 @@ const ToggleTheme = () => {
         const timer = setTimeout(() => {
             setCurrentIcon(
                 theme === 'light'
-                    ? <BsFillCloudMoonFill className='text-nexus-primary' />
+                    ? <IoMoon  className='text-nexus-primary' />
                     : <MdLightMode className='text--nexus-secondary' />);
             setIsAnimating(false);
         }, 500);
