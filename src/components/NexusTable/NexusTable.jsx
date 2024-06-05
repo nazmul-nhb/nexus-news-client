@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { RiSortAsc, RiSortDesc } from 'react-icons/ri';
-import { useReactTable, getCoreRowModel, flexRender, getSortedRowModel } from '@tanstack/react-table';
+import { useReactTable, getCoreRowModel, flexRender, getSortedRowModel, getPaginationRowModel } from '@tanstack/react-table';
 import './NexusTable.css';
 
 const NexusTable = ({ data, columns }) => {
@@ -11,6 +11,7 @@ const NexusTable = ({ data, columns }) => {
         data, columns,
         getCoreRowModel: getCoreRowModel(),
         getSortedRowModel: getSortedRowModel(),
+        getPaginationRowModel: getPaginationRowModel(),
         state: { sorting: sortArticle },
         onSortingChange: setSortArticle
     });
@@ -49,6 +50,28 @@ const NexusTable = ({ data, columns }) => {
                     ))}
                 </tbody>
             </table>
+            <div>
+                <button
+                    disabled={!table.getCanPreviousPage()}
+                    onClick={() => table.setPageIndex(0)}>First page</button>
+                <button
+                    disabled={!table.getCanPreviousPage()}
+                    onClick={() => table.previousPage()}
+                >
+                    Previous page
+                </button>
+                <button
+                    disabled={!table.getCanNextPage()}
+                    onClick={() => table.nextPage()}
+                >
+                    Next page
+                </button>
+                <button
+                    disabled={!table.getCanNextPage()}
+                    onClick={() => table.setPageIndex(table.getPageCount() - 1)}>
+                    Last page
+                </button>
+            </div>
         </div>
     );
 };

@@ -32,6 +32,10 @@
     border-left: 1px solid #e1e5f18d
 }
 
+.article-table th:nth-last-child(-n+2) {
+    text-align: center;
+}
+
 .article-table td {
     padding: 8px 8px;
     display: table-cell;

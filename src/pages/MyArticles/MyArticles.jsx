@@ -123,7 +123,7 @@ const MyArticles = () => {
             accessorKey: '',
             enableSorting: false,
             cell: (cell) => {
-                return <button onClick={() => handleUpdateArticle(cell.row.original._id)}>Update</button>;
+                return <h3 className="text-center cursor-pointer" onClick={() => handleUpdateArticle(cell.row.original._id)}>Update</h3>;
             },
         },
         {
@@ -131,7 +131,10 @@ const MyArticles = () => {
             accessorKey: '',
             enableSorting: false,
             cell: (cell) => {
-                return <button onClick={() => handleDeleteArticle(cell.row.original._id, cell.row.original.headline)}>Delete</button>;
+                const { _id, headline } = cell.row.original;
+                return (
+                    <h3 className="text-center cursor-pointer" onClick={() => handleDeleteArticle(_id, headline)}>Delete</h3>
+                )
             }
         }
     ]

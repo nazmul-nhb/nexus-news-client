@@ -1,15 +1,19 @@
 import { useMemo } from "react";
 import useNexusUsers from "../../../hooks/useNexusUsers";
 import NexusTable from "../../../components/NexusTable/NexusTable";
+import { MdOutlineAdminPanelSettings } from "react-icons/md";
+import { PhotoProvider, PhotoView } from "react-photo-view";
+import 'react-photo-view/dist/react-photo-view.css';
 
 const AllUsers = () => {
     const { data: nexusUsers = [] } = useNexusUsers(['nexusUsers']);
 
-    const userData = useMemo(() => nexusUsers, [nexusUsers]);
 
     const handleMakeAdmin = (email) => {
         console.log(email);
     }
+
+    const userData = useMemo(() => nexusUsers, [nexusUsers]);
 
     /** @type import('@tanstack/react-table').ColumnDef<any> */
     const userColumns = [
@@ -30,15 +34,33 @@ const AllUsers = () => {
             header: 'Profile Picture',
             accessorKey: 'profile_image',
             cell: (cell) => {
-                return <img className="w-16 rounded-full p-[1px] border border-furry mx-auto" src={cell.row.original.profile_image} title={cell.row.original.email} alt={cell.row.original.name} />;
+                const { profile_image, email, name } = cell.row.original;
+                return (
+                    <PhotoProvider>
+                        <PhotoView src={profile_image}>
+                            <img
+                                className="w-11 h-11 cursor-pointer rounded-full p-[1px] border border-furry mx-auto"
+                                src={profile_image}
+                                title={email}
+                                alt={name}
+                            />
+                        </PhotoView>
+                    </PhotoProvider>
+                );
             },
         },
         {
             header: 'Action',
-            accessorKey: '',
+            accessorKey: 'role',
             enableSorting: false,
             cell: (cell) => {
-                return <button className="flex items-center justify-center" onClick={() => handleMakeAdmin(cell.row.original.email)}>{cell.row.original.role === 'admin' ? 'Admin' : 'Make Admin'}</button>;
+                return <>{
+                    cell.row.original.role === 'admin'
+                        ? <h3 className="flex items-center gap-1 text-green-700 mx-auto justify-center">
+                            <MdOutlineAdminPanelSettings /> Admin
+                        </h3>
+                        : <h3 className="flex items-center justify-center mx-auto cursor-pointer" onClick={() => handleMakeAdmin(cell.row.original.email)}>Make Admin</h3>
+                }</>;
             }
         }
     ]
