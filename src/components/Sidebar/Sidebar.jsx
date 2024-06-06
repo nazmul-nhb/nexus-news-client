@@ -1,5 +1,4 @@
-import PropTypes from 'prop-types';
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
@@ -13,16 +12,10 @@ import { ThemeContext } from "../../providers/ThemeProvider";
 import { Tooltip } from "react-tooltip";
 import { IoNewspaperSharp } from "react-icons/io5";
 
-const Sidebar = ({ setSidebarOpen }) => {
+const Sidebar = () => {
     const { user, logOut } = useAuth();
     const [openSidebar, setOpenSidebar] = useState(true);
     const { theme } = useContext(ThemeContext);
-
-    useEffect(() => {
-        if (setSidebarOpen){
-            setSidebarOpen(openSidebar)
-        }
-    }, [openSidebar, setSidebarOpen]);
 
     const navigate = useNavigate();
 
@@ -88,9 +81,5 @@ const Sidebar = ({ setSidebarOpen }) => {
         </div>
     );
 };
-
-Sidebar.propTypes = {
-    setSidebarOpen: PropTypes.func,
-}
 
 export default Sidebar;
