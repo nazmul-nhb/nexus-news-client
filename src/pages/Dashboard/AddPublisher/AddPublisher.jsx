@@ -13,7 +13,7 @@ import Swal from "sweetalert2";
 const AddPublisher = () => {
     const [imageFileName, setImageFileName] = useState("Upload Publisher Logo");
     const [imageUploading, setImageUploading] = useState(false);
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
     const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure();
@@ -52,6 +52,9 @@ const AddPublisher = () => {
 
                 if (res.data.insertedId) {
                     toast.success("Publisher Added Successfully!");
+                    reset();
+                    setImageFileName("Upload Publisher Logo");
+                    refetch();
                 } else if (res.data.message) {
                     Swal.fire({
                         title: 'Error!',
@@ -78,8 +81,8 @@ const AddPublisher = () => {
 
 
     return (
-        <section className="">
-            <form onSubmit={handleSubmit(handleAddPublisher)} className="w-full flex flex-col gap-6 px-4 lg:px-8 py-4 lg:py-6 shadow-lg shadow-nexus-secondary border border-nexus-secondary rounded-md">
+        <section className="flex md:flex-row-reverse md:items-start flex-col gap-6">
+            <form onSubmit={handleSubmit(handleAddPublisher)} className="w-full md:w-1/4 md:flex-grow-0 flex flex-col gap-6 px-4 lg:px-8 py-4 lg:py-6 shadow-lg shadow-nexus-secondary border border-nexus-secondary rounded-md">
                 {/* Publisher Name */}
                 <div className="flex flex-col gap-3">
                     <label className="font-medium" htmlFor="publisher">Your Name *</label>
@@ -123,8 +126,17 @@ const AddPublisher = () => {
                         errors.picture && <p className="text-red-700">{errors.picture.message}</p>
                     }
                 </div>
-                <button className="">Add Publisher</button>
+                <button className="">{imageUploading ? 'Loading...' : 'Add Publisher'}</button>
             </form>
+            <div className="grid md:grid-cols-2 gap-4 w-3/4">
+{
+    publishers?.map((pub, index) =><div className="flex flex-col gap-2 p-2 border" key={index}>
+        <img src={pub.publisher_logo} alt={pub.publisher} />
+        <h3>{pub.publisher}</h3>
+        <h4>{moment(pub.added_on).format('dddd, MMMM DD, YYYY • hh:mm:ss A')}</h4>
+    </div>)
+}
+            </div>
         </section>
     );
 };
