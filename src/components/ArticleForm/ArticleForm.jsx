@@ -15,8 +15,9 @@ import customStyles from '../../utilities/selectStyles';
 const animatedComponents = makeAnimated();
 
 const ArticleForm = ({
-    // addArticle,
-    // updateArticle,
+    isUpdateArticle,
+    handleUpdateArticle,
+    article,
     imageUploading,
     imageFileName,
     setImageFileName,
@@ -54,13 +55,14 @@ const ArticleForm = ({
 
     return (
         <div className='my-6'>
-            <form onSubmit={handleSubmit(handlePostArticle)} className='mx-auto grid grid-cols-9 gap-3 font-medium'>
+            <form onSubmit={handleSubmit(isUpdateArticle ? handleUpdateArticle : handlePostArticle)} className='mx-auto grid grid-cols-9 gap-3 font-medium'>
                 {/* Headline/Title */}
                 <div className="col-span-9 lg:col-span-6 flex flex-col gap-3">
                     <div className="flex items-center gap-2 pl-2 bg-transparent rounded-lg border border-nexus-primary">
                         <MdViewHeadline />
                         <label className="font-medium" htmlFor="headline">Headline</label>
                         <input
+                            defaultValue={isUpdateArticle && article?.headline}
                             {...register("headline", {
                                 required: { value: true, message: "You must write a headline!" },
                             })}
@@ -92,6 +94,7 @@ const ArticleForm = ({
                         <FaNewspaper />
                         <label className="font-medium" htmlFor="publisher">Publisher</label>
                         <Select isClearable
+                            defaultValue={isUpdateArticle && article?.publisher ? { value: article.publisher, label: article.publisher } : null}
                             styles={customStyles}
                             components={animatedComponents}
                             onChange={setPublisher}
@@ -115,7 +118,7 @@ const ArticleForm = ({
                                 <input
                                     {...register("image", {
                                         required:
-                                            { value: true, message: "Provide an image file!" }
+                                            { value: isUpdateArticle ? false : true, message: "Provide an image file!" }
                                     })}
                                     className="absolute w-full h-full opacity-0 cursor-pointer bg-transparent focus:outline-0"
                                     type="file" name="image" id="image"
@@ -142,7 +145,7 @@ const ArticleForm = ({
                             isClearable isMulti
                             closeMenuOnSelect={false}
                             components={animatedComponents}
-                            defaultValue={[]}
+                            defaultValue={isUpdateArticle && article?.tags ? article.tags.map(tag => ({ value: tag, label: tag })) : []}
                             options={tags}
                             onChange={setNewsTags}
                             required
@@ -160,6 +163,7 @@ const ArticleForm = ({
                             <label className="font-medium" htmlFor="description">Description</label>
                         </div>
                         <textarea
+                            defaultValue={isUpdateArticle && article?.description}
                             {...register("description", {
                                 required: { value: true, message: "You must write News Description!" },
                             })}
@@ -176,15 +180,16 @@ const ArticleForm = ({
 };
 
 ArticleForm.propTypes = {
-    addArticle: PropTypes.bool,
-    updateArticle: PropTypes.bool,
+    isUpdateArticle: PropTypes.bool,
     imageUploading: PropTypes.bool,
+    handleUpdateArticle: PropTypes.func,
     handlePostArticle: PropTypes.func,
     setResetForm: PropTypes.func,
     setImageFileName: PropTypes.func,
     setNewsTags: PropTypes.func,
     setPublisher: PropTypes.func,
     imageFileName: PropTypes.string,
+    article: PropTypes.object,
 };
 
 export default ArticleForm;

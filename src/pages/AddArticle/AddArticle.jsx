@@ -113,7 +113,6 @@ const AddArticle = () => {
             </Helmet>
 
             <ArticleForm
-                addArticle={true}
                 setResetForm={setFormReset}
                 handlePostArticle={handlePostArticle}
                 imageFileName={imageFileName}
