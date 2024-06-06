@@ -3,6 +3,7 @@ import "keen-slider/keen-slider.min.css"
 import './Publishers.css';
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import ArticleLoading from "../LoadingSpinners/ArticleLoading";
 
 const animation = { duration: 30000, easing: (t) => t };
 
@@ -51,6 +52,10 @@ const Publishers = () => {
         },
         [carousel]
     );
+
+    if(isFetching){
+        return <ArticleLoading/>
+    }
 
     return (
         <div className="wrapper">
