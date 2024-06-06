@@ -17,7 +17,7 @@ import useImageUpload from "../../hooks/useImageUpload";
 
 const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
-    const [imageFileName, setImageFileName] = useState("Upload Your Profile Picture")
+    const [imageFileName, setImageFileName] = useState("Upload Your Profile Picture");
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { createUser, updateUserProfile, userLoading, user, setUser } = useAuth();
     const navigate = useNavigate();

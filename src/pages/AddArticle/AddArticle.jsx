@@ -93,7 +93,7 @@ const AddArticle = () => {
         } catch (error) {
             Swal.fire({
                 title: 'Error!',
-                text: error,
+                text: error?.message,
                 icon: 'error',
                 confirmButtonText: 'Close'
             });

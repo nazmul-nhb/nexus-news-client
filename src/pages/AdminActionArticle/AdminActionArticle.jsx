@@ -56,7 +56,7 @@ const AdminActionArticle = ({ article, refetch }) => {
             {/* post time and publisher */}
             <div className="flex justify-between items-center">
                 <h3>{moment(posted_on).format('MMMM DD, YYYY [at] hh:mm:ss A')}</h3>
-                <h3>{publisher}</h3>
+                <h3 className='first-letter:capitalize'>{publisher}</h3>
             </div>
 
             {/* author info */}
