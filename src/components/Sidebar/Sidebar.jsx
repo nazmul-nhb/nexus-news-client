@@ -1,4 +1,5 @@
-import { useContext, useState } from "react";
+import PropTypes from 'prop-types';
+import { useContext, useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
@@ -12,10 +13,16 @@ import { ThemeContext } from "../../providers/ThemeProvider";
 import { Tooltip } from "react-tooltip";
 import { IoNewspaperSharp } from "react-icons/io5";
 
-const Sidebar = () => {
+const Sidebar = ({ setSidebarOpen }) => {
     const { user, logOut } = useAuth();
     const [openSidebar, setOpenSidebar] = useState(true);
     const { theme } = useContext(ThemeContext);
+
+    useEffect(() => {
+        if (setSidebarOpen){
+            setSidebarOpen(openSidebar)
+        }
+    }, [openSidebar, setSidebarOpen]);
 
     const navigate = useNavigate();
 
@@ -40,7 +47,7 @@ const Sidebar = () => {
     ]
 
     return (
-        <div className={`${openSidebar ? "w-64" : "w-20 "} whitespace-nowrap bg-nexus-secondary border-nexus-secondary h-dvh p-5 pt-6 relative transition-all transform duration-300`}>
+        <div className={`${openSidebar ? "w-64" : "w-20"} whitespace-nowrap bg-nexus-secondary border-nexus-secondary h-dvh p-5 pt-6 relative transition-all transform duration-300`}>
             {/* ${openSidebar ? "w-72" : "w-20 "} */}
             {/* sidebar control */}
             <IoIosArrowDropleftCircle className={`absolute cursor-pointer -right-3 top-[30] w-7 text-4xl text-nexus-primary ${!openSidebar && "rotate-180"}`} onClick={() => setOpenSidebar(!openSidebar)} />
@@ -51,7 +58,7 @@ const Sidebar = () => {
             <Link to='/profile'>
                 <div className="flex gap-3 items-center userName">
                     <img src={user?.photoURL} alt={user?.displayName}
-                        className={`border p-[1px] cursor-pointer transition-all transform duration-500 text-4xl w-8 md:w-10 h-8 md:h-10 rounded-full ${openSidebar && "rotate-[360deg]"}`} />
+                        className={`border p-[1px] cursor-pointer transition-all transform duration-500 text-4xl w-8 md:w-9 h-8 md:h-9 rounded-full ${openSidebar && "rotate-[360deg]"}`} />
                     <div className={`text-white flex-1 origin-left font-medium transition-all transform duration-200 ${!openSidebar && "hidden"}`}>
                         <h3 className="text-sm md:text-xl">{user?.displayName}</h3>
                         <h4 className="text-xs">Profile</h4>
@@ -81,5 +88,9 @@ const Sidebar = () => {
         </div>
     );
 };
+
+Sidebar.propTypes = {
+    setSidebarOpen: PropTypes.func,
+}
 
 export default Sidebar;
