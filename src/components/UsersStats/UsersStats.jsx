@@ -12,7 +12,7 @@ const UsersStats = () => {
     const countNormalRef = useRef(null);
     const countPremiumRef = useRef(null);
 
-    const { isFetching, isError, error, data: countUsers = {} } = useQuery({
+    const { isFetching, isError, data: countUsers = {} } = useQuery({
         queryKey: ['countUsers'],
         queryFn: async () => {
             const res = await axiosPublic('/users-count');
@@ -22,7 +22,11 @@ const UsersStats = () => {
 
     const { total_users = 0, normal_users = 0, premium_users = 0 } = countUsers;
 
-    const { start: startTotal, reset: resetTotal, update: updateTotal } = useCountUp({
+    const totalPercentage = total_users > 0 ? 100 : 0;
+    const normalPercentage = total_users > 0 ? ((normal_users / total_users) * 100).toFixed(2) : 0;
+    const premiumPercentage = total_users > 0 ? ((premium_users / total_users) * 100).toFixed(2) : 0;
+
+    const { reset: resetTotal, update: updateTotal } = useCountUp({
         ref: countTotalRef,
         start: 0,
         end: total_users,
@@ -30,7 +34,7 @@ const UsersStats = () => {
         duration: 10,
     });
 
-    const { start: startNormal, reset: resetNormal, update: updateNormal } = useCountUp({
+    const {  reset: resetNormal, update: updateNormal } = useCountUp({
         ref: countNormalRef,
         start: 0,
         end: normal_users,
@@ -38,7 +42,7 @@ const UsersStats = () => {
         duration: 10,
     });
 
-    const { start: startPremium, reset: resetPremium, update: updatePremium } = useCountUp({
+    const { reset: resetPremium, update: updatePremium } = useCountUp({
         ref: countPremiumRef,
         start: 0,
         end: premium_users,
@@ -47,8 +51,8 @@ const UsersStats = () => {
     });
 
     const { ref: inViewRef, inView } = useInView({
-        triggerOnce: false, // Trigger every time the component comes into view
-        threshold: 0.1, // Trigger when 10% of the component is in view
+        triggerOnce: false, // trigger every time the component comes into view
+        threshold: 0.2, // trigger when 20% of the component is in view
     });
 
     const [chartData, setChartData] = useState({
@@ -56,7 +60,7 @@ const UsersStats = () => {
         datasets: [
             {
                 label: 'Users Count',
-                data: [0, 0, 0],
+                data: [totalPercentage, normalPercentage, premiumPercentage],
                 backgroundColor: ['#3b82f6', '#34d399', '#f97316'],
             },
         ],
@@ -83,13 +87,13 @@ const UsersStats = () => {
                 datasets: [
                     {
                         label: 'Users Count',
-                        data: [total_users, normal_users, premium_users],
+                        data: [totalPercentage, normalPercentage, premiumPercentage],
                         backgroundColor: ['#3b82f6', '#34d399', '#f97316'],
                     },
                 ],
             });
         }
-    }, [inView, total_users, normal_users, premium_users, isFetching, isError, resetTotal, resetNormal, resetPremium, updateTotal, updateNormal, updatePremium]);
+    }, [inView, total_users, normal_users, premium_users, isFetching, isError, resetTotal, resetNormal, resetPremium, updateTotal, updateNormal, updatePremium, totalPercentage, normalPercentage, premiumPercentage]);
 
     return (
         <div ref={setRefs} className='text-4xl flex flex-col items-center justify-center'>
@@ -103,7 +107,7 @@ const UsersStats = () => {
                 <div>Premium Users: <span ref={countPremiumRef} /></div>
             </div>
             <div className='mt-8 w-full max-w-md'>
-                <Bar data={chartData} options={{ animation: { duration: 10000 } }} />
+                <Bar data={chartData} options={{ animation: { duration: 10000 }, scales: { y: { max: 100 } }, plugins: { legend: { display: false }, tooltip: { callbacks: { label: (context) => `${context.label}: ${context.raw}%` } } } }} />
             </div>
         </div>
     );
