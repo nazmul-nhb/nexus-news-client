@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../hooks/useAuth";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import NexusTable from "../../components/NexusTable/NexusTable";
 import { Helmet } from "react-helmet-async";
@@ -9,8 +9,12 @@ import { Helmet } from "react-helmet-async";
 import ArticleLoading from "../../components/LoadingSpinners/ArticleLoading";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useDeleteArticle from "../../hooks/useDeleteArticle";
+import { IoIosCloseCircle } from "react-icons/io";
 
 const MyArticles = () => {
+    const [showModal, setShowModal] = useState(false);
+    const [declineReason, setDeclineReason] = useState('');
+
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
     const deleteArticle = useDeleteArticle();
@@ -23,6 +27,10 @@ const MyArticles = () => {
         }
     });
 
+    const closeModal = () => {
+        setShowModal(false);
+    };
+
     // console.log(userArticles);
 
     // update article
@@ -31,8 +39,10 @@ const MyArticles = () => {
     }
 
     // show decline reason 
-    const handleShowReason = (id) => {
-        console.log(id);
+    const handleShowReason = (reason) => {
+        setDeclineReason(reason);
+        setShowModal(true);
+
     }
 
     // delete article
@@ -69,15 +79,16 @@ const MyArticles = () => {
             header: 'Status',
             accessorKey: 'status',
             cell: (cell) => {
+                const { decline_reason, status } = cell.row.original;
                 return (
-                    <div>
-                        {cell.row.original.status === 'Approved' && 'Approved'}
-                        {cell.row.original.status === 'Declined' && (
+                    <div className="flex justify-between gap-1">
+                        {status === 'Approved' && 'Approved'}
+                        {status === 'Declined' && (
                             <>
-                                Declined <button onClick={() => handleShowReason(cell.row.original._id)}>Reason</button>
+                                Declined <button onClick={() => handleShowReason(decline_reason)}>Reason</button>
                             </>
                         )}
-                        {!cell.row.original.status && 'Pending'}
+                        {!status && 'Pending'}
                     </div>
                 )
             }
@@ -120,6 +131,19 @@ const MyArticles = () => {
             {user.displayName}&rsquo;s Articles
             {
                 !userArticles.length ? <p>No Data</p> : <NexusTable data={articleData} columns={articleColumns} />
+            }
+            {showModal &&
+                <dialog open className="w-[96%] xl:w-auto h-3/4 bg-opacity-95 p-12 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-transparent rounded-lg z-50 overflow-y-auto">
+                    <div className='animate__animated animate__pulse bg-[#c5cce5f1] border shadow-lg h-full rounded-lg p-6 flex flex-col justify-around'>
+                        <IoIosCloseCircle onClick={closeModal} className='absolute -top-4 -right-4 text-5xl text-red-700 hover:text-nexus-secondary hover:opacity-80 transition-all duration-500 cursor-pointer' title='Close' />
+
+                        <div className="flex flex-col items-center gap-4 h-3/4 p-1">
+                            <h3 className="animate__animated animate__headShake text-center text-red-700 font-kreonSerif font-bold max-[430px]:text-lg text-2xl mb-4 md:mb-6">Reason Your Article was Declined!</h3>
+                            <p className="">{declineReason}</p>
+                        </div>
+
+                    </div>
+                </dialog>
             }
         </section>
     );

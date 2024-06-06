@@ -115,9 +115,7 @@ const AdminActionArticle = ({ article, refetch }) => {
                         <h3 className="animate__animated animate__headShake text-center text-red-700 font-kreonSerif font-bold max-[430px]:text-lg text-2xl mb-4 md:mb-6">Give A Feedback</h3>
 
                         <form onSubmit={(e) => handleDeclineArticle(e, _id)} className='flex flex-col items-center justify-between h-3/4 p-1'>
-                            <textarea className='text-sm bg-transparent outline-0 border border-nexus-secondary w-4/5 h-3/4 p-2 rounded-lg' name="feedback" id="feedback">
-
-                            </textarea>
+                            <textarea className='text-sm bg-transparent outline-0 border border-nexus-secondary w-4/5 h-3/4 p-2 rounded-lg' name="feedback" id="feedback"/>
                             <button type='submit'>Decline</button>
                         </form>
                     </div>
