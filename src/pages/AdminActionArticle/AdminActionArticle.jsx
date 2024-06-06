@@ -2,14 +2,13 @@ import PropTypes from 'prop-types';
 import useNexusUsers from '../../hooks/useNexusUsers';
 import moment from 'moment';
 import useUpdateArticle from '../../hooks/useUpdateArticle';
-// import Swal from 'sweetalert2';
-// import useAxiosSecure from '../../hooks/useAxiosSecure';
-// import toast from 'react-hot-toast';
 import useDeleteArticle from '../../hooks/useDeleteArticle';
+import { useState } from 'react';
+import { IoIosCloseCircle } from 'react-icons/io';
 
 const AdminActionArticle = ({ article, refetch }) => {
     const { _id, headline, posted_by_email, posted_on, status, isPremium, publisher } = article;
-    // const axiosSecure = useAxiosSecure();
+    const [showModal, setShowModal] = useState(false);
     const updateArticle = useUpdateArticle();
     const deleteArticle = useDeleteArticle();
 
@@ -18,6 +17,10 @@ const AdminActionArticle = ({ article, refetch }) => {
 
     const articleAuthor = nexusUser?.name;
     const authorImage = nexusUser?.profile_image;
+
+    const closeModal = () => {
+        setShowModal(false);
+    };
 
     // delete article
     const handleDeleteArticle = (id, headline) => {
@@ -30,16 +33,16 @@ const AdminActionArticle = ({ article, refetch }) => {
         updateArticle(id, premiumArticle, msg, refetch);
     }
 
-    const handleDeclineArticle = (id) => {
-        console.log(id);
-        // const msg = 'Article is Now Premium!';
-        // const premiumArticle = { isPremium: true };
-        // updateArticle(id, premiumArticle, msg);
-        // refetch();
+    const handleDeclineArticle = (e, id) => {
+        e.preventDefault();
+        const decline_reason = e.target.feedback.value;
+        const msg = 'Declined!';
+        const declinedArticle = { decline_reason, status: 'Declined' }
+        updateArticle(id, declinedArticle, msg, refetch);
+        setShowModal(false);
     }
 
     const handleApproveArticle = (id) => {
-        // console.log(id);
         const msg = 'Article is Approved!';
         const approvedArticle = { status: 'Approved' };
         updateArticle(id, approvedArticle, msg, refetch);
@@ -84,7 +87,7 @@ const AdminActionArticle = ({ article, refetch }) => {
                 </button>
 
                 <button
-                    onClick={() => handleDeclineArticle(_id)}
+                    onClick={() => setShowModal(!showModal)}
                     className="">
                     Decline
                 </button>
@@ -105,6 +108,21 @@ const AdminActionArticle = ({ article, refetch }) => {
                     }
                 </button>
             </div>
+            {showModal &&
+                <dialog open className="w-[96%] xl:w-auto h-3/4 bg-opacity-95 p-12 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-transparent rounded-lg z-50 overflow-y-auto">
+                    <div className='animate__animated animate__pulse bg-[#c5cce5f1] border shadow-lg h-full rounded-lg p-6 flex flex-col justify-around'>
+                        <IoIosCloseCircle onClick={closeModal} className='absolute -top-4 -right-4 text-5xl text-red-700 hover:text-nexus-secondary hover:opacity-80 transition-all duration-500 cursor-pointer' title='Close' />
+                        <h3 className="animate__animated animate__headShake text-center text-red-700 font-kreonSerif font-bold max-[430px]:text-lg text-2xl mb-4 md:mb-6">Give A Feedback</h3>
+
+                        <form onSubmit={(e) => handleDeclineArticle(e, _id)} className='flex flex-col items-center justify-between h-3/4 p-1'>
+                            <textarea className='text-sm bg-transparent outline-0 border border-nexus-secondary w-4/5 h-3/4 p-2 rounded-lg' name="feedback" id="feedback">
+
+                            </textarea>
+                            <button type='submit'>Decline</button>
+                        </form>
+                    </div>
+                </dialog>
+            }
         </div>
     );
 };

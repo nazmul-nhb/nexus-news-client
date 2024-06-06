@@ -62,7 +62,7 @@ const Sidebar = () => {
             <ul className="flex flex-col gap-5 items-start">
                 {
                     sidebarMenus.map((menu, index) => (
-                        <NavLink title={menu.title} className={sideBarClasses} to={menu.link} key={index}>
+                        <NavLink onClick={() => setOpenSidebar(false)} title={menu.title} className={sideBarClasses} to={menu.link} key={index}>
                             {menu.icon}
                             <h3 className={`${!openSidebar && "hidden"} text-sm md:text-xl origin-left transition-all transform duration-200`}> {menu.title}</h3>
                         </NavLink>
