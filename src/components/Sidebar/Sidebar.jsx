@@ -44,14 +44,14 @@ const Sidebar = () => {
             {/* ${openSidebar ? "w-72" : "w-20 "} */}
             {/* sidebar control */}
             <IoIosArrowDropleftCircle className={`absolute cursor-pointer -right-3 top-[30] w-7 text-4xl text-nexus-primary ${!openSidebar && "rotate-180"}`} onClick={() => setOpenSidebar(!openSidebar)} />
-            <Tooltip anchorSelect=".userName" place="right">
+            <Tooltip anchorSelect=".userName" place="bottom-end">
                 {user?.displayName}
             </Tooltip>
             {/* Profile */}
             <Link to='/profile'>
-                <div className="flex gap-3 items-center userName">
+                <div className="flex gap-3 items-center">
                     <img src={user?.photoURL} alt={user?.displayName}
-                        className={`border p-[1px] cursor-pointer transition-all transform duration-500 text-4xl w-8 md:w-9 h-8 md:h-9 rounded-full ${openSidebar && "rotate-[360deg]"}`} />
+                        className={`border p-[1px] userName cursor-pointer transition-all transform duration-500 text-4xl w-8 md:w-9 h-8 md:h-9 rounded-full ${openSidebar && "rotate-[360deg]"}`} />
                     <div className={`text-white flex-1 origin-left font-medium transition-all transform duration-200 ${!openSidebar && "hidden"}`}>
                         <h3 className="text-sm md:text-xl">{user?.displayName}</h3>
                         <h4 className="text-xs">Profile</h4>

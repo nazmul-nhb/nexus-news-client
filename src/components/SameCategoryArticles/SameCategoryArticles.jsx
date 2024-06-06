@@ -3,11 +3,11 @@ import useGetArticles from '../../hooks/useGetArticles';
 import { Link } from 'react-router-dom';
 
 const SameCategoryArticles = ({ tags }) => {
-    console.log(tags);
-
     const tagsQueryString = tags.map(tag => `tag=${encodeURIComponent(tag)}`).join('&');
-    console.log(tagsQueryString);
-    const { data: similarArticles } = useGetArticles(['similarArticles', tags], `${tagsQueryString}&sort=time_descending&size=4`);
+    // console.log(tagsQueryString);
+    const { data: similarArticles } = useGetArticles(
+        ['similarArticles', tags], `${tagsQueryString}&sort=time_descending&size=6`
+    );
 
     console.log(similarArticles);
 

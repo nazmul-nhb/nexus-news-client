@@ -9,7 +9,7 @@ const Dashboard = () => {
         <section className="overflow-x-auto">
             <div className="flex items-start justify-start gap-1">
                 <Sidebar />
-                <div className={`mx-4 my-6 flex justify-center w-[calc(100%-80px)]`}>
+                <div className={`mx-4 my-6 flex justify-center w-[99%]`}>
                     <Outlet></Outlet>
                 </div>
             </div>

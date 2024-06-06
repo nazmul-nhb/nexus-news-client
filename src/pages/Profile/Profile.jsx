@@ -137,7 +137,7 @@ const Profile = () => {
                 <form onSubmit={handleSubmit(handleUpdateProfile)} className="w-full lg:w-2/5 flex flex-col gap-6 px-4 lg:px-8 py-4 lg:py-6 shadow-lg shadow-nexus-secondary border border-nexus-secondary rounded-md">
                     {/* Name */}
                     <div className="flex flex-col gap-3">
-                        <label className="font-medium" htmlFor="name">Your Name *</label>
+                        <label className="font-medium" htmlFor="name">Update Your Name *</label>
                         <div className="flex items-center gap-2 bg-transparent pl-2 rounded-lg border border-nexus-primary">
                             <FaUserEdit className="text-gray-500" />
                             <input
