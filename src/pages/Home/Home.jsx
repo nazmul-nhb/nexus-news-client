@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import TrendingArticles from "../../components/TrendingArticles/TrendingArticles";
+import Publishers from "../../components/Publishers/Publishers";
 
 
 const Home = () => {
@@ -11,6 +12,8 @@ const Home = () => {
             </Helmet>
 
             <TrendingArticles />
+
+            <Publishers/>
         </section>
     );
 };
