@@ -36,7 +36,7 @@ const MyArticles = () => {
     const { isLoading, data: userArticles = [], refetch } = useQuery({
         queryKey: ['userArticles'],
         queryFn: async () => {
-            const res = await axiosSecure(`/user/articles/${user?.email}`)
+            const res = await axiosSecure(`/articles/user/${user?.email}`)
             return res.data;
         }
     });

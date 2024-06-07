@@ -15,7 +15,7 @@ const UsersStats = () => {
     const { isFetching, isError, data: countUsers = {} } = useQuery({
         queryKey: ['countUsers'],
         queryFn: async () => {
-            const res = await axiosPublic('/users-count');
+            const res = await axiosPublic('/users/count');
             return res.data;
         }
     });

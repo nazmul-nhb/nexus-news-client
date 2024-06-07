@@ -4,14 +4,14 @@ import AdminActionArticle from "../../AdminActionArticle/AdminActionArticle";
 import useUserRole from "../../../hooks/useUserRole";
 
 const AllArticlesAdmin = () => {
-    const {role} = useUserRole();
+    const {role, roleLoading} = useUserRole();
     const axiosSecure = useAxiosSecure();
 
     const { isLoading, data: allRawArticles = [], isError, error, refetch } = useQuery({
         enabled: true,
         queryKey: ['allRawArticles', role],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/all-articles?role=${role}&sort=time_descending`);
+            const res = await axiosSecure.get(`/articles/all?role=${role}&sort=time_descending`);
             return res.data;
         }
     })
