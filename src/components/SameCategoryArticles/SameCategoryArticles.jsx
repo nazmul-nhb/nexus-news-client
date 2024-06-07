@@ -9,7 +9,7 @@ const SameCategoryArticles = ({ tags, exclude }) => {
         ['similarArticles', tags], `${tagsQueryString}&sort=time_descending&size=6`
     );
 
-    console.log(similarArticles);
+    // console.log(similarArticles);
 
     return (
         <div className='flex flex-col gap-3'>

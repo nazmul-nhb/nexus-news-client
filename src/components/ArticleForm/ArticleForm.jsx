@@ -72,22 +72,6 @@ const ArticleForm = ({
                         errors.headline && <p className="text-red-700">{errors.headline.message}</p>
                     }
                 </div>
-                {/* Type */}
-                {/* <div className="col-span-9 lg:col-span-2 flex flex-col gap-3">
-                    <div className="flex items-center gap-2 pl-2 bg-transparent rounded-lg border border-nexus-primary">
-                        <FaSackDollar />
-                        <label className="font-medium" htmlFor="type">Type</label>
-                        <Select isClearable
-                            styles={customStyles}
-                            components={animatedComponents}
-                            onChange={setNewsType}
-                            options={[{ value: true, label: 'Premium' }, { value: false, label: 'Free' }]}
-                            required
-                            placeholder="Article Type"
-                            className="px-2 rounded-r-lg py-1 bg-transparent w-full border-l border-nexus-primary focus:outline-0" id='type' name='type'
-                        />
-                    </div>
-                </div> */}
                 {/* Publisher */}
                 <div className="col-span-9 lg:col-span-3 flex flex-col gap-3">
                     <div className="flex items-center gap-2 pl-2 bg-transparent rounded-lg border border-nexus-primary">

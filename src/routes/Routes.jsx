@@ -18,6 +18,7 @@ import AllArticlesAdmin from "../pages/Dashboard/AllArticles/AllArticlesAdmin";
 import AdminHome from "../pages/Dashboard/AdminHome/AdminHome";
 import AddPublisher from "../pages/Dashboard/AddPublisher/AddPublisher";
 import AdminRoute from "./AdminRoute";
+import Payment from "../pages/Payment/Payment";
 
 export const router = createBrowserRouter([
     {
@@ -60,6 +61,10 @@ export const router = createBrowserRouter([
             {
                 path: '/profile',
                 element: <PrivateRoute><Profile /></PrivateRoute>
+            },
+            {
+                path: '/payment',
+                element: <PrivateRoute><Payment /></PrivateRoute>
             },
             {
                 path: '/premium-articles',
