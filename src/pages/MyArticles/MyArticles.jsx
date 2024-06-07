@@ -79,7 +79,7 @@ const MyArticles = () => {
 
             const finalArticle = {
                 headline,
-                tags,
+                tags: tags.length === 0 ? article.tags : tags,
                 description,
                 publisher: publisher.value,
                 updated_on: moment().format("YYYY-MM-DD HH:mm:ss")
@@ -223,7 +223,7 @@ const MyArticles = () => {
                 <title>{user.displayName}&rsquo;s Articles</title>
             </Helmet>
             {user.displayName}&rsquo;s Articles
-            
+
             {
                 !userArticles.length ? <p>No Data</p> : <NexusTable data={articleData} columns={articleColumns} />
             }

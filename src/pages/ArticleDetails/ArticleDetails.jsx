@@ -42,7 +42,7 @@ const ArticleDetails = () => {
                 <img src={full_image} alt={headline} />
                 <br /><br />
                 View: {view_count}
-                <p>{description}</p>
+                <p className="whitespace-pre-wrap">{description}</p>
                 <h3>{publisher}</h3>
                 {
                     tags?.map((tag, index) => <div key={index}>

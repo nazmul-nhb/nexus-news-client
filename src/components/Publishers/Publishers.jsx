@@ -26,10 +26,10 @@ const carousel = (slider) => {
 const Publishers = () => {
     const axiosPublic = useAxiosPublic();
 
-    const { isFetching, isError, error, data: publishers = [] } = useQuery({
-        queryKey: ['publishers'],
+    const { isFetching, isError, error, data: sliderPublishers = [] } = useQuery({
+        queryKey: ['sliderPublishers'],
         queryFn: async () => {
-            const res = await axiosPublic('/publishers')
+            const res = await axiosPublic('/publishers?size=7')
             return res.data;
         }
     });
@@ -63,7 +63,7 @@ const Publishers = () => {
                 <div className="carousel keen-slider" ref={sliderRef}>
 
                     {
-                        publishers?.map(publisher => <div key={publisher._id}
+                        sliderPublishers?.map(publisher => <div key={publisher._id}
                             className="carousel__cell flex flex-col items-center justify-center gap-3 bg-nexus-secondary p-3">
                             <img src={publisher.publisher_logo} alt={publisher.publisher} />
                             <h3 className="text-center font-kreonSerif text-lg text-white">{publisher.publisher}</h3>
