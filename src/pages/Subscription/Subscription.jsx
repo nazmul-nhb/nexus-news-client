@@ -35,16 +35,19 @@ const Subscription = () => {
         switch (selectedPlan.value) {
             case "minute":
                 subscriptionPlan.price = 1;
-                // subscriptionPlan.plan = label;
+                subscriptionPlan.expires_in = {duration:1, time:'minute'};
                 break;
             case "week":
                 subscriptionPlan.price = 5;
+                subscriptionPlan.expires_in = { duration: 1, time: 'week' };
                 break;
             case "month":
                 subscriptionPlan.price = 15;
+                subscriptionPlan.expires_in = { duration: 1, time: 'month' };
                 break;
             case "year":
                 subscriptionPlan.price = 150;
+                subscriptionPlan.expires_in = { duration: 1, time: 'year' };
                 break;
 
             default:
