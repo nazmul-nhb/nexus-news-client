@@ -4,6 +4,7 @@ import Publishers from "../../components/Publishers/Publishers";
 import UsersStats from "../../components/UsersStats/UsersStats";
 import { useEffect, useState } from "react";
 import { IoIosCloseCircle } from "react-icons/io";
+import Plans from "../../components/Plans/Plans";
 
 
 const Home = () => {
@@ -26,6 +27,8 @@ const Home = () => {
             <Publishers/>
 
             <UsersStats/>
+
+            <Plans/>
 
             {/* Subscription Modal */}
             {showSubscriptionModal &&
