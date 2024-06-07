@@ -5,6 +5,7 @@ import UsersStats from "../../components/UsersStats/UsersStats";
 import { useEffect, useState } from "react";
 import { IoIosCloseCircle } from "react-icons/io";
 import Plans from "../../components/Plans/Plans";
+import PublishersList from "../../components/PublishersList/PublishersList";
 
 
 const Home = () => {
@@ -25,6 +26,8 @@ const Home = () => {
             <TrendingArticles />
 
             <Publishers/>
+
+            <PublishersList/>
 
             <UsersStats/>
 

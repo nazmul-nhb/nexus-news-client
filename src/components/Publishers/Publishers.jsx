@@ -61,7 +61,6 @@ const Publishers = () => {
         <div className="wrapper">
             <div className="scene">
                 <div className="carousel keen-slider" ref={sliderRef}>
-
                     {
                         sliderPublishers?.map(publisher => <div key={publisher._id}
                             className="carousel__cell flex flex-col items-center justify-center gap-3 bg-nexus-secondary p-3">
