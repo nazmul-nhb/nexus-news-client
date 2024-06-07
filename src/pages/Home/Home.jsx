@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { IoIosCloseCircle } from "react-icons/io";
 import Plans from "../../components/Plans/Plans";
 import PublishersList from "../../components/PublishersList/PublishersList";
+import LatestNews from "../../components/LatestNews/LatestNews";
 
 
 const Home = () => {
@@ -23,7 +24,10 @@ const Home = () => {
                 <title>Home - Nexus News</title>
             </Helmet>
 
-            <TrendingArticles />
+            <div className="flex justify-between gap-3">
+                <TrendingArticles />
+                <LatestNews/>
+            </div>
 
             <Publishers/>
 

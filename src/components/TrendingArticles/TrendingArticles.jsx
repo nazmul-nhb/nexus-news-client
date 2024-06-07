@@ -26,7 +26,7 @@ const TrendingArticles = () => {
     }
 
     return (
-        <div>
+        <div className='w-2/3'>
             <Swiper
                 style={{
                     '--swiper-navigation-color': 'orange',

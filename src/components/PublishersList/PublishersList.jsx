@@ -12,14 +12,14 @@ const PublishersList = () => {
         }
     });
     return (
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+        <section className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
             {
                 listPublishers?.map(pub=><div className="border p-3" key={pub._id}>
                     <img src={pub.publisher_logo} alt={pub.publisher} />
                     <h4 className="">{pub.publisher}</h4>
                 </div>)
             }
-        </div>
+        </section>
     );
 };
 
