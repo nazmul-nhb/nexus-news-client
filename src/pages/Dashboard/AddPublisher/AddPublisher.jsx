@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaNewspaper } from "react-icons/fa";
-import { MdImage } from "react-icons/md";
+import { MdDeleteForever, MdImage } from "react-icons/md";
 import useImageUpload from "../../../hooks/useImageUpload";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
@@ -79,6 +79,40 @@ const AddPublisher = () => {
         }
     }
 
+    const handleDeletePublisher = (id, publisher)=>{
+        Swal.fire({
+            title: 'Are You Sure?',
+            text: `Delete "${publisher}" Permanently?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#ff0000',
+            cancelButtonColor: '#2a7947',
+            confirmButtonText: 'Yes, Delete It!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/publishers/${id}`)
+                    .then(res => {
+                        if (res.data.deletedCount > 0) {
+                            refetch();
+                            Swal.fire(
+                                'Article Deleted!',
+                                `Permanently Deleted "${publisher}"!`,
+                                'success'
+                            )
+                            toast.success('Publisher Deleted!');
+                        }
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            title: 'Error!',
+                            text: error?.message,
+                            icon: 'error',
+                            confirmButtonText: 'Close'
+                        });
+                    })
+            }
+        })
+    }
 
     return (
         <section className="flex md:flex-row-reverse md:items-start flex-col gap-6">
@@ -130,10 +164,11 @@ const AddPublisher = () => {
             </form>
             <div className="grid md:grid-cols-2 gap-4 w-3/4">
 {
-    publishers?.map((pub, index) =><div className="flex flex-col gap-2 p-2 border" key={index}>
+    publishers?.map((pub, index) =><div className="relative flex flex-col gap-2 p-2 border" key={index}>
         <img src={pub.publisher_logo} alt={pub.publisher} />
         <h3>{pub.publisher}</h3>
         <h4>{moment(pub.added_on).format('dddd, MMMM DD, YYYY • hh:mm:ss A')}</h4>
+        <button onClick={() => handleDeletePublisher(pub._id, pub.publisher)} className="absolute -right-5 -top-5 text-5xl text-red-600"><MdDeleteForever /></button>
     </div>)
 }
             </div>

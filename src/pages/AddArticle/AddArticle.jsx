@@ -48,7 +48,6 @@ const AddArticle = () => {
                     description,
                     posted_by: user.displayName,
                     posted_by_email: user.email,
-                    // isPremium: newsType.value,
                     publisher: publisher.value,
                     view_count: 0,
                     thumb_image: result.data.display_url,
