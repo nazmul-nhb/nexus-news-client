@@ -23,7 +23,7 @@ const AdminHome = () => {
     useEffect(() => {
         if (publicationPercentages.length > 0) {
             const formattedData = publicationPercentages.map(({ publication, percentage }) => [publication, parseInt(percentage)]);
-            setPublicationData([['Publication', 'Percentage']].concat(formattedData));
+            setPublicationData([['Publication', 'Percentage'], ...formattedData]);
         }
     }, [publicationPercentages]);
 

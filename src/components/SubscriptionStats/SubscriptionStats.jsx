@@ -22,16 +22,18 @@ const SubscriptionStats = () => {
         if (subscriptionStats.length > 0) {
             const colors = ['#76A7FA', '#FFD700', '#32CD32', '#FF6347'];
             const formattedData = subscriptionStats.map(({ plan, count, percentage }, index) => [plan, parseInt(count), `${percentage}%`, `color: ${colors[index]}`]);
-            setSubscriptionData([['Plan', 'Subscription Count', { role: 'annotation' }, { role: 'style' }]].concat(formattedData));
+            setSubscriptionData([['Plan', 'Subscription Count', { role: 'annotation' }, { role: 'style' }], ...formattedData]);
         } else{
             console.log('No subscription stats found.');
         }
     }, [subscriptionStats]);
 
+    // const legendLabels = subscriptionStats?.map(sub=> sub.plan);
+
     if (isLoading || roleLoading) return <div>Loading...</div>;
     if (isError) return <div>Error: {error.message}</div>;
-
-    console.log(subscriptionStats);
+    
+    // console.log(legendLabels);
 
     return (
         <div>
@@ -39,13 +41,34 @@ const SubscriptionStats = () => {
                 <Chart
                     chartType="ColumnChart"
                     width={'100%'}
-                    height={'500px'}
+                    height={'640px'}
                     data={subscriptionData}
                     options={{
                         title: 'Subscriptions by Plan',
-                        hAxis: { title: 'Plan' },
-                        vAxis: { title: 'Subscription Count' },
+                        backgroundColor: 'transparent',
+                        theme: 'material',
+                        hAxis: {
+                            title: 'Plan',
+                            titleTextStyle: { fontSize: 14 },
+                            slantedText: true, 
+                            slantedTextAngle: 30,
+                            textStyle: { fontSize: 12 }
+                        },
+                        vAxis: {
+                            title: 'Subscription Count',
+                            titleTextStyle: { fontSize: 14 },
+                            minValue: 0, 
+                            textStyle: { fontSize: 12 }
+                        },
+                        legend: { position: 'top', alignment: 'end' },
+                        annotations: {
+                            textStyle: { fontSize: 12 }
+                        },
+                        is3D: true, 
+                        depth: 50, 
+                        viewWindow: { min: 10 }, 
                     }}
+                    // legend={legendLabels}
                 />
             )}
         </div>

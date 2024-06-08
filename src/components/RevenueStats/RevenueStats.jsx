@@ -37,13 +37,15 @@ const RevenueStats = () => {
                 <Chart
                     chartType="LineChart"
                     width={'100%'}
-                    height={'500px'}
+                    height={'640px'}
                     data={revenueData}
                     options={{
                         legend: { position: 'top' },
                         title: 'Revenue by Plan',
                         curveType: 'function',
                         lineWidth: 5,
+                        backgroundColor: 'transparent',
+                        theme: 'material',
                         series: {
                             0: { pointShape: 'circle', pointSize: 10 }
                         }
