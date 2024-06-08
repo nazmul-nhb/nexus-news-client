@@ -32,15 +32,15 @@ const Subscription = () => {
         e.preventDefault();
 
         // check if a user is already subscribed and return with a modal
-        if (nexusUser?.isPremium && nexusUser?.expires_on){
+        if (nexusUser?.isPremium && nexusUser?.expires_on) {
             const expiration = moment(nexusUser.expires_on);
             const duration = moment.duration(expiration.diff(moment()));
 
             const days = Math.floor(duration.asDays());
             const hours = duration.hours();
             return Swal.fire({
-                title: "Already Subscribed!",
-                text: `You Already have a Subscription with ${days} Days and ${hours} Hours Remaining!`,
+                title: `Already Subscribed to ${nexusUser?.current_plan}!`,
+                text: `You Have An Active Plan with ${days} Days and ${hours} Hours Remaining!`,
                 icon: "success"
             });
         }
@@ -51,7 +51,7 @@ const Subscription = () => {
         switch (selectedPlan.value) {
             case "minute":
                 subscriptionPlan.price = 1;
-                subscriptionPlan.expires_in = {duration:1, time:'minute'};
+                subscriptionPlan.expires_in = { duration: 1, time: 'minute' };
                 break;
             case "week":
                 subscriptionPlan.price = 5;
@@ -71,39 +71,39 @@ const Subscription = () => {
                 break;
         }
 
-        axiosSecure.post('/payment', subscriptionPlan)
-            .then(res => {
-                if (res.data.insertedId || res.data.modifiedCount > 0) {
-                    Swal.fire({
-                        title: "Go to Payment Page?",
-                        text: `You have selected ${subscriptionPlan?.plan}`,
-                        icon: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#3085d6",
-                        cancelButtonColor: "#d33",
-                        confirmButtonText: "Yes, Take Me to Payment Page!"
-                    }).then((result) => {
-                        if (result.isConfirmed) {
+        Swal.fire({
+            title: "Go to Payment Page?",
+            text: `You have selected ${subscriptionPlan?.plan}`,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Take Me to Payment Page!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.post('/payment', subscriptionPlan)
+                    .then(res => {
+                        if (res.data.insertedId || res.data.modifiedCount > 0) {
                             navigate('/payment');
+                        } else {
+                            Swal.fire({
+                                title: 'Error!',
+                                text: 'Error Happened! Try Again!',
+                                icon: 'error',
+                                confirmButtonText: 'Close'
+                            });
                         }
                     })
-                } else {
-                    Swal.fire({
-                        title: 'Error!',
-                        text: 'Error Happened!',
-                        icon: 'error',
-                        confirmButtonText: 'Close'
-                    });
-                }
-            })
-            .catch(error => {
-                Swal.fire({
-                    title: 'Error!',
-                    text: error.response,
-                    icon: 'error',
-                    confirmButtonText: 'Close'
-                });
-            })
+                    .catch(error => {
+                        Swal.fire({
+                            title: 'Error!',
+                            text: error.response,
+                            icon: 'error',
+                            confirmButtonText: 'Close'
+                        });
+                    })
+            }
+        })
     }
 
     return (

@@ -54,8 +54,8 @@ const Navbar = () => {
     const navItems = <>
         <NavLink className={navClasses} to={'/'}>Home</NavLink>
         <NavLink className={navClasses} to={'/all-articles'}>All Articles</NavLink>
-        <NavLink className={navClasses} to={'/subscription'}>Subscription</NavLink>
         {user && <>
+        <NavLink className={navClasses} to={'/subscription'}>Subscription</NavLink>
             <NavLink className={navClasses} to={'/add-article'}>Add Articles</NavLink>
             <NavLink className={navClasses} to={'my-articles'}>My Articles</NavLink>
             <NavLink className={navClasses} to={'/premium-articles'}>Premium Articles</NavLink>

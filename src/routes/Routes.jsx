@@ -44,7 +44,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/subscription',
-                element: <Subscription />
+                element: <PrivateRoute><Subscription /></PrivateRoute>
             },
             {
                 path: '/add-article',
