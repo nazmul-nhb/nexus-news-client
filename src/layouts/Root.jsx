@@ -63,7 +63,7 @@ const Root = () => {
                 // call reset function
                 resetUserSubscription();
             }
-        }, 60000);
+        }, 30000);
         // clear interval
         return () => clearInterval(intervalId);
 

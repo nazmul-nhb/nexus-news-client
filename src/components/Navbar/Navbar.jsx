@@ -61,6 +61,7 @@ const Navbar = () => {
             <NavLink className={navClasses} to={'/premium-articles'}>Premium Articles</NavLink>
             {role === 'admin' && <NavLink className={navClasses} to={'/dashboard'}>Dashboard</NavLink>}
         </>}
+        <NavLink className={navClasses} to={'/about'}>About</NavLink>
     </>
 
     const handleLogout = () => {

@@ -40,13 +40,13 @@ const RevenueStats = () => {
                     data={revenueData}
                     options={{
                         legend: { position: 'top' },
-                        title: 'Revenue by Plan',
+                        title: '$ Revenue by Plan',
                         curveType: 'function',
                         lineWidth: 5,
                         backgroundColor: 'transparent',
                         theme: 'material',
                         series: {
-                            0: { pointShape: 'circle', pointSize: 10 }
+                            0: { pointShape: 'circle', pointSize: 16 }
                         }
                     }}
                 />

@@ -19,6 +19,7 @@ import AdminHome from "../pages/Dashboard/AdminHome/AdminHome";
 import AddPublisher from "../pages/Dashboard/AddPublisher/AddPublisher";
 import AdminRoute from "./AdminRoute";
 import Payment from "../pages/Payment/Payment";
+import About from "../pages/About/About";
 
 export const router = createBrowserRouter([
     {
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
             {
                 path: '/all-articles',
                 element: <AllArticles />
+            },
+            {
+                path: '/about',
+                element: <About />
             },
             {
                 path: '/subscription',
