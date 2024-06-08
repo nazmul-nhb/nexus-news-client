@@ -94,7 +94,7 @@ const Navbar = () => {
                 <div className="flex gap-8 items-center">
                     <ToggleTheme />
 
-                    {userLoading ?
+                    {!user && userLoading ?
                         "Loading..."
                         : user
                             ? <div className="flex items-center gap-2 md:gap-3">

@@ -3,7 +3,7 @@ import useAuth from "./useAuth";
 import useAxiosSecure from "./useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const useHandleArticleDetails = () => {
     const { user, userLoading } = useAuth();
@@ -11,6 +11,7 @@ const useHandleArticleDetails = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const [articleID, setArticleID] = useState(null);
+    const [article, setArticle] = useState({});
 
     const { data: nexusUser = {} } = useQuery({
         enabled: !!user && !userLoading,
@@ -21,14 +22,19 @@ const useHandleArticleDetails = () => {
         }
     });
 
-    const { data: article = {} } = useQuery({
-        enabled: !!articleID,
-        queryKey: ['article', articleID],
-        queryFn: async () => {
-            const res = await axiosSecure(`/articles/${articleID}`)
-            return res.data;
-        }
-    });
+    useEffect(() => {
+        const fetchArticle = async () => {
+            if (user && articleID) {
+                try {
+                    const res = await axiosSecure(`/articles/${articleID}`);
+                    setArticle(res.data);
+                } catch (error) {
+                    console.error("Error fetching article:", error);
+                }
+            }
+        };
+        fetchArticle();
+    }, [articleID, axiosSecure, user]);
 
     const handleGoToArticleDetails = (id) => {
         setArticleID(id);
@@ -46,6 +52,10 @@ const useHandleArticleDetails = () => {
                     navigate('/login', { state: { from: location } });
                 }
             });
+            return;
+        }
+
+        if (!article) {
             return;
         }
 

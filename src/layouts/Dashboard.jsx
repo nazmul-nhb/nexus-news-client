@@ -8,9 +8,11 @@ const Dashboard = () => {
         <SiteTitle />
         <section className="overflow-x-auto">
             <div className="flex items-start h-full justify-start gap-4">
-                <Sidebar />
-                <div className={`flex-1 mx-auto h-full flex my-6 w-[99%]`}>
-                    <Outlet></Outlet>
+                <div className="h-screen">
+                    <Sidebar />
+                </div>
+                <div className={`flex-1 mx-auto overflow-auto flex h-screen my-6 w-[99%%]`}>
+                    <Outlet />
                 </div>
             </div>
         </section>

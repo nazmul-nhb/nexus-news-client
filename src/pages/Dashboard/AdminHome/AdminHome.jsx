@@ -34,10 +34,9 @@ const AdminHome = () => {
     // console.log(publicationData);
 
     return (
-        <section className="mx-auto w-full h-full flex flex-col gap-6">
+        <section className="mx-auto w-[99%] flex flex-col gap-6">
 
             <PublisherPieChart publicationData={publicationData} />
-
             <SubscriptionStats />
             <RevenueStats />
         </section>

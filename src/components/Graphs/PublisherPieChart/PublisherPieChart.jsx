@@ -9,7 +9,6 @@ const PublisherPieChart = ({ publicationData }) => {
                     chartType="PieChart"
                     width={'100%'}
                     height={'640px'}
-                    loader={<div>Loading Chart...</div>}
                     data={publicationData}
                     options={{
                         backgroundColor:'transparent',
