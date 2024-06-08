@@ -106,7 +106,8 @@ const CheckoutForm = () => {
                         premium_taken: moment().format("YYYY-MM-DD HH:mm:ss"),
                         expires_on: moment().clone().add(expires_in?.duration, expires_in?.time).format("YYYY-MM-DD HH:mm:ss"),
                         isPremium: true,
-                        current_plan: plan
+                        current_plan: plan,
+                        last_transaction_ID: paymentIntent.id
                     }
                     // update user info after successful payment
                     const result = await axiosSecure.patch(`/users/${user?.email}`, updatedUser);

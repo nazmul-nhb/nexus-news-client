@@ -39,7 +39,8 @@ const Root = () => {
                         isPremium: false,
                         premium_taken: null,
                         expires_on: null,
-                        current_plan: null
+                        current_plan: null,
+                        last_transaction_ID: null
                     };
 
                     const res = await axiosSecure.patch(`/users/${user?.email}`, updatedUser);
