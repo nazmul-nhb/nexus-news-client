@@ -1,11 +1,11 @@
-// Import Swiper React components
-import { Link } from 'react-router-dom';
 import ArticleLoading from '../LoadingSpinners/ArticleLoading';
 import useGetArticles from '../../hooks/useGetArticles';
+import useHandleArticleDetails from '../../hooks/useHandleArticleDetails';
+
+// Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 // import required modules
 import { Autoplay, EffectCreative, Navigation, Pagination } from 'swiper/modules';
-
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -13,6 +13,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/effect-creative';
 
 const TrendingArticles = () => {
+    const handleGoToArticleDetails = useHandleArticleDetails();
     const { isLoading, data: trendingArticles } = useGetArticles(['trendingArticles'], 'sort=view_descending&size=6');
 
     const pagination = {
@@ -59,13 +60,13 @@ const TrendingArticles = () => {
             >
                 {
                     trendingArticles?.map(article => <SwiperSlide key={article._id}>
-                        <Link to={`/news/${article._id}`}>
+                        <button onClick={() => handleGoToArticleDetails(article._id)}>
                             <div>
                                 <img src={article.full_image} className='w-full' alt={article.headline} />
                             </div>
                             <h3>{article.headline}</h3>
                             <h3>View: {article.view_count}</h3>
-                        </Link>
+                        </button>
                     </SwiperSlide>)
                 }
             </Swiper>

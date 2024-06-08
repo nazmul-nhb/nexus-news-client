@@ -19,7 +19,7 @@ const Home = () => {
     }, []);
     
     return (
-        <section className="space-y-8">
+        <section className="space-y-8 mx-6 md:mx-10 my-2 md:my-8 p-2 md:px-4">
             <Helmet>
                 <title>Home - Nexus News</title>
             </Helmet>
