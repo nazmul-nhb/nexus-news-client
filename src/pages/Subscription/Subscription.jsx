@@ -73,12 +73,12 @@ const Subscription = () => {
 
         Swal.fire({
             title: "Go to Payment Page?",
-            text: `You have selected ${subscriptionPlan?.plan}`,
+            text: `You Have Selected "${subscriptionPlan?.plan}"`,
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, Take Me to Payment!"
+            confirmButtonText: "Yes, Proceed to Payment!"
         }).then((result) => {
             if (result.isConfirmed) {
                 axiosSecure.post('/payment', subscriptionPlan)

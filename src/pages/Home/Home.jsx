@@ -1,12 +1,12 @@
 import { Helmet } from "react-helmet-async";
 import TrendingArticles from "../../components/TrendingArticles/TrendingArticles";
 import Publishers from "../../components/Publishers/Publishers";
-import UsersStats from "../../components/UsersStats/UsersStats";
 import { useEffect, useState } from "react";
 import { IoIosCloseCircle } from "react-icons/io";
 import Plans from "../../components/Plans/Plans";
 import PublishersList from "../../components/PublishersList/PublishersList";
 import LatestNews from "../../components/LatestNews/LatestNews";
+import UsersStats from "../../components/Graphs/UsersStats/UsersStats";
 
 
 const Home = () => {

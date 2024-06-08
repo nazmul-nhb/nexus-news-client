@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import useUserRole from "../../hooks/useUserRole";
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
-import {Chart} from "react-google-charts";
+import { Chart } from "react-google-charts";
+import useUserRole from "../../../hooks/useUserRole";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const SubscriptionStats = () => {
     const [subscriptionData, setSubscriptionData] = useState([['Plan', 'Subscription Count', { role: 'annotation' }, { role: 'style' }]]);
@@ -21,9 +21,9 @@ const SubscriptionStats = () => {
     useEffect(() => {
         if (subscriptionStats.length > 0) {
             const colors = ['#76A7FA', '#FFD700', '#32CD32', '#FF6347'];
-            const formattedData = subscriptionStats.map(({ plan, count, percentage }, index) => [plan, parseInt(count), `${percentage}%`, `color: ${colors[index]}`]);
+            const formattedData = subscriptionStats.map(({ plan, count, percentage }, index) => [plan, parseInt(count), `${(percentage).toFixed(2)}%`, `color: ${colors[index]}`]);
             setSubscriptionData([['Plan', 'Subscription Count', { role: 'annotation' }, { role: 'style' }], ...formattedData]);
-        } else{
+        } else {
             // console.log('No subscription stats found.');
         }
     }, [subscriptionStats]);
@@ -32,7 +32,7 @@ const SubscriptionStats = () => {
 
     if (isLoading || roleLoading) return <div>Loading...</div>;
     if (isError) return <div>Error: {error.message}</div>;
-    
+
     // console.log(legendLabels);
 
     return (
@@ -50,25 +50,25 @@ const SubscriptionStats = () => {
                         hAxis: {
                             title: 'Plan',
                             titleTextStyle: { fontSize: 14 },
-                            slantedText: true, 
+                            slantedText: true,
                             slantedTextAngle: 30,
                             textStyle: { fontSize: 12 }
                         },
                         vAxis: {
                             title: 'Subscription Count',
                             titleTextStyle: { fontSize: 14 },
-                            minValue: 0, 
+                            minValue: 0,
                             textStyle: { fontSize: 12 }
                         },
                         legend: { position: 'top', alignment: 'end' },
                         annotations: {
                             textStyle: { fontSize: 12 }
                         },
-                        is3D: true, 
-                        depth: 50, 
-                        viewWindow: { min: 10 }, 
+                        is3D: true,
+                        depth: 50,
+                        viewWindow: { min: 10 },
                     }}
-                    // legend={legendLabels}
+                // legend={legendLabels}
                 />
             )}
         </div>

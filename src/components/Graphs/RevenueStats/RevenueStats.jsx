@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
-import useUserRole from '../../hooks/useUserRole';
-import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { Chart } from 'react-google-charts';
+import useUserRole from '../../../hooks/useUserRole';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const RevenueStats = () => {
     const [revenueData, setRevenueData] = useState([]);
-
     const { role, roleLoading } = useUserRole();
     const axiosSecure = useAxiosSecure();
 

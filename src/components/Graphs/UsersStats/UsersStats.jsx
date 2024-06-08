@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-import useAxiosPublic from '../../hooks/useAxiosPublic';
 import { useRef, useEffect, useCallback, useState } from 'react';
 import { useCountUp } from 'react-countup';
 import { useInView } from 'react-intersection-observer';
+import useAxiosPublic from '../../../hooks/useAxiosPublic';
 import { Bar } from 'react-chartjs-2';
 import 'chart.js/auto';
 

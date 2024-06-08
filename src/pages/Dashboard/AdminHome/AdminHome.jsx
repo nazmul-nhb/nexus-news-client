@@ -2,9 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useUserRole from "../../../hooks/useUserRole";
 import { useEffect, useState } from "react";
-import PublisherPieChart from "../../../components/PublisherPieChart/PublisherPieChart";
-import SubscriptionStats from "../../../components/SubscriptionStats/SubscriptionStats";
-import RevenueStats from "../../../components/RevenueStats/RevenueStats";
+import PublisherPieChart from "../../../components/Graphs/PublisherPieChart/PublisherPieChart";
+import SubscriptionStats from "../../../components/Graphs/SubscriptionStats/SubscriptionStats";
+import RevenueStats from "../../../components/Graphs/RevenueStats/RevenueStats";
+
 
 const AdminHome = () => {
     const [publicationData, setPublicationData] = useState([['Publication', 'Percentage']]);
