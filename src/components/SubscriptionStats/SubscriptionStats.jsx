@@ -5,7 +5,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import {Chart} from "react-google-charts";
 
 const SubscriptionStats = () => {
-    const [subscriptionData, setSubscriptionData] = useState([['Plan', 'Count', { role: 'style' }]]);
+    const [subscriptionData, setSubscriptionData] = useState([['Plan', 'Subscription Count', { role: 'annotation' }, { role: 'style' }]]);
     const { role, roleLoading } = useUserRole();
     const axiosSecure = useAxiosSecure();
 
@@ -21,8 +21,8 @@ const SubscriptionStats = () => {
     useEffect(() => {
         if (subscriptionStats.length > 0) {
             const colors = ['#76A7FA', '#FFD700', '#32CD32', '#FF6347'];
-            const formattedData = subscriptionStats.map(({ plan, count }, index) => [plan, parseInt(count), `color: ${colors[index]}`]);
-            setSubscriptionData([['Plan', 'Count', { role: 'style' }]].concat(formattedData));
+            const formattedData = subscriptionStats.map(({ plan, count, percentage }, index) => [plan, parseInt(count), `${percentage}%`, `color: ${colors[index]}`]);
+            setSubscriptionData([['Plan', 'Subscription Count', { role: 'annotation' }, { role: 'style' }]].concat(formattedData));
         } else{
             console.log('No subscription stats found.');
         }
@@ -44,7 +44,7 @@ const SubscriptionStats = () => {
                     options={{
                         title: 'Subscriptions by Plan',
                         hAxis: { title: 'Plan' },
-                        vAxis: { title: 'Count' },
+                        vAxis: { title: 'Subscription Count' },
                     }}
                 />
             )}

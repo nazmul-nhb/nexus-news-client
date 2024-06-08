@@ -4,6 +4,7 @@ import useUserRole from "../../../hooks/useUserRole";
 import { useEffect, useState } from "react";
 import PublisherPieChart from "../../../components/PublisherPieChart/PublisherPieChart";
 import SubscriptionStats from "../../../components/SubscriptionStats/SubscriptionStats";
+import RevenueStats from "../../../components/RevenueStats/RevenueStats";
 
 const AdminHome = () => {
     const [publicationData, setPublicationData] = useState([['Publication', 'Percentage']]);
@@ -37,7 +38,7 @@ const AdminHome = () => {
             <PublisherPieChart publicationData={publicationData} />
 
             <SubscriptionStats />
-
+            <RevenueStats />
         </section>
     );
 };
