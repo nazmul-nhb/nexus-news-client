@@ -16,7 +16,7 @@ const AllArticlesAdmin = () => {
         }
     })
 
-    console.log(allRawArticles);
+    // console.log(allRawArticles);
 
     return (
         <section>

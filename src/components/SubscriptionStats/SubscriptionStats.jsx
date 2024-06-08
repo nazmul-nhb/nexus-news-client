@@ -24,7 +24,7 @@ const SubscriptionStats = () => {
             const formattedData = subscriptionStats.map(({ plan, count, percentage }, index) => [plan, parseInt(count), `${percentage}%`, `color: ${colors[index]}`]);
             setSubscriptionData([['Plan', 'Subscription Count', { role: 'annotation' }, { role: 'style' }], ...formattedData]);
         } else{
-            console.log('No subscription stats found.');
+            // console.log('No subscription stats found.');
         }
     }, [subscriptionStats]);
 

@@ -19,7 +19,7 @@ const TrendingArticles = () => {
         clickable: true,
     };
 
-    console.log(trendingArticles);
+    // console.log(trendingArticles);
 
     if (isLoading) {
         return <ArticleLoading />

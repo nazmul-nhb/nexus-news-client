@@ -15,7 +15,7 @@ const useUpdateArticle = () => {
      */
 
     const updateArticle = (id, article, msg, refetch) => {
-        console.log(article);
+        // console.log(article);
         axiosSecure.patch(`/articles/${id}`, article)
             .then(res => {
                 if (res.data.modifiedCount > 0) {

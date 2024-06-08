@@ -15,7 +15,7 @@ const useImageUpload = () => {
                     'content-type': 'multipart/form-data'
                 }
             });
-            console.log(res.data);
+            // console.log(res.data);
             return res.data;
         } catch (error) {
             console.error(error);

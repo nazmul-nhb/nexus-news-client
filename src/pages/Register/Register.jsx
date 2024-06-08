@@ -69,7 +69,7 @@ const Register = () => {
         try {
             // start image upload
             const result = await uploadImage(imageFile);
-            console.log(result);
+            // console.log(result);
             const lowResImageURL = result.data.display_url;
 
             if (result.success) {

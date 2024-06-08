@@ -20,7 +20,7 @@ const AddArticle = () => {
     const axiosSecure = useAxiosSecure();
 
     const handlePostArticle = async (newArticle) => {
-        console.log(newArticle);
+        // console.log(newArticle);
         const { headline, image, description } = newArticle;
         const imageFile = image[0];
 
@@ -38,7 +38,7 @@ const AddArticle = () => {
             // start image upload
             const result = await uploadImage(imageFile);
 
-            console.log(result);
+            // console.log(result);
 
             if (result.success) {
 
@@ -55,8 +55,8 @@ const AddArticle = () => {
                     posted_on: moment().format("YYYY-MM-DD HH:mm:ss")
                 };
 
-                console.log(tags);
-                console.log(newsTags);
+                // console.log(tags);
+                // console.log(newsTags);
 
                 const res = await axiosSecure.post('/articles', finalArticle);
                 if (res.data.insertedId) {

@@ -14,7 +14,7 @@ const AllUsers = () => {
     const axiosSecure = useAxiosSecure();
 
     const handleMakeAdmin = (name, email) => {
-        console.log({ name, email });
+        // console.log({ name, email });
         Swal.fire({
             title: 'Are You Sure?',
             text: `Want to Make "${name}" Admin?`,
@@ -44,7 +44,7 @@ const AllUsers = () => {
 
     const usersWithSerial = nexusUsers?.map((user, index) => ({ ...user, serial: index + 1 }));
 
-    console.log(usersWithSerial);
+    // console.log(usersWithSerial);
 
     const userData = useMemo(() => usersWithSerial, [usersWithSerial]);
 

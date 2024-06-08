@@ -50,7 +50,7 @@ const MyArticles = () => {
 
     // update article
     const handleUpdateArticle = async (updatedArticle) => {
-        console.log(updatedArticle);
+        // console.log(updatedArticle);
 
         const { headline, description } = updatedArticle;
 

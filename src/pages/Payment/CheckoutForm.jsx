@@ -36,11 +36,11 @@ const CheckoutForm = () => {
         if (price > 0) {
             axiosSecure.post('/payment/create-payment-intent', { price })
                 .then(res => {
-                    console.log(res.data.clientSecret);
+                    // console.log(res.data.clientSecret);
                     setClientSecret(res.data.clientSecret);
                 })
         }
-        console.log(price);
+        // console.log(price);
     }, [axiosSecure, price])
 
     const handleSubmit = async (event) => {
@@ -62,11 +62,11 @@ const CheckoutForm = () => {
         })
 
         if (error) {
-            console.log('payment error', error);
+            // console.log('payment error', error);
             setError(error.message);
         }
         else {
-            console.log('payment method', paymentMethod)
+            // console.log('payment method', paymentMethod);
             setError('');
         }
 
@@ -85,9 +85,9 @@ const CheckoutForm = () => {
             console.error('confirm error')
         }
         else {
-            console.log('payment intent: ', paymentIntent)
+            // console.log('payment intent: ', paymentIntent)
             if (paymentIntent.status === 'succeeded') {
-                console.log('transaction id: ', paymentIntent.id);
+                // console.log('transaction id: ', paymentIntent.id);
                 setTransactionId(paymentIntent.id);
 
                 // now save the payment info in the database
@@ -110,7 +110,7 @@ const CheckoutForm = () => {
                     }
                     // update user info after successful payment
                     const result = await axiosSecure.patch(`/users/${user?.email}`, updatedUser);
-                    console.log('user: ', result);
+                    // console.log('user: ', result);
                     if (result.data.modifiedCount > 0) {
                         Swal.fire({
                             title: "Congratulations!",

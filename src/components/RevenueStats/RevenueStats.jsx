@@ -24,7 +24,7 @@ const RevenueStats = () => {
             const formattedData = [['Plan', 'Revenue']].concat(revenueStats.map(({ plan, revenue }) => [plan, revenue]));
             setRevenueData(formattedData);
         } else {
-            console.log('No revenue stats found.');
+            // console.log('No revenue stats found.');
         }
     }, [revenueStats]);
 

@@ -26,7 +26,7 @@ const Profile = () => {
     const { isFetching, data: nexusUser = {} } = useNexusUsers(['nexusUser', user?.email], user?.email);
     const now = moment();
     const expiration = moment(nexusUser?.expires_on);
-    console.log(now.isAfter(expiration));
+    // console.log(now.isAfter(expiration));
 
     const handleUpdateProfile = async (updateInfo) => {
         const { name, picture } = updateInfo;
@@ -62,7 +62,7 @@ const Profile = () => {
                     }
                     axiosPublic.post('/users', userInfo)
                         .then(res => {
-                            console.log(res);
+                            // console.log(res);
                             if (res.data.modifiedCount > 0) {
                                 toast.success("Profile Updated!");
                             }
