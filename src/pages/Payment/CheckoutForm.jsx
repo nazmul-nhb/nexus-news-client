@@ -114,7 +114,7 @@ const CheckoutForm = () => {
                     if (result.data.modifiedCount > 0) {
                         Swal.fire({
                             title: "Congratulations!",
-                            text: "Now You’re a Premium User!",
+                            text: "Now You’re A Premium User!",
                             icon: "success"
                         });
                         navigate('/premium-articles');

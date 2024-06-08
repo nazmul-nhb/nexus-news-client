@@ -78,7 +78,7 @@ const Subscription = () => {
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, Take Me to Payment Page!"
+            confirmButtonText: "Yes, Take Me to Payment!"
         }).then((result) => {
             if (result.isConfirmed) {
                 axiosSecure.post('/payment', subscriptionPlan)

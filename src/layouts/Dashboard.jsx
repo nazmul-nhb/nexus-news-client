@@ -9,7 +9,7 @@ const Dashboard = () => {
         <section className="overflow-x-auto">
             <div className="flex items-start justify-start gap-4">
                 <Sidebar />
-                <div className={`mx-auto flex my-6 w-[99%]`}>
+                <div className={`flex-1 mx-auto flex my-6 w-[99%]`}>
                     <Outlet></Outlet>
                 </div>
             </div>
