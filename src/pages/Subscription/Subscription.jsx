@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import useNexusUsers from "../../hooks/useNexusUsers";
+import moment from "moment";
 
 const animatedComponents = makeAnimated();
 
@@ -23,11 +25,25 @@ const Subscription = () => {
     const { user } = useAuth()
     const [selectedPlan, setSelectedPlan] = useState();
     const axiosSecure = useAxiosSecure();
-    // console.log(subscriptionPlan);
     const navigate = useNavigate();
+    const { isFetching, data: nexusUser = {} } = useNexusUsers(['nexusUser', user?.email], user?.email);
 
     const handleSubscription = (e) => {
         e.preventDefault();
+
+        // check if a user is already subscribed and return with a modal
+        if (nexusUser?.isPremium && nexusUser?.expires_on){
+            const expiration = moment(nexusUser.expires_on);
+            const duration = moment.duration(expiration.diff(moment()));
+
+            const days = Math.floor(duration.asDays());
+            const hours = duration.hours();
+            return Swal.fire({
+                title: "Already Subscribed!",
+                text: `You Already have a Subscription with ${days} Days and ${hours} Hours Remaining!`,
+                icon: "success"
+            });
+        }
 
         const { label } = selectedPlan;
         let subscriptionPlan = { plan: label, status: 'pending', user: user?.email };
@@ -68,7 +84,7 @@ const Subscription = () => {
                         confirmButtonText: "Yes, Take Me to Payment Page!"
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            navigate('/payment')
+                            navigate('/payment');
                         }
                     })
                 } else {

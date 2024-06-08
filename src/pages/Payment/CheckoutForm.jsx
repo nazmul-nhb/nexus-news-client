@@ -19,6 +19,8 @@ const CheckoutForm = () => {
     const { user } = useAuth();
     const navigate = useNavigate();
 
+    
+
     const { isLoading: paymentLoading, data: paymentInfo = {} } = useQuery({
         queryKey: ['paymentInfo', user?.email],
         queryFn: async () => {
