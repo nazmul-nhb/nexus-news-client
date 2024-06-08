@@ -13,6 +13,8 @@ import useNexusUsers from "../../hooks/useNexusUsers";
 import { Tooltip } from "react-tooltip";
 import { VscUnverified } from "react-icons/vsc";
 import ArticleLoading from "../../components/LoadingSpinners/ArticleLoading";
+import { PhotoProvider, PhotoView } from "react-photo-view";
+import 'react-photo-view/dist/react-photo-view.css';
 
 const Profile = () => {
     const { user, setUser, userLoading, updateUserProfile } = useAuth();
@@ -22,8 +24,9 @@ const Profile = () => {
     const [imageUploading, setImageUploading] = useState(false);
     const uploadImage = useImageUpload();
     const { isFetching, data: nexusUser = {} } = useNexusUsers(['nexusUser', user?.email], user?.email);
-
-    // console.log(nexusUser);
+    const now = moment();
+    const expiration = moment(nexusUser?.expires_on);
+    console.log(now.isAfter(expiration));
 
     const handleUpdateProfile = async (updateInfo) => {
         const { name, picture } = updateInfo;
@@ -98,14 +101,18 @@ const Profile = () => {
                 <title>{user.displayName}&rsquo;s Profile - Nexus News</title>
             </Helmet>
             <div className="flex flex-col lg:flex-row gap-10 items-center mb-8 lg:mb-16">
-                {isFetching ? <div className="lg:w-3/5 flex-1 "><ArticleLoading/></div> :
+                {isFetching ? <div className="lg:w-3/5 flex-1 "><ArticleLoading /></div> :
                     <div className="w-full lg:w-3/5 flex-1 border bg-gradient-to-l from-[#2e50bc62] to-[#033eff37]  border-nexus-secondary flex flex-col gap-6 p-6 shadow-lg shadow-[#8689ee]">
                         <div className="flex flex-col items-center lg:items-start">
                             <div className="flex flex-col lg:flex-row gap-2 items-center lg:items-start justify-center lg:justify-start my-4">
                                 <Tooltip anchorSelect=".user-name" place="top">
                                     {user.displayName}
                                 </Tooltip>
-                                <img className="user-name user-email border p-1 border-nexus-secondary w-24 md:w-36 h-24 md:h-36" src={user.photoURL} alt={user.displayName} />
+                                <PhotoProvider>
+                                    <PhotoView src={user.photoURL}>
+                                        <img className="user-name cursor-pointer border p-1 border-nexus-secondary w-24 md:w-36 h-24 md:h-36" src={user.photoURL} alt={user.displayName} />
+                                    </PhotoView>
+                                </PhotoProvider>
                                 <div className="flex flex-col items-center lg:items-start justify-center lg:justify-start gap-3">
                                     <h4 className="text-lg md:text-2xl font-bold">{user.displayName}</h4>
                                     <Tooltip anchorSelect=".verification-status" place="top">
@@ -129,6 +136,16 @@ const Profile = () => {
                                         <h4>{moment(nexusUser?.updated_on).format('MMMM DD, YYYY [at] hh:mm:ss A')}</h4>
                                     </div>
                                 }
+                                {nexusUser?.expires_on && <>
+                                    <div className="flex flex-col items-center lg:flex-row gap-1 md:text-xl">
+                                        <h4 className="font-semibold">Current Plan:</h4>
+                                        <h4>{nexusUser?.current_plan}</h4>
+                                    </div>
+                                    <div className="flex flex-col items-center lg:flex-row gap-1 md:text-xl">
+                                        <h4 className="font-semibold">{now.isAfter(expiration) ? 'Expired': 'Will Expire'} on:</h4>
+                                        <h4>{moment(nexusUser?.expires_on).format('MMMM DD, YYYY [at] hh:mm:ss A')}</h4>
+                                    </div>
+                                </>}
                             </div>
                         </div>
                     </div>

@@ -77,19 +77,19 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: '/dashboard',
-                element: <AdminHome />
+                element: <AdminRoute><AdminHome /></AdminRoute>
             },
             {
                 path: '/dashboard/all-users',
-                element: <AllUsers />
+                element: <AdminRoute><AllUsers /></AdminRoute>
             },
             {
                 path: '/dashboard/all-articles',
-                element: <AllArticlesAdmin />
+                element: <AdminRoute><AllArticlesAdmin /></AdminRoute>
             },
             {
                 path: '/dashboard/add-publisher',
-                element: <AddPublisher />
+                element: <AdminRoute><AddPublisher /></AdminRoute>
             }
         ]
     }
