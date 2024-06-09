@@ -7,6 +7,7 @@ import Plans from "../../components/Plans/Plans";
 import PublishersList from "../../components/PublishersList/PublishersList";
 import LatestNews from "../../components/LatestNews/LatestNews";
 import UsersStats from "../../components/Graphs/UsersStats/UsersStats";
+import SectionHeader from "../../components/SectionHeader/SectionHeader";
 
 
 const Home = () => {
@@ -29,10 +30,18 @@ const Home = () => {
                 <LatestNews />
             </div>
 
-            <Publishers />
+            <div className="border-t w-full my-16 h-5 lg:h-12"></div>
+            <SectionHeader heading={"Our Top Publishers"} />
 
+            <div className="w-[99%]">
+                <Publishers />
+            </div>
+
+            <SectionHeader heading={"Other Publishers"} />
             <PublishersList />
 
+            <div className="border-t w-full my-16 h-5 lg:h-12"></div>
+            <SectionHeader heading={"User Statistics"} />
             <UsersStats />
 
             <Plans />
