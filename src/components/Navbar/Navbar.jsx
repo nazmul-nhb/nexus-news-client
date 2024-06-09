@@ -76,7 +76,7 @@ const Navbar = () => {
     }
 
     return (
-        <nav className="max-w-screen-2xl flex items-center gap-0 md:gap-4 mx-auto shadow-md px-3 py-2 md:px-10 xl:px-20 sticky top-0 bg-white bg-opacity-90 z-50 text-nexus-secondary">
+        <nav className="max-w-screen-2xl flex items-center gap-0 md:gap-4 mx-auto shadow-md px-3 py-2 md:px-14 sticky top-0 bg-white bg-opacity-90 z-50 text-nexus-secondary">
             <div ref={sidebarRef} className="min-[1170px]:hidden max-[430px]:text-3xl text-5xl cursor-pointer z-50" onClick={() => setOpenNavbar(!openNavbar)}>
                 {
                     openNavbar

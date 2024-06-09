@@ -10,9 +10,10 @@ import moment from "moment";
 import Swal from "sweetalert2";
 import SectionHeader from "../../../components/SectionHeader/SectionHeader";
 import { buttonInvert } from "../../../utilities/buttonStyles";
+import { articleLoader } from "../../../components/LoadingSpinners/Loaders";
 
 const AllUsers = () => {
-    const { data: nexusUsers = [], refetch } = useNexusUsers(['nexusUsers']);
+    const { isLoading, data: nexusUsers = [], refetch } = useNexusUsers(['nexusUsers']);
     const axiosSecure = useAxiosSecure();
 
     const handleMakeAdmin = (name, email) => {
@@ -100,6 +101,8 @@ const AllUsers = () => {
             }
         }
     ]
+
+    if(isLoading) return articleLoader;
 
     return (
         <section className="mx-auto">

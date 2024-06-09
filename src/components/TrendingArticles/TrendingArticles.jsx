@@ -11,6 +11,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import 'swiper/css/effect-creative';
 import { articleLoader } from '../LoadingSpinners/Loaders';
+import SectionHeader from '../SectionHeader/SectionHeader';
 
 const TrendingArticles = () => {
     const handleGoToArticleDetails = useHandleArticleDetails();
@@ -27,7 +28,8 @@ const TrendingArticles = () => {
     }
 
     return (
-        <div className='w-2/3'>
+        <div className='w-full lg:w-2/3'>
+            <SectionHeader heading={"Trending Articles"}/>
             <Swiper
                 style={{
                     '--swiper-navigation-color': 'orange',

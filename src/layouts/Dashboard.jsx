@@ -1,6 +1,7 @@
 import SiteTitle from "../components/SiteTitle/SiteTitle";
 import { Outlet } from "react-router-dom";
 import Sidebar from "../components/Sidebar/Sidebar";
+import Footer from "../components/Footer/Footer";
 
 const Dashboard = () => {
 
@@ -16,6 +17,7 @@ const Dashboard = () => {
                 </div>
             </div>
         </section>
+        <Footer/>
     </>
     );
 };

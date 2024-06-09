@@ -24,7 +24,7 @@ const Home = () => {
                 <title>Home - Nexus News</title>
             </Helmet>
 
-            <div className="flex justify-between gap-3">
+            <div className="flex flex-col lg:flex-row justify-between gap-3">
                 <TrendingArticles />
                 <LatestNews />
             </div>

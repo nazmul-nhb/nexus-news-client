@@ -13,7 +13,7 @@ import { Helmet } from "react-helmet-async";
 import { IoNewspaper } from "react-icons/io5";
 import SectionHeader from "../../../components/SectionHeader/SectionHeader";
 import { buttonNormal } from "../../../utilities/buttonStyles";
-import { buttonLoader } from "../../../components/LoadingSpinners/Loaders";
+import { articleLoader, buttonLoader } from "../../../components/LoadingSpinners/Loaders";
 
 const AddPublisher = () => {
     const [imageFileName, setImageFileName] = useState("Upload Publisher Logo");
@@ -24,7 +24,7 @@ const AddPublisher = () => {
     const axiosSecure = useAxiosSecure();
     const uploadImage = useImageUpload();
 
-    const { data: publishers = [], refetch } = useQuery({
+    const { isLoading, data: publishers = [], refetch } = useQuery({
         queryKey: ['publishers'],
         queryFn: async () => {
             const res = await axiosPublic('/publishers')
@@ -119,6 +119,8 @@ const AddPublisher = () => {
         })
     }
 
+    // if (isLoading) return articleLoader;
+
     return (
         <section className="flex flex-col items-center gap-4 overflow-x-auto">
             <Helmet>
@@ -173,16 +175,16 @@ const AddPublisher = () => {
             </form>
             <div className="border-t w-full my-16"></div>
             <SectionHeader heading={"List of Publishers"} subHeading={`Total Publishers: ${publishers.length}`} />
-            <div className="grid md:grid-cols-3 gap-8 w-3/4">
+            {isLoading ? articleLoader : <div className="grid md:grid-cols-3 gap-8 w-3/4">
                 {
-                    publishers?.map((pub, index) => <div className="relative flex flex-col justify-around items-center gap-4 p-3 border border-nexus-secondary rounded-md shadow-lg shadow-nexus-secondary" key={index}>
+                    publishers?.map((pub, index) => <div className="relative flex flex-col justify-around items-center gap-4 p-3 border border-nexus-primary rounded-md shadow-lg shadow-nexus-primary bg-nexusBG" key={index}>
                         <h3 className="flex items-center gap-2 font-semibold"><IoNewspaper />{pub.publisher}</h3>
                         <img src={pub.publisher_logo} alt={pub.publisher} />
                         <h4 className="flex items-center gap-2"><MdManageHistory />{moment(pub.added_on).format('dddd, MMMM DD, YYYY')}</h4>
                         <button onClick={() => handleDeletePublisher(pub._id, pub.publisher)} className="absolute z-30 right-0.5 top-0.5 text-4xl text-red-600"><MdDeleteForever /></button>
                     </div>)
                 }
-            </div>
+            </div>}
         </section>
     );
 };
