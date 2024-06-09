@@ -32,7 +32,7 @@ const RevenueStats = () => {
     if (isError) return <div>Error: {error.message}</div>;
 
     return (
-        <div>
+        <div className='mx-auto w-full h-auto text-center'>
             {revenueData.length > 1 && (
                 <Chart
                     chartType="LineChart"

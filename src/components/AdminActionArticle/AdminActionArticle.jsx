@@ -5,6 +5,14 @@ import useUpdateArticle from '../../hooks/useUpdateArticle';
 import useDeleteArticle from '../../hooks/useDeleteArticle';
 import { useState } from 'react';
 import { IoIosCloseCircle } from 'react-icons/io';
+import { TiTick } from 'react-icons/ti';
+import { TbHandStop, TbPremiumRights } from 'react-icons/tb';
+import { AiTwotoneDelete } from 'react-icons/ai';
+import { MdAlternateEmail, MdDateRange, MdOutlinePendingActions } from 'react-icons/md';
+import { FaUserEdit } from 'react-icons/fa';
+import { PhotoProvider, PhotoView } from 'react-photo-view';
+import { IoNewspaper } from 'react-icons/io5';
+import { Link } from 'react-router-dom';
 
 const AdminActionArticle = ({ article, refetch }) => {
     const { _id, headline, posted_by_email, posted_on, status, isPremium, publisher } = article;
@@ -49,64 +57,80 @@ const AdminActionArticle = ({ article, refetch }) => {
     }
 
     return (
-        <div className='flex flex-col gap-3 border px-3 py-2'>
+        <div className='flex flex-col gap-3 border border-nexus-primary bg-nexusBG rounded-md shadow-md shadow-nexus-primary p-4 mx-2'>
             {/* headline */}
-            <h3 className="">{headline}</h3>
+            <Link to={`/news/${_id}`} className=" flex-grow font-bold text-xl hover:text-nexus-primary">{headline}</Link>
 
             {/* post time and publisher */}
-            <div className="flex justify-between items-center">
-                <h3>{moment(posted_on).format('MMMM DD, YYYY [at] hh:mm:ss A')}</h3>
-                <h3 className='first-letter:capitalize'>{publisher}</h3>
+            <div className="flex md:flex-row flex-col md:items-center justify-between gap-2">
+                <h3 className="flex items-center gap-0.5 font-medium"><MdDateRange />{moment(posted_on).format('MMMM DD, YYYY [at] hh:mm:ss A')}</h3>
+                <h3 className='first-letter:capitalize flex items-center gap-0.5 font-semibold'><IoNewspaper />{publisher}</h3>
             </div>
 
             {/* author info */}
-            <div className="flex items-center justify-between">
+            <div className="flex md:flex-row flex-col md:items-center justify-between gap-3">
                 <div className="flex items-center gap-2">
-                    <img className='w-12 h-12 rounded-xl' src={authorImage} alt={articleAuthor} />
+                    <PhotoProvider>
+                        <PhotoView src={authorImage}>
+                            <img className='cursor-pointer w-12 h-12 rounded-xl p-0.5 border' src={authorImage} alt={articleAuthor} />
+                        </PhotoView>
+                    </PhotoProvider>
                     <div className="">
-                        <h3>{articleAuthor}</h3>
-                        <h4>{posted_by_email}</h4>
+                        <h3 className='font-semibold flex items-center gap-0.5'><FaUserEdit /> {articleAuthor}</h3>
+                        <h4 className='font-medium flex items-center gap-0.5'><MdAlternateEmail />{posted_by_email}</h4>
                     </div>
                 </div>
 
-                <h3 className="">
+                <h3 className={`${status === 'Approved' ? 'text-green-700' : status === 'Declined' ? 'text-red-700' : 'text-nexus-primary'} flex items-center gap-0.5`}>
+                    {status === 'Approved' ? <TiTick /> : status === 'Declined' ? <TbHandStop /> : <MdOutlinePendingActions />}
                     {status === 'Approved' ? 'Approved' : status === 'Declined' ? 'Declined' : 'Pending'}
                 </h3>
             </div>
 
             {/* action buttons */}
-            <div className="flex gap-2 items-center justify-between">
+            <div className="flex gap-2 flex-col md:flex-row md:items-center justify-between">
 
-                <button
-                    disabled={status === 'Approved'}
-                    onClick={() => handleApproveArticle(_id)}
-                    className="">
-                    {
-                        status === 'Approved' ? 'Approved' : 'Approve'
-                    }
-                </button>
+                <div className='flex items-center justify-between gap-4'>
+                    <button
+                        disabled={status === 'Approved'}
+                        onClick={() => handleApproveArticle(_id)}
+                        className="text-green-700 border border-green-700 hover:bg-green-700 hover:text-white transition-all duration-500 px-2 rounded-3xl flex items-center gap-0.5">
+                        <TiTick />
+                        {
+                            status === 'Approved' ? `Approved` : 'Approve'
+                        }
+                    </button>
 
-                <button
-                    onClick={() => setShowModal(!showModal)}
-                    className="">
-                    Decline
-                </button>
+                    <button
+                        disabled={status === 'Declined'}
+                        onClick={() => setShowModal(!showModal)}
+                        className="text-red-700 border border-red-700 hover:bg-red-700 hover:text-white transition-all duration-500 px-2 rounded-3xl flex items-center gap-0.5">
+                        <TbHandStop />
+                        {
+                            status === 'Declined' ? `Declined` : 'Decline'
+                        }
+                    </button>
+                </div>
 
+                <div className='flex items-center justify-between gap-4'>
+                    <button
+                        onClick={() => handleDeleteArticle(_id, headline)}
+                        className="text-red-700 border border-red-700 hover:bg-red-700 hover:text-white transition-all duration-500 px-2 rounded-3xl flex items-center gap-0.5">
+                        <AiTwotoneDelete />
+                        Delete
+                    </button>
 
-                <button
-                    onClick={() => handleDeleteArticle(_id, headline)}
-                    className="">
-                    Delete
-                </button>
+                    <button
+                        disabled={isPremium}
+                        onClick={() => handleMakePremium(_id)}
+                        className="text-orange-600 border border-orange-600 hover:bg-orange-600 hover:text-white transition-all duration-500 px-2 rounded-3xl flex items-center gap-0.5">
+                        <TbPremiumRights />
+                        {
+                            !isPremium ? "Make Premium" : "Premium"
+                        }
+                    </button>
+                </div>
 
-                <button
-                    disabled={isPremium}
-                    onClick={() => handleMakePremium(_id)}
-                    className="">
-                    {
-                        !isPremium ? "Make Premium" : "Premium"
-                    }
-                </button>
             </div>
             {showModal &&
                 <dialog open className="w-[96%] xl:w-auto h-3/4 bg-opacity-95 p-12 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-transparent rounded-lg z-50 overflow-y-auto">

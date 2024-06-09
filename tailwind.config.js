@@ -23,7 +23,7 @@ export default {
       colors: {
         'nexus-primary': '#6897bb',
         'nexus-secondary': '#31404b',
-        'nexusBG': '#e2e9ee'
+        'nexusBG': '#b6d1e488'
       },
       fontFamily: {
         kreonSerif: '"Kreon", serif;',

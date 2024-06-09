@@ -4,6 +4,7 @@ import AdminActionArticle from "../../../components/AdminActionArticle/AdminActi
 import useUserRole from "../../../hooks/useUserRole";
 import { Helmet } from "react-helmet-async";
 import { articleLoader } from "../../../components/LoadingSpinners/Loaders";
+import SectionHeader from "../../../components/SectionHeader/SectionHeader";
 
 const AllArticlesAdmin = () => {
     const {role, roleLoading} = useUserRole();
@@ -21,11 +22,11 @@ const AllArticlesAdmin = () => {
     // console.log(allRawArticles);
 
     return (
-        <section className="mx-auto">
+        <section className="mx-auto space-y-8">
             <Helmet>
                 <title>All Articles || Dashboard - Nexus News</title>
             </Helmet>
-            <h3>Total {allRawArticles?.length} Articles</h3>
+            <SectionHeader heading={`Total ${allRawArticles.length} Articles`}/>
             <div className="grid lg:grid-cols-2 gap-6">
                 {isLoading || roleLoading ? articleLoader :
                     allRawArticles?.map(article => <AdminActionArticle key={article._id}

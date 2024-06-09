@@ -37,7 +37,7 @@ const SubscriptionStats = () => {
     // console.log(legendLabels);
 
     return (
-        <div>
+        <div className='mx-auto w-full h-auto text-center'>
             {subscriptionData.length > 1 && (
                 <Chart
                     chartType="ColumnChart"
