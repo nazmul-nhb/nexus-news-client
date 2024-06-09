@@ -12,6 +12,7 @@ import { FaUserLock } from "react-icons/fa6";
 import { GiExitDoor } from "react-icons/gi";
 import useUserRole from "../../hooks/useUserRole";
 import logo from '../../assets/logo.png'
+import { buttonLoader } from "../LoadingSpinners/Loaders";
 
 const Navbar = () => {
     const { user, userLoading, logOut } = useAuth();
@@ -107,7 +108,7 @@ const Navbar = () => {
                     <ToggleTheme />
 
                     {!user && userLoading ?
-                        "Loading..."
+                        buttonLoader
                         : user
                             ? <div className="flex items-center gap-2 md:gap-3">
                                 <Tooltip anchorSelect=".nameIcon" place="right">

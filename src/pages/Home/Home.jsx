@@ -14,7 +14,7 @@ const Home = () => {
 
     useEffect(() => {
         setTimeout(() => {
-            setShowSubscriptionModal(true);
+            // setShowSubscriptionModal(true);
         }, 10000);
     }, []);
 

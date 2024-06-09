@@ -14,6 +14,7 @@ import moment from "moment";
 import { MdEmail, MdImage } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import useImageUpload from "../../hooks/useImageUpload";
+import { buttonLoader } from "../../components/LoadingSpinners/Loaders";
 
 const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -275,7 +276,7 @@ const Register = () => {
                                     <p className="text-red-700">{errors.password.message}</p>)
                             }
                         </div>
-                        <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-lg px-5 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">{userLoading || imageUploading ? "Loading..." : "Register New Account"}</button>
+                        <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-lg px-5 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">{userLoading || imageUploading ? buttonLoader : "Register New Account"}</button>
                         <p className="text-center text-sm md:text-base font-medium">Already have an Account? <Link className="hover:pl-4 text-[#3c5cc3] font-bold hover:text-nexus-secondary transition-all duration-500" to={'/login'}>Login Here!</Link></p>
                     </form>
                 </div>

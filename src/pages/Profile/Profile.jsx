@@ -14,7 +14,7 @@ import { Tooltip } from "react-tooltip";
 import { VscUnverified } from "react-icons/vsc";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import 'react-photo-view/dist/react-photo-view.css';
-import { articleLoader } from "../../components/LoadingSpinners/Loaders";
+import { articleLoader, buttonLoader } from "../../components/LoadingSpinners/Loaders";
 
 const Profile = () => {
     const { user, setUser, userLoading, updateUserProfile } = useAuth();
@@ -190,7 +190,7 @@ const Profile = () => {
                             </div>
                         </div>
                     </div>
-                    <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-lg px-5 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">{userLoading || imageUploading ? "Loading..." : "Update Profile"}</button>
+                    <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-lg px-5 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">{userLoading || imageUploading ? buttonLoader : "Update Profile"}</button>
                 </form>
             </div>
         </section>

@@ -11,6 +11,7 @@ import { useQuery } from '@tanstack/react-query';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
 import { TiNews } from 'react-icons/ti';
 import customStyles from '../../utilities/selectStyles';
+import { buttonLoader } from '../LoadingSpinners/Loaders';
 
 const animatedComponents = makeAnimated();
 
@@ -157,7 +158,7 @@ const ArticleForm = ({
                         errors.description && <p className="text-red-700">{errors.description.message}</p>
                     }
                 </div>
-                <Button buttonType={'submit'} buttonText={imageUploading ? 'Loading...' : 'Post Article'} />
+                <Button buttonType={'submit'} buttonText={imageUploading ? buttonLoader : 'Post Article'} />
             </form >
         </div >
     );
