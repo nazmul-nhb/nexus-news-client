@@ -19,7 +19,7 @@ const CheckoutForm = () => {
     const { user } = useAuth();
     const navigate = useNavigate();
 
-    
+
 
     const { isLoading: paymentLoading, data: paymentInfo = {} } = useQuery({
         queryKey: ['paymentInfo', user?.email],
@@ -147,7 +147,7 @@ const CheckoutForm = () => {
                     },
                 }}
             />
-            <button className="border rounded-lg border-nexus-secondary px-3  my-4" type="submit" disabled={!stripe || !clientSecret}>
+            <button className="border rounded-lg border-nexus-primary px-3  my-4" type="submit" disabled={!stripe || !clientSecret}>
                 Pay
             </button>
             <p className="text-red-600">{error}</p>

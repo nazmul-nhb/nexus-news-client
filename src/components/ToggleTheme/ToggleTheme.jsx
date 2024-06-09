@@ -9,16 +9,16 @@ const ToggleTheme = () => {
     const [isAnimating, setIsAnimating] = useState(false);
     const [currentIcon, setCurrentIcon] = useState(
         theme === 'light'
-            ? <IoMoon  className='text-nexus-primary' />
-            : <MdLightMode className='text-nexus-secondary' />);
+            ? <IoMoon className='text-nexus-secondary' />
+            : <MdLightMode className='text-nexus-primary' />);
 
     useEffect(() => {
         setIsAnimating(true);
         const timer = setTimeout(() => {
             setCurrentIcon(
                 theme === 'light'
-                    ? <IoMoon  className='text-nexus-primary' />
-                    : <MdLightMode className='text--nexus-secondary' />);
+                    ? <IoMoon className='text-nexus-secondary' />
+                    : <MdLightMode className='text--nexus-primary' />);
             setIsAnimating(false);
         }, 500);
 

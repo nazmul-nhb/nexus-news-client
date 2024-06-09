@@ -16,7 +16,7 @@ const NexusTable = ({ data, columns }) => {
         onSortingChange: setSortArticle
     });
 
-    const buttonClasses = 'px-3 border disabled:text-gray-500 disabled:border-gray-500 disabled:hover:text-gray-500 disabled:hover:bg-transparent text-nexus-secondary border-nexus-secondary hover:bg-nexus-secondary hover:text-white';
+    const buttonClasses = 'px-3 border disabled:text-gray-500 disabled:border-gray-500 disabled:hover:text-gray-500 disabled:hover:bg-transparent text-nexus-primary border-nexus-primary hover:bg-nexus-primary hover:text-white';
 
     return (
         <div className='article-container container overflow-x-auto mx-auto'>
@@ -25,7 +25,7 @@ const NexusTable = ({ data, columns }) => {
                     {table.getHeaderGroups()?.map(headerGroup => (
                         <tr key={headerGroup.id}>
                             {
-                                headerGroup.headers?.map(header => <th className='text-white bg-nexus-secondary text-lg font-semibold' key={header.id} onClick={header.column.getToggleSortingHandler()}>
+                                headerGroup.headers?.map(header => <th className='text-white bg-nexus-primary text-lg font-semibold' key={header.id} onClick={header.column.getToggleSortingHandler()}>
                                     {flexRender(header.column.columnDef.header, header.getContext())}
                                     {
                                         { asc: <RiSortAsc className='inline ml-2' />, desc: <RiSortDesc className='inline ml-2' /> }[

@@ -11,6 +11,7 @@ import { ImProfile } from "react-icons/im";
 import { FaUserLock } from "react-icons/fa6";
 import { GiExitDoor } from "react-icons/gi";
 import useUserRole from "../../hooks/useUserRole";
+import logo from '../../assets/logo.png'
 
 const Navbar = () => {
     const { user, userLoading, logOut } = useAuth();
@@ -49,13 +50,13 @@ const Navbar = () => {
         };
     }, [sidebarRef, dropdownRef]);
 
-    const navClasses = ({ isActive }) => isActive ? 'text-nexus-secondary font-bold border-b-2 border-nexus-secondary flex items-center gap-2' : 'text-nexus-primary hover:text-nexus-secondary flex items-center gap-2';
+    const navClasses = ({ isActive }) => isActive ? 'text-nexus-primary font-bold border-b-2 border-nexus-primary flex items-center gap-2' : 'text-nexus-secondary hover:text-nexus-primary flex items-center gap-2';
 
     const navItems = <>
         <NavLink className={navClasses} to={'/'}>Home</NavLink>
         <NavLink className={navClasses} to={'/all-articles'}>All Articles</NavLink>
         {user && <>
-        <NavLink className={navClasses} to={'/subscription'}>Subscription</NavLink>
+            <NavLink className={navClasses} to={'/subscription'}>Subscription</NavLink>
             <NavLink className={navClasses} to={'/add-article'}>Add Articles</NavLink>
             <NavLink className={navClasses} to={'my-articles'}>My Articles</NavLink>
             <NavLink className={navClasses} to={'/premium-articles'}>Premium Articles</NavLink>
@@ -75,14 +76,25 @@ const Navbar = () => {
     }
 
     return (
-        <nav className="max-w-screen-2xl flex items-center gap-0 md:gap-4 mx-auto shadow-md px-3 py-2 md:px-10 xl:px-20 sticky top-0 bg-white bg-opacity-90 z-50 text-nexus-primary">
+        <nav className="max-w-screen-2xl flex items-center gap-0 md:gap-4 mx-auto shadow-md px-3 py-2 md:px-10 xl:px-20 sticky top-0 bg-white bg-opacity-90 z-50 text-nexus-secondary">
             <div ref={sidebarRef} className="min-[1170px]:hidden max-[430px]:text-3xl text-5xl cursor-pointer z-50" onClick={() => setOpenNavbar(!openNavbar)}>
                 {
                     openNavbar
-                        ? <MdOutlineClose className="text-nexus-primary hover:text-nexus-secondary transform transition-all duration-1000"></MdOutlineClose>
-                        : <MdMenuOpen className="text-nexus-secondary hover:text-nexus-primary transform transition-all duration-1000"></MdMenuOpen>
+                        ? <MdOutlineClose className="text-nexus-secondary hover:text-nexus-primary transform transition-all duration-1000"></MdOutlineClose>
+                        : <MdMenuOpen className="text-nexus-primary hover:text-nexus-secondary transform transition-all duration-1000"></MdMenuOpen>
                 }
             </div>
+
+            {/* Site Logo */}
+            <figure className="flex items-center gap-2 font-kreonSerif">
+                <img className="w-9 md:w-12 h-7 md:h-10" src={logo} alt="logo" />
+                <NavLink
+                    className="min-[1170px]:hidden transition-all duration-500 text-2xl font-semibold text-nexus-secondary flex items-center gap-1" to={'/'}>
+                    Nexus
+                    <span className='text-nexus-primary'>News</span>
+                </NavLink>
+            </figure>
+
             <div className="flex justify-between items-center w-full">
                 {/* Navbar Items/Links/Routes */}
                 <div className="text-sm xl:text-base">
@@ -103,12 +115,12 @@ const Navbar = () => {
                                 </Tooltip>
                                 <div className="relative" ref={dropdownRef}>
                                     <img
-                                        className="nameIcon w-9 md:w-12 h-9 md:h-12 rounded-full border-2 border-nexus-primary hover:opacity-70 transition-all duration-1000 cursor-pointer"
+                                        className="nameIcon w-9 md:w-12 h-9 md:h-12 rounded-full border-2 border-nexus-secondary hover:opacity-70 transition-all duration-1000 cursor-pointer"
                                         src={profilePicture} alt={userName}
                                         onClick={() => setProfileOpen(!profileOpen)}
                                     />
                                     {profileOpen && (
-                                        <div className="dropdown-arrow absolute md:right-[16%] right-[1%] mt-2 w-56 overflow-x-auto-auto rounded-md shadow-md z-30 bg-nexus-secondary shadow-[#6897bb] p-2 flex flex-col gap-2 animate__animated animate__bounceIn">
+                                        <div className="dropdown-arrow absolute md:right-[16%] right-[1%] mt-2 w-56 overflow-x-auto-auto rounded-md shadow-md z-30 bg-nexus-primary shadow-[#6897bb] p-2 flex flex-col gap-2 animate__animated animate__bounceIn">
                                             <NavLink to={'/profile'}
                                                 onClick={() => setProfileOpen(!profileOpen)}
                                                 className={'flex gap-2 items-center text-white'}><ImProfile />

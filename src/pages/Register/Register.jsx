@@ -153,12 +153,12 @@ const Register = () => {
                         <hr className="w-full dark:text-gray-600" />
                     </div>
                     {/* Email Password Login */}
-                    <form onSubmit={handleSubmit(handleRegister)} className="w-full flex flex-col gap-6 px-4 lg:px-8 py-4 lg:py-6 shadow-lg shadow-nexus-secondary border border-nexus-secondary rounded-md">
+                    <form onSubmit={handleSubmit(handleRegister)} className="w-full flex flex-col gap-6 px-4 lg:px-8 py-4 lg:py-6 shadow-lg shadow-nexus-primary border border-nexus-primary rounded-md">
                         <h3 className='text-lg md:text-xl font-medium text-center'>Register with Email & Password</h3>
                         {/* Name */}
                         <div className="flex flex-col gap-3">
                             <label className="font-medium" htmlFor="name">Your Name *</label>
-                            <div className="flex items-center gap-2 bg-transparent pl-2 rounded-lg border border-nexus-primary">
+                            <div className="flex items-center gap-2 bg-transparent pl-2 rounded-lg border border-nexus-secondary">
                                 <FaUserEdit className="text-gray-500" />
                                 <input
                                     {...register("name", {
@@ -174,7 +174,7 @@ const Register = () => {
                         {/* Email */}
                         <div className="flex flex-col gap-3">
                             <label className="font-medium" htmlFor="email">Your Email *</label>
-                            <div className="flex items-center gap-2 bg-transparent pl-2 rounded-lg border border-nexus-primary">
+                            <div className="flex items-center gap-2 bg-transparent pl-2 rounded-lg border border-nexus-secondary">
                                 <MdEmail className="text-gray-500" />
                                 <input
                                     {...register("email", {
@@ -190,7 +190,7 @@ const Register = () => {
                         {/* Profile Picture */}
                         <div className="flex flex-col gap-3">
                             <label className="font-medium" htmlFor="picture">Choose Your Profile Picture *</label>
-                            <div className="flex items-center gap-2 bg-transparent pl-2 py-2 rounded-lg border border-nexus-primary">
+                            <div className="flex items-center gap-2 bg-transparent pl-2 py-2 rounded-lg border border-nexus-secondary">
                                 <MdImage className="text-gray-500" />
                                 <div className="w-full">
                                     <div className="relative w-full">
@@ -221,14 +221,14 @@ const Register = () => {
                                     required:
                                         { value: true, message: "Provide a valid photo URL." }
                                 })}
-                                className="bg-transparent focus:border-2 p-2 rounded-lg border border-nexus-primary transition duration-500 focus:outline-0" type="text" name="photo" id="photo" placeholder="Enter Your Photo URL" />
+                                className="bg-transparent focus:border-2 p-2 rounded-lg border border-nexus-secondary transition duration-500 focus:outline-0" type="text" name="photo" id="photo" placeholder="Enter Your Photo URL" />
                             {
                                 errors.photo && <p className="text-red-700">{errors.photo.message}</p>
                             }
                         </div> */}
                         <div className="flex flex-col gap-3">
                             <label className="font-medium" htmlFor="password">Your Password *</label>
-                            <div className="flex items-center gap-2 bg-transparent  pl-2 rounded-lg border border-nexus-primary">
+                            <div className="flex items-center gap-2 bg-transparent  pl-2 rounded-lg border border-nexus-secondary">
                                 <RiLockPasswordFill className="text-gray-500" />
                                 <div className="relative w-full">
                                     <input
@@ -276,7 +276,7 @@ const Register = () => {
                             }
                         </div>
                         <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-lg px-5 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">{userLoading || imageUploading ? "Loading..." : "Register New Account"}</button>
-                        <p className="text-center text-sm md:text-base font-medium">Already have an Account? <Link className="hover:pl-4 text-[#3c5cc3] font-bold hover:text-nexus-primary transition-all duration-500" to={'/login'}>Login Here!</Link></p>
+                        <p className="text-center text-sm md:text-base font-medium">Already have an Account? <Link className="hover:pl-4 text-[#3c5cc3] font-bold hover:text-nexus-secondary transition-all duration-500" to={'/login'}>Login Here!</Link></p>
                     </form>
                 </div>
             </div>

@@ -146,7 +146,7 @@ const MyArticles = () => {
             header: 'Headline',
             accessorKey: 'headline',
             cell: (cell) => {
-                return <Link className="hover:text-nexus-secondary font-semibold font-kreonSerif"
+                return <Link className="hover:text-nexus-primary font-semibold font-kreonSerif"
                     to={`../news/${cell.row.original._id}`}>
                     {cell.row.original.headline}
                 </Link>;
@@ -157,7 +157,7 @@ const MyArticles = () => {
             accessorKey: '_id',
             cell: (cell) => {
                 return <Link
-                    className="hover:text-nexus-secondary text-center font-semibold font-kreonSerif"
+                    className="hover:text-nexus-primary text-center font-semibold font-kreonSerif"
                     to={`../news/${cell.row.original._id}`}>
                     Details
                 </Link>;
@@ -232,7 +232,7 @@ const MyArticles = () => {
             {showReasonModal &&
                 <dialog open className="w-[96%] xl:w-auto h-3/4 bg-opacity-95 p-12 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-transparent rounded-lg z-50 overflow-y-auto">
                     <div className='animate__animated animate__pulse bg-[#c5cce5f1] border shadow-lg h-full rounded-lg p-6 flex flex-col justify-around'>
-                        <IoIosCloseCircle onClick={() => setShowReasonModal(false)} className='absolute -top-4 -right-4 text-5xl text-red-700 hover:text-nexus-secondary hover:opacity-80 transition-all duration-500 cursor-pointer' title='Close' />
+                        <IoIosCloseCircle onClick={() => setShowReasonModal(false)} className='absolute -top-4 -right-4 text-5xl text-red-700 hover:text-nexus-primary hover:opacity-80 transition-all duration-500 cursor-pointer' title='Close' />
 
                         <div className="flex flex-col items-center gap-4 h-3/4 p-1">
                             <h3 className="animate__animated animate__headShake text-center text-red-700 font-kreonSerif font-bold max-[430px]:text-lg text-2xl mb-4 md:mb-6">Reason Your Article was Declined!</h3>
@@ -246,7 +246,7 @@ const MyArticles = () => {
             {showUpdateModal &&
                 <dialog open className="w-full h-full bg-opacity-95 p-11 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-transparent rounded-lg z-50 overflow-y-auto">
                     <div className='animate__animated animate__pulse bg-[#c5cce5fe] border shadow-lg h-auto rounded-lg p-6 flex flex-col justify-around'>
-                        <IoIosCloseCircle onClick={() => setShowUpdateModal(false)} className='absolute -top-4 -right-4 text-5xl text-red-700 hover:text-nexus-secondary hover:opacity-80 transition-all duration-500 cursor-pointer' title='Close' />
+                        <IoIosCloseCircle onClick={() => setShowUpdateModal(false)} className='absolute -top-4 -right-4 text-5xl text-red-700 hover:text-nexus-primary hover:opacity-80 transition-all duration-500 cursor-pointer' title='Close' />
                         <h3 className="animate__animated animate__headShake text-center text-red-700 font-kreonSerif font-bold max-[430px]:text-lg text-2xl mb-4 md:mb-6">Update: {article.headline}</h3>
 
                         <ArticleForm

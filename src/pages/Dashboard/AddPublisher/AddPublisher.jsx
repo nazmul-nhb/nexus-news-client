@@ -79,7 +79,7 @@ const AddPublisher = () => {
         }
     }
 
-    const handleDeletePublisher = (id, publisher)=>{
+    const handleDeletePublisher = (id, publisher) => {
         Swal.fire({
             title: 'Are You Sure?',
             text: `Delete "${publisher}" Permanently?`,
@@ -116,11 +116,11 @@ const AddPublisher = () => {
 
     return (
         <section className="flex md:flex-row-reverse md:items-start flex-col gap-6">
-            <form onSubmit={handleSubmit(handleAddPublisher)} className="w-full md:w-1/4 md:flex-grow-0 flex flex-col gap-6 px-4 lg:px-8 py-4 lg:py-6 shadow-lg shadow-nexus-secondary border border-nexus-secondary rounded-md">
+            <form onSubmit={handleSubmit(handleAddPublisher)} className="w-full md:w-1/4 md:flex-grow-0 flex flex-col gap-6 px-4 lg:px-8 py-4 lg:py-6 shadow-lg shadow-nexus-primary border border-nexus-primary rounded-md">
                 {/* Publisher Name */}
                 <div className="flex flex-col gap-3">
                     <label className="font-medium" htmlFor="publisher">Add A Publisher *</label>
-                    <div className="flex items-center gap-2 bg-transparent pl-2 rounded-lg border border-nexus-primary">
+                    <div className="flex items-center gap-2 bg-transparent pl-2 rounded-lg border border-nexus-secondary">
                         <FaNewspaper className="text-gray-500" />
                         <input
                             {...register("publisher", {
@@ -136,7 +136,7 @@ const AddPublisher = () => {
 
                 <div className="flex flex-col gap-3">
                     <label className="font-medium" htmlFor="logo">Choose Publisher Logo *</label>
-                    <div className="flex items-center gap-2 bg-transparent pl-2 py-2 rounded-lg border border-nexus-primary">
+                    <div className="flex items-center gap-2 bg-transparent pl-2 py-2 rounded-lg border border-nexus-secondary">
                         <MdImage className="text-gray-500" />
                         <div className="w-full">
                             <div className="relative w-full">
@@ -163,14 +163,14 @@ const AddPublisher = () => {
                 <button className="">{imageUploading ? 'Loading...' : 'Add Publisher'}</button>
             </form>
             <div className="grid md:grid-cols-2 gap-4 w-3/4">
-{
-    publishers?.map((pub, index) =><div className="relative flex flex-col gap-2 p-2 border" key={index}>
-        <img src={pub.publisher_logo} alt={pub.publisher} />
-        <h3>{pub.publisher}</h3>
-        <h4>{moment(pub.added_on).format('dddd, MMMM DD, YYYY • hh:mm:ss A')}</h4>
-        <button onClick={() => handleDeletePublisher(pub._id, pub.publisher)} className="absolute -right-5 -top-5 text-5xl text-red-600"><MdDeleteForever /></button>
-    </div>)
-}
+                {
+                    publishers?.map((pub, index) => <div className="relative flex flex-col gap-2 p-2 border" key={index}>
+                        <img src={pub.publisher_logo} alt={pub.publisher} />
+                        <h3>{pub.publisher}</h3>
+                        <h4>{moment(pub.added_on).format('dddd, MMMM DD, YYYY • hh:mm:ss A')}</h4>
+                        <button onClick={() => handleDeletePublisher(pub._id, pub.publisher)} className="absolute -right-5 -top-5 text-5xl text-red-600"><MdDeleteForever /></button>
+                    </div>)
+                }
             </div>
         </section>
     );

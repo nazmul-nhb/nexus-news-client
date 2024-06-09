@@ -21,9 +21,9 @@ export default {
         fadeOut: 'fadeOut 0.5s ease-in-out',
       },
       colors: {
-        'nexus-primary': '#31404b',
-        'nexus-secondary': '#6897bb',
-        'nexusBG': 'Final Project Part-7'
+        'nexus-primary': '#6897bb',
+        'nexus-secondary': '#31404b',
+        'nexusBG': ''
       },
       fontFamily: {
         kreonSerif: '"Kreon", serif;',

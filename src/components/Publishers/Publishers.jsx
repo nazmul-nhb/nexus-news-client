@@ -53,8 +53,8 @@ const Publishers = () => {
         [carousel]
     );
 
-    if(isFetching){
-        return <ArticleLoading/>
+    if (isFetching) {
+        return <ArticleLoading />
     }
 
     return (
@@ -63,7 +63,7 @@ const Publishers = () => {
                 <div className="carousel keen-slider" ref={sliderRef}>
                     {
                         sliderPublishers?.map(publisher => <div key={publisher._id}
-                            className="carousel__cell flex flex-col items-center justify-center gap-3 bg-nexus-secondary p-3">
+                            className="carousel__cell flex flex-col items-center justify-center gap-3 bg-nexus-primary p-3">
                             <img src={publisher.publisher_logo} alt={publisher.publisher} />
                             <h3 className="text-center font-kreonSerif text-lg text-white">{publisher.publisher}</h3>
                         </div>)

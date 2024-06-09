@@ -102,7 +102,7 @@ const Profile = () => {
             </Helmet>
             <div className="flex flex-col lg:flex-row gap-10 items-center mb-8 lg:mb-16">
                 {isFetching ? <div className="lg:w-3/5 flex-1 "><ArticleLoading /></div> :
-                    <div className="w-full lg:w-3/5 flex-1 border bg-gradient-to-l from-[#2e50bc62] to-[#033eff37]  border-nexus-secondary flex flex-col gap-6 p-6 shadow-lg shadow-[#8689ee]">
+                    <div className="w-full lg:w-3/5 flex-1 border bg-gradient-to-l from-[#2e50bc62] to-[#033eff37]  border-nexus-primary flex flex-col gap-6 p-6 shadow-lg shadow-[#8689ee]">
                         <div className="flex flex-col items-center lg:items-start">
                             <div className="flex flex-col lg:flex-row gap-2 items-center lg:items-start justify-center lg:justify-start my-4">
                                 <Tooltip anchorSelect=".user-name" place="top">
@@ -110,7 +110,7 @@ const Profile = () => {
                                 </Tooltip>
                                 <PhotoProvider>
                                     <PhotoView src={user.photoURL}>
-                                        <img className="user-name cursor-pointer border p-1 border-nexus-secondary w-24 md:w-36 h-24 md:h-36" src={user.photoURL} alt={user.displayName} />
+                                        <img className="user-name cursor-pointer border p-1 border-nexus-primary w-24 md:w-36 h-24 md:h-36" src={user.photoURL} alt={user.displayName} />
                                     </PhotoView>
                                 </PhotoProvider>
                                 <div className="flex flex-col items-center lg:items-start justify-center lg:justify-start gap-3">
@@ -118,7 +118,7 @@ const Profile = () => {
                                     <Tooltip anchorSelect=".verification-status" place="top">
                                         {user.emailVerified ? "Verified!" : "Not Verified!"}
                                     </Tooltip>
-                                    <h4 className="verification-status font-semibold flex items-center gap-1">{user.email} {user.emailVerified ? <MdVerified className="text-nexus-secondary" /> : <VscUnverified className="text-red-700" />}</h4>
+                                    <h4 className="verification-status font-semibold flex items-center gap-1">{user.email} {user.emailVerified ? <MdVerified className="text-nexus-primary" /> : <VscUnverified className="text-red-700" />}</h4>
                                     <div className="flex flex-col items-center lg:flex-row gap-1 md:text-xl">
                                         <h4 className="font-semibold">Last Login:</h4>
                                         <h4>{moment(user.metadata.lastSignInTime).format('MMMM DD, YYYY [at] hh:mm:ss A')}</h4>
@@ -142,7 +142,7 @@ const Profile = () => {
                                         <h4>{nexusUser?.current_plan}</h4>
                                     </div>
                                     <div className="flex flex-col items-center lg:flex-row gap-1 md:text-xl">
-                                        <h4 className="font-semibold">{now.isAfter(expiration) ? 'Expired': 'Will Expire'} on:</h4>
+                                        <h4 className="font-semibold">{now.isAfter(expiration) ? 'Expired' : 'Will Expire'} on:</h4>
                                         <h4>{moment(nexusUser?.expires_on).format('MMMM DD, YYYY [at] hh:mm:ss A')}</h4>
                                     </div>
                                 </>}
@@ -151,11 +151,11 @@ const Profile = () => {
                     </div>
                 }
 
-                <form onSubmit={handleSubmit(handleUpdateProfile)} className="w-full lg:w-2/5 flex flex-col gap-6 px-4 lg:px-8 py-4 lg:py-6 shadow-lg shadow-nexus-secondary border border-nexus-secondary rounded-md">
+                <form onSubmit={handleSubmit(handleUpdateProfile)} className="w-full lg:w-2/5 flex flex-col gap-6 px-4 lg:px-8 py-4 lg:py-6 shadow-lg shadow-nexus-primary border border-nexus-primary rounded-md">
                     {/* Name */}
                     <div className="flex flex-col gap-3">
                         <label className="font-medium" htmlFor="name">Update Your Name *</label>
-                        <div className="flex items-center gap-2 bg-transparent pl-2 rounded-lg border border-nexus-primary">
+                        <div className="flex items-center gap-2 bg-transparent pl-2 rounded-lg border border-nexus-secondary">
                             <FaUserEdit className="text-gray-500" />
                             <input
                                 defaultValue={user?.displayName}
@@ -172,7 +172,7 @@ const Profile = () => {
                     {/* Profile Picture */}
                     <div className="flex flex-col gap-3">
                         <label className="font-medium" htmlFor="picture">Choose Your Profile Picture</label>
-                        <div className="flex items-center gap-2 bg-transparent pl-2 py-2 rounded-lg border border-nexus-primary">
+                        <div className="flex items-center gap-2 bg-transparent pl-2 py-2 rounded-lg border border-nexus-secondary">
                             <MdImage className="text-gray-500" />
                             <div className="w-full">
                                 <div className="relative w-full">

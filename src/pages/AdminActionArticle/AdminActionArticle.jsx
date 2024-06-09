@@ -111,11 +111,11 @@ const AdminActionArticle = ({ article, refetch }) => {
             {showModal &&
                 <dialog open className="w-[96%] xl:w-auto h-3/4 bg-opacity-95 p-12 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-transparent rounded-lg z-50 overflow-y-auto">
                     <div className='animate__animated animate__pulse bg-[#c5cce5f1] border shadow-lg h-full rounded-lg p-6 flex flex-col justify-around'>
-                        <IoIosCloseCircle onClick={closeModal} className='absolute -top-4 -right-4 text-5xl text-red-700 hover:text-nexus-secondary hover:opacity-80 transition-all duration-500 cursor-pointer' title='Close' />
+                        <IoIosCloseCircle onClick={closeModal} className='absolute -top-4 -right-4 text-5xl text-red-700 hover:text-nexus-primary hover:opacity-80 transition-all duration-500 cursor-pointer' title='Close' />
                         <h3 className="animate__animated animate__headShake text-center text-red-700 font-kreonSerif font-bold max-[430px]:text-lg text-2xl mb-4 md:mb-6">Give A Feedback</h3>
 
                         <form onSubmit={(e) => handleDeclineArticle(e, _id)} className='flex flex-col items-center justify-between h-3/4 p-1'>
-                            <textarea className='text-sm bg-transparent outline-0 border border-nexus-secondary w-4/5 h-3/4 p-2 rounded-lg' name="feedback" id="feedback"/>
+                            <textarea className='text-sm bg-transparent outline-0 border border-nexus-primary w-4/5 h-3/4 p-2 rounded-lg' name="feedback" id="feedback" />
                             <button type='submit'>Decline</button>
                         </form>
                     </div>

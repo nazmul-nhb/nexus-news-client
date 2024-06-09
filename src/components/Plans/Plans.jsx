@@ -7,7 +7,7 @@ const Plans = ({ inSubscriptionPage }) => {
         <section className="w-full mx-auto gap-3 lg:grid grid-cols-5 ">
 
             {inSubscriptionPage ||
-                <div className="border border-nexus-primary p-3 rounded-xl">
+                <div className="border border-nexus-secondary p-3 rounded-xl">
                     <h3 className="text-center">Free</h3>
                     <ul>
                         <li>Browse Free Articles Only</li>
@@ -17,7 +17,7 @@ const Plans = ({ inSubscriptionPage }) => {
                     </ul>
                 </div>}
 
-            <div className="border border-nexus-primary p-3 rounded-xl">
+            <div className="border border-nexus-secondary p-3 rounded-xl">
                 <h3 className="text-center">Minute Monitor</h3>
                 <ul>
                     <li>Browse Premium News</li>
@@ -28,7 +28,7 @@ const Plans = ({ inSubscriptionPage }) => {
                 {inSubscriptionPage || <button>Try for 1 Day</button>}
             </div>
 
-            <div className="border border-nexus-primary p-3 rounded-xl">
+            <div className="border border-nexus-secondary p-3 rounded-xl">
                 <h3 className="text-center">Weekly Wrap-Up</h3>
                 <ul>
                     <li>Browse Premium News</li>
@@ -39,7 +39,7 @@ const Plans = ({ inSubscriptionPage }) => {
                 {inSubscriptionPage || <button>Try for 7 Days</button>}
             </div>
 
-            <div className="border border-nexus-primary p-3 rounded-xl">
+            <div className="border border-nexus-secondary p-3 rounded-xl">
                 <h3 className="text-center">Monthly Marvel</h3>
                 <ul>
                     <li>Browse Premium News</li>
@@ -50,7 +50,7 @@ const Plans = ({ inSubscriptionPage }) => {
                 {inSubscriptionPage || <button>Try for 30 Days</button>}
             </div>
 
-            <div className="border border-nexus-primary p-3 rounded-xl">
+            <div className="border border-nexus-secondary p-3 rounded-xl">
                 <h3 className="text-center">Yearly Yonder</h3>
                 <ul>
                     <li>Browse Premium News</li>

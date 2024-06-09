@@ -78,7 +78,7 @@ const AllArticles = () => {
             <div className="grid md:grid-cols-2 lg:grid-cols-4 mx-auto gap-4 mb-8 text-sm">
                 {/* Filter by Publisher */}
                 <div className="flex flex-col gap-3">
-                    <div className="flex items-center gap-2 pl-2 bg-transparent rounded-lg border border-nexus-primary">
+                    <div className="flex items-center gap-2 pl-2 bg-transparent rounded-lg border border-nexus-secondary">
                         <FaNewspaper />
                         <Select isClearable
                             styles={customStyles}
@@ -90,13 +90,13 @@ const AllArticles = () => {
                             }))}
                             required
                             placeholder="Filter by Publisher"
-                            className="px-2 rounded-r-lg py-1 bg-transparent w-full border-l border-nexus-primary focus:outline-0" id='publisher' name='publisher'
+                            className="px-2 rounded-r-lg py-1 bg-transparent w-full border-l border-nexus-secondary focus:outline-0" id='publisher' name='publisher'
                         />
                     </div>
                 </div>
                 {/* Filter by Tags */}
                 <div className="flex flex-col gap-3">
-                    <div className="flex items-center gap-2 pl-2 bg-transparent rounded-lg border border-nexus-primary">
+                    <div className="flex items-center gap-2 pl-2 bg-transparent rounded-lg border border-nexus-secondary">
                         <FaHashtag />
                         <Select isClearable
                             styles={customStyles}
@@ -108,27 +108,27 @@ const AllArticles = () => {
                             }))}
                             required
                             placeholder="Filter by Tag"
-                            className="px-2 rounded-r-lg py-1 bg-transparent w-full border-l border-nexus-primary focus:outline-0" id='tag' name='tag'
+                            className="px-2 rounded-r-lg py-1 bg-transparent w-full border-l border-nexus-secondary focus:outline-0" id='tag' name='tag'
                         />
                     </div>
                 </div>
                 {/* Search Articles */}
-                <form onSubmit={handleSearchArticle} className="flex gap-2 items-center justify-start text-nexus-primary">
-                    <div className="flex gap-2 w-full items-center relative pl-2 bg-transparent rounded-lg border border-nexus-primary">
+                <form onSubmit={handleSearchArticle} className="flex gap-2 items-center justify-start text-nexus-secondary">
+                    <div className="flex gap-2 w-full items-center relative pl-2 bg-transparent rounded-lg border border-nexus-secondary">
                         <label className="font-medium" htmlFor="search"><FaSearch /></label>
-                        <input ref={inputRef} defaultValue={searchText} className="px-2 rounded-r-lg py-[9px] bg-transparent w-full border-l border-nexus-primary focus:outline-0" placeholder="Search Articles" type="text" name="search" id="search" />
+                        <input ref={inputRef} defaultValue={searchText} className="px-2 rounded-r-lg py-[9px] bg-transparent w-full border-l border-nexus-secondary focus:outline-0" placeholder="Search Articles" type="text" name="search" id="search" />
                         <div className="absolute right-0 flex gap-2">
                             {
-                                searchText !== '' && <button title="Clear Search Field" onClick={clearSearchText} className="text-2xl hover:text-nexus-secondary transition-all duration-500"><MdClear /></button>
+                                searchText !== '' && <button title="Clear Search Field" onClick={clearSearchText} className="text-2xl hover:text-nexus-primary transition-all duration-500"><MdClear /></button>
                             }
-                            <button className="border py-[9px] px-4 rounded-r-lg font-bold tracking-wider border-nexus-primary bg-nexus-primary text-white hover:bg-white hover:text-nexus-primary transition-all duration-700" type="submit">Search</button>
+                            <button className="border py-[9px] px-4 rounded-r-lg font-bold tracking-wider border-nexus-secondary bg-nexus-secondary text-white hover:bg-white hover:text-nexus-secondary transition-all duration-700" type="submit">Search</button>
                         </div>
                     </div>
-                   
+
                 </form>
                 <button
                     onClick={() => setSortByTime(!sortByTime)}
-                    className="border py-1 px-2 rounded-lg font-semibold border-nexus-primary bg-transparent text-nexus-primary hover:bg-nexus-primary text-lg hover:text-white transition-all duration-700"
+                    className="border py-1 px-2 rounded-lg font-semibold border-nexus-secondary bg-transparent text-nexus-secondary hover:bg-nexus-secondary text-lg hover:text-white transition-all duration-700"
                     type="submit">{sortByTime ? 'See Oldest Articles' : 'See Latest Articles'}
                 </button>
             </div>

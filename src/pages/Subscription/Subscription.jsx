@@ -122,7 +122,7 @@ const Subscription = () => {
 
             <form onSubmit={handleSubscription}>
                 <div className="w-[240px] flex flex-col gap-3">
-                    <div className="flex items-center gap-2 pl-2 bg-transparent rounded-lg border border-nexus-primary">
+                    <div className="flex items-center gap-2 pl-2 bg-transparent rounded-lg border border-nexus-secondary">
                         <label className="font-medium" htmlFor="subscription"><FaSackDollar /></label>
                         <Select isClearable
                             styles={customStyles}
@@ -131,7 +131,7 @@ const Subscription = () => {
                             options={subscriptionOptions}
                             required
                             placeholder="Select Plan"
-                            className="px-2 rounded-r-lg py-1 bg-transparent w-full border-l border-nexus-primary focus:outline-0" id='subscription' name='subscription'
+                            className="px-2 rounded-r-lg py-1 bg-transparent w-full border-l border-nexus-secondary focus:outline-0" id='subscription' name='subscription'
                         />
                     </div>
                 </div>

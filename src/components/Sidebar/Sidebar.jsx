@@ -29,7 +29,7 @@ const Sidebar = () => {
             })
     }
 
-    const sideBarClasses = ({ isActive }) => isActive ? 'text-orange-900 font-bold flex items-center gap-2' : 'text-nexus-primary hover:text-orange-900 flex items-center gap-2 font-semibold';
+    const sideBarClasses = ({ isActive }) => isActive ? 'text-orange-900 font-bold flex items-center gap-2' : 'text-nexus-secondary hover:text-orange-900 flex items-center gap-2 font-semibold';
 
     const sidebarMenus = [
         { icon: <RiHome7Fill className="text-3xl" />, link: '/', title: 'Home' },
@@ -41,10 +41,10 @@ const Sidebar = () => {
 
 
     return (
-        <div className={`${openSidebar ? "w-64" : "w-20"} h-screen whitespace-nowrap bg-nexus-secondary border-nexus-secondary p-5 pt-6 relative transition-all transform duration-300`}>
+        <div className={`${openSidebar ? "w-64" : "w-20"} h-screen whitespace-nowrap bg-nexus-primary border-nexus-primary p-5 pt-6 relative transition-all transform duration-300`}>
             {/* ${openSidebar ? "w-72" : "w-20 "} */}
             {/* sidebar control */}
-            <IoIosArrowDropleftCircle className={`absolute cursor-pointer -right-3 top-[30] w-7 text-4xl text-nexus-primary ${!openSidebar && "rotate-180"}`} onClick={() => setOpenSidebar(!openSidebar)} />
+            <IoIosArrowDropleftCircle className={`absolute cursor-pointer -right-3 top-[30] w-7 text-4xl text-nexus-secondary ${!openSidebar && "rotate-180"}`} onClick={() => setOpenSidebar(!openSidebar)} />
             <Tooltip anchorSelect=".userName" place="bottom-end">
                 {user?.displayName}
             </Tooltip>
