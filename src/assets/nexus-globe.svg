@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240" style="background: transparent;">
+    <defs>
+        <clipPath id="clip">
+            <circle cx="120" cy="120" r="100"/>
+        </clipPath>
+    </defs>
+    <circle cx="120" cy="120" r="100" fill="#6897bb"/>
+    <g clip-path="url(#clip)">
+        <path fill="#31404b" d="M120,20c-50,0-90,40-90,90s40,90,90,90s90-40,90-90S170,20,120,20z M120,40c44.1,0,80,35.9,80,80 s-35.9,80-80,80s-80-35.9-80-80S75.9,40,120,40z">
+            <animateTransform attributeName="transform" type="rotate" from="0 120 120" to="360 120 120" dur="4s" repeatCount="indefinite"/>
+        </path>
+    </g>
+</svg>

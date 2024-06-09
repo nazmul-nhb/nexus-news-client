@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaNewspaper } from "react-icons/fa";
-import { MdDeleteForever, MdImage } from "react-icons/md";
+import { MdDeleteForever, MdImage, MdManageHistory } from "react-icons/md";
 import useImageUpload from "../../../hooks/useImageUpload";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
@@ -10,6 +10,10 @@ import moment from "moment";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
+import { IoNewspaper } from "react-icons/io5";
+import SectionHeader from "../../../components/SectionHeader/SectionHeader";
+import { buttonNormal } from "../../../utilities/buttonStyles";
+import { buttonLoader } from "../../../components/LoadingSpinners/Loaders";
 
 const AddPublisher = () => {
     const [imageFileName, setImageFileName] = useState("Upload Publisher Logo");
@@ -116,14 +120,15 @@ const AddPublisher = () => {
     }
 
     return (
-        <section className="flex md:flex-row-reverse md:items-start flex-col gap-6">
+        <section className="flex flex-col items-center gap-4 overflow-x-auto">
             <Helmet>
                 <title>Add Publisher || Dashboard - Nexus News</title>
             </Helmet>
-            <form onSubmit={handleSubmit(handleAddPublisher)} className="w-full md:w-1/4 md:flex-grow-0 flex flex-col gap-6 px-4 lg:px-8 py-4 lg:py-6 shadow-lg shadow-nexus-primary border border-nexus-primary rounded-md">
+            <SectionHeader heading={"Add New Publishers"} />
+            <form onSubmit={handleSubmit(handleAddPublisher)} className="w-full md:w-1/4 md:flex-grow-0 flex flex-col gap-6 px-4 lg:px-8 py-4 lg:py-6 shadow-lg shadow-nexus-secondary border border-nexus-secondary rounded-md">
                 {/* Publisher Name */}
                 <div className="flex flex-col gap-3">
-                    <label className="font-medium" htmlFor="publisher">Add A Publisher *</label>
+                    <label className="font-medium text-center text-nexus-primary" htmlFor="publisher">Add A Publisher *</label>
                     <div className="flex items-center gap-2 bg-transparent pl-2 rounded-lg border border-nexus-secondary">
                         <FaNewspaper className="text-gray-500" />
                         <input
@@ -139,7 +144,7 @@ const AddPublisher = () => {
                 </div>
 
                 <div className="flex flex-col gap-3">
-                    <label className="font-medium" htmlFor="logo">Choose Publisher Logo *</label>
+                    <label className="font-medium text-center text-nexus-primary" htmlFor="logo">Choose Publisher Logo *</label>
                     <div className="flex items-center gap-2 bg-transparent pl-2 py-2 rounded-lg border border-nexus-secondary">
                         <MdImage className="text-gray-500" />
                         <div className="w-full">
@@ -164,15 +169,17 @@ const AddPublisher = () => {
                         errors.picture && <p className="text-red-700">{errors.picture.message}</p>
                     }
                 </div>
-                <button className="">{imageUploading ? 'Loading...' : 'Add Publisher'}</button>
+                <button className={buttonNormal}>{imageUploading ? buttonLoader : 'Add Publisher'}</button>
             </form>
-            <div className="grid md:grid-cols-2 gap-4 w-3/4">
+            <div className="border-t w-full my-16"></div>
+            <SectionHeader heading={"List of Publishers"} subHeading={`Total Publishers: ${publishers.length}`} />
+            <div className="grid md:grid-cols-3 gap-8 w-3/4">
                 {
-                    publishers?.map((pub, index) => <div className="relative flex flex-col gap-2 p-2 border" key={index}>
+                    publishers?.map((pub, index) => <div className="relative flex flex-col justify-around items-center gap-4 p-3 border border-nexus-secondary rounded-md shadow-lg shadow-nexus-secondary" key={index}>
+                        <h3 className="flex items-center gap-2 font-semibold"><IoNewspaper />{pub.publisher}</h3>
                         <img src={pub.publisher_logo} alt={pub.publisher} />
-                        <h3>{pub.publisher}</h3>
-                        <h4>{moment(pub.added_on).format('dddd, MMMM DD, YYYY • hh:mm:ss A')}</h4>
-                        <button onClick={() => handleDeletePublisher(pub._id, pub.publisher)} className="absolute -right-5 -top-5 text-5xl text-red-600"><MdDeleteForever /></button>
+                        <h4 className="flex items-center gap-2"><MdManageHistory />{moment(pub.added_on).format('dddd, MMMM DD, YYYY')}</h4>
+                        <button onClick={() => handleDeletePublisher(pub._id, pub.publisher)} className="absolute z-30 right-0.5 top-0.5 text-4xl text-red-600"><MdDeleteForever /></button>
                     </div>)
                 }
             </div>

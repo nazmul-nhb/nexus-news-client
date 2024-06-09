@@ -20,7 +20,7 @@ const AllArticlesAdmin = () => {
     // console.log(allRawArticles);
 
     return (
-        <section>
+        <section className="mx-auto">
             <Helmet>
                 <title>All Articles || Dashboard - Nexus News</title>
             </Helmet>
