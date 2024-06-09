@@ -28,7 +28,7 @@ const AllUsers = () => {
             confirmButtonText: 'Yes, Make Admin!'
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosSecure.put(`/users`, { email, role: 'admin', admin_since: moment().format("YYYY-MM-DD HH:mm:ss") })
+                axiosSecure.put(`/users`, { email, role: 'admin', isPremium: true, admin_since: moment().format("YYYY-MM-DD HH:mm:ss") })
                     .then(res => {
                         if (res.data.modifiedCount > 0) {
                             Swal.fire({
@@ -102,14 +102,14 @@ const AllUsers = () => {
         }
     ]
 
-    if(isLoading) return articleLoader;
+    if (isLoading) return articleLoader;
 
     return (
         <section className="mx-auto">
             <Helmet>
                 <title>All Users || Dashboard - Nexus News</title>
             </Helmet>
-            <SectionHeader heading={`Total Registered Users: ${nexusUsers?.length}`}/>
+            <SectionHeader heading={`Total Registered Users: ${nexusUsers?.length}`} />
             <NexusTable data={userData} columns={userColumns} />
         </section>
     );

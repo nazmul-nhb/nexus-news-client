@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
-import Button from '../Button/Button';
 import { useEffect } from 'react';
 import { MdImage, MdViewHeadline } from 'react-icons/md';
 import { FaNewspaper, FaHashtag } from 'react-icons/fa6';
@@ -56,7 +55,7 @@ const ArticleForm = ({
     }, [reset, setResetForm]);
 
     return (
-        <div className='my-6 text-nexus-primary'>
+        <div className='my-6 text-nexus-secondary'>
             <form onSubmit={handleSubmit(isUpdateArticle ? handleUpdateArticle : handlePostArticle)} className='mx-auto grid grid-cols-9 gap-3 font-medium'>
                 {/* Headline/Title */}
                 <div className="col-span-9 lg:col-span-6 flex flex-col gap-3">
@@ -159,7 +158,7 @@ const ArticleForm = ({
                         errors.description && <p className="text-red-700">{errors.description.message}</p>
                     }
                 </div>
-                <button type='submit' className={`${buttonNormal} col-span-9 md:col-span-3 lg:col-span-2 justify-center`}>{imageUploading ? buttonLoader : 'Post Article'}</button>
+                <button type='submit' className={`${buttonNormal} col-span-9 md:col-span-3 lg:col-span-2 justify-center`}>{imageUploading ? buttonLoader : isUpdateArticle ? 'Update Article' : 'Post Article'}</button>
             </form >
         </div >
     );
