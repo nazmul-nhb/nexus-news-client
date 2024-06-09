@@ -147,7 +147,7 @@ const CheckoutForm = () => {
                     },
                 }}
             />
-            <button className="border rounded-lg border-nexus-primary px-3  my-4" type="submit" disabled={!stripe || !clientSecret}>
+            <button className="border rounded-lg border-nexus-primary1 px-3  my-4" type="submit" disabled={!stripe || !clientSecret}>
                 Pay
             </button>
             <p className="text-red-600">{error}</p>

@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import AdminActionArticle from "../../AdminActionArticle/AdminActionArticle";
+import AdminActionArticle from "../../../components/AdminActionArticle/AdminActionArticle";
 import useUserRole from "../../../hooks/useUserRole";
+import { Helmet } from "react-helmet-async";
 
 const AllArticlesAdmin = () => {
     const {role, roleLoading} = useUserRole();
@@ -20,7 +21,9 @@ const AllArticlesAdmin = () => {
 
     return (
         <section>
-            All is Well!!!
+            <Helmet>
+                <title>All Articles || Dashboard - Nexus News</title>
+            </Helmet>
             <h3>Total {allRawArticles?.length} Articles</h3>
             <div className="grid lg:grid-cols-2 gap-6">
                 {

@@ -9,6 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 import moment from "moment";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const AddPublisher = () => {
     const [imageFileName, setImageFileName] = useState("Upload Publisher Logo");
@@ -116,6 +117,9 @@ const AddPublisher = () => {
 
     return (
         <section className="flex md:flex-row-reverse md:items-start flex-col gap-6">
+            <Helmet>
+                <title>Add Publisher || Dashboard - Nexus News</title>
+            </Helmet>
             <form onSubmit={handleSubmit(handleAddPublisher)} className="w-full md:w-1/4 md:flex-grow-0 flex flex-col gap-6 px-4 lg:px-8 py-4 lg:py-6 shadow-lg shadow-nexus-primary border border-nexus-primary rounded-md">
                 {/* Publisher Name */}
                 <div className="flex flex-col gap-3">

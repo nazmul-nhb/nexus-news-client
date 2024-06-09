@@ -102,7 +102,7 @@ const AllUsers = () => {
     return (
         <section className="mx-auto">
             <Helmet>
-                <title>Dashboard - All Users - Nexus News</title>
+                <title>All Users || Dashboard - Nexus News</title>
             </Helmet>
             <h3 className="text-center text-2xl mb-4">Total Registered Users: {nexusUsers?.length}</h3>
 
