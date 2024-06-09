@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Chart } from 'react-google-charts';
 import useUserRole from '../../../hooks/useUserRole';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import { articleLoader } from '../../LoadingSpinners/Loaders';
 
 const RevenueStats = () => {
     const [revenueData, setRevenueData] = useState([]);
@@ -27,7 +28,7 @@ const RevenueStats = () => {
         }
     }, [revenueStats]);
 
-    if (isLoading || roleLoading) return <div>Loading...</div>;
+    if (isLoading || roleLoading) return articleLoader;
     if (isError) return <div>Error: {error.message}</div>;
 
     return (
