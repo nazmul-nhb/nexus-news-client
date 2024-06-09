@@ -75,7 +75,7 @@ const AllUsers = () => {
                     <PhotoProvider>
                         <PhotoView src={profile_image}>
                             <img
-                                className="w-11 h-11 cursor-pointer rounded-full p-[1px] border border-furry mx-auto"
+                                className="w-11 h-11 cursor-pointer rounded-full p-[1px] border border-nexus-primary mx-auto"
                                 src={profile_image}
                                 title={email}
                                 alt={name}

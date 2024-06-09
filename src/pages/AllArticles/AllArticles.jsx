@@ -143,7 +143,6 @@ const AllArticles = () => {
                                 />)
                             }
                         </div>
-
                 }
             </div>
             <div>
