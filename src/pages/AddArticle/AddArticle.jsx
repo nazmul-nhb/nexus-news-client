@@ -7,6 +7,8 @@ import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import SectionHeader from "../../components/SectionHeader/SectionHeader";
+import { useTypewriter } from "react-simple-typewriter";
 
 const AddArticle = () => {
     const { user } = useAuth();
@@ -105,11 +107,18 @@ const AddArticle = () => {
         setResetForm(() => resetFunction);
     };
 
+    const [text] = useTypewriter({
+        words: [`Add An Article`],
+        loop: true,
+    });
+
     return (
         <section className="mx-6 md:mx-10 my-2 md:my-8 p-2 md:px-4">
             <Helmet>
                 <title>Add Article - Nexus News</title>
             </Helmet>
+
+            <SectionHeader heading={`${user?.displayName}, ${text}`}/>
 
             <ArticleForm
                 setResetForm={setFormReset}

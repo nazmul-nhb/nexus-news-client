@@ -75,7 +75,7 @@ const AdminActionArticle = ({ article, refetch }) => {
                             <img className='cursor-pointer w-12 h-12 rounded-xl p-0.5 border' src={authorImage} alt={articleAuthor} />
                         </PhotoView>
                     </PhotoProvider>
-                    <div className="">
+                    <div>
                         <h3 className='font-semibold flex items-center gap-0.5'><FaUserEdit /> {articleAuthor}</h3>
                         <h4 className='font-medium flex items-center gap-0.5'><MdAlternateEmail />{posted_by_email}</h4>
                     </div>
