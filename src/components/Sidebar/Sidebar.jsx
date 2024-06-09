@@ -37,7 +37,8 @@ const Sidebar = () => {
         { icon: <FaUsersCog className="text-3xl" />, link: '/dashboard/all-users', title: 'All Users' },
         { icon: <IoNewspaperSharp className="text-3xl" />, link: '/dashboard/all-articles', title: 'All Articles' },
         { icon: <FaFileCirclePlus className="text-3xl" />, link: '/dashboard/add-publisher', title: 'Add Publisher' },
-    ]
+    ];
+
 
     return (
         <div className={`${openSidebar ? "w-64" : "w-20"} h-screen whitespace-nowrap bg-nexus-secondary border-nexus-secondary p-5 pt-6 relative transition-all transform duration-300`}>
@@ -62,13 +63,21 @@ const Sidebar = () => {
             <ul className="flex flex-col gap-5 items-start">
                 {
                     sidebarMenus.map((menu, index) => (
-                        <NavLink onClick={() => setOpenSidebar(false)} title={menu.title} className={sideBarClasses} to={menu.link} key={index}>
+                        <NavLink
+                            onClick={() => setOpenSidebar(false)}
+                            title={menu.title}
+                            className={sideBarClasses}
+                            to={menu.link}
+                            key={index}
+                            end
+                        >
                             {menu.icon}
                             <h3 className={`${!openSidebar && "hidden"} text-sm md:text-xl origin-left transition-all transform duration-200`}> {menu.title}</h3>
                         </NavLink>
                     ))
                 }
             </ul>
+
             <hr className="my-5" />
             <div className="flex items-center gap-2 duration-300 transition-all mb-5">
                 <ToggleTheme />
