@@ -100,14 +100,14 @@ const UsersStats = () => {
 
     return (
         <div className='flex flex-col items-center justify-center gap-5'>
-            <div ref={setRefs} className='text-4xl font-bold flex flex-col md:flex-row gap-6 items-center justify-center'>
+            <div ref={setRefs} className='text-2xl md:text-4xl font-bold flex flex-col md:flex-row gap-6 items-center justify-center'>
                 <div className='flex flex-col items-center gap-4 rounded-lg p-5 border text-[#3b82f6] bg-[#3b83f665] border-[#3b82f6]'>
-                    <FaUsers /><div className='flex flex-col gap-2 items-center'>Total Users <span ref={countTotalRef} /></div>
+                    <FaUsers /><div className='flex flex-col gap-2 text-center items-center'>Total Users <span ref={countTotalRef} /></div>
                 </div>
-                <div className='flex flex-col items-center gap-4 rounded-lg p-5 border bg-[#1d765565] text-[#1d7655] border-[#34d399]'>
+                <div className='flex flex-col text-center items-center gap-4 rounded-lg p-5 border bg-[#1d765565] text-[#1d7655] border-[#34d399]'>
                     <TbUsersGroup /> <div className='flex flex-col gap-2 items-center'>Normal Users <span ref={countNormalRef} /></div>
                 </div>
-                <div className='flex flex-col items-center gap-4 rounded-lg p-5 border bg-[#f9731665] text-[#f97316] border-[#f97316]'>
+                <div className='flex flex-col text-center items-center gap-4 rounded-lg p-5 border bg-[#f9731665] text-[#f97316] border-[#f97316]'>
                     <MdOutlineWorkspacePremium /> <div className='flex flex-col gap-2 items-center'>Premium Users <span ref={countPremiumRef} /></div>
                 </div>
             </div>

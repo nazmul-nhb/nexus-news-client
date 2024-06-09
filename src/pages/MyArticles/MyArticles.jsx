@@ -15,6 +15,11 @@ import moment from "moment";
 import Swal from "sweetalert2";
 import useUpdateArticle from "../../hooks/useUpdateArticle";
 import { articleLoader } from "../../components/LoadingSpinners/Loaders";
+import { AiTwotoneDelete } from "react-icons/ai";
+import { FaRegEdit } from "react-icons/fa";
+import SectionHeader from "../../components/SectionHeader/SectionHeader";
+import { TbHandStop } from "react-icons/tb";
+import { MdOutlinePendingActions } from "react-icons/md";
 
 const MyArticles = () => {
     const [showReasonModal, setShowReasonModal] = useState(false);
@@ -169,14 +174,14 @@ const MyArticles = () => {
             cell: (cell) => {
                 const { decline_reason, status } = cell.row.original;
                 return (
-                    <div className="flex justify-between gap-1">
+                    <div className="flex justify-between gap-1 items-center">
                         {status === 'Approved' && 'Approved'}
                         {status === 'Declined' && (
                             <>
-                                Declined <button onClick={() => handleShowReason(decline_reason)}>Reason</button>
+                                <span className="flex items-center gap-0.5 text-red-700 font-semibold"><TbHandStop />  Declined</span> <button className="text-nexus-primary font-semibold" onClick={() => handleShowReason(decline_reason)}>Reason</button>
                             </>
                         )}
-                        {!status && 'Pending'}
+                        {!status && <span className="flex items-center gap-0.5 text-nexus-secondary font-semibold"><MdOutlinePendingActions />Pending</span>}
                     </div>
                 )
             }
@@ -193,10 +198,10 @@ const MyArticles = () => {
             accessorKey: '',
             enableSorting: false,
             cell: (cell) => {
-                return <h3 className="text-center cursor-pointer"
+                return <button className="text-center flex gap-0.5 items-center text-green-700 hover:text-nexus-primary font-semibold transition-all duration-50"
                     onClick={() => handleUpdateModal(cell.row.original)}>
-                    Update
-                </h3>;
+                    <FaRegEdit /> Update
+                </button>;
             },
         },
         {
@@ -206,10 +211,10 @@ const MyArticles = () => {
             cell: (cell) => {
                 const { _id, headline } = cell.row.original;
                 return (
-                    <h3 className="text-center cursor-pointer"
+                    <button className="text-center flex gap-0.5 items-center text-red-700 hover:text-nexus-primary font-semibold transition-all duration-500"
                         onClick={() => handleDeleteArticle(_id, headline)}>
-                        Delete
-                    </h3>
+                        <AiTwotoneDelete /> Delete
+                    </button>
                 )
             }
         }
@@ -222,10 +227,10 @@ const MyArticles = () => {
             <Helmet>
                 <title>{user.displayName}&rsquo;s Articles</title>
             </Helmet>
-            {user.displayName}&rsquo;s Articles
+            <SectionHeader heading={`${user.displayName}’s Articles`}/>
 
             {
-                !userArticles.length ? <p>No Data</p> : <NexusTable data={articleData} columns={articleColumns} />
+                !userArticles.length ? <p className="flex items-center justify-center text-red-700">No Data</p> : <NexusTable data={articleData} columns={articleColumns} />
             }
 
             {/* ReasonModal */}
