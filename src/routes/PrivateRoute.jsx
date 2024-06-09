@@ -1,18 +1,14 @@
 import PropTypes from 'prop-types';
 import { Navigate, useLocation } from "react-router-dom";
 import useAuth from '../hooks/useAuth';
-import ArticleLoading from '../components/LoadingSpinners/ArticleLoading';
+import { articleLoader } from '../components/LoadingSpinners/Loaders';
 
 const PrivateRoute = ({ children }) => {
     const location = useLocation();
     const { user, userLoading } = useAuth();
 
     if (userLoading) {
-        return (
-            <div className="flex items-center justify-center space-x-2">
-                <ArticleLoading />
-            </div>
-        )
+        return articleLoader
     }
 
     if (user) {

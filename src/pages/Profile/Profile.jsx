@@ -12,9 +12,9 @@ import moment from "moment";
 import useNexusUsers from "../../hooks/useNexusUsers";
 import { Tooltip } from "react-tooltip";
 import { VscUnverified } from "react-icons/vsc";
-import ArticleLoading from "../../components/LoadingSpinners/ArticleLoading";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import 'react-photo-view/dist/react-photo-view.css';
+import { articleLoader } from "../../components/LoadingSpinners/Loaders";
 
 const Profile = () => {
     const { user, setUser, userLoading, updateUserProfile } = useAuth();
@@ -101,7 +101,7 @@ const Profile = () => {
                 <title>{user.displayName}&rsquo;s Profile - Nexus News</title>
             </Helmet>
             <div className="flex flex-col lg:flex-row gap-10 items-center mb-8 lg:mb-16">
-                {isFetching ? <div className="lg:w-3/5 flex-1 "><ArticleLoading /></div> :
+                {isFetching ? <div className="lg:w-3/5 flex-1 ">{articleLoader}</div> :
                     <div className="w-full lg:w-3/5 flex-1 border bg-gradient-to-l from-[#2e50bc62] to-[#033eff37]  border-nexus-primary flex flex-col gap-6 p-6 shadow-lg shadow-[#8689ee]">
                         <div className="flex flex-col items-center lg:items-start">
                             <div className="flex flex-col lg:flex-row gap-2 items-center lg:items-start justify-center lg:justify-start my-4">

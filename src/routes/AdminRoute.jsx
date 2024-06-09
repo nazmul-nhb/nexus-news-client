@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { Navigate, useLocation } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import useUserRole from '../hooks/useUserRole';
-import ArticleLoading from '../components/LoadingSpinners/ArticleLoading';
+import { articleLoader } from '../components/LoadingSpinners/Loaders';
 
 const AdminRoute = ({ children }) => {
     const { user, userLoading } = useAuth();
@@ -11,7 +11,7 @@ const AdminRoute = ({ children }) => {
     const location = useLocation();
 
     if (userLoading || roleLoading) {
-        return <ArticleLoading />
+        return articleLoader;
     }
 
     if (user && role === 'admin') {

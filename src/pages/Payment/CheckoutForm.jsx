@@ -6,7 +6,6 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import moment from "moment";
 import toast from "react-hot-toast";
-import ArticleLoading from "../../components/LoadingSpinners/ArticleLoading";
 import Swal from "sweetalert2";
 
 const CheckoutForm = () => {
@@ -126,7 +125,7 @@ const CheckoutForm = () => {
     }
 
     if (paymentLoading) {
-        return <ArticleLoading />
+        return articleLoader;
     }
 
     return (

@@ -1,4 +1,3 @@
-import ArticleLoading from '../LoadingSpinners/ArticleLoading';
 import useGetArticles from '../../hooks/useGetArticles';
 import useHandleArticleDetails from '../../hooks/useHandleArticleDetails';
 
@@ -11,6 +10,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import 'swiper/css/effect-creative';
+import { articleLoader } from '../LoadingSpinners/Loaders';
 
 const TrendingArticles = () => {
     const handleGoToArticleDetails = useHandleArticleDetails();
@@ -23,7 +23,7 @@ const TrendingArticles = () => {
     // console.log(trendingArticles);
 
     if (isLoading) {
-        return <ArticleLoading />
+        return articleLoader;
     }
 
     return (

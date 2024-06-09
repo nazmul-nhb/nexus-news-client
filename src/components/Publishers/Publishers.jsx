@@ -3,7 +3,7 @@ import "keen-slider/keen-slider.min.css"
 import './Publishers.css';
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
-import ArticleLoading from "../LoadingSpinners/ArticleLoading";
+import { articleLoader } from "../LoadingSpinners/Loaders";
 
 const animation = { duration: 30000, easing: (t) => t };
 
@@ -26,7 +26,7 @@ const carousel = (slider) => {
 const Publishers = () => {
     const axiosPublic = useAxiosPublic();
 
-    const { isFetching, isError, error, data: sliderPublishers = [] } = useQuery({
+    const { isFetching, data: sliderPublishers = [] } = useQuery({
         queryKey: ['sliderPublishers'],
         queryFn: async () => {
             const res = await axiosPublic('/publishers?size=7')
@@ -54,7 +54,7 @@ const Publishers = () => {
     );
 
     if (isFetching) {
-        return <ArticleLoading />
+        return articleLoader;
     }
 
     return (

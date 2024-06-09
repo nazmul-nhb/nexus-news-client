@@ -2,9 +2,9 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import SameCategoryArticles from "../../components/SameCategoryArticles/SameCategoryArticles";
-import ArticleLoading from "../../components/LoadingSpinners/ArticleLoading";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
+import { articleLoader } from "../../components/LoadingSpinners/Loaders";
 
 const ArticleDetails = () => {
     const { id } = useParams();
@@ -27,7 +27,7 @@ const ArticleDetails = () => {
     }, [id, refetch]);
 
     if (isLoading) {
-        return <ArticleLoading />
+        return articleLoader;
     }
 
     const { _id, headline, view_count, full_image, tags, publisher, description } = article;

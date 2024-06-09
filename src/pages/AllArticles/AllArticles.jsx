@@ -2,7 +2,6 @@ import { Helmet } from "react-helmet-async";
 import { useEffect, useRef, useState } from "react";
 import useGetArticles from "../../hooks/useGetArticles";
 import ArticleCard from "../../components/ArticleCard/ArticleCard";
-import ArticleLoading from "../../components/LoadingSpinners/ArticleLoading";
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import customStyles from "../../utilities/selectStyles";
@@ -12,6 +11,7 @@ import { FaNewspaper, FaSearch } from "react-icons/fa";
 import { FaHashtag } from "react-icons/fa6";
 import { MdClear } from "react-icons/md";
 import toast from "react-hot-toast";
+import { articleLoader } from "../../components/LoadingSpinners/Loaders";
 
 const animatedComponents = makeAnimated();
 
@@ -134,7 +134,7 @@ const AllArticles = () => {
             </div>
             <div className="">
                 {isLoading ?
-                    < ArticleLoading />
+                    articleLoader
                     : !allArticles.length ? <p>Nothing to Show</p>
                         : <div className="grid lg:grid-cols-2 xl:grid-cols-2 gap-6">
                             {

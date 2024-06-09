@@ -1,16 +1,16 @@
-import ArticleLoading from "../LoadingSpinners/ArticleLoading";
 import Marquee from "react-fast-marquee";
 import moment from "moment";
 import useGetArticles from "../../hooks/useGetArticles";
 import useHandleArticleDetails from "../../hooks/useHandleArticleDetails";
 import logo from '../../assets/logo-bw.png'
+import { buttonLoader } from "../LoadingSpinners/Loaders";
 
 const LatestHeadlines = () => {
     const handleGoToArticleDetails = useHandleArticleDetails();
     const { isLoading, data: latestArticles } = useGetArticles(['latestArticles'], 'sort=time_descending&size=12');
 
     if (isLoading) {
-        return <ArticleLoading />
+        return buttonLoader;
     }
 
     return (

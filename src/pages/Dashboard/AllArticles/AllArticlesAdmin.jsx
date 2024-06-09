@@ -3,12 +3,13 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import AdminActionArticle from "../../../components/AdminActionArticle/AdminActionArticle";
 import useUserRole from "../../../hooks/useUserRole";
 import { Helmet } from "react-helmet-async";
+import { articleLoader } from "../../../components/LoadingSpinners/Loaders";
 
 const AllArticlesAdmin = () => {
     const {role, roleLoading} = useUserRole();
     const axiosSecure = useAxiosSecure();
 
-    const { isLoading, data: allRawArticles = [], isError, error, refetch } = useQuery({
+    const { isLoading, data: allRawArticles = [], refetch } = useQuery({
         enabled: true,
         queryKey: ['allRawArticles', role],
         queryFn: async () => {
@@ -26,7 +27,7 @@ const AllArticlesAdmin = () => {
             </Helmet>
             <h3>Total {allRawArticles?.length} Articles</h3>
             <div className="grid lg:grid-cols-2 gap-6">
-                {
+                {isLoading || roleLoading ? articleLoader :
                     allRawArticles?.map(article => <AdminActionArticle key={article._id}
                         article={article}
                         refetch={refetch}

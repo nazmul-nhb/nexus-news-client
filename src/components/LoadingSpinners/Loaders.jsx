@@ -1,6 +1,6 @@
 import ripple from '../../assets/nexus-ripple.svg';
 import search from '../../assets/nexus-search.svg';
-import globe from '../../assets/nexus-globe.svg';
+import infinity from '../../assets/nexus-infinity.svg';
 
 const buttonLoader = (
     <div className="flex flex-col items-center justify-center">
@@ -10,7 +10,7 @@ const buttonLoader = (
 
 const articleLoader = (
     <div className="flex flex-col items-center justify-center">
-        <img src={globe} alt="Loading..." />
+        <img src={infinity} alt="Loading..." />
     </div>
 );
 
