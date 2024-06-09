@@ -6,12 +6,12 @@
 }
 
 .article-table {
-    border: 1px solid #1e40ad
+    border: 1px solid #6897bb
 }
 
 .article-table tr {
     border-bottom: 1px solid #95a7ea;
-    border-left: 1px solid #1e40ad
+    border-left: 1px solid #6897bb
 }
 
 /* 
@@ -21,7 +21,7 @@
 */
 
 .article-table tr:nth-child(even) {
-    background-color: #3559dd2b
+    background-color: #b6d1e488
 }
 
 .article-table th {
@@ -41,7 +41,7 @@
     display: table-cell;
     text-align: left;
     vertical-align: center;
-    border-left: 1px solid #718bde
+    border-left: 1px solid #6897bb
 }
 
 .article-table th:first-child,

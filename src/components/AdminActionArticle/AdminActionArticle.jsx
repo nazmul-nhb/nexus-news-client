@@ -62,7 +62,7 @@ const AdminActionArticle = ({ article, refetch }) => {
             <Link to={`/news/${_id}`} className=" flex-grow font-bold text-xl hover:text-nexus-primary">{headline}</Link>
 
             {/* post time and publisher */}
-            <div className="flex md:flex-row flex-col md:items-center justify-between gap-2">
+            <div className="flex xl:flex-row flex-col xl:items-center justify-between gap-2">
                 <h3 className="flex items-center gap-0.5 font-medium"><MdDateRange />{moment(posted_on).format('MMMM DD, YYYY [at] hh:mm:ss A')}</h3>
                 <h3 className='first-letter:capitalize flex items-center gap-0.5 font-semibold'><IoNewspaper />{publisher}</h3>
             </div>
@@ -88,7 +88,7 @@ const AdminActionArticle = ({ article, refetch }) => {
             </div>
 
             {/* action buttons */}
-            <div className="flex gap-2 flex-col md:flex-row md:items-center justify-between">
+            <div className="flex gap-2 flex-col xl:flex-row xl:items-center justify-between">
 
                 <div className='flex items-center justify-between gap-4'>
                     <button

@@ -8,6 +8,8 @@ import { Helmet } from "react-helmet-async";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import moment from "moment";
 import Swal from "sweetalert2";
+import SectionHeader from "../../../components/SectionHeader/SectionHeader";
+import { buttonInvert } from "../../../utilities/buttonStyles";
 
 const AllUsers = () => {
     const { data: nexusUsers = [], refetch } = useNexusUsers(['nexusUsers']);
@@ -90,10 +92,10 @@ const AllUsers = () => {
                 const { name, email } = cell.row.original;
                 return (<>{
                     cell.row.original.role === 'admin'
-                        ? <h3 className="flex items-center gap-1 text-green-700 mx-auto justify-center">
+                        ? <h3 className="flex items-center gap-1 font-bold text-lg text-green-700 mx-auto justify-center">
                             <MdOutlineAdminPanelSettings /> Admin
                         </h3>
-                        : <h3 className="flex items-center justify-center mx-auto cursor-pointer" onClick={() => handleMakeAdmin(name, email)}>Make Admin</h3>
+                        : <button className={buttonInvert} onClick={() => handleMakeAdmin(name, email)}>Make Admin</button>
                 }</>)
             }
         }
@@ -104,8 +106,7 @@ const AllUsers = () => {
             <Helmet>
                 <title>All Users || Dashboard - Nexus News</title>
             </Helmet>
-            <h3 className="text-center text-2xl mb-4">Total Registered Users: {nexusUsers?.length}</h3>
-
+            <SectionHeader heading={`Total Registered Users: ${nexusUsers?.length}`}/>
             <NexusTable data={userData} columns={userColumns} />
         </section>
     );
