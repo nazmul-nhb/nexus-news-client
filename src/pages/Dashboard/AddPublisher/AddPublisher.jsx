@@ -171,9 +171,9 @@ const AddPublisher = () => {
                         errors.picture && <p className="text-red-700">{errors.picture.message}</p>
                     }
                 </div>
-                <button className={buttonNormal}>{imageUploading ? buttonLoader : 'Add Publisher'}</button>
+                <button className={`${buttonNormal} justify-center`}>{imageUploading ? buttonLoader : 'Add Publisher'}</button>
             </form>
-            <div className="border-t w-full my-16"></div>
+            <div className="border-t w-full my-10"></div>
             <SectionHeader heading={"List of Publishers"} subHeading={`Total Publishers: ${publishers.length}`} />
             {isLoading ? articleLoader : <div className="grid md:grid-cols-3 gap-8 w-3/4">
                 {

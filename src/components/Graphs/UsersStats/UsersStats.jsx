@@ -111,7 +111,7 @@ const UsersStats = () => {
                     <MdOutlineWorkspacePremium /> <div className='flex flex-col gap-2 items-center'>Premium Users <span ref={countPremiumRef} /></div>
                 </div>
             </div>
-            <div className='mt-6'>
+            <div className='mt-6 max-w-full'>
                 <Bar data={chartData} options={{ animation: { duration: 10000 }, scales: { y: { max: 100 } }, plugins: { legend: { display: false }, tooltip: { callbacks: { label: (context) => `${context.label}: ${context.raw}%` } } } }} />
             </div>
         </div>

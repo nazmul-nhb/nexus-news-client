@@ -44,6 +44,8 @@ const Home = () => {
             <SectionHeader heading={"User Statistics"} />
             <UsersStats />
 
+            <div className="border-t w-full my-16 h-5 lg:h-12"></div>
+            <SectionHeader heading={"Our Premium Plans"} />
             <Plans />
 
             {/* Subscription Modal */}
