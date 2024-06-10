@@ -35,14 +35,14 @@ const ScrollButtons = () => {
     };
 
     return (
-        <div className={`fixed right-2 md:right-4 bottom-4 ${!showBottomButton ? 'text-gray-400' : 'text-blue-500'}  text-4xl md:text-5xl flex flex-col gap-1`}>
+        <div className={`fixed right-2 md:right-4 bottom-4 ${!showBottomButton ? 'text-nexus-secondary' : 'text-nexus-primary'}  text-4xl md:text-5xl flex flex-col gap-1`}>
             {showTopButton && (
-                <button onClick={scrollToTop} className="cursor-pointer hover:text-nexus-secondary transition-all duration-500">
+                <button onClick={scrollToTop} className={`cursor-pointer ${!showBottomButton ? 'hover:text-nexus-primary' : 'hover:text-nexus-secondary'} text-4xl md:text-5xl flex flex-col gap-1 transition-all duration-500`}>
                     <IoIosArrowDropup />
                 </button>
             )}
             {showBottomButton && (
-                <button onClick={scrollToBottom} className="cursor-pointer hover:text-nexus-secondary transition-all duration-500">
+                <button onClick={scrollToBottom} className={`cursor-pointer ${!showBottomButton ? 'hover:text-nexus-primary' : 'hover:text-nexus-secondary'} hover:text-nexus-secondary transition-all duration-500`}>
                     <IoIosArrowDropdown />
                 </button>
             )}

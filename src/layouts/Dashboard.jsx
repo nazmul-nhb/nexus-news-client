@@ -7,7 +7,7 @@ const Dashboard = () => {
 
     return (<>
         <SiteTitle />
-        <section className="overflow-x-auto max-w-screen-2xl mx-auto mb-8">
+        <section className="overflow-x-auto max-w-screen-2xl mx-auto">
             <div className="flex items-start h-full justify-start gap-4 bg-nexusBG">
                 <div className="h-dvh">
                     <Sidebar />

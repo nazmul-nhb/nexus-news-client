@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { buttonInvert } from '../../utilities/buttonStyles';
+import { buttonInvert, buttonNormal } from '../../utilities/buttonStyles';
 import { useNavigate } from 'react-router-dom';
 
 const Plans = ({ inSubscriptionPage }) => {
@@ -29,7 +29,7 @@ const Plans = ({ inSubscriptionPage }) => {
                 </ul>
                 {inSubscriptionPage || <div className='flex items-center justify-center'><button
                     onClick={() => navigate('/subscription')}
-                 className={`${buttonInvert}`}>Try for 1 Day</button></div>}
+                 className={`${buttonNormal}`}>Try for 1 Day</button></div>}
             </div>
 
             <div className="border border-yellow-700 p-3 rounded-xl shadow-md shadow-yellow-700 bg-yellow-100 bg-opacity-75 text-yellow-700 flex flex-col gap-3">

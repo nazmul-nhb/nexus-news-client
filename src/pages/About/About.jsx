@@ -4,6 +4,7 @@ import "leaflet/dist/leaflet.css";
 import pinIcon from '../../assets/location-pin.png';
 import "./About.css";
 import { Helmet } from 'react-helmet-async';
+import SectionHeader from '../../components/SectionHeader/SectionHeader';
 
 const About = () => {
     const position = [23.8759, 90.3795];
@@ -19,6 +20,8 @@ const About = () => {
                 <title>About - Nexus News</title>
             </Helmet>
 
+            <SectionHeader heading={'About Nexus News'} subHeading={'Find Us on Map'} info={'Nexus News Tower, Nexus Lane, Uttara, Dhaka - 1710'} />
+            <div className="w-full my-8"></div>
             {/* Map */}
             <MapContainer className='z-0' center={position} zoom={13} scrollWheelZoom={false}>
                 <TileLayer
