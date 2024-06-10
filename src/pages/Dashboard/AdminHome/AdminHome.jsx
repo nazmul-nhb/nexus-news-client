@@ -7,7 +7,7 @@ import SectionHeader from "../../../components/SectionHeader/SectionHeader";
 const AdminHome = () => {
   
     return (
-        <section className="mx-auto w-[99%] flex flex-col items-center gap-4">
+        <section className="mx-auto w-[99%] flex flex-col items-center gap-4 pb-32">
             <Helmet>
                 <title>Admin Home || Dashboard - Nexus News</title>
             </Helmet>

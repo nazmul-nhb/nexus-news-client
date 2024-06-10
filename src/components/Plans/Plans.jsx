@@ -6,7 +6,7 @@ const Plans = ({ inSubscriptionPage }) => {
     const navigate = useNavigate();
 
     return (
-        <section className="w-full mx-auto gap-3 lg:grid grid-cols-4 ">
+        <section className="w-full mx-auto gap-4 grid lg:grid-cols-4 ">
 
             {/* {inSubscriptionPage ||
                 <div className="border border-nexus-secondary p-3 rounded-xl shadow-md shadow-nexus-primary bg-nexusBG text-nexus-primary flex flex-col gap-3">

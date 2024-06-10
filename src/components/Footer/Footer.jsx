@@ -13,7 +13,7 @@ const Footer = () => {
                         <h3 className="font-kreonSerif text-2xl md:text-4xl font-semibold tracking-wider text-nexus-secondary">Nexus <span className="text-nexus-primary">News</span></h3>
                     </div>
                 </div>
-                <hr className="text-nexus-primary my-8" />
+                <hr className="text-nexus-secondary my-8 z-50" />
                 <div className="flex flex-col justify-center items-center gap-4 text-nexus-secondary">
                     <div className="flex-1 text-center">
                         <h3><a href="#">Terms & Conditions</a></h3>

@@ -37,7 +37,6 @@ const About = () => {
                     </Popup>
                 </Marker>
             </MapContainer>
-
         </section>
     );
 };

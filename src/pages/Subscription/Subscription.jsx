@@ -121,7 +121,7 @@ const Subscription = () => {
             {/* Banner */}
             <figure className="relative -mt-2 md:-mt-8 opacity-95">
                 <img className="w-full aspect-[1.8/1]" src={banner} alt="Banner" />
-                <div className="absolute font-black text-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-nexusBG text-white text-5xl">SUBSCRIBE TO OUR PREMIUM PLANS</div>
+                <div className="absolute font-black text-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-nexusBG text-white text-lg md:text-2xl lg:text-5xl">SUBSCRIBE TO OUR PREMIUM PLANS</div>
             </figure>
 
             <SectionHeader subHeading={'Our Premium Plans'} />

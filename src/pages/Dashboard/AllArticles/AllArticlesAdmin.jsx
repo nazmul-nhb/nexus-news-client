@@ -54,7 +54,7 @@ const AllArticlesAdmin = () => {
     // console.log(allRawArticles);
 
     return (
-        <section className="mx-auto space-y-8">
+        <section className="mx-auto space-y-8 pb-32">
             <Helmet>
                 <title>All Articles || Dashboard - Nexus News</title>
             </Helmet>

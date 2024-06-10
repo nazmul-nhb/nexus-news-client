@@ -40,12 +40,12 @@ const ArticleDetails = () => {
     const { _id, headline, view_count, posted_on, full_image, tags, publisher, description } = article;
 
     return (
-        <section className="grid lg:grid-cols-7 gap-6 mx-6 md:mx-10 py-2 md:py-8 p-2 md:px-4">
+        <section className="grid lg:grid-cols-7 gap-6 mx-4 md:mx-10 py-2 md:py-8 p-2 md:px-4">
             <Helmet>
                 <title>{headline} - Nexus News</title>
             </Helmet>
             <div className="col-span-5 flex flex-col gap-4 border px-3">
-                <h3 className="font-kreonSerif text-3xl text-nexus-primary mt-2">{headline}</h3>
+                <h3 className="font-kreonSerif text-xl md:text-2xl lg:text-3xl text-nexus-primary mt-2">{headline}</h3>
                 <h3 className='first-letter:capitalize flex items-center gap-1 font-semibold text-lg'><IoNewspaper />{publisher}</h3>
                 <PhotoProvider>
                     <PhotoView src={full_image}>

@@ -96,7 +96,7 @@ const AllUsers = () => {
                         ? <h3 className="flex items-center gap-1 font-bold text-lg text-green-700 mx-auto justify-center">
                             <MdOutlineAdminPanelSettings /> Admin
                         </h3>
-                        : <button className={buttonInvert} onClick={() => handleMakeAdmin(name, email)}>Make Admin</button>
+                        : <button className={`${buttonInvert} text-[10px] px-1 py-0.5 lg:py-1 lg:px-3 md:text-base lg:text-lg`} onClick={() => handleMakeAdmin(name, email)}>Make Admin</button>
                 }</>)
             }
         }
@@ -105,7 +105,7 @@ const AllUsers = () => {
     if (isLoading) return articleLoader;
 
     return (
-        <section className="mx-auto">
+        <section className="mx-auto pb-32">
             <Helmet>
                 <title>All Users || Dashboard - Nexus News</title>
             </Helmet>
