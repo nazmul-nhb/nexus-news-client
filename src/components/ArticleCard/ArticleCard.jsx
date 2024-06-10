@@ -6,6 +6,7 @@ import { IoNewspaper } from 'react-icons/io5';
 import { buttonNormal } from '../../utilities/buttonStyles';
 import { MdOutlineWorkspacePremium } from 'react-icons/md';
 import { FaHistory } from 'react-icons/fa';
+import moment from 'moment';
 
 const ArticleCard = ({ article }) => {
     const { _id, headline, thumb_image, publisher, description, isPremium, posted_on } = article;
@@ -20,7 +21,7 @@ const ArticleCard = ({ article }) => {
             <img className={`flex-grow aspect-[1.8/1] border p-1 ${isPremium ? 'border-yellow-700' : 'border-nexus-primary'}`} src={thumb_image} alt={headline} />
             <div className="w-full flex-grow flex flex-col md:flex-row md:items-center md:justify-between">
                 <h3 className='first-letter:capitalize flex items-center gap-1 font-semibold text-lg'><IoNewspaper />{publisher}</h3>
-                <h4 className='flex items-center gap-1'><FaHistory />{posted_on}</h4>
+                <h4 className='flex items-center gap-1'><FaHistory />{moment(posted_on).format('MMMM DD, YYYY [at] hh:mm A')}</h4>
             </div>
             <p className='flex-grow text-justify'>{description.slice(0, 256)} ...</p>
             <button className={`${buttonNormal} ${isPremium && 'bg-yellow-700 border-yellow-700 hover:text-yellow-700'}`}

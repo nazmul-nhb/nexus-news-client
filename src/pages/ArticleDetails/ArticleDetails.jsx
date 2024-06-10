@@ -11,6 +11,7 @@ import { IoNewspaper } from "react-icons/io5";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import 'react-photo-view/dist/react-photo-view.css';
 import SectionHeader from "../../components/SectionHeader/SectionHeader";
+import moment from "moment";
 
 const ArticleDetails = () => {
     const { id } = useParams();
@@ -51,8 +52,8 @@ const ArticleDetails = () => {
                         <img className="border p-1 cursor-pointer" src={full_image} alt={headline} />
                     </PhotoView>
                 </PhotoProvider>
-                <div className="w-full flex flex-col md:flex-row md:items-center md:justify-between text-gray-400">
-                    <h4 className='flex items-center gap-1'><FaHistory />{posted_on}</h4>
+                <div className="w-full flex flex-row items-center justify-between text-gray-400">
+                    <h4 className='flex items-center gap-1'><FaHistory />{moment(posted_on).format('MMMM DD, YYYY [at] hh:mm A')}</h4>
                     <h3 className='flex items-center gap-1 font-bold'><MdOutlineRemoveRedEye />{view_count}</h3>
                 </div>
                 <p className="whitespace-pre-wrap text-justify first-letter:text-6xl first-letter:font-bold first-letter:mr-2 first-letter:float-left first-letter:font-kreonSerif">{description}</p>
@@ -68,7 +69,7 @@ const ArticleDetails = () => {
 
             {/* Related Articles */}
             <div className="col-span-5 lg:col-span-2">
-                <SectionHeader heading={'Related Articles'}/>
+                <SectionHeader subHeading={'Related Articles'}/>
                 <SameCategoryArticles exclude={_id} tags={tags} />
             </div>
         </section>

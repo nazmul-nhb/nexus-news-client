@@ -99,7 +99,7 @@ const Navbar = () => {
             <div className="flex justify-between items-center w-full">
                 {/* Navbar Items/Links/Routes */}
                 <div className="text-sm xl:text-base">
-                    <ul className={`w-3/5 min-[1170px]:w-full flex flex-col min-[1170px]:flex-row justify-start min-[1170px]:justify-center gap-2 min-[1170px]:gap-6 text-lg md:text-xl font-semibold duration-500 absolute min-[1170px]:static shadow-lg shadow-slate-700 min-[1170px]:shadow-none h-screen min-[1170px]:h-auto p-4 min-[1170px]:p-0 ${openNavbar ? 'pl-10 left-0 top-0 bg-nexusBG bg-opacity-100 flex z-30' : '-left-full top-0'}`}>
+                    <ul className={`w-3/5 min-[1170px]:w-full flex flex-col min-[1170px]:flex-row justify-start min-[1170px]:justify-center gap-2 min-[1170px]:gap-6 text-lg md:text-xl font-semibold duration-500 absolute min-[1170px]:static shadow-lg shadow-slate-700 min-[1170px]:shadow-none h-screen min-[1170px]:h-auto p-4 min-[1170px]:p-0 ${openNavbar ? 'pl-14 left-0 top-0 bg-white flex z-30' : '-left-full top-0'}`}>
                         {navItems}
                     </ul>
                 </div>
