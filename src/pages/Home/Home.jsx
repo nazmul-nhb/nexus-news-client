@@ -11,6 +11,7 @@ import SectionHeader from "../../components/SectionHeader/SectionHeader";
 // import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
 import { buttonNormal } from "../../utilities/buttonStyles";
+import Environment from "../../components/Environment/Environment";
 
 
 const Home = () => {
@@ -64,6 +65,9 @@ const Home = () => {
             <div className="border-t w-full my-16 h-5 lg:h-12"></div>
             <SectionHeader heading={"Our Premium Plans"} />
             <Plans />
+
+            <div className="border-t w-full my-16 h-5 lg:h-12"></div>
+            <Environment/>
 
             {/* Subscription Modal */}
             {showSubscriptionModal &&
