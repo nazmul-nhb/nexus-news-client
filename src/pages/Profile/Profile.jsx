@@ -96,7 +96,7 @@ const Profile = () => {
     }
 
     return (
-        <section className="mx-6 md:mx-10 my-2 md:my-8 p-2 md:px-4">
+        <section className="mx-6 md:mx-10 py-2 md:py-8 p-2 md:px-4">
             <Helmet>
                 <title>{user.displayName}&rsquo;s Profile - Nexus News</title>
             </Helmet>

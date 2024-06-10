@@ -11,7 +11,7 @@ const PremiumArticles = () => {
     if (isLoading) return articleLoader;
 
     return (
-        <section className="mx-6 md:mx-10 my-2 md:my-8 p-2 md:px-4">
+        <section className="mx-6 md:mx-10 py-2 md:py-8 p-2 md:px-4">
             <Helmet>
                 <title>Premium Articles - Nexus News</title>
             </Helmet>

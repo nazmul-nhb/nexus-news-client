@@ -77,7 +77,7 @@ const Navbar = () => {
     }
 
     return (
-        <nav className="max-w-screen-2xl flex items-center gap-0 md:gap-4 mx-auto shadow-md px-3 py-2 md:px-14 sticky top-0 bg-white bg-opacity-90 z-50 text-nexus-secondary">
+        <nav className="max-w-screen-2xl flex items-center gap-0 md:gap-4 mx-auto shadow-md px-3 py-2 md:px-14 sticky top-0 bg-nexusBG bg-opacity-100 z-50 text-nexus-secondary">
             <div ref={sidebarRef} className="min-[1170px]:hidden max-[430px]:text-3xl text-5xl cursor-pointer z-50" onClick={() => setOpenNavbar(!openNavbar)}>
                 {
                     openNavbar
@@ -89,17 +89,17 @@ const Navbar = () => {
             {/* Site Logo */}
             <figure className="flex items-center gap-2 font-kreonSerif">
                 <img className="w-9 md:w-12 h-7 md:h-10" src={logo} alt="logo" />
-                <NavLink
+                {user && <NavLink
                     className="min-[1170px]:hidden transition-all duration-500 text-2xl font-semibold text-nexus-secondary flex items-center gap-1" to={'/'}>
                     Nexus
                     <span className='text-nexus-primary'>News</span>
-                </NavLink>
+                </NavLink>}
             </figure>
 
             <div className="flex justify-between items-center w-full">
                 {/* Navbar Items/Links/Routes */}
                 <div className="text-sm xl:text-base">
-                    <ul className={`w-3/5 min-[1170px]:w-full flex flex-col min-[1170px]:flex-row justify-start min-[1170px]:justify-center gap-2 min-[1170px]:gap-6 text-lg md:text-xl font-semibold duration-500 absolute min-[1170px]:static shadow-lg shadow-slate-700 min-[1170px]:shadow-none h-screen min-[1170px]:h-auto p-4 min-[1170px]:p-0 ${openNavbar ? 'pl-14 left-0 top-0 bg-white bg-opacity-90 flex z-30' : '-left-full top-0'}`}>
+                    <ul className={`w-3/5 min-[1170px]:w-full flex flex-col min-[1170px]:flex-row justify-start min-[1170px]:justify-center gap-2 min-[1170px]:gap-6 text-lg md:text-xl font-semibold duration-500 absolute min-[1170px]:static shadow-lg shadow-slate-700 min-[1170px]:shadow-none h-screen min-[1170px]:h-auto p-4 min-[1170px]:p-0 ${openNavbar ? 'pl-10 left-0 top-0 bg-nexusBG bg-opacity-100 flex z-30' : '-left-full top-0'}`}>
                         {navItems}
                     </ul>
                 </div>

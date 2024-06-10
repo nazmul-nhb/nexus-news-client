@@ -15,7 +15,7 @@ const SiteTitle = () => {
     }, []);
 
     return (
-        <div className='max-w-screen-2xl flex flex-col items-stretch justify-center gap-1 mx-auto border-b border-nexus-secondary px-3 py-2 bg-white bg-opacity-90 z-50 text-nexus-secondary overflow-hidden'>
+        <div className='max-w-screen-2xl flex flex-col items-stretch justify-center gap-1 mx-auto border-b border-nexus-secondary px-3 py-2 bg-nexusBG bg-opacity-100 z-50 text-nexus-secondary overflow-hidden'>
             <div className="flex flex-col sm:flex-row items-center justify-between gap-1" title="Nexus News">
                 <Link to="/">
                     <div className="flex flex-col font-kreonSerif">

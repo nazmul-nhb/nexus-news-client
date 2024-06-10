@@ -113,6 +113,13 @@ const Register = () => {
                                 icon: 'warning',
                                 confirmButtonText: 'Close'
                             });
+                        } else if (error.message === "Firebase: Error (auth/network-request-failed).") {
+                            Swal.fire({
+                                title: 'Network Error!',
+                                text: "Please, Check Your Network Connection!",
+                                icon: 'error',
+                                confirmButtonText: 'Close'
+                            });
                         } else {
                             Swal.fire({
                                 title: 'Error!',
@@ -136,7 +143,7 @@ const Register = () => {
     }
 
     return (
-        <section className="mx-6 md:mx-10 my-2 md:my-8 p-2 md:px-4">
+        <section className="mx-6 md:mx-10 py-2 md:py-8 p-2 md:px-4">
             <Helmet>
                 <title>Register - Nexus News</title>
             </Helmet>

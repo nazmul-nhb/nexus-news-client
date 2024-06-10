@@ -33,7 +33,7 @@ const ArticleDetails = () => {
     const { _id, headline, view_count, full_image, tags, publisher, description } = article;
 
     return (
-        <section className="grid lg:grid-cols-7 gap-6 mx-6 md:mx-10 my-2 md:my-8 p-2 md:px-4">
+        <section className="grid lg:grid-cols-7 gap-6 mx-6 md:mx-10 py-2 md:py-8 p-2 md:px-4">
             <Helmet>
                 <title>{headline} - Nexus News</title>
             </Helmet>

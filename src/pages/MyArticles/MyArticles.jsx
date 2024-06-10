@@ -223,11 +223,11 @@ const MyArticles = () => {
     if (isLoading) return articleLoader;
 
     return (
-        <section className="mx-6 md:mx-10 my-2 md:my-8 p-2 md:px-4">
+        <section className="mx-6 md:mx-10 py-2 md:py-8 p-2 md:px-4">
             <Helmet>
                 <title>{user.displayName}&rsquo;s Articles</title>
             </Helmet>
-            <SectionHeader heading={`${user.displayName}’s Articles`}/>
+            <SectionHeader heading={`${user.displayName}’s Articles`} />
 
             {
                 !userArticles.length ? <p className="flex items-center justify-center text-red-700">No Data</p> : <NexusTable data={articleData} columns={articleColumns} />

@@ -45,6 +45,13 @@ const SocialLogin = () => {
                         icon: 'error',
                         confirmButtonText: 'Close'
                     });
+                } else if (error.message === "Firebase: Error (auth/network-request-failed).") {
+                    Swal.fire({
+                        title: 'Network Error!',
+                        text: "Please, Check Your Network Connection!",
+                        icon: 'error',
+                        confirmButtonText: 'Close'
+                    });
                 } else {
                     Swal.fire({
                         title: 'Error!',
@@ -85,6 +92,13 @@ const SocialLogin = () => {
                     Swal.fire({
                         title: 'Error!',
                         text: "Account Exists for this Email with Different Credential!",
+                        icon: 'error',
+                        confirmButtonText: 'Close'
+                    });
+                } else if (error.message === "Firebase: Error (auth/network-request-failed).") {
+                    Swal.fire({
+                        title: 'Network Error!',
+                        text: "Please, Check Your Network Connection!",
                         icon: 'error',
                         confirmButtonText: 'Close'
                     });

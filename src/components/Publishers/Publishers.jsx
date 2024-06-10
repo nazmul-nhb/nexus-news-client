@@ -10,7 +10,7 @@ const animation = { duration: 30000, easing: (t) => t };
 const carousel = (slider) => {
     const z = 300
     function rotate() {
-        const deg = 360 * slider.track.details.progress
+        const deg = 360 * slider.track.details?.progress
         slider.container.style.transform = `translateZ(-${z}px) rotateY(${-deg}deg)`
     }
     slider.on("created", () => {
