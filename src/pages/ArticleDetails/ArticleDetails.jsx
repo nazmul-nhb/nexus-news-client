@@ -5,6 +5,12 @@ import SameCategoryArticles from "../../components/SameCategoryArticles/SameCate
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { articleLoader } from "../../components/LoadingSpinners/Loaders";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { FaHistory } from "react-icons/fa";
+import { IoNewspaper } from "react-icons/io5";
+import { PhotoProvider, PhotoView } from "react-photo-view";
+import 'react-photo-view/dist/react-photo-view.css';
+import SectionHeader from "../../components/SectionHeader/SectionHeader";
 
 const ArticleDetails = () => {
     const { id } = useParams();
@@ -30,30 +36,39 @@ const ArticleDetails = () => {
         return articleLoader;
     }
 
-    const { _id, headline, view_count, full_image, tags, publisher, description } = article;
+    const { _id, headline, view_count, posted_on, full_image, tags, publisher, description } = article;
 
     return (
         <section className="grid lg:grid-cols-7 gap-6 mx-6 md:mx-10 py-2 md:py-8 p-2 md:px-4">
             <Helmet>
                 <title>{headline} - Nexus News</title>
             </Helmet>
-            <div className="col-span-5">
-                <h3 className="">{headline}</h3>
-                <img src={full_image} alt={headline} />
-                <br /><br />
-                View: {view_count}
-                <p className="whitespace-pre-wrap">{description}</p>
-                <h3>{publisher}</h3>
-                {
-                    tags?.map((tag, index) => <div key={index}>
-                        <h5 className="first-letter:capitalize">{tag}</h5>
-                    </div>)
-                }
+            <div className="col-span-5 flex flex-col gap-4 border px-3">
+                <h3 className="font-kreonSerif text-3xl text-nexus-primary mt-2">{headline}</h3>
+                <h3 className='first-letter:capitalize flex items-center gap-1 font-semibold text-lg'><IoNewspaper />{publisher}</h3>
+                <PhotoProvider>
+                    <PhotoView src={full_image}>
+                        <img className="border p-1 cursor-pointer" src={full_image} alt={headline} />
+                    </PhotoView>
+                </PhotoProvider>
+                <div className="w-full flex flex-col md:flex-row md:items-center md:justify-between text-gray-400">
+                    <h4 className='flex items-center gap-1'><FaHistory />{posted_on}</h4>
+                    <h3 className='flex items-center gap-1 font-bold'><MdOutlineRemoveRedEye />{view_count}</h3>
+                </div>
+                <p className="whitespace-pre-wrap text-justify first-letter:text-6xl first-letter:font-bold first-letter:mr-2 first-letter:float-left first-letter:font-kreonSerif">{description}</p>
+                <div>
+                    <h3 className="text-lg font-semibold">Found in Categories:</h3>
+                    {
+                        tags?.map((tag, index) => <span className="text-blue-700 mr-2" key={index}>
+                            #{tag}
+                        </span>)
+                    }
+                </div>
             </div>
 
-
-            <div className="col-span-2">
-                <h3 className="">Related Articles</h3>
+            {/* Related Articles */}
+            <div className="col-span-5 lg:col-span-2">
+                <SectionHeader heading={'Related Articles'}/>
                 <SameCategoryArticles exclude={_id} tags={tags} />
             </div>
         </section>

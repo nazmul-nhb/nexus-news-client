@@ -8,6 +8,7 @@ import moment from "moment";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import { articleLoader } from "../../components/LoadingSpinners/Loaders";
+import { buttonInvert } from "../../utilities/buttonStyles";
 
 const CheckoutForm = () => {
     const [error, setError] = useState('');
@@ -129,13 +130,15 @@ const CheckoutForm = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className="space-y-5" onSubmit={handleSubmit}>
             <CardElement
                 options={{
                     style: {
                         base: {
                             fontSize: '16px',
                             color: '#424770',
+                            border:'1px solid gray',
+                            padding:'2px 4px',
                             '::placeholder': {
                                 color: '#aab7c4',
                             },
@@ -146,9 +149,11 @@ const CheckoutForm = () => {
                     },
                 }}
             />
-            <button className="border rounded-lg border-nexus-primary1 px-3  my-4" type="submit" disabled={!stripe || !clientSecret}>
-                Pay
+            <div className='flex items-center justify-center'>
+                <button className={buttonInvert} type="submit" disabled={!stripe || !clientSecret}>
+                Pay Now
             </button>
+            </div>
             <p className="text-red-600">{error}</p>
             {transactionId && <p className="text-green-600"> Your Transaction ID: {transactionId}</p>}
         </form>

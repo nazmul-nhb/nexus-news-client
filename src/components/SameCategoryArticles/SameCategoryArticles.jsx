@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 import useGetArticles from '../../hooks/useGetArticles';
-import { Link } from 'react-router-dom';
+import useHandleArticleDetails from '../../hooks/useHandleArticleDetails';
 
 const SameCategoryArticles = ({ tags, exclude }) => {
     const tagsQueryString = tags.map(tag => `tag=${encodeURIComponent(tag)}`).join('&');
     // console.log(tagsQueryString);
+    const handleGoToArticleDetails = useHandleArticleDetails();
     const { data: similarArticles } = useGetArticles(
         ['similarArticles', tags], `${tagsQueryString}&sort=time_descending&size=6`
     );
@@ -15,12 +16,13 @@ const SameCategoryArticles = ({ tags, exclude }) => {
         <div className='flex flex-col gap-3'>
             {
                 similarArticles?.filter(article => article._id !== exclude)
-                    .map(article => <Link key={article._id} to={`/news/${article._id}`}>
-                        <div className=''>
-                            <h3>{article.headline}</h3>
-                            <img src={article.thumb_image} alt="" />
+                    .map(article => <div onClick={() => handleGoToArticleDetails(article._id)} className="cursor-pointer border border-nexus-secondary shadow-md shadow-nexus-secondary p-4" key={article._id}>
+                        <div className="hover:scale-[1.03] transition-all duration-500 hover:text-nexus-primary space-y-3">
+                            <h3 className="font-kreonSerif">{article.headline}</h3>
+                            <img className='border p-0.5' src={article.thumb_image} alt="" />
                         </div>
-                    </Link>)
+                    </div>
+                    )
             }
         </div>
     );
