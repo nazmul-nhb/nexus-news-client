@@ -12,11 +12,12 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import moment from "moment";
+import { buttonLoader } from "../../components/LoadingSpinners/Loaders";
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { user, userLogin } = useAuth();
+    const { user, userLoading, userLogin } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
@@ -84,16 +85,16 @@ const Login = () => {
     }
 
     return (
-        <section className="mx-6 md:mx-10 py-2 md:py-8 p-2 md:px-4">
+        <section className="mx-6 md:mx-10 py-2 md:py-8 p-2 md:px-4 flex flex-col items-center">
             <Helmet>
                 <title>Login - Nexus News</title>
             </Helmet>
             <h2 className="text-2xl md:text-4xl font-semibold text-center mb-8 font-kreonSerif">Please, Login</h2>
-            <div className="flex flex-col lg:flex-row-reverse items-center justify-between gap-6 lg:gap-8">
-                <figure className='flex-1 w-3/5 lg:w-full'>
-                    {/* <img src={banner} alt="Login Banner" /> */}
-                </figure>
-                <div className="flex-1 flex flex-col gap-2">
+            {/* <div className="flex flex-col lg:flex-row-reverse items-center justify-between gap-6 lg:gap-8"> */}
+                {/* <figure className='flex-1 w-3/5 lg:w-full'>
+                    <img src={banner} alt="Login Banner" />
+                </figure> */}
+                <div className="flex-1 flex flex-col items-center gap-2 lg:w-1/2">
                     {/* Social Media Login */}
                     <SocialLogin />
                     <div className="flex items-center w-full my-4">
@@ -138,11 +139,11 @@ const Login = () => {
                             }
                         </div>
 
-                        <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-lg px-5 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Log into Your Account</button>
+                    <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-lg px-5 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">{userLoading ? buttonLoader : 'Login!'}</button>
                         <p className="text-center text-sm md:text-base font-medium">New to this site? <Link className="hover:pl-4 text-[#3c5cc3] font-bold hover:text-nexus-secondary transition-all duration-500" to={'/register'}>Register Here!</Link></p>
                     </form>
                 </div>
-            </div>
+            {/* </div> */}
         </section>
     );
 };

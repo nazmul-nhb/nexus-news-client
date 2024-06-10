@@ -16,7 +16,7 @@ const SameCategoryArticles = ({ tags, exclude }) => {
         <div className='flex flex-col gap-3'>
             {
                 similarArticles?.filter(article => article._id !== exclude)
-                    .map(article => <div onClick={() => handleGoToArticleDetails(article._id)} className="cursor-pointer border border-nexus-secondary shadow-md shadow-nexus-secondary p-4" key={article._id}>
+                    .map(article => <div onClick={() => handleGoToArticleDetails(article._id)} className="cursor-pointer border border-nexus-primary shadow-md shadow-nexus-primary p-4" key={article._id}>
                         <div className="hover:scale-[1.03] transition-all duration-500 hover:text-nexus-primary space-y-3">
                             <h3 className="font-kreonSerif">{article.headline}</h3>
                             <img className='border p-0.5' src={article.thumb_image} alt="" />

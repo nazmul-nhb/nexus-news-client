@@ -2,7 +2,7 @@ import "./Navbar.css";
 import defaultPP from '../../assets/user.png';
 import { NavLink } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
-import { MdMenuOpen, MdOutlineClose } from "react-icons/md";
+import { MdAppRegistration, MdMenuOpen, MdOutlineClose } from "react-icons/md";
 import { Tooltip } from "react-tooltip";
 import toast from "react-hot-toast";
 import ToggleTheme from "../ToggleTheme/ToggleTheme";
@@ -136,7 +136,7 @@ const Navbar = () => {
                             </div>
                             : <div className="font-jokeyOneSans flex items-center gap-1 md:gap-3 text-lg md:text-xl xl:text-2xl font-medium md:pt-0 pt-1">
                                 <NavLink to={'/login'} className={navClasses}><FaUserLock />Login</NavLink>
-                                <NavLink to={'/register'} className={navClasses}>Register</NavLink>
+                                <NavLink to={'/register'} className={navClasses}><MdAppRegistration />Register</NavLink>
                             </div>
                     }
                 </div>

@@ -75,7 +75,7 @@ const Home = () => {
                     <div className='animate__animated animate__pulse bg-[#c5cce5fe] border shadow-lg h-full rounded-lg p-6 flex flex-col items-center justify-around'>
                         <IoIosCloseCircle onClick={() => setShowSubscriptionModal(false)} className='absolute -top-4 -right-4 text-5xl text-red-700 hover:text-nexus-primary hover:opacity-80 transition-all duration-500 cursor-pointer' title='Close' />
                         <h3 className="animate__animated animate__headShake text-center text-nexus-secondary font-kreonSerif font-bold max-[430px]:text-lg text-2xl mb-4 md:mb-6">Hello There!</h3>
-                        <h5 className="max-[430px]:text-lg text-2xl text-nexus-primary font-bold">Did You Know about Our Premium Plans?</h5>
+                        <h5 className="max-[430px]:text-lg text-2xl text-center text-nexus-primary font-bold">Did You Know about Our Premium Plans?</h5>
                         <Link onClick={() => setShowSubscriptionModal(false)} className={buttonNormal} to={'/subscription'}>Visit Here!</Link>
                     </div>
                 </dialog>

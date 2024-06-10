@@ -143,16 +143,16 @@ const Register = () => {
     }
 
     return (
-        <section className="mx-6 md:mx-10 py-2 md:py-8 p-2 md:px-4">
+        <section className="mx-6 md:mx-10 py-2 md:py-8 p-2 md:px-4 flex flex-col items-center">
             <Helmet>
                 <title>Register - Nexus News</title>
             </Helmet>
             <h2 className="text-2xl md:text-4xl font-semibold text-center mb-8 font-kreonSerif">Please, Register</h2>
-            <div className='flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-8'>
-                <figure className='flex-1 w-1/2 lg:w-full'>
-                    {/* <img src={banner} alt="" /> */}
-                </figure>
-                <div className='flex-1'>
+            {/* <div className='flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-8'> */}
+                {/* <figure className='flex-1 w-1/2 lg:w-full'>
+                    <img src={banner} alt="" />
+                </figure> */}
+                <div className='flex-1 flex flex-col items-center gap-2 lg:w-1/2'>
                     {/* Social Media Login */}
                     <SocialLogin />
                     <div className="flex items-center w-full my-4">
@@ -287,7 +287,7 @@ const Register = () => {
                         <p className="text-center text-sm md:text-base font-medium">Already have an Account? <Link className="hover:pl-4 text-[#3c5cc3] font-bold hover:text-nexus-secondary transition-all duration-500" to={'/login'}>Login Here!</Link></p>
                     </form>
                 </div>
-            </div>
+            {/* </div> */}
         </section>
     );
 };
