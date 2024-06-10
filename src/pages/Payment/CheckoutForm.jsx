@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import moment from "moment";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import { articleLoader } from "../../components/LoadingSpinners/Loaders";
 
 const CheckoutForm = () => {
     const [error, setError] = useState('');
@@ -35,7 +36,6 @@ const CheckoutForm = () => {
         if (price > 0) {
             axiosSecure.post('/payment/create-payment-intent', { price })
                 .then(res => {
-                    // console.log(res.data.clientSecret);
                     setClientSecret(res.data.clientSecret);
                 })
         }
@@ -117,7 +117,7 @@ const CheckoutForm = () => {
                             text: "Now You’re A Premium User!",
                             icon: "success"
                         });
-                        navigate('/premium-articles');
+                        navigate('/profile');
                     }
                 }
             }

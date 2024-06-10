@@ -11,6 +11,10 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import useNexusUsers from "../../hooks/useNexusUsers";
 import moment from "moment";
+import { buttonLoader } from "../../components/LoadingSpinners/Loaders";
+import banner from '../../assets/sub-banner.jpg'
+import { buttonNormal } from "../../utilities/buttonStyles";
+import SectionHeader from "../../components/SectionHeader/SectionHeader";
 
 const animatedComponents = makeAnimated();
 
@@ -40,7 +44,7 @@ const Subscription = () => {
             const hours = duration.hours();
             return Swal.fire({
                 title: `Already Subscribed to ${nexusUser?.current_plan}!`,
-                text: `You Have An Active Plan with ${days} Days and ${hours} Hours Remaining!`,
+                text: `You Have An Active Plan with ${days} Day(s) and ${hours} Hour(s) Remaining!`,
                 icon: "success"
             });
         }
@@ -106,21 +110,23 @@ const Subscription = () => {
         })
     }
 
+    if (isFetching) return buttonLoader;
+
     return (
-        <section className="mx-auto py-2 md:py-8 py-2 px-8 md:px-14">
+        <section className="mx-auto md:py-8 py-2 px-8 md:px-14 flex flex-col items-center gap-5 pb-8">
             <Helmet>
                 <title>Subscriptions - Nexus News</title>
             </Helmet>
             {/* TO-DO: Add Banner Later */}
             {/* Banner */}
-            <figure>
-                <img src="" alt="" />
-                Banner Goes Here
+            <figure className="relative -mt-2 md:-mt-8 opacity-95">
+                <img className="w-full aspect-[1.8/1]" src={banner} alt="Banner" />
+                <div className="absolute font-black text-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-nexusBG text-white text-5xl">SUBSCRIBE TO OUR PREMIUM PLANS</div>
             </figure>
 
+            <SectionHeader subHeading={'Our Premium Plans'} />
             <Plans inSubscriptionPage={true} />
-
-            <form onSubmit={handleSubscription}>
+            <form className="flex flex-col gap-3 items-center" onSubmit={handleSubscription}>
                 <div className="w-[240px] flex flex-col gap-3">
                     <div className="flex items-center gap-2 pl-2 bg-transparent rounded-lg border border-nexus-secondary">
                         <label className="font-medium" htmlFor="subscription"><FaSackDollar /></label>
@@ -135,7 +141,7 @@ const Subscription = () => {
                         />
                     </div>
                 </div>
-                <button type="submit">Subscribe</button>
+                <div className='flex items-center justify-center'><button className={buttonNormal} type="submit">Subscribe</button></div>
             </form >
         </section>
 
