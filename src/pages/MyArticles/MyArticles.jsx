@@ -230,7 +230,7 @@ const MyArticles = () => {
             <SectionHeader heading={`${user.displayName}’s Articles`} />
 
             {
-                !userArticles.length ? <p className="flex items-center justify-center text-red-700">No Data</p> : <NexusTable data={articleData} columns={articleColumns} />
+                !userArticles.length ? <p className="flex items-center justify-center text-red-700 text-lg font-semibold"> You haven’t Posted Anything Yet!</p> : <NexusTable data={articleData} columns={articleColumns} />
             }
 
             {/* ReasonModal */}

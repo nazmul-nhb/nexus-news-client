@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet-async";
 import ArticleCard from "../../components/ArticleCard/ArticleCard";
 import useGetArticles from "../../hooks/useGetArticles";
 import { articleLoader } from "../../components/LoadingSpinners/Loaders";
+import SectionHeader from "../../components/SectionHeader/SectionHeader";
 
 const PremiumArticles = () => {
     const { isLoading, data: premiumArticles } = useGetArticles(['premiumArticles'], 'isPremium=true');
@@ -15,6 +16,8 @@ const PremiumArticles = () => {
             <Helmet>
                 <title>Premium Articles - Nexus News</title>
             </Helmet>
+            <SectionHeader heading={'Explore Our Premium Articles'} subHeading={`Total: ${premiumArticles.length} Articles`}/>
+            <div className="w-full my-6 md:my-16"></div>
             <div className="grid lg:grid-cols-2 xl:grid-cols-2 gap-6">
                 {
                     premiumArticles?.map(article => <ArticleCard

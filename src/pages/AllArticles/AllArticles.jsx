@@ -11,7 +11,8 @@ import { FaNewspaper, FaSearch } from "react-icons/fa";
 import { FaHashtag } from "react-icons/fa6";
 import { MdClear } from "react-icons/md";
 import toast from "react-hot-toast";
-import { articleLoader } from "../../components/LoadingSpinners/Loaders";
+import { articleLoader, searchLoader } from "../../components/LoadingSpinners/Loaders";
+import SectionHeader from "../../components/SectionHeader/SectionHeader";
 
 const animatedComponents = makeAnimated();
 
@@ -74,6 +75,8 @@ const AllArticles = () => {
             <Helmet>
                 <title>All Articles - Nexus News</title>
             </Helmet>
+            <SectionHeader heading={'Explore All Our Articles'} subHeading={`Total: ${allArticles.length}  ${allArticles?.length > 1 ? 'Articles' : 'Article'}`} />
+            <div className="w-full my-6 md:my-16"></div>
             {/* Filter */}
             <div className="grid md:grid-cols-2 lg:grid-cols-4 mx-auto gap-4 mb-8 text-sm">
                 {/* Filter by Publisher */}
@@ -133,16 +136,17 @@ const AllArticles = () => {
                 </button>
             </div>
             <div className="">
-                {isLoading ?
+                {isLoading && !searchText ?
                     articleLoader
-                    : !allArticles.length ? <p>Nothing to Show</p>
-                        : <div className="grid lg:grid-cols-2 xl:grid-cols-2 gap-6">
-                            {
-                                allArticles?.map(article => <ArticleCard key={article._id}
-                                    article={article}
-                                />)
-                            }
-                        </div>
+                    : searchText && isLoading ? searchLoader
+                        : !allArticles.length ? <p className="flex items-center justify-center text-lg font-semibold text-red-700">Nothing Found!</p>
+                            : <div className="grid lg:grid-cols-2 xl:grid-cols-2 gap-6">
+                                {
+                                    allArticles?.map(article => <ArticleCard key={article._id}
+                                        article={article}
+                                    />)
+                                }
+                            </div>
                 }
             </div>
             <div>
