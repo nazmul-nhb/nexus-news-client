@@ -42,7 +42,7 @@ const AddArticle = () => {
 
             // console.log(result);
 
-            if (result.success) {
+            if (result?.success) {
 
                 const finalArticle = {
                     headline,

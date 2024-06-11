@@ -15,6 +15,7 @@ import { buttonLoader } from "../../components/LoadingSpinners/Loaders";
 import banner from '../../assets/sub-banner.jpg'
 import { buttonNormal } from "../../utilities/buttonStyles";
 import SectionHeader from "../../components/SectionHeader/SectionHeader";
+import useUserRole from "../../hooks/useUserRole";
 
 const animatedComponents = makeAnimated();
 
@@ -31,9 +32,19 @@ const Subscription = () => {
     const axiosSecure = useAxiosSecure();
     const navigate = useNavigate();
     const { isFetching, data: nexusUser = {} } = useNexusUsers(['nexusUser', user?.email], user?.email);
+    const { role } = useUserRole();
 
     const handleSubscription = (e) => {
         e.preventDefault();
+
+        if (role==='admin') {
+            return Swal.fire({
+                title: 'Alert!',
+                text: 'Admins Cannot Buy Subscriptions!',
+                icon: 'warning',
+                confirmButtonText: 'Close'
+            });
+        }
 
         // check if a user is already subscribed and return with a modal
         if (nexusUser?.isPremium && nexusUser?.expires_on) {
@@ -92,7 +103,7 @@ const Subscription = () => {
                         } else {
                             Swal.fire({
                                 title: 'Error!',
-                                text: 'Error Happened! Try Again!',
+                                text: 'Something Went Wrong! Try Again!',
                                 icon: 'error',
                                 confirmButtonText: 'Close'
                             });

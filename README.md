@@ -10,7 +10,7 @@ A Simple Newspaper Website
 
 For admin access, use the following credentials:
 
-- **Email**: admin@nexus.com
+- **Email**: <admin@nexus.com>
 - **Password**: Admin@Nexus42
 
 ### NPM Utility Packages Used in this Project
@@ -21,7 +21,7 @@ For admin access, use the following credentials:
 - [react-photo-view](https://www.npmjs.com/package/react-photo-view) to view photos in full size
 - [react-hook-form](https://react-hook-form.com/) for handling forms
 - [react-simple-typewriter](https://www.npmjs.com/package/react-simple-typewriter) for typewriter animation
-- [swiper](https://swiperjs.com/) for sliders/swipers on the homepage banner
+- [swiper](https://swiperjs.com/) for slider on the homepage banner
 - [animate.css](https://animate.style/) for animation effects
 - [react-tooltip](https://react-tooltip.com/) for showing tooltips
 - [react-helmet-async](https://www.npmjs.com/package/react-helmet-async) for dynamic page titles
@@ -29,12 +29,12 @@ For admin access, use the following credentials:
 - [react-hot-toast](https://react-hot-toast.com/) for showing toast notifications
 - [sweetalert2](https://sweetalert2.github.io/) for showing sweet alerts
 - [momentjs](https://momentjs.com/) for handling time and date formats
-- [keen-slider](https://keen-slider.io/) for creating sliders and carousels
+- [keen-slider](https://keen-slider.io/) for creating publisher carousel
 - [leaflet](https://leafletjs.com/) for interactive maps
 - [react-chartjs-2](https://react-chartjs-2.js.org/) for charts and data visualization
 - [react-countup](https://www.npmjs.com/package/react-countup) for number animations
-- [react-fast-marquee](https://www.npmjs.com/package/react-fast-marquee) for scrolling text animations
-- [react-google-charts](https://react-google-charts.com/) for embedding Google Charts
+- [react-fast-marquee](https://www.npmjs.com/package/react-fast-marquee) for scrolling latest headlines on top of navbar
+- [react-google-charts](https://react-google-charts.com/) for displaying stats in admin dashboard
 - [react-intersection-observer](https://www.npmjs.com/package/react-intersection-observer) for observing visibility of elements
 - [react-select](https://react-select.com/home) for customizable select input fields
 
@@ -60,7 +60,7 @@ For admin access, use the following credentials:
 
 - Displays premium plans.
 - Users can select a plan and proceed to the payment page.
-- If subscribed, a popup shows the plan details.
+- If already subscribed, a popup shows the plan details.
 
 #### Article Details Page
 
@@ -113,11 +113,11 @@ For admin access, use the following credentials:
 
 - **Navbar**: Includes a theme toggler icon to switch between dark and light modes. Clicking the profile picture opens a menu with profile links and a logout button.
 - **Scroll Buttons**: Allows users to scroll to the top or bottom of pages.
-- **Headline Scroller**: Displays the latest headlines scrolling from right to left.
+- **Headline Scroller**: On top of Navbar displays the latest headlines scrolling from right to left.
 - **Live Clock**: Shows a live clock on the right corner of the website.
 - **404 Error Page**: Displays when an invalid URL is accessed.
 
-### Technologies Used in this Project
+## Technologies Used in this Project
 
 - ReactJS
 - JavaScript

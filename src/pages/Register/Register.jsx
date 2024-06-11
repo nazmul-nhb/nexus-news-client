@@ -73,7 +73,7 @@ const Register = () => {
             // console.log(result);
             const lowResImageURL = result.data.display_url;
 
-            if (result.success) {
+            if (result?.success) {
                 createUser(email, password)
                     .then(() => {
                         // update profile

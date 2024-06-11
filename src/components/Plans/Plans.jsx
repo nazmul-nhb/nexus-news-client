@@ -42,7 +42,7 @@ const Plans = ({ inSubscriptionPage }) => {
                 </ul>
                 {inSubscriptionPage || <div className='flex items-center justify-center'><button
                     onClick={() => navigate('/subscription')}
-                    className={`${buttonInvert} text-white bg-yellow-700 border-yellow-700 hover:border-yellow-700 hover:bg-transparent hover:text-yellow-700`}>Try for 7 Days</button></div>}
+                    className={`${buttonInvert} text-white bg-yellow-700 border-yellow-700 hover:border-yellow-700 hover:bg-transparent hover:!text-yellow-700`}>Try for 7 Days</button></div>}
             </div>
 
             <div className="border border-green-700 p-3 rounded-xl shadow-md shadow-green-700 bg-green-100 bg-opacity-75 text-green-700 flex flex-col gap-3">
@@ -55,7 +55,7 @@ const Plans = ({ inSubscriptionPage }) => {
                 </ul>
                 {inSubscriptionPage || <div className='flex items-center justify-center'><button 
                     onClick={() => navigate('/subscription')}
-                className={`${buttonInvert} text-white bg-green-700 border-green-700 hover:border-green-700 hover:bg-transparent hover:text-green-700`}>Try for 30 Days</button></div>}
+                className={`${buttonInvert} text-white bg-green-700 border-green-700 hover:border-green-700 hover:bg-transparent hover:!text-green-700`}>Try for 30 Days</button></div>}
             </div>
 
             <div className="border border-orange-700 p-3 rounded-xl shadow-md shadow-orange-700 bg-orange-100 bg-opacity-75 text-orange-700 flex flex-col gap-3">
@@ -68,7 +68,7 @@ const Plans = ({ inSubscriptionPage }) => {
                 </ul>
                 {inSubscriptionPage || <div className='flex items-center justify-center'><button
                     onClick={() => navigate('/subscription')}
-                    className={`${buttonInvert} text-white bg-orange-700 border-orange-700 hover:border-orange-700 hover:bg-transparent hover:text-orange-700`}>Try for 365 Days</button></div>}
+                    className={`${buttonInvert} text-white bg-orange-700 border-orange-700 hover:border-orange-700 hover:bg-transparent hover:!text-orange-700`}>Try for 365 Days</button></div>}
             </div>
 
         </section>

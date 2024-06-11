@@ -47,7 +47,7 @@ const Profile = () => {
             if (imageFile) {
                 // start image upload
                 result = await uploadImage(imageFile);
-                if (result.success) {
+                if (result?.success) {
                     lowResImageURL = result.data.display_url;
                 }
             }

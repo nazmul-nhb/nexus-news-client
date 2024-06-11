@@ -14,8 +14,7 @@ const useGetUserType = () => {
             // console.log(data);
             return data?.isPremium || false;
         }
-    })
-
+    });
     return { premiumUser, premiumLoading };
 }
 

@@ -13,6 +13,7 @@ import { FaUserEdit } from 'react-icons/fa';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import { IoNewspaper } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
+import { buttonNormal } from '../../utilities/buttonStyles';
 
 const AdminActionArticle = ({ article, refetch }) => {
     const { _id, headline, posted_by_email, posted_on, status, isPremium, publisher } = article;
@@ -140,7 +141,7 @@ const AdminActionArticle = ({ article, refetch }) => {
 
                         <form onSubmit={(e) => handleDeclineArticle(e, _id)} className='flex flex-col items-center justify-between h-3/4 p-1'>
                             <textarea className='text-sm bg-transparent outline-0 border border-nexus-primary w-4/5 h-3/4 p-2 rounded-lg' name="feedback" id="feedback" />
-                            <button type='submit'>Decline</button>
+                            <button className={buttonNormal} type='submit'>Decline</button>
                         </form>
                     </div>
                 </dialog>

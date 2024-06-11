@@ -50,7 +50,7 @@ const AddPublisher = () => {
             console.log(result);
             const publisher_logo = result.data.image.url;
 
-            if (result.success) {
+            if (result?.success) {
                 const newPublisher = { publisher, publisher_logo, added_on: moment().format("YYYY-MM-DD HH:mm:ss") }
 
                 const res = await axiosSecure.post('/publishers', newPublisher);
