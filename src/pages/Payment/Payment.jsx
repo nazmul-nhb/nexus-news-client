@@ -7,7 +7,7 @@ const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_KEY);
 
 const Payment = () => {
     return (
-        <section className="mx-auto py-2 md:py-8 py-2 px-8 md:px-14">
+        <section className="mx-auto md:py-8 py-2 px-8 md:px-14">
             <Helmet>
                 <title>Payment - Nexus News</title>
             </Helmet>

@@ -6,7 +6,7 @@ const Plans = ({ inSubscriptionPage }) => {
     const navigate = useNavigate();
 
     return (
-        <section className="w-full mx-auto gap-4 grid lg:grid-cols-4 ">
+        <section className="w-full mx-auto gap-4 grid md:grid-cols-2 lg:grid-cols-4 ">
 
             {/* {inSubscriptionPage ||
                 <div className="border border-nexus-secondary p-3 rounded-xl shadow-md shadow-nexus-primary bg-nexusBG text-nexus-primary flex flex-col gap-3">
@@ -19,7 +19,7 @@ const Plans = ({ inSubscriptionPage }) => {
                     </ul>
                 </div>} */}
 
-            <div className="border border-nexus-secondary p-3 rounded-xl shadow-md shadow-nexus-primary bg-nexusBG text-nexus-primary flex flex-col gap-3">
+            <div className="relative border border-nexus-primary p-3 rounded-xl shadow-md shadow-nexus-primary bg-nexusBG text-nexus-primary flex flex-col gap-3">
                 <h3 className="text-center font-bold font-kreonSerif text-3xl">Minute Monitor</h3>
                 <ul className='flex-grow text-lg list-disc ml-6'>
                     <li>Browse Premium News</li>
@@ -27,12 +27,13 @@ const Plans = ({ inSubscriptionPage }) => {
                     <li>Exclusive Updates</li>
                     <li>Can Post more than 1 Article</li>
                 </ul>
+                <span className='absolute top-0.5 right-0.5 text-sm md:text-lg font-black rounded-full border border-inherit aspect-square flex items-center justify-center px-2'>$1</span>
                 {inSubscriptionPage || <div className='flex items-center justify-center'><button
                     onClick={() => navigate('/subscription')}
                  className={`${buttonNormal}`}>Try for 1 Day</button></div>}
             </div>
 
-            <div className="border border-yellow-700 p-3 rounded-xl shadow-md shadow-yellow-700 bg-yellow-100 bg-opacity-75 text-yellow-700 flex flex-col gap-3">
+            <div className="relative border border-yellow-700 p-3 rounded-xl shadow-md shadow-yellow-700 bg-yellow-100 bg-opacity-75 text-yellow-700 flex flex-col gap-3">
                 <h3 className="text-center font-bold font-kreonSerif text-3xl">Weekly Wrap-Up</h3>
                 <ul className='flex-grow text-lg list-disc ml-6'>
                     <li>Browse Premium News</li>
@@ -40,12 +41,13 @@ const Plans = ({ inSubscriptionPage }) => {
                     <li>Exclusive Updates</li>
                     <li>Can Post more than 1 Article</li>
                 </ul>
+                <span className='absolute top-0.5 right-0.5 text-sm md:text-lg font-black rounded-full border border-inherit aspect-square flex items-center justify-center px-2'>$5</span>
                 {inSubscriptionPage || <div className='flex items-center justify-center'><button
                     onClick={() => navigate('/subscription')}
                     className={`${buttonInvert} text-white bg-yellow-700 border-yellow-700 hover:border-yellow-700 hover:bg-transparent hover:!text-yellow-700`}>Try for 7 Days</button></div>}
             </div>
 
-            <div className="border border-green-700 p-3 rounded-xl shadow-md shadow-green-700 bg-green-100 bg-opacity-75 text-green-700 flex flex-col gap-3">
+            <div className="relative border border-green-700 p-3 rounded-xl shadow-md shadow-green-700 bg-green-100 bg-opacity-75 text-green-700 flex flex-col gap-3">
                 <h3 className="text-center font-bold font-kreonSerif text-3xl">Monthly Marvel</h3>
                 <ul className='flex-grow text-lg list-disc ml-6'>
                     <li>Browse Premium News</li>
@@ -53,12 +55,13 @@ const Plans = ({ inSubscriptionPage }) => {
                     <li>Exclusive Updates</li>
                     <li>Can Post more than 1 Article</li>
                 </ul>
+                <span className='absolute top-0.5 right-0.5 text-sm md:text-lg font-black rounded-full border border-inherit aspect-square flex items-center justify-center px-2'>$15</span>
                 {inSubscriptionPage || <div className='flex items-center justify-center'><button 
                     onClick={() => navigate('/subscription')}
                 className={`${buttonInvert} text-white bg-green-700 border-green-700 hover:border-green-700 hover:bg-transparent hover:!text-green-700`}>Try for 30 Days</button></div>}
             </div>
 
-            <div className="border border-orange-700 p-3 rounded-xl shadow-md shadow-orange-700 bg-orange-100 bg-opacity-75 text-orange-700 flex flex-col gap-3">
+            <div className="relative border border-orange-700 p-3 rounded-xl shadow-md shadow-orange-700 bg-orange-100 bg-opacity-75 text-orange-700 flex flex-col gap-3">
                 <h3 className="text-center font-bold font-kreonSerif text-3xl">Yearly Yonder</h3>
                 <ul className='flex-grow text-lg list-disc ml-6'>
                     <li>Browse Premium News</li>
@@ -66,6 +69,7 @@ const Plans = ({ inSubscriptionPage }) => {
                     <li>Exclusive Updates</li>
                     <li>Can Post more than 1 Article</li>
                 </ul>
+                <span className='absolute top-0.5 right-0.5 text-sm md:text-lg font-black rounded-full border border-inherit aspect-square flex items-center justify-center px-2'>$150</span>
                 {inSubscriptionPage || <div className='flex items-center justify-center'><button
                     onClick={() => navigate('/subscription')}
                     className={`${buttonInvert} text-white bg-orange-700 border-orange-700 hover:border-orange-700 hover:bg-transparent hover:!text-orange-700`}>Try for 365 Days</button></div>}

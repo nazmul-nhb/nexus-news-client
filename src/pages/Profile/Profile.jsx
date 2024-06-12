@@ -137,13 +137,17 @@ const Profile = () => {
                                     </div>
                                 }
                                 {nexusUser?.expires_on && <>
-                                    <div className="flex flex-col items-center lg:flex-row gap-1 md:text-xl">
-                                        <h4 className="font-semibold">Current Plan:</h4>
+                                    <div className={`${now.isAfter(expiration) && 'text-red-600'} flex flex-col items-center lg:flex-row gap-1 md:text-xl`}>
+                                        <h4 className="font-semibold">{now.isAfter(expiration) ? 'Previous Plan:' : 'Current Plan:'}</h4>
                                         <h4>{nexusUser?.current_plan}</h4>
                                     </div>
-                                    <div className="flex flex-col items-center lg:flex-row gap-1 md:text-xl">
+                                    <div className={`${now.isAfter(expiration) && 'text-red-600'} flex flex-col items-center lg:flex-row gap-1 md:text-xl`}>
                                         <h4 className="font-semibold">{now.isAfter(expiration) ? 'Expired' : 'Will Expire'} on:</h4>
                                         <h4>{moment(nexusUser?.expires_on).format('MMMM DD, YYYY [at] hh:mm:ss A')}</h4>
+                                    </div>
+                                    <div className={`flex flex-col items-center lg:flex-row gap-1 md:text-xl`}>
+                                        <h4 className="font-semibold">Last Transaction ID:</h4>
+                                        <h4>{nexusUser?.last_transaction_ID}</h4>
                                     </div>
                                 </>}
                             </div>

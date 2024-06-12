@@ -20,7 +20,7 @@ const Home = () => {
         setTimeout(() => {
             if (!premiumUser) {
                 Swal.fire({
-                    title: "Did You Know about Our Premium Plans?!",
+                    title: "Did You Know About Our Premium Plans?",
                     text: `Get Exciting Features! Subscribe to Our Premium Plans Now!`,
                     icon: "warning",
                     showCancelButton: true,

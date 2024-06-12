@@ -10,11 +10,13 @@ import moment from 'moment';
 import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
 import { useQuery } from '@tanstack/react-query';
+import useGetUserType from '../hooks/useGetUserType';
 
 const Root = () => {
     const { user, userLoading } = useAuth();
     const axiosSecure = useAxiosSecure();
     const navigate = useNavigate();
+    const { premiumUser } = useGetUserType();
 
     const { data: nexusUser = {} } = useQuery({
         enabled: !!user && !userLoading,
@@ -26,21 +28,20 @@ const Root = () => {
     });
 
     useEffect(() => {
-        if (!user || !user.email || !nexusUser.expires_on) return;
+        if (!user || !user.email || !premiumUser) return;
         const intervalId = setInterval(() => {
             const now = moment();
             const expiration = moment(nexusUser?.expires_on);
 
             if (now.isAfter(expiration)) {
-                toast.error('Your subscription Has expired.');
+                toast.error('Your Subscription Has expired.');
                 // reset the user subscription properties
                 const resetUserSubscription = async () => {
                     const updatedUser = {
                         isPremium: false,
-                        premium_taken: null,
-                        expires_on: null,
-                        current_plan: null,
-                        last_transaction_ID: null
+                        // premium_taken: null,
+                        // expires_on: null,
+                        // current_plan: null
                     };
 
                     const res = await axiosSecure.patch(`/users/${user?.email}`, updatedUser);
@@ -68,7 +69,7 @@ const Root = () => {
         // clear interval
         return () => clearInterval(intervalId);
 
-    }, [nexusUser, user, axiosSecure, navigate]);
+    }, [nexusUser, user, axiosSecure, navigate, premiumUser]);
 
     return (
         <>

@@ -16,6 +16,7 @@ import banner from '../../assets/sub-banner.jpg'
 import { buttonNormal } from "../../utilities/buttonStyles";
 import SectionHeader from "../../components/SectionHeader/SectionHeader";
 import useUserRole from "../../hooks/useUserRole";
+import useGetUserType from "../../hooks/useGetUserType";
 
 const animatedComponents = makeAnimated();
 
@@ -33,21 +34,22 @@ const Subscription = () => {
     const navigate = useNavigate();
     const { isFetching, data: nexusUser = {} } = useNexusUsers(['nexusUser', user?.email], user?.email);
     const { role } = useUserRole();
+    const { premiumUser } = useGetUserType();
 
     const handleSubscription = (e) => {
         e.preventDefault();
 
-        if (role==='admin') {
+        if (role === 'admin') {
             return Swal.fire({
                 title: 'Alert!',
-                text: 'Admins Cannot Buy Subscriptions!',
+                text: 'Admins Need Not Buy Subscriptions!',
                 icon: 'warning',
                 confirmButtonText: 'Close'
             });
         }
 
         // check if a user is already subscribed and return with a modal
-        if (nexusUser?.isPremium && nexusUser?.expires_on) {
+        if (premiumUser && nexusUser?.expires_on) {
             const expiration = moment(nexusUser.expires_on);
             const duration = moment.duration(expiration.diff(moment()));
 
@@ -98,12 +100,13 @@ const Subscription = () => {
             if (result.isConfirmed) {
                 axiosSecure.post('/payment', subscriptionPlan)
                     .then(res => {
-                        if (res.data.insertedId || res.data.modifiedCount > 0) {
+                        console.log(res.data);
+                        if (res.data.insertedId || res.data.modifiedCount > 0 || res.data.matchedCount > 0) {
                             navigate('/payment');
                         } else {
                             Swal.fire({
                                 title: 'Error!',
-                                text: 'Something Went Wrong! Try Again!',
+                                text: 'Something Went Wrong! Try Di!',
                                 icon: 'error',
                                 confirmButtonText: 'Close'
                             });
