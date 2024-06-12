@@ -100,7 +100,7 @@ const Subscription = () => {
             if (result.isConfirmed) {
                 axiosSecure.post('/payment', subscriptionPlan)
                     .then(res => {
-                        console.log(res.data);
+                        // console.log(res.data);
                         if (res.data.insertedId || res.data.modifiedCount > 0 || res.data.matchedCount > 0) {
                             navigate('/payment');
                         } else {
