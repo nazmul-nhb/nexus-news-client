@@ -1,6 +1,6 @@
 # Nexus News
 
-A Simple Newspaper Website
+A Simple News Portal Website
 
 ## Live Link
 
@@ -10,8 +10,8 @@ A Simple Newspaper Website
 
 For admin access, use the following credentials:
 
-- **Email**: <admin@nexus.com>
-- **Password**: Admin@Nexus42
+- **Email**: `admin@nexus.com`
+- **Password**: `Admin@Nexus42`
 
 ### NPM Utility Packages Used in this Project
 
