@@ -100,7 +100,7 @@ const AddPublisher = () => {
                         if (res.data.deletedCount > 0) {
                             refetch();
                             Swal.fire(
-                                'Article Deleted!',
+                                'Publisher Deleted!',
                                 `Permanently Deleted "${publisher}"!`,
                                 'success'
                             )

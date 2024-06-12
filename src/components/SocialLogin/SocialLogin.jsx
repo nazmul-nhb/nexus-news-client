@@ -117,12 +117,12 @@ const SocialLogin = () => {
         <div className="text-nexus-secondary">
             <h3 className='text-lg md:text-xl font-medium text-center mb-6 font-kreonSerif'>Login with Social Media</h3>
             <div className="flex flex-col md:flex-row md:items-center gap-4 text-xl font-bold tracking-wider">
-                <button onClick={handleGoogleLogin} aria-label="Login with Google" type="button" className="flex items-center justify-center w-full p-2 gap-2 border rounded-md border-[#dc3c2a] bg-[#dc3c2a] text-[#fff] hover:text-[#dc3c2a] hover:bg-transparent transition-all duration-500">
+                <button onClick={handleGoogleLogin} aria-label="Login with Google" type="button" className="flex items-center justify-center w-full px-2 py-1 gap-2 border rounded-md border-[#dc3c2a] bg-[#dc3c2a] text-[#fff] hover:text-[#dc3c2a] hover:bg-transparent transition-all duration-500">
                     <FaGoogle />
                     <p>Google</p>
                 </button>
 
-                <button onClick={handleFacebookLogin} aria-label="Login with Facebook" role="button" className="flex items-center justify-center w-full p-2 gap-2 border rounded-md border-[#0866ff] bg-[#0866ff] text-[#fff] hover:text-[#0866ff] hover:bg-transparent transition-all duration-500">
+                <button onClick={handleFacebookLogin} aria-label="Login with Facebook" role="button" className="flex items-center justify-center w-full px-2 py-1 gap-2 border rounded-md border-[#0866ff] bg-[#0866ff] text-[#fff] hover:text-[#0866ff] hover:bg-transparent transition-all duration-500">
                     <FaFacebook />
                     <p>Facebook</p>
                 </button>
