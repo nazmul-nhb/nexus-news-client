@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import { articleLoader } from "../../components/LoadingSpinners/Loaders";
 import { buttonInvert } from "../../utilities/buttonStyles";
+import SectionHeader from "../../components/SectionHeader/SectionHeader";
 
 const CheckoutForm = () => {
     const [error, setError] = useState('');
@@ -29,7 +30,6 @@ const CheckoutForm = () => {
         }
     })
 
-    // console.log(price);
     const { price, plan, expires_in } = paymentInfo;
 
     useEffect(() => {
@@ -61,11 +61,11 @@ const CheckoutForm = () => {
         })
 
         if (error) {
-            // console.log('payment error', error);
+            console.error('Payment Error: ', error);
             setError(error.message);
         }
         else {
-            // console.log('payment method', paymentMethod);
+            console.log('Payment Method: ', paymentMethod);
             setError('');
         }
 
@@ -108,9 +108,10 @@ const CheckoutForm = () => {
                         current_plan: plan,
                         last_transaction_ID: paymentIntent.id
                     }
+
                     // update user info after successful payment
                     const result = await axiosSecure.patch(`/users/${user?.email}`, updatedUser);
-                    // console.log('user: ', result);
+
                     if (result.data.modifiedCount > 0) {
                         Swal.fire({
                             title: "Congratulations!",
@@ -129,31 +130,43 @@ const CheckoutForm = () => {
     }
 
     return (
-        <form className="space-y-5" onSubmit={handleSubmit}>
-            <CardElement
-                options={{
-                    style: {
-                        base: {
-                            fontSize: '16px',
-                            color: '#424770',
-                            '::placeholder': {
-                                color: '#aab7c4',
+        <section className="mx-6 md:mx-10 md:py-8 p-2 md:px-4 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            {paymentInfo ?
+                <div className="text-lg space-y-5 text-center px-6 py-3 shadow-md shadow-nexus-primary border border-nexus-primary bg-nexusBG rounded-xl">
+                    <SectionHeader subHeading={'Pay for Your Plan'} />
+                    <h4 className="font-medium">Selected Plan: <span className="text-nexus-primary font-bold">{paymentInfo?.plan}</span></h4>
+                    <h4 className="font-medium">Validity: <span className="text-nexus-primary font-bold">{paymentInfo?.expires_in?.duration} {paymentInfo?.expires_in?.time}</span></h4>
+                    <h4 className="font-medium">Subscription Fee: <span className="text-nexus-primary font-bold">${paymentInfo?.price}</span></h4>
+                </div>
+                : <p className="text-red-600 text-center">You Did Not Select Any Subscription Plan!</p>
+            }
+            <form className="flex-1 space-y-5" onSubmit={handleSubmit}>
+                <SectionHeader subHeading={'Enter Your Card Information'} />
+                <CardElement className="shadow-md shadow-nexus-primary border border-nexus-primary bg-nexusBG px-3 py-1 rounded-3xl"
+                    options={{
+                        style: {
+                            base: {
+                                fontSize: '16px',
+                                color: '#424770',
+                                '::placeholder': {
+                                    color: '#aab7c4',
+                                },
+                            },
+                            invalid: {
+                                color: '#9e2146',
                             },
                         },
-                        invalid: {
-                            color: '#9e2146',
-                        },
-                    },
-                }}
-            />
-            <div className='flex items-center justify-center'>
-                <button className={buttonInvert} type="submit" disabled={!stripe || !clientSecret}>
-                Pay Now
-            </button>
-            </div>
-            <p className="text-red-600">{error}</p>
-            {transactionId && <p className="text-green-600"> Your Transaction ID: {transactionId}</p>}
-        </form>
+                    }}
+                />
+                <div className='flex items-center justify-center'>
+                    <button className={buttonInvert} type="submit" disabled={!stripe || !clientSecret}>
+                        Pay Now
+                    </button>
+                </div>
+                <p className="text-red-600 text-center">{error}</p>
+                {transactionId && <p className="text-green-600"> Your Transaction ID: {transactionId}</p>}
+            </form>
+        </section>
     );
 };
 
