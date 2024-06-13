@@ -37,12 +37,7 @@ const Root = () => {
                 toast.error('Your Subscription Has expired.');
                 // reset the user subscription properties
                 const resetUserSubscription = async () => {
-                    const updatedUser = {
-                        isPremium: false,
-                        // premium_taken: null,
-                        // expires_on: null,
-                        // current_plan: null
-                    };
+                    const updatedUser = { isPremium: false };
 
                     const res = await axiosSecure.patch(`/users/${user?.email}`, updatedUser);
                     if (res.data.modifiedCount > 0) {

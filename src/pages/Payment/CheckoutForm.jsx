@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import moment from "moment";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
-import { articleLoader } from "../../components/LoadingSpinners/Loaders";
+import { articleLoader, buttonLoader } from "../../components/LoadingSpinners/Loaders";
 import { buttonInvert } from "../../utilities/buttonStyles";
 import SectionHeader from "../../components/SectionHeader/SectionHeader";
 
@@ -15,6 +15,7 @@ const CheckoutForm = () => {
     const [error, setError] = useState('');
     const [clientSecret, setClientSecret] = useState('')
     const [transactionId, setTransactionId] = useState('');
+    const [isStripeLoading, setIsStripeLoading] = useState(false);
     const stripe = useStripe();
     const elements = useElements();
     const axiosSecure = useAxiosSecure();
@@ -44,14 +45,17 @@ const CheckoutForm = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setIsStripeLoading(true);
 
         if (!stripe || !elements) {
+            setIsStripeLoading(false);
             return;
         }
 
         const card = elements.getElement(CardElement)
 
         if (card === null) {
+            setIsStripeLoading(false);
             return;
         }
 
@@ -63,6 +67,7 @@ const CheckoutForm = () => {
         if (error) {
             console.error('Payment Error: ', error);
             setError(error.message);
+            setIsStripeLoading(false);
         }
         else {
             console.log('Payment Method: ', paymentMethod);
@@ -82,6 +87,7 @@ const CheckoutForm = () => {
 
         if (confirmError) {
             console.error('confirm error')
+            setIsStripeLoading(false);
         }
         else {
             // console.log('payment intent: ', paymentIntent)
@@ -113,12 +119,20 @@ const CheckoutForm = () => {
                     const result = await axiosSecure.patch(`/users/${user?.email}`, updatedUser);
 
                     if (result.data.modifiedCount > 0) {
+                        setIsStripeLoading(false);
                         Swal.fire({
                             title: "Congratulations!",
                             text: "Now You’re A Premium User!",
-                            icon: "success"
+                            icon: "success",
+                            showCancelButton: true,
+                            confirmButtonColor: "#3085d6",
+                            cancelButtonColor: "#d33",
+                            confirmButtonText: "Go to Profile!"
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                navigate('/profile');
+                            }
                         });
-                        navigate('/profile');
                     }
                 }
             }
@@ -130,42 +144,44 @@ const CheckoutForm = () => {
     }
 
     return (
-        <section className="mx-6 md:mx-10 md:py-8 p-2 md:px-4 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-            {paymentInfo ?
-                <div className="text-lg space-y-5 text-center px-6 py-3 shadow-md shadow-nexus-primary border border-nexus-primary bg-nexusBG rounded-xl">
+        <section className="mx-auto pt-6 flex flex-col lg:flex-row lg:items-center justify-center gap-6">
+            {paymentInfo ? <>
+                <div className="text-base md:text-lg space-y-5 text-center px-6 py-3 shadow-md shadow-nexus-primary border border-nexus-primary bg-nexusBG rounded-xl">
                     <SectionHeader subHeading={'Pay for Your Plan'} />
-                    <h4 className="font-medium">Selected Plan: <span className="text-nexus-primary font-bold">{paymentInfo?.plan}</span></h4>
-                    <h4 className="font-medium">Validity: <span className="text-nexus-primary font-bold">{paymentInfo?.expires_in?.duration} {paymentInfo?.expires_in?.time}</span></h4>
-                    <h4 className="font-medium">Subscription Fee: <span className="text-nexus-primary font-bold">${paymentInfo?.price}</span></h4>
+                    <h4 className="font-medium">Selected Plan: <span className="text-nexus-primary font-bold">{plan}</span></h4>
+                    <h4 className="font-medium">Validity: <span className="text-nexus-primary font-bold">{expires_in?.duration} {expires_in?.time}</span></h4>
+                    <h4 className="font-medium">Subscription Fee: <span className="text-nexus-primary font-bold">${price}</span></h4>
                 </div>
-                : <p className="text-red-600 text-center">You Did Not Select Any Subscription Plan!</p>
-            }
-            <form className="flex-1 space-y-5" onSubmit={handleSubmit}>
-                <SectionHeader subHeading={'Enter Your Card Information'} />
-                <CardElement className="shadow-md shadow-nexus-primary border border-nexus-primary bg-nexusBG px-3 py-1 rounded-3xl"
-                    options={{
-                        style: {
-                            base: {
-                                fontSize: '16px',
-                                color: '#424770',
-                                '::placeholder': {
-                                    color: '#aab7c4',
+                <form className="flex-1 space-y-5" onSubmit={handleSubmit}>
+                    <SectionHeader subHeading={'Enter Your Card Information'} />
+                    <CardElement className="shadow-md shadow-nexus-primary border border-nexus-primary bg-nexusBG px-3 py-1 rounded-3xl"
+                        options={{
+                            style: {
+                                base: {
+                                    fontSize: '16px',
+                                    color: '#424770',
+                                    '::placeholder': {
+                                        color: '#aab7c4',
+                                    },
+                                },
+                                invalid: {
+                                    color: '#9e2146',
                                 },
                             },
-                            invalid: {
-                                color: '#9e2146',
-                            },
-                        },
-                    }}
-                />
-                <div className='flex items-center justify-center'>
-                    <button className={buttonInvert} type="submit" disabled={!stripe || !clientSecret}>
-                        Pay Now
-                    </button>
-                </div>
-                <p className="text-red-600 text-center">{error}</p>
-                {transactionId && <p className="text-green-600"> Your Transaction ID: {transactionId}</p>}
-            </form>
+                        }}
+                    />
+                    <div className='flex items-center justify-center'>
+                        <button className={buttonInvert} type="submit" disabled={!stripe || !clientSecret}>
+                            {isStripeLoading ? buttonLoader : 'Pay Now'}
+                        </button>
+                    </div>
+                    <p className="text-red-600 text-center">{error}</p>
+                    {transactionId && <p className="text-green-700 flex items-center justify-center"> Your Transaction ID: {transactionId}</p>}
+                </form>
+            </>
+                : <p className="text-red-600 font-bold flex items-center justify-center">You Did Not Select Any Subscription Plan!</p>
+            }
+
         </section>
     );
 };

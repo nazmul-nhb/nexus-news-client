@@ -20,13 +20,13 @@ const Home = () => {
         setTimeout(() => {
             if (!premiumUser) {
                 Swal.fire({
-                    title: "Did You Know About Our Premium Plans?",
-                    text: `Get Exciting Features! Subscribe to Our Premium Plans Now!`,
+                    title: "Check Out Our Premium Plans!",
+                    text: `Get Exciting Features! Subscribe to Premium Plans Now!`,
                     icon: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#3085d6",
                     cancelButtonColor: "#d33",
-                    confirmButtonText: "Buy Subscription!"
+                    confirmButtonText: "Subscribe!"
                 }).then((result) => {
                     if (result.isConfirmed) {
                         navigate('/subscription');
