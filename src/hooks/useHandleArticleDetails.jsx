@@ -36,7 +36,7 @@ const useHandleArticleDetails = () => {
             if (securedArticle.isPremium && !premiumUser) {
                 Swal.fire({
                     title: "Premium Article!",
-                    text: `This Article Needs Subscription to Read!`,
+                    text: `Needs Subscription to Read!`,
                     icon: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#3085d6",

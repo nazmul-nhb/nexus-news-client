@@ -2,7 +2,7 @@ import "./Navbar.css";
 import defaultPP from '../../assets/user.png';
 import { NavLink } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
-import { MdAppRegistration, MdMenuOpen, MdOutlineClose } from "react-icons/md";
+import { MdAppRegistration, MdMenuOpen, MdOutlineClose, MdOutlineDashboard, MdOutlineWorkspacePremium, MdPostAdd } from "react-icons/md";
 import { Tooltip } from "react-tooltip";
 import toast from "react-hot-toast";
 import ToggleTheme from "../ToggleTheme/ToggleTheme";
@@ -13,6 +13,10 @@ import { GiExitDoor } from "react-icons/gi";
 import useUserRole from "../../hooks/useUserRole";
 import logo from '../../assets/logo.png'
 import { buttonLoader } from "../LoadingSpinners/Loaders";
+import { IoHomeOutline, IoLogoUsd } from "react-icons/io5";
+import { RiArticleLine } from "react-icons/ri";
+import { PiArticleMediumBold } from "react-icons/pi";
+import { TiInfoLargeOutline } from "react-icons/ti";
 
 const Navbar = () => {
     const { user, userLoading, logOut } = useAuth();
@@ -51,19 +55,19 @@ const Navbar = () => {
         };
     }, [sidebarRef, dropdownRef]);
 
-    const navClasses = ({ isActive }) => isActive ? 'text-nexus-primary font-bold border-b-2 border-nexus-primary flex items-center gap-2' : 'text-nexus-secondary hover:text-nexus-primary flex items-center gap-2';
+    const navClasses = ({ isActive }) => isActive ? 'text-nexus-primary font-bold border-b-2 border-nexus-primary flex items-center gap-0.5' : 'text-nexus-secondary hover:text-nexus-primary font-semibold flex items-center gap-0.5';
 
     const navItems = <>
-        <NavLink className={navClasses} to={'/'}>Home</NavLink>
-        <NavLink className={navClasses} to={'/all-articles'}>All Articles</NavLink>
+        <NavLink className={navClasses} to={'/'}><IoHomeOutline />Home</NavLink>
+        <NavLink className={navClasses} to={'/all-articles'}><RiArticleLine />All Articles</NavLink>
         {user && <>
-            <NavLink className={navClasses} to={'/subscription'}>Subscription</NavLink>
-            <NavLink className={navClasses} to={'/add-article'}>Add Articles</NavLink>
-            <NavLink className={navClasses} to={'my-articles'}>My Articles</NavLink>
-            <NavLink className={navClasses} to={'/premium-articles'}>Premium Articles</NavLink>
-            {role === 'admin' && <NavLink className={navClasses} to={'/dashboard'}>Dashboard</NavLink>}
+            <NavLink className={navClasses} to={'/subscription'}><IoLogoUsd />Subscription</NavLink>
+            <NavLink className={navClasses} to={'/add-article'}><MdPostAdd />Add Articles</NavLink>
+            <NavLink className={navClasses} to={'my-articles'}><PiArticleMediumBold />My Articles</NavLink>
+            <NavLink className={navClasses} to={'/premium-articles'}><MdOutlineWorkspacePremium />Premium Articles</NavLink>
+            {role === 'admin' && <NavLink className={navClasses} to={'/dashboard'}><MdOutlineDashboard />Dashboard</NavLink>}
         </>}
-        <NavLink className={navClasses} to={'/about'}>About</NavLink>
+        <NavLink className={navClasses} to={'/about'}><TiInfoLargeOutline />About</NavLink>
     </>
 
     const handleLogout = () => {
@@ -82,7 +86,7 @@ const Navbar = () => {
                 {
                     openNavbar
                         ? <MdOutlineClose className="-ml-14 text-nexus-secondary hover:text-nexus-primary transform transition-all duration-1000"></MdOutlineClose>
-                        : <MdMenuOpen className="text-nexus-primary hover:text-nexus-secondary transform transition-all duration-1000"></MdMenuOpen>
+                        : <MdMenuOpen className="-ml-1 text-nexus-primary hover:text-nexus-secondary transform transition-all duration-1000"></MdMenuOpen>
                 }
             </div>
 
@@ -99,7 +103,7 @@ const Navbar = () => {
             <div className="flex justify-between items-center w-full">
                 {/* Navbar Items/Links/Routes */}
                 <div className="text-sm xl:text-base">
-                    <ul className={`w-3/5 min-[1170px]:w-full flex flex-col min-[1170px]:flex-row justify-start min-[1170px]:justify-center gap-2 min-[1170px]:gap-6 text-lg md:text-xl font-semibold duration-500 absolute min-[1170px]:static shadow-lg shadow-slate-700 min-[1170px]:shadow-none h-screen min-[1170px]:h-auto p-4 min-[1170px]:p-0 ${openNavbar ? 'pl-14 left-0 top-0 bg-navBG flex z-30' : '-left-full top-0'}`}>
+                    <ul className={`w-3/5 min-[1170px]:w-full flex flex-col min-[1170px]:flex-row justify-start min-[1170px]:justify-center gap-2 min-[1170px]:gap-6 text-lg md:text-xl font-semibold duration-500 absolute min-[1170px]:static shadow-lg shadow-slate-700 min-[1170px]:shadow-none h-screen min-[1170px]:h-auto p-4 min-[1170px]:p-0 ${openNavbar ? 'md:pl-14 left-0 top-0 bg-navBG flex z-30' : '-left-full top-0'}`}>
                         {navItems}
                     </ul>
                 </div>

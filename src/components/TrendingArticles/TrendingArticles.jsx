@@ -33,7 +33,7 @@ const TrendingArticles = () => {
             <SectionHeader heading={"Trending Articles"} />
             <Swiper
                 style={{
-                    '--swiper-navigation-color': '#fff',
+                    '--swiper-navigation-color': 'transparent',
                     '--swiper-pagination-color': '#fff',
                     '--swiper-pagination-bullet-size': '16px',
                     '--swiper-pagination-bullet-width': '16px',
