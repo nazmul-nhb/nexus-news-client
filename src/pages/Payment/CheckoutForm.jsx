@@ -94,6 +94,7 @@ const CheckoutForm = () => {
             if (paymentIntent.status === 'succeeded') {
                 // console.log('transaction id: ', paymentIntent.id);
                 setTransactionId(paymentIntent.id);
+                setIsStripeLoading(false);
 
                 // now save the payment info in the database
                 const updatedPaymentInfo = {
@@ -119,7 +120,6 @@ const CheckoutForm = () => {
                     const result = await axiosSecure.patch(`/users/${user?.email}`, updatedUser);
 
                     if (result.data.modifiedCount > 0) {
-                        setIsStripeLoading(false);
                         Swal.fire({
                             title: "Congratulations!",
                             text: "Now You’re A Premium User!",
@@ -179,7 +179,7 @@ const CheckoutForm = () => {
                     {transactionId && <p className="text-green-700 flex items-center justify-center"> Your Transaction ID: {transactionId}</p>}
                 </form>
             </>
-                : <p className="text-red-600 font-bold flex items-center justify-center">You Did Not Select Any Subscription Plan!</p>
+                : <p className="text-red-600 font-bold flex items-center justify-center">You Did Not Select Any Plan!</p>
             }
 
         </section>
