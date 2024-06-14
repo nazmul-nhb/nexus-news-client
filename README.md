@@ -41,7 +41,7 @@ For admin access, use the following credentials:
 
 </details>
 
-### NPM Utility Packages Used in this Project
+## NPM Utility Packages Used in this Project
 
 - [tanstack-table](https://tanstack.com/table/latest) for showing interactive tables
 - [tanstack-query](https://tanstack.com/query/latest) for managing states while fetching data (get)
@@ -66,9 +66,9 @@ For admin access, use the following credentials:
 - [react-intersection-observer](https://www.npmjs.com/package/react-intersection-observer) for observing visibility of elements
 - [react-select](https://react-select.com/home) for customizable select input fields
 
-### Notable Features & Description of the Project
+## Notable Features & Description of the Project
 
-#### Homepage
+### Homepage
 
 - **Trending News Slider**: Features a slider with trending news in the hero section. Clicking on the title redirects to the details page.
 - **Latest Articles**: Displays four recent articles. Users can read the full article by clicking the area.
@@ -77,29 +77,29 @@ For admin access, use the following credentials:
 - **Premium Plans**: Shows all the premium plans. Clicking the button navigates to the subscription page.
 - **Commitment to the Environment**: Highlights the site's support for the green movement.
 
-#### All Articles Page
+### All Articles Page
 
 - Displays all approved articles.
 - Users can filter articles by publishers or tags or search for specific article titles.
 - Articles can be sorted by the latest or oldest.
 - Free users cannot access the detailed view of articles.
 
-#### Subscription & Payment Pages
+### Subscription & Payment Pages
 
 - Displays premium plans.
 - Users can select a plan and proceed to the payment page.
 - If already subscribed, a popup shows the plan details.
 
-#### Article Details Page
+### Article Details Page
 
 - Shows detailed information about the article and related articles from the same tags.
 
-#### User Profile Page
+### User Profile Page
 
 - Users can update their profile.
 - Displays the last login time and current plan details.
 
-#### Add Article Page
+### Add Article Page
 
 - Allows users to add/post articles. Free users can post only one article.
 - Users can upload images with their articles.
@@ -125,19 +125,19 @@ For admin access, use the following credentials:
 
 - Displays the address of the newspaper with a map by OpenStreetMap.
 
-#### Register Page
+### Register Page
 
 - Users must fill in all fields to create a new account. Passwords must be at least 6 characters long and include an uppercase letter, a number, and a symbol.
 - Error messages are shown below input fields and as toast notifications for invalid inputs.
 - Successful registration redirects users to the login page.
 
-#### Login Page
+### Login Page
 
 - Users can log in using email/password or Google/Facebook accounts.
 - Includes a link to the register page for new accounts.
 - Successful login triggers a toast notification. Errors are displayed as toast messages.
 
-#### Navbar & Others
+### Navbar & Others
 
 - **Navbar**: Includes a theme toggler icon to switch between dark and light modes. Clicking the profile picture opens a menu with profile links and a logout button.
 - **Scroll Buttons**: Allows users to scroll to the top or bottom of pages.
