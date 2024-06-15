@@ -20,6 +20,7 @@ import AddPublisher from "../pages/Dashboard/AddPublisher/AddPublisher";
 import AdminRoute from "./AdminRoute";
 import Payment from "../pages/Payment/Payment";
 import About from "../pages/About/About";
+import PremiumRoute from "./PremiumRoute";
 
 export const router = createBrowserRouter([
     {
@@ -73,7 +74,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/premium-articles',
-                element: <PrivateRoute><PremiumArticles /></PrivateRoute>
+                element: <PremiumRoute><PrivateRoute><PremiumArticles /></PrivateRoute></PremiumRoute>
             }
         ],
     }, {
