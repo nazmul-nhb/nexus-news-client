@@ -17,6 +17,7 @@ import { IoHomeOutline, IoLogoUsd } from "react-icons/io5";
 import { RiArticleLine } from "react-icons/ri";
 import { PiArticleMediumBold } from "react-icons/pi";
 import { TiInfoLargeOutline } from "react-icons/ti";
+import useGetUserType from "../../hooks/useGetUserType";
 
 const Navbar = () => {
     const { user, userLoading, logOut } = useAuth();
@@ -27,6 +28,7 @@ const Navbar = () => {
     const sidebarRef = useRef(null);
     const dropdownRef = useRef(null);
     const { role } = useUserRole();
+    const { premiumUser } = useGetUserType();
 
     useEffect(() => {
         if (user) {
@@ -64,7 +66,7 @@ const Navbar = () => {
             <NavLink className={navClasses} to={'/subscription'}><IoLogoUsd />Subscription</NavLink>
             <NavLink className={navClasses} to={'/add-article'}><MdPostAdd />Add Articles</NavLink>
             <NavLink className={navClasses} to={'my-articles'}><PiArticleMediumBold />My Articles</NavLink>
-            <NavLink className={navClasses} to={'/premium-articles'}><MdOutlineWorkspacePremium />Premium Articles</NavLink>
+            {premiumUser  && <NavLink className={navClasses} to={'/premium-articles'}><MdOutlineWorkspacePremium />Premium Articles</NavLink>}
             {role === 'admin' && <NavLink className={navClasses} to={'/dashboard'}><MdOutlineDashboard />Dashboard</NavLink>}
         </>}
         <NavLink className={navClasses} to={'/about'}><TiInfoLargeOutline />About</NavLink>
@@ -82,7 +84,7 @@ const Navbar = () => {
 
     return (
         <nav className="max-w-screen-2xl flex items-center gap-0 md:gap-4 mx-auto shadow-md px-3 py-2 md:px-14 sticky top-0 bg-navBG bg-opacity-100 z-50 text-nexus-secondary transition-all duration-1000">
-            <div ref={sidebarRef} className="min-[1170px]:hidden max-[430px]:text-3xl text-5xl cursor-pointer z-50" onClick={() => setOpenNavbar(!openNavbar)}>
+            <div ref={sidebarRef} className="min-[1370px]:hidden max-[430px]:text-3xl text-5xl cursor-pointer z-50" onClick={() => setOpenNavbar(!openNavbar)}>
                 {
                     openNavbar
                         ? <MdOutlineClose className="-ml-14 text-nexus-secondary hover:text-nexus-primary transform transition-all duration-1000"></MdOutlineClose>
@@ -94,7 +96,7 @@ const Navbar = () => {
             <figure className="flex items-center gap-2 font-kreonSerif">
                 <img className="w-9 md:w-12 h-7 md:h-10" src={logo} alt="logo" />
                 {user && <NavLink
-                    className="min-[1170px]:hidden transition-all duration-500 text-2xl font-semibold text-nexus-secondary flex items-center gap-1" to={'/'}>
+                    className="min-[1370px]:hidden transition-all duration-500 text-2xl font-semibold text-nexus-secondary flex items-center gap-1" to={'/'}>
                     Nexus
                     <span className='text-nexus-primary'>News</span>
                 </NavLink>}
@@ -103,7 +105,7 @@ const Navbar = () => {
             <div className="flex justify-between items-center w-full">
                 {/* Navbar Items/Links/Routes */}
                 <div className="text-sm xl:text-base">
-                    <ul className={`w-3/5 min-[1170px]:w-full flex flex-col min-[1170px]:flex-row justify-start min-[1170px]:justify-center gap-2 min-[1170px]:gap-6 text-lg md:text-xl font-semibold duration-500 absolute min-[1170px]:static shadow-lg shadow-slate-700 min-[1170px]:shadow-none h-screen min-[1170px]:h-auto p-4 min-[1170px]:p-0 ${openNavbar ? 'md:pl-14 left-0 top-0 bg-navBG flex z-30' : '-left-full top-0'}`}>
+                    <ul className={`w-3/5 min-[1370px]:w-full flex flex-col min-[1370px]:flex-row justify-start min-[1370px]:justify-center gap-2 min-[1370px]:gap-4 text-lg md:text-xl font-semibold duration-500 absolute min-[1370px]:static shadow-lg shadow-slate-700 min-[1370px]:shadow-none h-screen min-[1370px]:h-auto p-4 min-[1370px]:p-0 ${openNavbar ? 'md:pl-14 left-0 top-0 bg-navBG flex z-30' : '-left-full top-0'}`}>
                         {navItems}
                     </ul>
                 </div>
@@ -138,7 +140,7 @@ const Navbar = () => {
                                     )}
                                 </div>
                             </div>
-                            : <div className="font-jokeyOneSans flex items-center gap-1 md:gap-3 text-lg md:text-xl xl:text-2xl font-medium md:pt-0 pt-1">
+                            : <div className="font-jokeyOneSans flex items-center gap-1 md:gap-3 text-lg md:text-xl font-medium md:pt-0 pt-1">
                                 <NavLink to={'/login'} className={navClasses}><FaUserLock />Login</NavLink>
                                 <NavLink to={'/register'} className={navClasses}><MdAppRegistration />Register</NavLink>
                             </div>

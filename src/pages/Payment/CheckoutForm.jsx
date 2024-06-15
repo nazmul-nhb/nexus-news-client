@@ -13,7 +13,7 @@ import SectionHeader from "../../components/SectionHeader/SectionHeader";
 
 const CheckoutForm = () => {
     const [error, setError] = useState('');
-    const [clientSecret, setClientSecret] = useState('')
+    const [clientSecret, setClientSecret] = useState('');
     const [transactionId, setTransactionId] = useState('');
     const [isStripeLoading, setIsStripeLoading] = useState(false);
     const stripe = useStripe();
@@ -29,7 +29,7 @@ const CheckoutForm = () => {
             const res = await axiosSecure.get(`/payment/${user?.email}`);
             return res.data;
         }
-    })
+    });
 
     const { price, plan, expires_in } = paymentInfo;
 
@@ -41,7 +41,7 @@ const CheckoutForm = () => {
                 })
         }
         // console.log(price);
-    }, [axiosSecure, price])
+    }, [axiosSecure, price]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();

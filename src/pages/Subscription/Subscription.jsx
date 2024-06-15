@@ -25,7 +25,7 @@ const subscriptionOptions = [
     { value: 'week', label: 'Weekly Wrap-Up' },
     { value: 'month', label: 'Monthly Marvel' },
     { value: 'year', label: 'Yearly Yonder' }
-]
+];
 
 const Subscription = () => {
     const { user } = useAuth()

@@ -11,30 +11,33 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import Environment from "../../components/Environment/Environment";
 import useGetUserType from "../../hooks/useGetUserType";
+import useUserRole from "../../hooks/useUserRole";
 
 const Home = () => {
     const navigate = useNavigate();
+    const { role } = useUserRole();
     const { premiumUser } = useGetUserType();
 
     useEffect(() => {
-        setTimeout(() => {
-            if (!premiumUser) {
-                Swal.fire({
-                    title: "Check Out Our Premium Plans!",
-                    text: `Get Exciting Features! Subscribe to Premium Plans Now!`,
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Subscribe!"
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        navigate('/subscription');
-                    }
-                });
-            }
+        if (premiumUser === undefined || role === undefined) return;
+        if (premiumUser || role === 'admin') return;
+        const timer = setTimeout(() => {
+            Swal.fire({
+                title: "Check Out Our Premium Plans!",
+                text: `Get Exciting Features! Subscribe to Premium Plans Now!`,
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Subscribe!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    navigate('/subscription');
+                }
+            });
         }, 30000);
-    }, [navigate, premiumUser]);
+        return () => clearTimeout(timer);
+    }, [navigate, premiumUser, role]);
 
     return (
         <section className="space-y-8 mx-6 md:mx-10 py-2 md:py-8 p-2 md:px-4">

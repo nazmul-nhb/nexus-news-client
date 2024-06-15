@@ -13,8 +13,8 @@ For admin access, use the following credentials:
 - **Email**: `admin@nexus.com`
 - **Password**: `Admin@Nexus42`
 
-## For Fake Payment
-
+## Payment Card Info for Subscription
+<!-- markdownlint-disable MD033 -->
 <details>
 <summary>Test Card Information</summary>
 
@@ -40,6 +40,7 @@ For admin access, use the following credentials:
 | UnionPay (19-digit card)    | 6205500000000000004  | Any 3 digits | Any future date  | Any 5 digits  |
 
 </details>
+<!-- markdownlint-enable MD033 -->
 
 ## NPM Utility Packages Used in this Project
 
