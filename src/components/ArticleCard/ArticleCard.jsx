@@ -17,8 +17,8 @@ const ArticleCard = ({ article }) => {
     return (
         <div className={`flex flex-col items-start gap-2 rounded-lg border shadow-md p-4 ${isPremium ? 'text-yellow-800 shadow-yellow-700 border-yellow-700 bg-yellow-100 bg-opacity-75' : 'shadow-nexus-primary border-nexus-primary bg-nexusBG'}`}>
             <h3 className='flex-grow text-xl font-bold font-kreonSerif'>{headline}</h3>
-            <img className={`flex-grow aspect-[1.8/1] border p-1 ${isPremium ? 'border-yellow-700' : 'border-nexus-primary'}`} src={thumb_image} alt={headline} />
-            <div className="w-full flex-grow flex flex-col md:flex-row md:items-center md:justify-between">
+            <img className={`aspect-[1.8/1] w-full border p-1 ${isPremium ? 'border-yellow-700' : 'border-nexus-primary'}`} src={thumb_image} alt={headline} />
+            <div className="w-full flex flex-col md:flex-row md:items-center md:justify-between">
                 <h3 className='first-letter:capitalize flex items-center gap-1 font-semibold text-lg'><IoNewspaper />{publisher}</h3>
                 <h4 className='flex items-center gap-1'><FaHistory />{moment(posted_on).format('MMMM DD, YYYY [at] hh:mm A')}</h4>
             </div>
@@ -28,7 +28,7 @@ const ArticleCard = ({ article }) => {
                     onClick={() => handleGoToArticleDetails(_id)}
                 // disabled={isPremium && premiumUser !== true}
                 >Read Details</button>
-                {isPremium && <MdOutlineWorkspacePremium className='text-5xl' />}
+                <MdOutlineWorkspacePremium className={`text-5xl ${!isPremium && 'invisible'}`} />
             </div>
         </div>
     );

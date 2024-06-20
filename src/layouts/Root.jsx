@@ -70,7 +70,7 @@ const Root = () => {
         <>
             <SiteTitle />
             <Navbar />
-            <main className="max-w-screen-2xl mx-auto">
+            <main className="max-w-[1920px] mx-auto">
                 <Outlet />
             </main>
             <Footer />
