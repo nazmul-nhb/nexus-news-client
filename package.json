@@ -1,7 +1,7 @@
 {
   "name": "b9a12-client-side-nazmul-nhb",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.1.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
