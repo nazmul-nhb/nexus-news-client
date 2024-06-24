@@ -11,12 +11,13 @@ import ToggleTheme from "../ToggleTheme/ToggleTheme";
 import { ThemeContext } from "../../providers/ThemeProvider";
 import { Tooltip } from "react-tooltip";
 import { IoNewspaperSharp } from "react-icons/io5";
+import useUserRole from "../../hooks/useUserRole";
 
 const Sidebar = () => {
     const { user, logOut } = useAuth();
     const [openSidebar, setOpenSidebar] = useState(true);
     const { theme } = useContext(ThemeContext);
-
+    const { role } = useUserRole();
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -55,7 +56,7 @@ const Sidebar = () => {
                         className={`border p-[1px] userName cursor-pointer transition-all transform duration-500 text-4xl w-8 md:w-9 h-8 md:h-9 rounded-full ${openSidebar && "rotate-[360deg]"}`} />
                     <div className={`text-white flex-1 origin-left font-medium transition-all transform duration-200 ${!openSidebar && "hidden"}`}>
                         <h3 className="text-sm md:text-xl">{user?.displayName}</h3>
-                        <h4 className="text-xs">Profile</h4>
+                        <h4 className="text-xs first-letter:capitalize">{role} Profile</h4>
                     </div>
                 </div>
             </Link>
