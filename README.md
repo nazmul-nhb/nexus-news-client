@@ -4,7 +4,8 @@ A Simple News Portal Website
 
 ## Live Link
 
-- [Live Link](https://nexus-news-nhb.web.app)
+- [Vercel](https://nexus-news-nhb.vercel.app)
+- [Firebase](https://nexus-news-nhb.web.app)
 
 ## Admin Access
 
