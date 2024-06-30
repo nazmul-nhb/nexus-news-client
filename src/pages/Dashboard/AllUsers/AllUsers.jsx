@@ -13,7 +13,7 @@ import { buttonInvert } from "../../../utilities/buttonStyles";
 import { articleLoader } from "../../../components/LoadingSpinners/Loaders";
 
 const AllUsers = () => {
-    const { isLoading, data: nexusUsers = [], refetch } = useNexusUsers(['nexusUsers']);
+    const { isNexusUserLoading, data: nexusUsers = [], refetch } = useNexusUsers(['nexusUsers']);
     const axiosSecure = useAxiosSecure();
 
     const handleMakeAdmin = (name, email) => {
@@ -102,7 +102,7 @@ const AllUsers = () => {
         }
     ]
 
-    if (isLoading) return articleLoader;
+    if (isNexusUserLoading) return articleLoader;
 
     return (
         <section className="mx-auto pb-32">

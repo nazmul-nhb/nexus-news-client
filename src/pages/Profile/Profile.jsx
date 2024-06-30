@@ -23,7 +23,7 @@ const Profile = () => {
     const axiosPublic = useAxiosPublic();
     const [imageUploading, setImageUploading] = useState(false);
     const uploadImage = useImageUpload();
-    const { isFetching, data: nexusUser = {} } = useNexusUsers(['nexusUser', user?.email], user?.email);
+    const { isNexusUserLoading, data: nexusUser = {} } = useNexusUsers(['nexusUser', user?.email], user?.email);
     const now = moment();
     const expiration = moment(nexusUser?.expires_on);
     // console.log(now.isAfter(expiration));
@@ -101,7 +101,7 @@ const Profile = () => {
                 <title>{user.displayName}&rsquo;s Profile - Nexus News</title>
             </Helmet>
             <div className="flex flex-col lg:flex-row gap-10 items-center mb-8 lg:mb-16">
-                {isFetching ? <div className="lg:w-3/5 flex-1 ">{articleLoader}</div> :
+                {isNexusUserLoading ? <div className="lg:w-3/5 flex-1 ">{articleLoader}</div> :
                     <div className="w-full lg:w-3/5 flex-1 border bg-gradient-to-l from-[#2e50bc62] to-[#033eff37]  border-nexus-primary flex flex-col gap-6 p-6 shadow-lg shadow-[#8689ee]">
                         <div className="flex flex-col items-center lg:items-start">
                             <div className="flex flex-col lg:flex-row gap-2 items-center lg:items-start justify-center lg:justify-start my-4">

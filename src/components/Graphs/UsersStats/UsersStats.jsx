@@ -15,7 +15,7 @@ const UsersStats = () => {
     const countNormalRef = useRef(null);
     const countPremiumRef = useRef(null);
 
-    const { isFetching, isError, data: countUsers = {} } = useQuery({
+    const { isLoading, isError, data: countUsers = {} } = useQuery({
         queryKey: ['countUsers'],
         queryFn: async () => {
             const res = await axiosPublic('/users/count');
@@ -77,7 +77,7 @@ const UsersStats = () => {
     );
 
     useEffect(() => {
-        if (inView && !isFetching && !isError) {
+        if (inView && !isLoading && !isError) {
             resetTotal();
             resetNormal();
             resetPremium();
@@ -96,7 +96,7 @@ const UsersStats = () => {
                 ],
             });
         }
-    }, [inView, total_users, normal_users, premium_users, isFetching, isError, resetTotal, resetNormal, resetPremium, updateTotal, updateNormal, updatePremium, totalPercentage, normalPercentage, premiumPercentage]);
+    }, [inView, total_users, normal_users, premium_users, isLoading, isError, resetTotal, resetNormal, resetPremium, updateTotal, updateNormal, updatePremium, totalPercentage, normalPercentage, premiumPercentage]);
 
     return (
         <div className='flex flex-col items-center justify-center gap-5'>
@@ -111,8 +111,20 @@ const UsersStats = () => {
                     <MdOutlineWorkspacePremium /> <div className='flex flex-col gap-2 items-center'>Premium Users <span ref={countPremiumRef} /></div>
                 </div>
             </div>
-            <div className='mt-6 max-w-full'>
-                <Bar data={chartData} options={{ animation: { duration: 10000 }, scales: { y: { max: 100 } }, plugins: { legend: { display: false }, tooltip: { callbacks: { label: (context) => `${context.label}: ${context.raw}%` } } } }} />
+            <div className='mt-6 !w-full max-w-full h-[60svh] md:px-16 md:mx-auto'>
+                <Bar data={chartData}
+                    options={
+                        {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            animation: { duration: 10000 },
+                            scales: { y: { max: 100 } },
+                            plugins: {
+                                legend: { display: false },
+                                tooltip: { callbacks: { label: (context) => `${context.label}: ${context.raw}%` } }
+                            }
+                        }
+                    } />
             </div>
         </div>
     );

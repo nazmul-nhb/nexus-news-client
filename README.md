@@ -5,7 +5,7 @@ A Simple News Portal Website
 ## Live Link
 
 - [Vercel](https://nexus-news-nhb.vercel.app)
-- [Firebase](https://nexus-news-nhb.web.app)
+- [Firebase](https://nexus-news-nhb.web.app) (May Not Work Sometimes)
 
 ## Admin Access
 

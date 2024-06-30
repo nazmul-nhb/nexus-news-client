@@ -5,7 +5,7 @@ import { articleLoader } from "../LoadingSpinners/Loaders";
 const PublishersList = () => {
     const axiosPublic = useAxiosPublic();
 
-    const { isFetching, data: listPublishers = [] } = useQuery({
+    const { isLoading, data: listPublishers = [] } = useQuery({
         queryKey: ['listPublishers'],
         queryFn: async () => {
             const res = await axiosPublic('/publishers')
@@ -13,7 +13,7 @@ const PublishersList = () => {
         }
     });
 
-    if (isFetching) {
+    if (isLoading) {
         return articleLoader;
     }
 

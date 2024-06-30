@@ -26,7 +26,7 @@ const carousel = (slider) => {
 const Publishers = () => {
     const axiosPublic = useAxiosPublic();
 
-    const { isFetching, data: sliderPublishers = [] } = useQuery({
+    const { isLoading, data: sliderPublishers = [] } = useQuery({
         queryKey: ['sliderPublishers'],
         queryFn: async () => {
             const res = await axiosPublic('/publishers?size=7')
@@ -53,7 +53,7 @@ const Publishers = () => {
         [carousel]
     );
 
-    if (isFetching) {
+    if (isLoading) {
         return articleLoader;
     }
 

@@ -4,7 +4,7 @@ import useAxiosSecure from "./useAxiosSecure";
 const useNexusUsers = (queryKey, email='') => {
     const axiosSecure = useAxiosSecure();
 
-    const { isFetching, data, refetch } = useQuery({
+    const { isLoading: isNexusUserLoading, data, refetch } = useQuery({
         queryKey,
         queryFn: async () => {
             if (email) {
@@ -16,7 +16,7 @@ const useNexusUsers = (queryKey, email='') => {
             }
         }
     });
-    return { isFetching, data, refetch };
+    return { isNexusUserLoading, data, refetch };
 };
 
 export default useNexusUsers;

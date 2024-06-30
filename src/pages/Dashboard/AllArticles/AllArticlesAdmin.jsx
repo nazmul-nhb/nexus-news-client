@@ -13,7 +13,7 @@ const AllArticlesAdmin = () => {
     const { role, roleLoading } = useUserRole();
     const axiosSecure = useAxiosSecure();
 
-    const { isFetching, data: articleCount = 0 } = useQuery({
+    const { isLoading: isCountLoading, data: articleCount = 0 } = useQuery({
         queryKey: ['articleCount'],
         queryFn: async () => {
             const res = await
@@ -60,7 +60,7 @@ const AllArticlesAdmin = () => {
             </Helmet>
             <SectionHeader heading={`Total ${articleCount} Articles`} />
             <div className="grid lg:grid-cols-2 gap-6">
-                {isLoading || isFetching || roleLoading ? articleLoader :
+                {isLoading || isCountLoading || roleLoading ? articleLoader :
                     allRawArticles?.map(article => <AdminActionArticle key={article._id}
                         article={article}
                         refetch={refetch}

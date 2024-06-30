@@ -32,7 +32,7 @@ const Subscription = () => {
     const [selectedPlan, setSelectedPlan] = useState();
     const axiosSecure = useAxiosSecure();
     const navigate = useNavigate();
-    const { isFetching, data: nexusUser = {} } = useNexusUsers(['nexusUser', user?.email], user?.email);
+    const { isNexusUserLoading, data: nexusUser = {} } = useNexusUsers(['nexusUser', user?.email], user?.email);
     const { role } = useUserRole();
     const { premiumUser } = useGetUserType();
 
@@ -124,7 +124,7 @@ const Subscription = () => {
         })
     }
 
-    if (isFetching) return buttonLoader;
+    if (isNexusUserLoading) return buttonLoader;
 
     return (
         <section className="mx-auto md:py-8 py-2 px-8 md:px-14 flex flex-col items-center gap-5 pb-8">
