@@ -45,7 +45,7 @@ const RevenueStats = () => {
                         curveType: 'function',
                         lineWidth: 5,
                         backgroundColor: 'transparent',
-                        theme: 'material',
+                        // theme: 'material',
                         series: {
                             0: { pointShape: 'circle', pointSize: 16 }
                         }

@@ -39,7 +39,7 @@ const PublisherPieChart = () => {
                     options={{
                         backgroundColor:'transparent',
                         color:'red',
-                        theme:'material',
+                        // theme:'material',
                         title: 'Articles by Publishers', is3D: true,
                     }}
                     rootProps={{ 'data-testid': '1' }}

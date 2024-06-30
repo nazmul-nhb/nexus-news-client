@@ -4,17 +4,17 @@ import { createContext, useEffect, useState } from 'react';
 export const ThemeContext = createContext();
 
 const ThemeProvider = ({ children }) => {
-    const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+    const [theme, setTheme] = useState(localStorage.getItem('nexus-theme') || 'light');
 
     useEffect(() => {
-        localStorage.setItem('theme', theme);
+        localStorage.setItem('nexus-theme', theme);
 
         if (theme === 'dark') {
-            document.documentElement.classList.add('bg-[#000000]', 'text-[#a3b3e6]');
-            document.documentElement.classList.remove('bg-transparent');
+            document.documentElement.classList.add('bg-[#031120fc]', 'text-[#fff]');
+            document.documentElement.classList.remove('bg-transparent', 'text-nexus-secondary');
         } else {
-            document.documentElement.classList.remove('bg-[#000000]', 'text-[#a3b3e6]');
-            document.documentElement.classList.add('bg-transparent');
+            document.documentElement.classList.remove('bg-[#031120fc]', 'text-[#fff]');
+            document.documentElement.classList.add('bg-transparent', 'text-nexus-secondary');
         }
     }, [theme]);
 

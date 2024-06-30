@@ -30,6 +30,9 @@ export default {
         kreonSerif: '"Kreon", serif;',
         sourceSans: '"Source Sans 3", sans-serif;',
       },
+      backgroundImage: {
+        nexusFixedBG: 'url("/src/assets/shapes.svg")',
+      },
     },
   },
   plugins: [],

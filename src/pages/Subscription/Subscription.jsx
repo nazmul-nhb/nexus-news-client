@@ -142,7 +142,7 @@ const Subscription = () => {
             <Plans inSubscriptionPage={true} />
             <form className="flex flex-col gap-3 items-center" onSubmit={handleSubscription}>
                 <div className="w-[240px] flex flex-col gap-3">
-                    <div className="flex items-center gap-2 pl-2 bg-transparent rounded-lg border border-nexus-secondary">
+                    <div className="flex items-center gap-2 pl-2 text-nexus-secondary bg-transparent rounded-lg border border-nexus-secondary">
                         <label className="font-medium" htmlFor="subscription"><FaSackDollar /></label>
                         <Select isClearable
                             styles={customStyles}

@@ -47,7 +47,7 @@ const SubscriptionStats = () => {
                     options={{
                         title: 'Subscriptions by Plan',
                         backgroundColor: 'transparent',
-                        theme: 'material',
+                        // theme: 'material',
                         hAxis: {
                             title: 'Plan',
                             titleTextStyle: { fontSize: 14 },
