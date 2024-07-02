@@ -62,6 +62,8 @@ For admin access, use the following credentials:
 - Express.js (Server Side)
 - MongoDB (Server Side)
 
+## Run the Project Locally
+
 1. **Clone the Repository**:
 
     ```sh
@@ -75,15 +77,15 @@ For admin access, use the following credentials:
     npm install
     ```
 
-3. **Set Up Environment Variables**: Create a `.env.local` file in the root directory and add the necessary environment variables.
+3. **Set Up Environment Variables**: Create a `.env.local` file in the root directory and add the necessary environment variables. (**Important!**)
 
 4. **Run the Application**:
 
     ```sh
-    npm run dev
+    npm run dev -- --host
     ```
 
-5. **Access the Site**: Open your browser and go to `http://localhost:5173` to view the application.
+5. **Access the Site**: Open your browser and go to `http://localhost:5173/` or `http://192.168.1.12:5173/` from other devices on the same network to view the application.
 
 ## Utility Packages Used in this Project
 
