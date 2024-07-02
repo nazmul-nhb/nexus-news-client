@@ -88,6 +88,9 @@ For admin access, use the following credentials:
 5. **Access the Site**: Open your browser and go to `http://localhost:5173/` or `http://192.168.1.12:5173/` from other devices on the same network to view the application.
 
 ## Utility Packages Used in this Project
+<!-- markdownlint-disable MD033 -->
+<details>
+<summary>Click to Expand</summary>
 
 - [tanstack-table](https://tanstack.com/table/latest) for showing interactive tables
 - [tanstack-query](https://tanstack.com/query/latest) for managing states while fetching data (get)
@@ -111,6 +114,10 @@ For admin access, use the following credentials:
 - [react-google-charts](https://react-google-charts.com/) for displaying stats in admin dashboard
 - [react-intersection-observer](https://www.npmjs.com/package/react-intersection-observer) for observing visibility of elements
 - [react-select](https://react-select.com/home) for customizable select input fields
+
+</details>
+<!-- markdownlint-enable MD033 -->
+
 <!-- 
 ## Notable Features & Description of the Project
 
