@@ -1,11 +1,22 @@
 # Nexus News
 
-A Simple News Portal Website
+## Project Overview
+
+### A Simple News Portal Website
+
+Nexus News is a feature-rich news website designed to provide users with a seamless and engaging experience. The platform offers the latest news and articles from renowned publishers across the globe and provides various functionalities for both free and premium users, ensuring dynamic interaction with news content. It also includes subscription options using Stripe for easy and secure payments.
 
 ## Live Link
 
-- [Vercel](https://nexus-news-nhb.vercel.app)
-- [Firebase](https://nexus-news-nhb.web.app) (May Not Work Sometimes)
+- [Vercel Live Link](https://nexus-news-nhb.vercel.app)
+- [Firebase Live Link](https://nexus-news-nhb.web.app) (May Not Work Sometimes)
+
+## Notable Features of the Website
+
+- **Integrated Stripe for User Subscription Payments:** Secure and efficient payment processing for premium subscriptions.
+- **Advanced Article Search & Filter:** Users can search by title, filter by publisher or tags, and sort articles by date.
+<!-- - **Admin Dashboard:** Manage user roles and articles with options to delete, approve, decline, and mark articles as premium. -->
+- **Subscription Expiration Alerts:** The application checks for expiration date for premium users every 30 seconds and popup alerts notify users about subscription expiration.
 
 ## Admin Access
 
@@ -43,7 +54,38 @@ For admin access, use the following credentials:
 </details>
 <!-- markdownlint-enable MD033 -->
 
-## NPM Utility Packages Used in this Project
+## Technologies Used in this Project
+
+- ReactJS
+- JavaScript
+- TailwindCSS
+- Express.js (Server Side)
+- MongoDB (Server Side)
+
+1. **Clone the Repository**:
+
+    ```sh
+    git clone https://github.com/nazmul-nhb/nexus-news-client.git
+    cd nexus-news-client
+    ```
+
+2. **Install Dependencies**:
+
+    ```sh
+    npm install
+    ```
+
+3. **Set Up Environment Variables**: Create a `.env.local` file in the root directory and add the necessary environment variables.
+
+4. **Run the Application**:
+
+    ```sh
+    npm run dev
+    ```
+
+5. **Access the Site**: Open your browser and go to `http://localhost:5173` to view the application.
+
+## Utility Packages Used in this Project
 
 - [tanstack-table](https://tanstack.com/table/latest) for showing interactive tables
 - [tanstack-query](https://tanstack.com/query/latest) for managing states while fetching data (get)
@@ -67,7 +109,7 @@ For admin access, use the following credentials:
 - [react-google-charts](https://react-google-charts.com/) for displaying stats in admin dashboard
 - [react-intersection-observer](https://www.npmjs.com/package/react-intersection-observer) for observing visibility of elements
 - [react-select](https://react-select.com/home) for customizable select input fields
-
+<!-- 
 ## Notable Features & Description of the Project
 
 ### Homepage
@@ -145,12 +187,5 @@ For admin access, use the following credentials:
 - **Scroll Buttons**: Allows users to scroll to the top or bottom of pages.
 - **Headline Scroller**: On top of Navbar displays the latest headlines scrolling from right to left.
 - **Live Clock**: Shows a live clock on the right corner of the website.
-- **404 Error Page**: Displays when an invalid URL is accessed.
-
-## Technologies Used in this Project
-
-- ReactJS
-- JavaScript
-- TailwindCSS
-- Express.js (Server Side)
-- MongoDB (Server Side)
+- **404 Error Page**: Displays when an invalid URL is accessed. 
+-->
