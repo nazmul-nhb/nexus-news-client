@@ -51,7 +51,7 @@ const NexusTable = ({ data, columns }) => {
                     ))}
                 </tbody>
             </table>
-            <div className='flex justify-center items-center gap-6 mt-5'>
+            <div className='flex justify-center items-center gap-6 mt-5 mb-12'>
                 <button className={buttonClasses}
                     disabled={!table.getCanPreviousPage()}
                     onClick={() => table.setPageIndex(0)}>First</button>

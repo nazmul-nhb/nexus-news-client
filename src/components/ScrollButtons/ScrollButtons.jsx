@@ -3,7 +3,7 @@ import { IoIosArrowDropdown, IoIosArrowDropup } from 'react-icons/io';
 
 const ScrollButtons = () => {
     const [showTopButton, setShowTopButton] = useState(false);
-    const [showBottomButton, setShowBottomButton] = useState(true);
+    const [showBottomButton, setShowBottomButton] = useState(false);
 
     const handleScroll = () => {
         const scrollTop = window.scrollY || document.documentElement.scrollTop;

@@ -105,7 +105,7 @@ const AllUsers = () => {
     if (isNexusUserLoading) return articleLoader;
 
     return (
-        <section className="mx-auto pb-32">
+        <section className="mx-auto my-6 pb-6">
             <Helmet>
                 <title>All Users || Dashboard - Nexus News</title>
             </Helmet>

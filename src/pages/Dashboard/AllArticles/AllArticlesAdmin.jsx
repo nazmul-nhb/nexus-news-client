@@ -54,7 +54,7 @@ const AllArticlesAdmin = () => {
     // console.log(allRawArticles);
 
     return (
-        <section className="mx-auto space-y-8 pb-32">
+        <section className="mx-auto space-y-8 my-6 pb-6">
             <Helmet>
                 <title>All Articles || Dashboard - Nexus News</title>
             </Helmet>
@@ -82,7 +82,7 @@ const AllArticlesAdmin = () => {
 
                     <button className={"px-3 border disabled:text-gray-500 disabled:border-gray-500 disabled:hover:text-gray-500 disabled:hover:bg-transparent text-nexus-primary border-nexus-primary hover:bg-nexus-primary hover:text-white"} disabled={currentPage === pages?.length || totalPages === 0} onClick={handleNextPage}>Next</button>
                 </div>
-                <select className="border px-2 py-1 focus:text-nexus-primary outline-nexus-primary border-nexus-primary text-nexus-primary bg-transparent focus:border-2 mx-auto" value={itemsPerPage} onChange={handleItemsPerPage} name="blogs" id="blogs">
+                <select className="border px-2 py-1 focus:text-nexus-primary outline-nexus-primary border-nexus-primary text-nexus-primary bg-transparent focus:border-2 mx-auto mb-12" value={itemsPerPage} onChange={handleItemsPerPage} name="blogs" id="blogs">
                     <option value="6">Articles Per Page: 6</option>
                     <option value="12">Articles Per Page: 12</option>
                     <option value="24">Articles Per Page: 24</option>
