@@ -9,7 +9,7 @@ const Dashboard = () => {
                 <div className="h-dvh">
                     <Sidebar />
                 </div>
-                <div className={`flex-1 mx-auto overflow-auto flex h-screen w-[99%%] scrollbar-custom`}>
+                <div className={`flex-1 mx-auto overflow-auto flex h-screen w-[99%] scrollbar-custom`}>
                     <Outlet />
                 </div>
             </div>
