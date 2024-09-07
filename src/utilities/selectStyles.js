@@ -17,7 +17,7 @@ const customStyles = {
     }),
     menu: (base) => ({
         ...base,
-        // backgroundColor: 'transparent',
+        backgroundColor: '#b6d1e4f8',
         padding: '0 0 0 4px',
     }),
     multiValue: (base) => ({
@@ -26,6 +26,7 @@ const customStyles = {
     }),
     multiValueLabel: (base) => ({
         ...base,
+        // backgroundColor: 'transparent',
         // color: '#000',
     }),
     multiValueRemove: (base) => ({
@@ -38,6 +39,7 @@ const customStyles = {
     }),
     input: (base) => ({
         ...base,
+        // backgroundColor: 'transparent',
         margin: '0',
         padding: '0 0 0 4px',
     }),
