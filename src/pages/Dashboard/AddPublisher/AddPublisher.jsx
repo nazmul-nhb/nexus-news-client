@@ -122,7 +122,7 @@ const AddPublisher = () => {
     // if (isLoading) return articleLoader;
 
     return (
-        <section className="flex flex-col items-center gap-4 overflow-x-auto pt-6 pb-12">
+        <section className="w-full flex flex-col items-center gap-4 overflow-x-auto pt-6 pb-12">
             <Helmet>
                 <title>Add Publisher || Dashboard - Nexus News</title>
             </Helmet>
