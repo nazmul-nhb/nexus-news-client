@@ -7,7 +7,7 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import moment from "moment";
 
 const SocialLogin = () => {
-	const { googleLogin, setUserLoading } = useAuth();
+	const { googleLogin } = useAuth();
 	const navigate = useNavigate();
 	const location = useLocation();
 	const from = location.state?.from?.pathname || "/";
@@ -74,9 +74,6 @@ const SocialLogin = () => {
 					});
 				}
 			})
-			.finally(() => {
-				setUserLoading(false);
-			});
 	};
 
 	return (

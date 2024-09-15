@@ -21,7 +21,7 @@ const Login = () => {
 		handleSubmit,
 		formState: { errors },
 	} = useForm();
-	const { user, userLoading, setUserLoading, userLogin } = useAuth();
+	const { user, userLoading, userLogin } = useAuth();
 	const navigate = useNavigate();
 	const location = useLocation();
 	const from = location.state?.from?.pathname || "/";
@@ -96,9 +96,6 @@ const Login = () => {
 					});
 				}
 			})
-			.finally(() => {
-				setUserLoading(false);
-			});
 	};
 
 	return (

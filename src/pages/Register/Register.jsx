@@ -25,14 +25,8 @@ const Register = () => {
 		handleSubmit,
 		formState: { errors },
 	} = useForm();
-	const {
-		createUser,
-		updateUserProfile,
-		userLoading,
-		setUserLoading,
-		user,
-		setUser,
-	} = useAuth();
+	const { createUser, updateUserProfile, userLoading, user, setUser } =
+		useAuth();
 	const navigate = useNavigate();
 	const location = useLocation();
 	const from = location.state?.from?.pathname || "/";
@@ -159,9 +153,6 @@ const Register = () => {
 								confirmButtonText: "Close",
 							});
 						}
-					})
-					.finally(() => {
-						setUserLoading(false);
 					});
 			}
 		} catch (error) {
