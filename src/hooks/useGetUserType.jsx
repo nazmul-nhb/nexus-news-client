@@ -6,7 +6,7 @@ const useGetUserType = () => {
     const { user, userLoading } = useAuth();
     const axiosSecure = useAxiosSecure();
 
-    const { data: premiumUser = false, isPending: premiumLoading } = useQuery({
+    const { data: premiumUser = false, isLoading: premiumLoading } = useQuery({
         queryKey: ['premiumUser', user?.email],
         enabled: !userLoading && !!user?.email,
         queryFn: async () => {
