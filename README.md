@@ -9,7 +9,7 @@ Nexus News is a feature-rich news website designed to provide users with a seaml
 ## Live Link
 
 - [Vercel Live Link](https://nexus-news-nhb.vercel.app)
-- [Firebase Live Link](https://nexus-news-nhb.web.app) (May Not Work Sometimes)
+<!-- - [Firebase Live Link](https://nexus-news-nhb.web.app) (May Not Work Sometimes) -->
 
 ## Notable Features of the Website
 
