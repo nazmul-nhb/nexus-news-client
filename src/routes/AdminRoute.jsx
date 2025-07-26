@@ -1,29 +1,28 @@
 import PropTypes from 'prop-types';
-import { Navigate, useLocation } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
+import { Navigate, useLocation } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
 import useUserRole from '../hooks/useUserRole';
 import { buttonLoader } from '../components/LoadingSpinners/Loaders';
 
 const AdminRoute = ({ children }) => {
-    const { user, userLoading } = useAuth();
-    const { role, roleLoading } = useUserRole();
+	const { user, userLoading } = useAuth();
+	const { role, roleLoading } = useUserRole();
 
-    const location = useLocation();
+	const location = useLocation();
 
-    if (userLoading || roleLoading) {
-        return buttonLoader;
-    }
+	if (userLoading || roleLoading) {
+		return buttonLoader;
+	}
 
-    if (user && role === 'admin') {
-        return children;
-    }
+	if (user && role === 'admin') {
+		return children;
+	}
 
-    return <Navigate to="/" state={{ from: location }} replace></Navigate>
-
+	return <Navigate to="/" state={{ from: location }} replace></Navigate>;
 };
 
 AdminRoute.propTypes = {
-    children: PropTypes.node
-}
+	children: PropTypes.node,
+};
 
 export default AdminRoute;

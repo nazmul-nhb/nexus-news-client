@@ -1,96 +1,144 @@
-import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import AdminActionArticle from "../../../components/AdminActionArticle/AdminActionArticle";
-import useUserRole from "../../../hooks/useUserRole";
-import { Helmet } from "react-helmet-async";
-import { articleLoader } from "../../../components/LoadingSpinners/Loaders";
-import SectionHeader from "../../../components/SectionHeader/SectionHeader";
-import { useState } from "react";
+import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
+import ReactPlaceholder from 'react-placeholder';
+import AdminActionArticle from '../../../components/AdminActionArticle/AdminActionArticle';
+import SectionHeader from '../../../components/SectionHeader/SectionHeader';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import useUserRole from '../../../hooks/useUserRole';
 
 const AllArticlesAdmin = () => {
-    const [itemsPerPage, setItemsPerPage] = useState(6);
-    const [currentPage, setCurrentPage] = useState(1);
-    const { role, roleLoading } = useUserRole();
-    const axiosSecure = useAxiosSecure();
+	const [itemsPerPage, setItemsPerPage] = useState(6);
+	const [currentPage, setCurrentPage] = useState(1);
+	const { role, roleLoading } = useUserRole();
+	const axiosSecure = useAxiosSecure();
 
-    const { isLoading: isCountLoading, data: articleCount = 0 } = useQuery({
-        queryKey: ['articleCount'],
-        queryFn: async () => {
-            const res = await
-                axiosSecure.get(`/articles/article-count`)
-            return res.data.count;
-        }
-    });
+	const { isLoading: isCountLoading, data: articleCount = 0 } = useQuery({
+		queryKey: ['articleCount'],
+		queryFn: async () => {
+			const res = await axiosSecure.get(`/articles/article-count`);
+			return res.data.count;
+		},
+	});
 
-    // console.log(articleCount);
+	// console.log(articleCount);
 
-    // Calculate Pages
-    const totalPages = Math.ceil(articleCount / itemsPerPage);
-    const pages = [...Array(totalPages).keys()];
+	// Calculate Pages
+	const totalPages = Math.ceil(articleCount / itemsPerPage);
+	const pages = [...Array(totalPages).keys()];
 
-    const { isLoading, data: allRawArticles = [], refetch } = useQuery({
-        enabled: true,
-        queryKey: ['allRawArticles', role, currentPage, itemsPerPage],
-        queryFn: async () => {
-            const res = await axiosSecure.get(`/articles/all?role=${role}&sort=time_descending&page=${currentPage - 1}&size=${itemsPerPage}`);
-            return res.data;
-        }
-    });
+	const {
+		isLoading,
+		data: allRawArticles = [],
+		refetch,
+	} = useQuery({
+		enabled: true,
+		queryKey: ['allRawArticles', role, currentPage, itemsPerPage],
+		queryFn: async () => {
+			const res = await axiosSecure.get(
+				`/articles/all?role=${role}&sort=time_descending&page=${
+					currentPage - 1
+				}&size=${itemsPerPage}`
+			);
+			return res.data;
+		},
+	});
 
-    const handleItemsPerPage = (e) => {
-        const pageValue = parseInt(e.target.value);
-        setItemsPerPage(pageValue);
-        setCurrentPage(1);
-    }
+	const handleItemsPerPage = (e) => {
+		const pageValue = parseInt(e.target.value);
+		setItemsPerPage(pageValue);
+		setCurrentPage(1);
+	};
 
-    const handlePreviousPage = () => {
-        currentPage > 1 && setCurrentPage(currentPage - 1);
-    }
+	const handlePreviousPage = () => {
+		currentPage > 1 && setCurrentPage(currentPage - 1);
+	};
 
-    const handleNextPage = () => {
-        currentPage < pages?.length && setCurrentPage(currentPage + 1);
-    }
+	const handleNextPage = () => {
+		currentPage < pages?.length && setCurrentPage(currentPage + 1);
+	};
 
-    // console.log(allRawArticles);
+	// console.log(allRawArticles);
 
-    return (
-        <section className="mx-auto space-y-8 my-6 pb-6">
-            <Helmet>
-                <title>All Articles || Dashboard - Nexus News</title>
-            </Helmet>
-            <SectionHeader heading={`Total ${articleCount} Articles`} />
-            <div className="grid lg:grid-cols-2 gap-6">
-                {isLoading || isCountLoading || roleLoading ? articleLoader :
-                    allRawArticles?.map(article => <AdminActionArticle key={article._id}
-                        article={article}
-                        refetch={refetch}
-                    />)
-                }
-            </div>
-            <div className="flex flex-col gap-4 justify-center items-center font-semibold mt-8 lg:mt-16">
-                <p className="text-nexus-primary">Page: {currentPage} of {totalPages}</p>
-                <div className="flex gap-3">
-                    <button className={"px-3 border disabled:text-gray-500 disabled:border-gray-500 disabled:hover:text-gray-500 disabled:hover:bg-transparent text-nexus-primary border-nexus-primary hover:bg-nexus-primary hover:text-white"} disabled={currentPage === 1} onClick={handlePreviousPage}>Previous</button>
+	return (
+		<ReactPlaceholder
+			showLoadingAnimation
+			type="text"
+			className="w-full my-10 mr-10"
+			widths={['100%']}
+			color="#6897bb"
+			rows={24}
+			ready={!(isLoading || isCountLoading || roleLoading)}
+		>
+			<section className="mx-auto space-y-8 my-6 pb-6">
+				<Helmet>
+					<title>All Articles || Dashboard - Nexus News</title>
+				</Helmet>
+				<SectionHeader heading={`Total ${articleCount} Articles`} />
+				<div className="grid lg:grid-cols-2 gap-6">
+					{allRawArticles?.map((article) => (
+						<AdminActionArticle
+							key={article._id}
+							article={article}
+							refetch={refetch}
+						/>
+					))}
+				</div>
+				<div className="flex flex-col gap-4 justify-center items-center font-semibold mt-8 lg:mt-16">
+					<p className="text-nexus-primary">
+						Page: {currentPage} of {totalPages}
+					</p>
+					<div className="flex gap-3">
+						<button
+							className={
+								'px-3 border disabled:text-gray-500 disabled:border-gray-500 disabled:hover:text-gray-500 disabled:hover:bg-transparent text-nexus-primary border-nexus-primary hover:bg-nexus-primary hover:text-white'
+							}
+							disabled={currentPage === 1}
+							onClick={handlePreviousPage}
+						>
+							Previous
+						</button>
 
-                    {
-                        pages?.map(page => <button
-                            className={`px-3 border ${currentPage === page + 1 ? 'bg-nexus-primary border-nexus-primary text-white hover:bg-transparent hover:text-nexus-primary' : ' text-nexus-primary border-nexus-primary hover:bg-nexus-primary hover:text-white'}`}
-                            onClick={() => setCurrentPage(page + 1)}
-                            key={page}
-                        >{page + 1}</button>)
-                    }
+						{pages?.map((page) => (
+							<button
+								className={`px-3 border ${
+									currentPage === page + 1
+										? 'bg-nexus-primary border-nexus-primary text-white hover:bg-transparent hover:text-nexus-primary'
+										: ' text-nexus-primary border-nexus-primary hover:bg-nexus-primary hover:text-white'
+								}`}
+								onClick={() => setCurrentPage(page + 1)}
+								key={page}
+							>
+								{page + 1}
+							</button>
+						))}
 
-                    <button className={"px-3 border disabled:text-gray-500 disabled:border-gray-500 disabled:hover:text-gray-500 disabled:hover:bg-transparent text-nexus-primary border-nexus-primary hover:bg-nexus-primary hover:text-white"} disabled={currentPage === pages?.length || totalPages === 0} onClick={handleNextPage}>Next</button>
-                </div>
-                <select className="border px-2 py-1 focus:text-nexus-primary outline-nexus-primary border-nexus-primary text-nexus-primary bg-transparent focus:border-2 mx-auto mb-12" value={itemsPerPage} onChange={handleItemsPerPage} name="articles" id="articles">
-                    <option value="6">Articles Per Page: 6</option>
-                    <option value="12">Articles Per Page: 12</option>
-                    <option value="24">Articles Per Page: 24</option>
-                    <option value="48">Articles Per Page: 48</option>
-                </select>
-            </div>
-        </section>
-    );
+						<button
+							className={
+								'px-3 border disabled:text-gray-500 disabled:border-gray-500 disabled:hover:text-gray-500 disabled:hover:bg-transparent text-nexus-primary border-nexus-primary hover:bg-nexus-primary hover:text-white'
+							}
+							disabled={currentPage === pages?.length || totalPages === 0}
+							onClick={handleNextPage}
+						>
+							Next
+						</button>
+					</div>
+					<select
+						className="border px-2 py-1 focus:text-nexus-primary outline-nexus-primary border-nexus-primary text-nexus-primary bg-transparent focus:border-2 mx-auto mb-12"
+						value={itemsPerPage}
+						onChange={handleItemsPerPage}
+						name="articles"
+						id="articles"
+					>
+						<option value="6">Articles Per Page: 6</option>
+						<option value="12">Articles Per Page: 12</option>
+						<option value="24">Articles Per Page: 24</option>
+						<option value="48">Articles Per Page: 48</option>
+					</select>
+				</div>
+			</section>
+		</ReactPlaceholder>
+	);
 };
 
 export default AllArticlesAdmin;
