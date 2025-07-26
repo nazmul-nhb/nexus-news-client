@@ -7,22 +7,27 @@ const PrivateRoute = ({ children }) => {
 	const location = useLocation();
 	const { user, userLoading } = useAuth();
 
-	if (user) {
+	if (userLoading) {
 		return (
 			<ReactPlaceholder
 				showLoadingAnimation
 				type="text"
-				className="m-10"
-				widths={['100%']}
-				color="#6897bb"
 				rows={48}
-				ready={!userLoading}
+				widths={['100%']}
+				ready={false}
+				color="#6897bb"
+				className="p-10 max-w-full"
 			>
-				{children}
+				<div style={{ maxWidth: '100%', width: '100%', height: '75vh' }} />
 			</ReactPlaceholder>
 		);
 	}
-	return <Navigate to="/login" state={{ from: location }} replace></Navigate>;
+
+	if (!user) {
+		return <Navigate to="/login" state={{ from: location }} replace />;
+	}
+
+	return children;
 };
 
 PrivateRoute.propTypes = {
