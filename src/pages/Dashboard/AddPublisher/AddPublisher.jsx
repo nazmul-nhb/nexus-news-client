@@ -157,7 +157,7 @@ const AddPublisher = () => {
 							{...register('publisher', {
 								required: {
 									value: true,
-									message: 'You must provide publisher name.',
+									message: 'Publisher name is required!',
 								},
 							})}
 							className="px-2 rounded-r-lg py-1 bg-transparent w-full focus:bg-transparent focus:outline-0"
@@ -229,11 +229,11 @@ const AddPublisher = () => {
 				showLoadingAnimation
 				type="text"
 				widths={['100%']}
+				className="px-8"
 				color="#6897bb"
 				rows={20}
 				ready={!isLoading}
 			>
-				{' '}
 				<div className="grid md:grid-cols-3 gap-8 w-3/4">
 					{publishers?.map((pub, index) => (
 						<div
