@@ -83,7 +83,7 @@ const ArticleForm = ({
                             styles={customStyles}
                             components={animatedComponents}
                             onChange={setPublisher}
-                            options={publishers.map(publisher => ({
+                            options={publishers?.map(publisher => ({
                                 value: publisher.publisher,
                                 label: publisher.publisher
                             }))}
@@ -130,7 +130,7 @@ const ArticleForm = ({
                             isClearable isMulti
                             closeMenuOnSelect={false}
                             components={animatedComponents}
-                            defaultValue={isUpdateArticle && article?.tags ? article.tags.map(tag => ({ value: tag, label: tag })) : []}
+                            defaultValue={isUpdateArticle && article?.tags ? article?.tags?.map(tag => ({ value: tag, label: tag })) : []}
                             options={tags}
                             onChange={setNewsTags}
                             required

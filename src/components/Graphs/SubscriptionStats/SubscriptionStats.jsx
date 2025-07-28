@@ -29,7 +29,7 @@ const SubscriptionStats = () => {
 	useEffect(() => {
 		if (subscriptionStats.length > 0) {
 			const colors = ['#76A7FA', '#FFD700', '#32CD32', '#FF6347'];
-			const formattedData = subscriptionStats.map(
+			const formattedData = subscriptionStats?.map(
 				({ plan, count, percentage }, index) => [
 					plan,
 					parseInt(count),

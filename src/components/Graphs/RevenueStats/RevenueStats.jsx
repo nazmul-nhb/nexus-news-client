@@ -27,7 +27,7 @@ const RevenueStats = () => {
 	useEffect(() => {
 		if (revenueStats.length > 0) {
 			const formattedData = [['Plan', 'Revenue']].concat(
-				revenueStats.map(({ plan, revenue }) => [plan, revenue])
+				revenueStats?.map(({ plan, revenue }) => [plan, revenue])
 			);
 			setRevenueData(formattedData);
 		} else {

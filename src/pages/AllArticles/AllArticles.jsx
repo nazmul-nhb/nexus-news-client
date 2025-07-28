@@ -107,7 +107,7 @@ const AllArticles = () => {
 							styles={customStyles}
 							components={animatedComponents}
 							onChange={setSelectedPublisher}
-							options={publishers.map((publisher) => ({
+							options={publishers?.map((publisher) => ({
 								value: publisher.publisher,
 								label: publisher.publisher,
 							}))}
@@ -128,7 +128,7 @@ const AllArticles = () => {
 							styles={customStyles}
 							components={animatedComponents}
 							onChange={setSelectedTag}
-							options={tags.map((tag) => ({
+							options={tags?.map((tag) => ({
 								value: tag.value,
 								label: tag.label,
 							}))}
